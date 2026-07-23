@@ -1008,50 +1008,109 @@ button:hover {
 }
 
 @media (max-width: 760px), (orientation: portrait) {
+  body {
+    place-items: stretch;
+  }
+
   #game-shell {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh;
     aspect-ratio: auto;
+    box-shadow: none;
   }
 
   #hud {
-    inset: max(10px, env(safe-area-inset-top)) auto auto 10px;
-    width: min(66vw, 370px);
-    padding: 10px 12px;
-    border-width: 24px;
-    border-image-width: 24px;
+    inset: max(8px, env(safe-area-inset-top)) auto auto max(8px, env(safe-area-inset-left));
+    width: min(54vw, 208px);
+    min-height: 0;
+    padding: 6px 8px 7px;
+    border-width: 10px;
+    border-image-width: 10px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(205, 171, 108, 0.72), rgba(154, 111, 66, 0.58));
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(2px);
   }
 
-  h1 {
-    font-size: 22px;
+  #hud::before {
+    inset: 4px;
   }
 
-  .brand {
-    margin-bottom: 7px;
+  #hud h1 {
+    max-width: 142px;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 1.12;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
-  .brand p {
-    font-size: 12px;
+  #hud .brand {
+    gap: 5px;
+    margin-bottom: 3px;
   }
 
-  .seal {
-    width: 38px;
-    height: 38px;
+  #hud .brand p {
+    max-width: 142px;
+    overflow: hidden;
+    font-size: 9px;
+    line-height: 1.18;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
-  .bars label,
-  .stats {
-    font-size: 12px;
+  #hud .seal {
+    width: 21px;
+    height: 21px;
+    flex: 0 0 auto;
+    font-size: 10px;
   }
 
-  .stats {
-    gap: 5px 10px;
+  #hud .bars {
+    gap: 2px;
+  }
+
+  #hud .bars label {
+    font-size: 9px;
+    line-height: 1.2;
+  }
+
+  #hud .bar {
+    height: 6px;
+    padding: 1px 4px;
+  }
+
+  #hud .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 7px;
+    margin-top: 4px;
+    font-size: 9px;
+    line-height: 1.2;
+  }
+
+  #hud .stats span {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  #hud .stats span:first-child {
+    flex: 0 1 auto;
+  }
+
+  .build-strip {
+    display: none;
   }
 
   .top-counters {
-    inset: max(10px, env(safe-area-inset-top)) 10px auto auto;
+    inset: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) auto auto;
     flex-direction: column;
-    gap: 7px;
+    gap: 6px;
+    align-items: flex-end;
   }
 
   .touch-stick {
@@ -1059,21 +1118,29 @@ button:hover {
   }
 
   .counter {
-    height: 42px;
-    min-width: 80px;
-    padding: 0 8px;
-    font-size: 16px;
+    height: 30px;
+    min-width: 56px;
+    padding: 0 6px;
+    gap: 4px;
+    font-size: 13px;
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.34));
   }
 
   .counter.soul,
   .counter.fire {
-    border-width: 10px;
-    border-image-width: 10px;
+    border-width: 7px;
+    border-image-width: 7px;
+  }
+
+  .counter i {
+    width: 15px;
+    height: 15px;
   }
 
   .pause-btn {
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
   }
 
   .skill-dock {
@@ -1084,84 +1151,173 @@ button:hover {
     width: auto;
     gap: 8px;
     padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
   }
 
   .level-badge {
-    width: 54px;
-    height: 54px;
+    width: 46px;
+    height: 46px;
+    border-width: 10px;
+    border-image-width: 10px;
+  }
+
+  .level-badge b {
+    font-size: 17px;
+  }
+
+  .level-badge span {
+    font-size: 9px;
   }
 
   .dash-btn {
-    width: 62px;
-    height: 62px;
+    width: 58px;
+    height: 58px;
     font-size: 13px;
   }
 
   .overlay {
-    padding: 18px;
+    padding: calc(12px + env(safe-area-inset-top)) 10px calc(12px + env(safe-area-inset-bottom));
   }
 
   .panel {
-    max-height: calc(100vh - 36px);
+    max-height: calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
     overflow: auto;
-    border-width: 30px;
-    border-image-width: 30px;
-    padding: 20px 22px;
+    border-width: 22px;
+    border-image-width: 22px;
+    padding: 16px 16px;
+    -webkit-overflow-scrolling: touch;
   }
 
   .start-panel {
-    width: min(94vw, 520px);
+    width: min(94vw, 480px);
   }
 
   .lineage-list {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .level-overlay {
-    padding: 18px 12px calc(24px + env(safe-area-inset-bottom));
+    align-items: end;
+    padding: 18px 10px calc(14px + env(safe-area-inset-bottom));
   }
 
   .choice-panel {
     width: 100%;
-    padding: 18px 12px;
+    padding: 0;
   }
 
   .choice-panel h2 {
     text-align: center;
-    font-size: 25px;
+    font-size: 22px;
+    margin-bottom: 9px;
+    padding: 5px 22px;
+    border-width: 14px;
+    border-image-width: 14px;
   }
 
   .choice-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
+    grid-template-columns: 1fr;
+    gap: 9px;
+    margin-top: 0;
   }
 
   .choice {
-    min-height: 232px;
-    padding: 12px 8px 14px;
-    border-width: 24px;
-    border-image-width: 24px;
-    text-align: center;
+    min-height: 128px;
+    padding: 18px 18px 16px 86px;
+    border-width: 20px;
+    border-image-width: 20px;
+    text-align: left;
   }
 
   .lineage {
-    border-width: 30px;
-    border-image-width: 30px;
+    min-height: 158px;
+    padding: 22px 18px 20px 116px;
+    border-width: 22px;
+    border-image-width: 22px;
+  }
+
+  .lineage-art {
+    position: absolute;
+    left: 22px;
+    top: 26px;
+    width: 82px;
+    margin: 0;
+  }
+
+  .lineage-art img,
+  .start-panel .lineage-art img {
+    max-width: 76px;
+    max-height: 92px;
+  }
+
+  .lineage-copy {
+    justify-items: start;
+    text-align: left;
   }
 
   .choice b {
     font-size: 16px;
+    margin-bottom: 5px;
   }
 
   .choice span {
+    max-width: none;
+    min-height: 0;
+    margin: 0 0 6px;
     font-size: 12px;
     line-height: 1.45;
   }
 
   .choice .choice-icon {
-    width: 52px;
-    height: 52px;
-    font-size: 23px;
+    position: absolute;
+    left: 24px;
+    top: 28px;
+    width: 48px;
+    height: 48px;
+    margin: 0;
+    font-size: 22px;
+  }
+
+  .choice .choice-cost {
+    min-width: 64px;
+    min-height: 26px;
+    font-size: 12px;
+  }
+
+  .choice-actions {
+    justify-content: center;
+    margin-top: 9px;
+  }
+
+  .choice-actions .minor-btn {
+    min-width: 0;
+    min-height: 32px;
+    font-size: 12px;
+  }
+
+  .story-panel,
+  .pause-panel,
+  .result-panel {
+    width: min(92vw, 430px);
+    min-height: 0;
+    padding: 24px 26px 26px;
+    border-width: 26px;
+    border-image-width: 26px;
+  }
+
+  .story-panel h2,
+  .pause-panel h2,
+  .result-panel h2 {
+    font-size: 24px;
+  }
+
+  .story-panel p,
+  .result-panel p {
+    font-size: 14px;
+    line-height: 1.65;
   }
 }
 
