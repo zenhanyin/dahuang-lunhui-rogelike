@@ -1,0 +1,13 @@
+{
+  "version": "0.3.2a-qingqiu-ground-mist-decals",
+  "layer": "ground-decal",
+  "dynamic": false,
+  "runtimeBehavior": "moves with map, no collision, no interaction; optional very subtle alpha breathing only",
+  "assets": [
+    "assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_ground_mist_01.webp",
+    "assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_ground_mist_02.webp",
+    "assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_ground_mist_03.webp",
+    "assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_old_vow_trace_01.webp"
+  ],
+  "preview": "assets/maps/v032_atlas/qingqiu/decals/preview_ground_mist_decals_on_base.png"
+}

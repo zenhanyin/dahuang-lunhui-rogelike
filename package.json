@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "scripts": {
+    "build": "node build-site.js",
+    "preview": "python -m http.server 5173 -d deploy-root"
+  },
+  "devDependencies": {}
+}

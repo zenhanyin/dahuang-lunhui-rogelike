@@ -1,0 +1,96 @@
+{
+  "version": "0.3.1-ui-nineslice",
+  "borderImage": true,
+  "assets": [
+    {
+      "id": "panel_9",
+      "path": "assets/runtime/webp/ui/nineslice/panel_9.webp",
+      "size": [
+        240,
+        180
+      ],
+      "slice": 54,
+      "bytes": 14936
+    },
+    {
+      "id": "hud_9",
+      "path": "assets/runtime/webp/ui/nineslice/hud_9.webp",
+      "size": [
+        260,
+        190
+      ],
+      "slice": 58,
+      "bytes": 16320
+    },
+    {
+      "id": "card_9",
+      "path": "assets/runtime/webp/ui/nineslice/card_9.webp",
+      "size": [
+        220,
+        280
+      ],
+      "slice": 62,
+      "bytes": 19582
+    },
+    {
+      "id": "lineage_9",
+      "path": "assets/runtime/webp/ui/nineslice/lineage_9.webp",
+      "size": [
+        230,
+        300
+      ],
+      "slice": 64,
+      "bytes": 21900
+    },
+    {
+      "id": "dialogue_9",
+      "path": "assets/runtime/webp/ui/nineslice/dialogue_9.webp",
+      "size": [
+        260,
+        180
+      ],
+      "slice": 58,
+      "bytes": 15784
+    },
+    {
+      "id": "resource_9",
+      "path": "assets/runtime/webp/ui/nineslice/resource_9.webp",
+      "size": [
+        150,
+        74
+      ],
+      "slice": 28,
+      "bytes": 5834
+    },
+    {
+      "id": "button_9",
+      "path": "assets/runtime/webp/ui/nineslice/button_9.webp",
+      "size": [
+        128,
+        68
+      ],
+      "slice": 24,
+      "bytes": 5008
+    },
+    {
+      "id": "button_dark_9",
+      "path": "assets/runtime/webp/ui/nineslice/button_dark_9.webp",
+      "size": [
+        128,
+        58
+      ],
+      "slice": 22,
+      "bytes": 4418
+    },
+    {
+      "id": "plaque_9",
+      "path": "assets/runtime/webp/ui/nineslice/plaque_9.webp",
+      "size": [
+        180,
+        72
+      ],
+      "slice": 30,
+      "bytes": 5976
+    }
+  ]
+}

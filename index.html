@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>大荒轮回录：荒境</title>
+  <link rel="stylesheet" href="./styles.css?v=0.3.2-online">
+</head>
+<body>
+  <div id="game-shell">
+    <canvas id="game" width="1280" height="720" aria-label="大荒轮回录：荒境游戏画面"></canvas>
+
+    <div id="hud" aria-live="polite">
+      <div class="brand">
+        <span class="seal">荒</span>
+        <div>
+          <h1>大荒轮回录：荒境</h1>
+          <p id="lineageText">择命入荒</p>
+        </div>
+      </div>
+      <div class="bars">
+        <label>气血 <span id="hpText"></span></label>
+        <div class="bar hp"><span id="hpBar"></span></div>
+        <label>修为 <span id="xpText"></span></label>
+        <div class="bar xp"><span id="xpBar"></span></div>
+      </div>
+      <div class="stats">
+        <span>境界 <strong id="levelText">炼气一层</strong></span>
+        <span>轮回 <strong id="timeText">00:00</strong></span>
+        <span>斩妖 <strong id="killText">0</strong></span>
+      </div>
+      <div id="buildText" class="build-strip">构筑 未定</div>
+    </div>
+
+    <div id="topCounters" class="top-counters" aria-hidden="true">
+      <span class="counter soul" title="灵髓：刷新卡牌、略过补偿、剧情事件与后续商店资源"><i></i><b id="soulText">0</b></span>
+      <span class="counter fire" title="丹火：高阶事件与后续轮回消耗资源"><i></i><b id="fireText">0</b></span>
+      <button id="pauseBtn" class="pause-btn" type="button" aria-label="暂停">暂</button>
+    </div>
+
+    <div id="touchStick" class="touch-stick" aria-hidden="true">
+      <span></span>
+    </div>
+
+    <div id="skillDock" class="skill-dock" aria-label="功法状态">
+      <div class="level-badge"><b id="dockLevelText">1</b><span>等级</span></div>
+      <button id="dashBtn" class="dash-btn" type="button" aria-label="冲刺">冲刺</button>
+    </div>
+
+    <div id="start" class="overlay">
+      <div class="panel start-panel">
+        <h2>择命入荒</h2>
+        <p>选择一个主角开局，在随机生成的大荒地图中存活、斩妖、突破修为。当前版本验证 WebP 图集、随机场景摆件、角色行走帧、竖版 UI、功法构筑与剧情点位。</p>
+        <div id="lineageList" class="lineage-list"></div>
+        <button id="startBtn" type="button">开始轮回</button>
+        <small>WASD / 方向键移动，功法自动释放，升级免费选择修为；灵髓用于略过补偿、刷新和后续事件。</small>
+      </div>
+    </div>
+
+    <div id="choices" class="overlay level-overlay hidden">
+      <div class="panel choice-panel">
+        <h2>选择修为</h2>
+        <div id="choiceList" class="choice-list"></div>
+        <div class="future-actions choice-actions" aria-label="卡牌功能">
+          <button id="skipChoiceBtn" type="button" class="minor-btn">略过悟道 +2 灵髓</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="storyOverlay" class="overlay hidden">
+      <div class="panel story-panel">
+        <h2 id="storyTitle">大荒遗痕</h2>
+        <p id="storyText"></p>
+        <div class="future-actions">
+          <button id="storyChoiceBtn" type="button">记入轮回</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="pauseOverlay" class="overlay hidden">
+      <div class="panel pause-panel">
+        <h2>铜镜暂停</h2>
+        <div id="buildLedger" class="build-ledger"></div>
+        <div class="future-actions">
+          <button type="button" data-action="resume">继续</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="gameOver" class="overlay hidden">
+      <div class="panel result-panel">
+        <h2>此世已尽</h2>
+        <p id="resultText"></p>
+        <div class="run-summary" aria-label="轮回结算入口">
+          <span>轮回点 <b id="metaPointText">0</b></span>
+        </div>
+        <button id="restartBtn" type="button">再入轮回</button>
+      </div>
+    </div>
+  </div>
+  <script src="./src/config.js?v=0.3.2-online"></script>
+  <script src="./src/game.js?v=0.3.2-online"></script>
+</body>
+</html>

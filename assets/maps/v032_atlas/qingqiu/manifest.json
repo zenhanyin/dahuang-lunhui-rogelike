@@ -1,0 +1,21 @@
+{
+  "version": "0.3.2a-qingqiu-tile-atlas",
+  "tileSize": 512,
+  "edgeBlend": 82,
+  "style": "Dunhuang mineral fresco, Qingqiu gray-purple and ink-teal terrain",
+  "tiles": [
+    "assets/maps/v032_atlas/qingqiu/tile_qingqiu_ground_01.webp",
+    "assets/maps/v032_atlas/qingqiu/tile_qingqiu_ground_02.webp",
+    "assets/maps/v032_atlas/qingqiu/tile_qingqiu_ground_03.webp",
+    "assets/maps/v032_atlas/qingqiu/tile_qingqiu_ground_04.webp",
+    "assets/maps/v032_atlas/qingqiu/tile_qingqiu_ground_05.webp",
+    "assets/maps/v032_atlas/qingqiu/tile_qingqiu_ground_06.webp"
+  ],
+  "preview": "assets/maps/v032_atlas/qingqiu/preview_qingqiu_3x3_from_tiles.png",
+  "rules": [
+    "base terrain only",
+    "no large fog pool, monument, character, enemy, grass cluster, or bone pile in base tile",
+    "no tile-local vignette or center spotlight",
+    "noise selects tiles and decals, it does not draw main ground"
+  ]
+}

@@ -1,0 +1,16 @@
+dist/
+deploy-root/
+*.tar.gz
+*.inspect.ndjson
+*.log
+node_modules/
+visual-qa/
+assets/concepts/
+assets/generated/
+assets/sprites/
+assets/ui/
+assets/maps/*-final.webp
+assets/maps/v032_atlas/qingqiu/preview*.png
+assets/maps/v032_atlas/qingqiu/tile_qingqiu_ground_*.webp
+assets/maps/v032_atlas/qingqiu/decals/preview*.png
+assets/maps/v032_atlas/qingqiu_seamless/preview*.png
