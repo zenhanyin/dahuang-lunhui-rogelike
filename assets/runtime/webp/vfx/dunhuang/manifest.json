@@ -1,0 +1,19 @@
+{
+  "version": "0.3.2b-ai-atlas",
+  "qingqiu_source": "D:\\Acodex3\\dahuang-lunhui-lu\\assets\\runtime\\raw_ai_atlas\\qingqiu_props_events_ai_atlas.png",
+  "vfx_source": "D:\\Acodex3\\dahuang-lunhui-lu\\assets\\runtime\\raw_ai_atlas\\dunhuang_skill_vfx_ai_atlas.png",
+  "vfx": [
+    "assets/runtime/webp/vfx/dunhuang/vfx_sword_projectile.webp",
+    "assets/runtime/webp/vfx/dunhuang/vfx_sword_slash.webp",
+    "assets/runtime/webp/vfx/dunhuang/vfx_talisman_projectile.webp",
+    "assets/runtime/webp/vfx/dunhuang/vfx_talisman_impact.webp",
+    "assets/runtime/webp/vfx/dunhuang/vfx_fire_explosion.webp",
+    "assets/runtime/webp/vfx/dunhuang/vfx_fire_ground_bloom.webp",
+    "assets/runtime/webp/vfx/dunhuang/vfx_phantom_mist_ring.webp",
+    "assets/runtime/webp/vfx/dunhuang/vfx_dash_wind_trail.webp",
+    "assets/runtime/webp/vfx/dunhuang/vfx_pickup_orb_burst.webp",
+    "assets/runtime/webp/vfx/dunhuang/vfx_level_lotus_burst.webp",
+    "assets/runtime/webp/vfx/dunhuang/vfx_hit_spark.webp",
+    "assets/runtime/webp/vfx/dunhuang/vfx_kill_bloom.webp"
+  ]
+}

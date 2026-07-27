@@ -1,0 +1,32 @@
+{
+  "version": "0.3.2-story-ui-art-atlas",
+  "assets": [
+    {
+      "id": "story_panel_art",
+      "path": "assets/runtime/webp/ui/story/story_panel_art.webp",
+      "size": [
+        1577,
+        733
+      ],
+      "bytes": 257674
+    },
+    {
+      "id": "story_panel_mobile_art",
+      "path": "assets/runtime/webp/ui/story/story_panel_mobile_art.webp",
+      "size": [
+        933,
+        1492
+      ],
+      "bytes": 417472
+    },
+    {
+      "id": "story_button_art",
+      "path": "assets/runtime/webp/ui/story/story_button_art.webp",
+      "size": [
+        380,
+        104
+      ],
+      "bytes": 11930
+    }
+  ]
+}

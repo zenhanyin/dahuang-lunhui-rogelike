@@ -15,6 +15,15 @@ const ui = {
   soulText: document.getElementById("soulText"),
   fireText: document.getElementById("fireText"),
   dockLevelText: document.getElementById("dockLevelText"),
+  mobileHud: document.getElementById("mobileHud"),
+  mobileHpText: document.getElementById("mobileHpText"),
+  mobileHpBar: document.getElementById("mobileHpBar"),
+  mobileXpText: document.getElementById("mobileXpText"),
+  mobileXpBar: document.getElementById("mobileXpBar"),
+  mobileLevelText: document.getElementById("mobileLevelText"),
+  mobileLineageText: document.getElementById("mobileLineageText"),
+  mobileTimeText: document.getElementById("mobileTimeText"),
+  mobileKillText: document.getElementById("mobileKillText"),
   pauseBtn: document.getElementById("pauseBtn"),
   dashBtn: document.getElementById("dashBtn"),
   touchStick: document.getElementById("touchStick"),
@@ -27,8 +36,11 @@ const ui = {
   storyOverlay: document.getElementById("storyOverlay"),
   storyTitle: document.getElementById("storyTitle"),
   storyText: document.getElementById("storyText"),
+  storySpeaker: document.getElementById("storySpeaker"),
+  storyPortrait: document.getElementById("storyPortrait"),
   storyChoiceBtn: document.getElementById("storyChoiceBtn"),
   pauseOverlay: document.getElementById("pauseOverlay"),
+  buildOverlay: document.getElementById("buildOverlay"),
   buildLedger: document.getElementById("buildLedger"),
   gameOver: document.getElementById("gameOver"),
   resultText: document.getElementById("resultText"),
@@ -48,7 +60,7 @@ let screenShake = 0;
 const touchMove = { active: false, id: null, originX: 0, originY: 0, dx: 0, dy: 0 };
 
 const RUNTIME_ASSET_ROOT = "assets/runtime/webp";
-const ASSET_VERSION = "0.3.2-ground-mist";
+const ASSET_VERSION = "0.3.2b-ui-point-feedback";
 const ASSET_PATHS = {
   characters: {
     sword_right_0: `${RUNTIME_ASSET_ROOT}/characters/sword_right_0.webp`,
@@ -91,8 +103,22 @@ const ASSET_PATHS = {
     elite_left_2: `${RUNTIME_ASSET_ROOT}/enemies/elite_left_2.webp`
   },
   skills: {
-    sword: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_sword.webp`,
-    talisman: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_talisman.webp`
+    sword: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_sword.webp`,
+    talisman: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_talisman.webp`
+  },
+  vfx: {
+    sword_projectile: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_sword_projectile.webp`,
+    sword_slash: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_sword_slash.webp`,
+    talisman_projectile: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_talisman_projectile.webp`,
+    talisman_impact: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_talisman_impact.webp`,
+    fire_explosion: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_fire_explosion.webp`,
+    fire_ground_bloom: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_fire_ground_bloom.webp`,
+    phantom_mist_ring: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_phantom_mist_ring.webp`,
+    dash_wind_trail: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_dash_wind_trail.webp`,
+    pickup_orb_burst: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_pickup_orb_burst.webp`,
+    level_lotus_burst: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_level_lotus_burst.webp`,
+    hit_spark: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_hit_spark.webp`,
+    kill_bloom: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_kill_bloom.webp`
   },
   terrain: {
     foxfire_0: `${RUNTIME_ASSET_ROOT}/terrain/foxfire_0.webp`,
@@ -123,22 +149,27 @@ const ASSET_PATHS = {
   },
   maps: {
     wilds: `assets/maps/wilds-runtime.webp`,
-    qingqiu: `assets/maps/qingqiu-runtime.webp`,
     sword_tomb: `assets/maps/v032/sword_tomb/ground_a.webp`,
     herb_marsh: `assets/maps/v032/herb_marsh/ground_a.webp`,
     wilderness: `assets/maps/v032/wilderness/ground_a.webp`
   },
   mapTiles: {
-    qingqiu_base_01: `assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_seamless_01.webp`
+    qingqiu_base_final_01: `assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_01.webp`,
+    qingqiu_base_final_02: `assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_02.webp`,
+    qingqiu_base_final_03: `assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_03.webp`,
+    qingqiu_base_final_04: `assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_04.webp`
   },
   scene: {
-    decal_mist_pool_01: `${RUNTIME_ASSET_ROOT}/scene/qingqiu/decal_mist_pool_01.webp`,
-    decal_mist_pool_02: `${RUNTIME_ASSET_ROOT}/scene/qingqiu/decal_mist_pool_02.webp`,
-    decal_mist_pool_03: `${RUNTIME_ASSET_ROOT}/scene/qingqiu/decal_mist_pool_03.webp`,
-    decal_qingqiu_ground_mist_01: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_ground_mist_01.webp`,
-    decal_qingqiu_ground_mist_02: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_ground_mist_02.webp`,
-    decal_qingqiu_ground_mist_03: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_ground_mist_03.webp`,
     decal_qingqiu_old_vow_trace_01: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_old_vow_trace_01.webp`,
+    decal_qingqiu_old_vow_trace_02: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_old_vow_trace_02.webp`,
+    decal_qingqiu_ink_teal_vein_01: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_ink_teal_vein_01.webp`,
+    decal_qingqiu_gold_mural_lines_01: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_gold_mural_lines_01.webp`,
+    decal_qingqiu_ink_teal_vein_ai_01: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_ink_teal_vein_ai_01.webp`,
+    decal_qingqiu_gold_mural_lines_ai_01: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_gold_mural_lines_ai_01.webp`,
+    decal_qingqiu_old_vow_trace_ai_02: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_old_vow_trace_ai_02.webp`,
+    decal_qingqiu_ink_teal_vein_ai_02: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_ink_teal_vein_ai_02.webp`,
+    decal_qingqiu_gold_mural_lines_ai_02: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_gold_mural_lines_ai_02.webp`,
+    decal_qingqiu_old_vow_trace_ai_03: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_old_vow_trace_ai_03.webp`,
     decal_crack_01: `${RUNTIME_ASSET_ROOT}/scene/qingqiu/decal_crack_01.webp`,
     decal_crack_02: `${RUNTIME_ASSET_ROOT}/scene/qingqiu/decal_crack_02.webp`,
     sword_tomb_transition_1: `assets/maps/v032/sword_tomb/transition_1.webp`,
@@ -157,26 +188,58 @@ const ASSET_PATHS = {
   sceneEvents: {
     brokenSword: `assets/maps/v032/sword_tomb/event_broken_sword.webp`,
     foxfire: `assets/maps/v032/qingqiu/event_foxfire_vow.webp`,
+    foxfireVowIdle: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_foxfire_vow_idle.webp`,
+    foxfireVowReady: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_foxfire_vow_ready.webp`,
+    foxfireVowDone: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_foxfire_vow_done.webp`,
+    oldVowSteleIdle: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_old_vow_stele_idle.webp`,
+    oldVowSteleReady: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_old_vow_stele_ready.webp`,
+    oldVowSteleDone: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_old_vow_stele_done.webp`,
     herbCauldron: `assets/maps/v032/herb_marsh/event_herb_cauldron.webp`,
     memoryStele: `assets/maps/v032/wilderness/event_memory_stele.webp`
   },
+  qingqiuProps: {
+    foxfire_small_0: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_small_0.webp`,
+    foxfire_small_1: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_small_1.webp`,
+    foxfire_small_2: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_small_2.webp`,
+    foxfire_small_3: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_small_3.webp`,
+    foxfire_medium_0: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_medium_0.webp`,
+    foxfire_medium_1: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_medium_1.webp`,
+    foxfire_medium_2: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_medium_2.webp`,
+    foxfire_medium_3: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_medium_3.webp`,
+    foxfire_cluster_0: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_cluster_0.webp`,
+    foxfire_cluster_1: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_cluster_1.webp`,
+    foxfire_cluster_2: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_cluster_2.webp`,
+    foxfire_cluster_3: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_cluster_3.webp`,
+    grass_low_0: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_grass_low_0.webp`,
+    grass_low_1: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_grass_low_1.webp`,
+    grass_low_2: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_grass_low_2.webp`,
+    grass_low_3: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_grass_low_3.webp`,
+    grass_low_4: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_grass_low_4.webp`,
+    fox_mask_shard_0: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_fox_mask_shard_0.webp`,
+    fox_mask_shard_1: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_fox_mask_shard_1.webp`,
+    fox_mask_shard_2: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_fox_mask_shard_2.webp`,
+    ground_ribbon_0: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_ground_ribbon_0.webp`,
+    ground_ribbon_1: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_ground_ribbon_1.webp`,
+    ground_ribbon_2: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_ground_ribbon_2.webp`,
+    ground_ribbon_3: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_ground_ribbon_3.webp`
+  },
   uiIcons: {
-    sword: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_sword.webp`,
-    talisman: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_talisman.webp`,
-    flame: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_flame.webp`,
-    phantom: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_mist.webp`,
-    wind: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_speed.webp`,
-    earth: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_shield.webp`,
-    arrow: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_sword.webp`,
-    core: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_burst.webp`,
-    mark: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_sword.webp`,
-    rune: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_talisman.webp`,
-    mist: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_mist.webp`,
-    split: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_talisman.webp`,
-    lotus: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_heal.webp`,
-    cloud: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_flame.webp`,
-    heal: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_heal.webp`,
-    clue: `${RUNTIME_ASSET_ROOT}/ui/icons/attr_clue.webp`
+    sword: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_sword.webp`,
+    talisman: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_talisman.webp`,
+    flame: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_flame.webp`,
+    phantom: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_mist.webp`,
+    wind: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_speed.webp`,
+    earth: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_shield.webp`,
+    arrow: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_sword.webp`,
+    core: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_burst.webp`,
+    mark: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_sword.webp`,
+    rune: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_talisman.webp`,
+    mist: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_mist.webp`,
+    split: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_talisman.webp`,
+    lotus: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_heal.webp`,
+    cloud: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_flame.webp`,
+    heal: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_heal.webp`,
+    clue: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_clue.webp`
   }
 };
 
@@ -221,6 +284,11 @@ function drawAnimatedAsset(group, prefix, direction, frameCount, animTime, x, y,
   return drawAsset(group, key, x, y, w, h, options);
 }
 
+function drawVfxAsset(key, x, y, radius, options = {}) {
+  const { rotate = 0, alpha = 1, w = 2.8, h = 1.8, anchorY = 0.5 } = options;
+  return drawAsset("vfx", key, x, y, radius * w, radius * h, { rotate, alpha, anchorY });
+}
+
 function tuningValue(key, fallback) {
   return CONFIG.tuning[key] ?? fallback;
 }
@@ -262,7 +330,9 @@ const DECAL_ALPHA = {
   sceneMist: 0.76,
   sceneTransition: 0.52,
   groundMist: 0.56,
-  oldVowTrace: 0.48,
+  oldVowTrace: 0.3,
+  inkTealVein: 0.28,
+  goldMuralLine: 0.24,
   sceneCrack: 0.46
 };
 
@@ -313,13 +383,39 @@ function buildSummary() {
 function renderBuildLedger() {
   if (!ui.buildLedger || !state) return;
   if (!state.build.length) {
-    ui.buildLedger.innerHTML = "<span>本局尚未领悟机缘。</span>";
+    ui.buildLedger.innerHTML = `
+      <div class="build-empty">
+        <b>尚未领悟机缘</b>
+        <span>升级或触发剧情点位后，本局功法路线会记录在这里。</span>
+      </div>
+    `;
     return;
   }
-  ui.buildLedger.innerHTML = state.build
-    .slice(-6)
-    .map(item => `<span><b>${item.tag}</b>${item.name}${item.count > 1 ? ` x${item.count}` : ""}</span>`)
+  const groups = new Map();
+  for (const item of state.build) groups.set(item.tag, (groups.get(item.tag) || 0) + item.count);
+  const routeHtml = [...groups.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([tag, count]) => `<span class="build-route"><b>${tag}</b><i>${count} 层</i></span>`)
     .join("");
+  const itemHtml = state.build
+    .slice()
+    .reverse()
+    .map(item => `
+      <span class="build-entry">
+        <b>${item.tag}</b>
+        <em>${item.name}</em>
+        <i>${item.count > 1 ? `${item.count} 层` : "初悟"}</i>
+      </span>
+    `)
+    .join("");
+  ui.buildLedger.innerHTML = `
+    <div class="build-routes">${routeHtml}</div>
+    <div class="build-evolution">
+      <strong>${[...groups.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] || "未定"}线</strong>
+      <span>${state.build.length >= 3 ? "已形成初步功法方向，后续可接入进化组合。" : "继续领悟同系功法，可点亮进化线。"}</span>
+    </div>
+    <div class="build-list">${itemHtml}</div>
+  `;
 }
 
 function screen() {
@@ -511,8 +607,12 @@ function generateChunk(map, chunkX, chunkY) {
   }
 
   for (const rule of map.generation.events || []) {
-    const bias = map.variant.eventBias?.[rule.type] || 0;
-    const count = Math.max(0, Math.round((randomInt(rng, rule.count[0], rule.count[1]) + bias) * 0.45));
+    let count = 0;
+    if (typeof rule.chunkChance === "number") {
+      count = rng() < rule.chunkChance ? 1 : 0;
+    } else {
+      count = Math.max(0, Math.round(randomInt(rng, rule.count[0], rule.count[1]) * 0.35));
+    }
     for (let i = 0; i < count; i += 1) placeOne(rule, chunk.events, minEventDistance, true);
   }
 
@@ -797,10 +897,12 @@ function startGame() {
   state.running = true;
   state.paused = false;
   ui.lineageText.textContent = `${state.lineage.name} · ${state.map.name} · ${state.map.variant.name}`;
+  if (ui.mobileLineageText) ui.mobileLineageText.textContent = `${state.lineage.name} · ${state.map.variant.name}`;
   ui.start.classList.add("hidden");
   ui.gameOver.classList.add("hidden");
   ui.choices.classList.add("hidden");
   ui.pauseOverlay.classList.add("hidden");
+  ui.buildOverlay?.classList.add("hidden");
   ui.pauseBtn.textContent = "暂";
   lastTime = performance.now();
   playSound("level", 3);
@@ -810,6 +912,8 @@ function endGame() {
   if (!state.running) return;
   state.running = false;
   state.paused = true;
+  ui.pauseOverlay.classList.add("hidden");
+  ui.buildOverlay?.classList.add("hidden");
   playSound("death", 3);
   ui.resultText.textContent = `${state.lineage.name}在${state.map.name}坚持了 ${formatTime(state.time)}，斩妖 ${state.kills}。`;
   if (ui.metaPointText) ui.metaPointText.textContent = Math.max(1, Math.floor(state.kills / 12) + Math.floor(state.time / 45));
@@ -1109,6 +1213,23 @@ function closeChoices() {
   lastTime = performance.now();
 }
 
+function openBuildPanel() {
+  if (!state?.running || !ui.buildOverlay) return;
+  renderBuildLedger();
+  state.paused = true;
+  ui.pauseOverlay.classList.add("hidden");
+  ui.buildOverlay.classList.remove("hidden");
+  ui.pauseBtn.textContent = "续";
+}
+
+function closeBuildPanel() {
+  if (!state?.running || !ui.buildOverlay) return;
+  ui.buildOverlay.classList.add("hidden");
+  state.paused = false;
+  ui.pauseBtn.textContent = "暂";
+  lastTime = performance.now();
+}
+
 function openChoices() {
   state.paused = true;
   ui.choiceList.innerHTML = "";
@@ -1175,39 +1296,69 @@ function storyForEvent(event) {
   const table = {
     stele: {
       title: "残碑低语",
+      speaker: "轮回残灵",
+      portrait: "reincarnation_spirit",
       text: "碑上刻着半句旧誓：若不死药重开，青丘、轩辕、神农三脉皆会被拖回同一场轮回。"
     },
     shrine: {
       title: "荒祠香火",
+      speaker: "轮回残灵",
+      portrait: "reincarnation_spirit",
       text: "破败小祠仍有微光，像是在供奉某位被抹去姓名的古神。你记下一缕香火，灵台短暂清明。"
     },
     rift: {
       title: "赤裂回声",
+      speaker: "轩辕遗剑",
+      portrait: "xuanyuan_swordsman",
       text: "裂隙里传来前世兵戈声。有人在梦里喊你的名字，也有人提醒你：不要相信昆仑送来的丹方。"
     },
     spiritWell: {
       title: "灵井残影",
+      speaker: "轮回残灵",
+      portrait: "reincarnation_spirit",
       text: "井中浮出陌生倒影，似乎是另一世的你。倒影伸手点向远方，那里应当藏着章节 Boss 的线索。"
     },
     foxfire: {
       title: "狐火旧约",
+      speaker: "青丘旧誓",
+      portrait: "qingqiu_witch",
       text: "狐火绕身三匝，青丘旧约浮现一角：幻雾并非逃避，而是遮住天庭视线的古老术法。"
+    },
+    foxfireVow: {
+      title: "狐火旧约",
+      speaker: "青丘旧誓",
+      portrait: "qingqiu_witch",
+      text: "狐火绕身三匝，青丘旧约浮现一角：幻雾并非逃避，而是遮住天庭视线的古老术法。"
+    },
+    oldVowStele: {
+      title: "旧誓残碑",
+      speaker: "青丘旧誓",
+      portrait: "qingqiu_witch",
+      text: "残碑边缘亮起青金细线。你读见青丘旧誓：每一次轮回都不是重来，而是在补全通往真结局的路。"
     },
     brokenSword: {
       title: "断剑残誓",
+      speaker: "轩辕遗剑",
+      portrait: "xuanyuan_swordsman",
       text: "断剑插在荒土里，剑脊仍有旧战余温。你听见前世在剑冢里留下的誓言：若轮回不止，便以剑痕记路。"
     },
     herbCauldron: {
       title: "丹炉遗火",
+      speaker: "神农丹徒",
+      portrait: "shennong_alchemist",
       text: "残炉里有未熄的丹火，火色并不灼人，反而像在辨认你的气息。神农一脉的旧线索开始浮出。"
     },
     memoryStele: {
       title: "轮回残碑",
+      speaker: "轮回残灵",
+      portrait: "reincarnation_spirit",
       text: "碑文只亮起一半，像有意漏掉结局。它提醒你：每一世走过的地方，都会把真结局往前推近一点。"
     }
   };
   return table[event.type] || {
     title: "大荒遗痕",
+    speaker: "轮回残灵",
+    portrait: "reincarnation_spirit",
     text: "你触碰到一段散落在大荒里的记忆。它尚未完整，却足以证明这片荒原并非单纯的试炼场。"
   };
 }
@@ -1220,6 +1371,9 @@ function openStoryEvent(event) {
   const story = storyForEvent(event);
   ui.storyTitle.textContent = story.title;
   ui.storyText.textContent = story.text;
+  ui.storySpeaker.textContent = story.speaker;
+  ui.storyPortrait.src = `assets/runtime/webp/ui/portraits/${story.portrait}.webp`;
+  ui.storyChoiceBtn.textContent = "记入轮回";
   state.paused = true;
   ui.storyOverlay.classList.remove("hidden");
   addShake(3);
@@ -1249,7 +1403,7 @@ function closeStoryEvent() {
 }
 
 function checkStoryEvents() {
-  if (!state?.running || state.paused || !ui.storyOverlay.classList.contains("hidden") || !ui.choices.classList.contains("hidden")) return;
+  if (!state?.running || state.paused || !ui.storyOverlay.classList.contains("hidden") || !ui.choices.classList.contains("hidden") || !ui.buildOverlay?.classList.contains("hidden")) return;
   if (state.storyCooldown > 0) return;
   const visible = visibleMapFeatures();
   const events = [...state.map.events, ...visible.events];
@@ -1540,8 +1694,6 @@ function drawBackground(s) {
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, s.w, s.h);
   drawMapBaseImage(s, map);
-  drawMuralTexture(s, map);
-  if (!map.tileAtlas) drawPaintedGround(s, map);
 
   if (!state?.map) return;
   const visible = visibleMapFeatures();
@@ -1582,17 +1734,34 @@ function drawMapBaseImage(s, map) {
 }
 
 function drawTiledMapBase(s, map) {
-  if (!assetReady("mapTiles", "qingqiu_base_01")) return false;
-  const img = assets.mapTiles.qingqiu_base_01;
+  const tileKeys = [
+    "qingqiu_base_final_01",
+    "qingqiu_base_final_02",
+    "qingqiu_base_final_03",
+    "qingqiu_base_final_04"
+  ].filter(key => assetReady("mapTiles", key));
+  if (!tileKeys.length) return false;
   const tileSize = map.tileSize || 512;
   const camera = state?.camera || { x: 0, y: 0 };
-  const startX = -mod(camera.x, tileSize) - tileSize;
-  const startY = -mod(camera.y, tileSize) - tileSize;
+  const cx = s.w / 2;
+  const cy = s.h / 2 + 26;
+  const viewPad = tileSize * 2;
+  const minWorldY = camera.y + (-viewPad - cy) / 0.68;
+  const maxWorldY = camera.y + (s.h + viewPad - cy) / 0.68;
+  const minWorldX = camera.x + (-viewPad - cx) - (maxWorldY - camera.y) * 0.22;
+  const maxWorldX = camera.x + (s.w + viewPad - cx) - (minWorldY - camera.y) * 0.22;
+  const startTx = Math.floor(minWorldX / tileSize) - 1;
+  const endTx = Math.ceil(maxWorldX / tileSize) + 1;
+  const startTy = Math.floor(minWorldY / tileSize) - 1;
+  const endTy = Math.ceil(maxWorldY / tileSize) + 1;
   ctx.save();
   ctx.globalAlpha = 1;
-  for (let y = startY; y < s.h + tileSize; y += tileSize) {
-    for (let x = startX; x < s.w + tileSize; x += tileSize) {
-      ctx.drawImage(img, x, y, tileSize + 1, tileSize + 1);
+  ctx.translate(cx - camera.x - camera.y * 0.22, cy - camera.y * 0.68);
+  ctx.transform(1, 0, 0.22, 0.68, 0, 0);
+  for (let ty = startTy; ty <= endTy; ty += 1) {
+    for (let tx = startTx; tx <= endTx; tx += 1) {
+      const img = assets.mapTiles[tileKeys[hashSeed(map.seed, tx, ty) % tileKeys.length]];
+      ctx.drawImage(img, tx * tileSize, ty * tileSize, tileSize + 1, tileSize + 1);
     }
   }
   ctx.restore();
@@ -1603,94 +1772,37 @@ function mod(value, size) {
   return ((value % size) + size) % size;
 }
 
-function drawMuralTexture(s, map) {
-  ctx.save();
-  ctx.globalAlpha = map.scenePack ? 0.18 : 0.42;
-  ctx.strokeStyle = "rgba(231, 186, 86, 0.12)";
-  ctx.lineWidth = 1;
-  for (let i = 0; i < 12; i += 1) {
-    const y = ((i * 157 + map.seed * 0.00001) % (s.h + 160)) - 80;
-    ctx.beginPath();
-    for (let x = -80; x <= s.w + 80; x += 70) {
-      const wave = Math.sin((x + i * 37) * 0.012) * 16;
-      if (x === -80) ctx.moveTo(x, y + wave);
-      else ctx.quadraticCurveTo(x - 34, y - wave * 0.35, x, y + wave);
-    }
-    ctx.stroke();
-  }
-
-  ctx.globalAlpha = 0.34;
-  ctx.strokeStyle = "rgba(37, 25, 18, 0.28)";
-  for (let i = 0; i < 18; i += 1) {
-    const x = (i * 311 + map.seed * 0.00003) % s.w;
-    const y = (i * 173 + map.seed * 0.00002) % s.h;
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x + 18, y + 8);
-    ctx.lineTo(x + 34, y - 3);
-    ctx.lineTo(x + 52, y + 10);
-    ctx.stroke();
-  }
-  ctx.restore();
-}
-
-function drawPaintedGround(s, map) {
-  ctx.save();
-  ctx.globalAlpha = map.scenePack ? 0.16 : 0.42;
-  const tint = map.id === "qingqiu" ? "rgba(93, 75, 112, 0.12)" : "rgba(147, 107, 56, 0.18)";
-  const stroke = map.id === "qingqiu" ? "rgba(185, 123, 174, 0.12)" : "rgba(225, 178, 88, 0.19)";
-  const camera = state?.camera || { x: 0, y: 0 };
-  const cell = 360;
-  const baseX = Math.floor(camera.x / cell);
-  const baseY = Math.floor(camera.y / cell);
-  for (let gy = baseY - 3; gy <= baseY + 3; gy += 1) {
-    for (let gx = baseX - 4; gx <= baseX + 4; gx += 1) {
-      const rng = makeRng(hashSeed(map.seed, gx, gy));
-      if (rng() < 0.2) continue;
-      const world = {
-        x: gx * cell + 40 + rng() * (cell - 80),
-        y: gy * cell + 40 + rng() * (cell - 80)
-      };
-      const p = toView(world);
-      if (p.x < -280 || p.x > s.w + 280 || p.y < -140 || p.y > s.h + 140) continue;
-      const w = 150 + rng() * 220;
-      const h = 28 + rng() * 34;
-      const angle = -0.22 + rng() * 0.44;
-    ctx.globalAlpha = map.scenePack ? 0.055 : map.id === "qingqiu" ? 0.12 : 0.18;
-    ctx.fillStyle = tint;
-    ctx.beginPath();
-      ctx.ellipse(p.x, p.y, w, h, angle, 0, TAU);
-    ctx.fill();
-    ctx.globalAlpha = map.scenePack ? 0.09 : map.id === "qingqiu" ? 0.18 : 0.26;
-    ctx.strokeStyle = stroke;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-      ctx.moveTo(p.x - w * 0.58, p.y + 2);
-      ctx.bezierCurveTo(p.x - w * 0.24, p.y - h * 0.5, p.x + w * 0.05, p.y + h * 0.52, p.x + w * 0.5, p.y - 2);
-      ctx.moveTo(p.x - w * 0.38, p.y + h * 0.28);
-      ctx.bezierCurveTo(p.x - w * 0.08, p.y + h * 0.62, p.x + w * 0.12, p.y - h * 0.2, p.x + w * 0.42, p.y + h * 0.18);
-    ctx.stroke();
-    }
-  }
-  ctx.restore();
-}
-
 function drawSceneDecals(chunks) {
   if (!state?.map) return;
   ctx.save();
   for (const item of chunks) {
     for (const decal of item.chunk.decals || []) {
       const p = toView(decal);
+      const isQingqiuDecal = state.map.scenePack === "qingqiu" && (
+        decal.type === "oldVowTrace" ||
+        decal.type === "inkTealVein" ||
+        decal.type === "goldMuralLine"
+      );
       const isPaintedGround = decal.type === "groundMist" || decal.type === "oldVowTrace";
       const isImageDecal = Boolean(decal.asset && assetReady("scene", decal.asset));
-      const w = decal.r * (isPaintedGround ? 4.8 : decal.type === "sceneMist" || decal.type === "sceneTransition" ? 3.4 : 3.0);
-      const h = decal.r * (isPaintedGround ? 2.15 : decal.type === "sceneMist" || decal.type === "sceneTransition" ? 1.35 : 1.25);
+      const qingqiuScale = isQingqiuDecal ? 0.72 : 1;
+      const w = decal.r * (isPaintedGround ? 4.8 : decal.type === "sceneMist" || decal.type === "sceneTransition" ? 3.4 : 3.0) * qingqiuScale;
+      const h = decal.r * (isPaintedGround ? 2.15 : decal.type === "sceneMist" || decal.type === "sceneTransition" ? 1.35 : 1.25) * qingqiuScale;
       if (p.x < -w || p.x > screen().w + w || p.y < -h || p.y > screen().h + h) continue;
-      if (isImageDecal && drawAsset("scene", decal.asset, p.x, p.y, w, h, {
-        alpha: decal.alpha,
-        rotate: decal.rotate,
-        anchorY: 0.5
-      })) continue;
+      if (isImageDecal) {
+        ctx.save();
+        if (isQingqiuDecal) {
+          ctx.globalCompositeOperation = decal.type === "goldMuralLine" ? "source-over" : "multiply";
+          ctx.filter = "saturate(0.82) contrast(0.92)";
+        }
+        const ok = drawAsset("scene", decal.asset, p.x, p.y, w, h, {
+          alpha: isQingqiuDecal ? decal.alpha * (decal.type === "goldMuralLine" ? 0.62 : 0.74) : decal.alpha,
+          rotate: decal.rotate,
+          anchorY: 0.5
+        });
+        ctx.restore();
+        if (ok) continue;
+      }
       ctx.globalAlpha = decal.alpha;
       if (decal.type === "sceneMist" || decal.type === "groundMist" || decal.type === "oldVowTrace") {
         ctx.fillStyle = "rgba(132, 72, 158, 0.24)";
@@ -1719,14 +1831,19 @@ function drawSceneDecals(chunks) {
 
 function drawMuralFrame(s, map) {
   ctx.save();
-  const edge = map.id === "qingqiu" ? "rgba(30, 21, 34, 0.52)" : "rgba(64, 31, 18, 0.5)";
+  const edge = map.id === "qingqiu" ? "rgba(18, 14, 17, 0.34)" : "rgba(64, 31, 18, 0.5)";
   const gradTop = ctx.createLinearGradient(0, 0, 0, s.h);
   gradTop.addColorStop(0, edge);
-  gradTop.addColorStop(0.16, "rgba(0, 0, 0, 0)");
-  gradTop.addColorStop(0.84, "rgba(0, 0, 0, 0)");
+  gradTop.addColorStop(map.tileAtlas ? 0.09 : 0.16, "rgba(0, 0, 0, 0)");
+  gradTop.addColorStop(map.tileAtlas ? 0.91 : 0.84, "rgba(0, 0, 0, 0)");
   gradTop.addColorStop(1, edge);
   ctx.fillStyle = gradTop;
   ctx.fillRect(0, 0, s.w, s.h);
+
+  if (map.tileAtlas) {
+    ctx.restore();
+    return;
+  }
 
   ctx.globalAlpha = map.id === "qingqiu" ? 0.18 : 0.26;
   ctx.strokeStyle = map.id === "qingqiu" ? "#b96eb1" : "#b74431";
@@ -1744,55 +1861,86 @@ function drawMuralFrame(s, map) {
   ctx.restore();
 }
 
-function drawStoryMarkerUnder(feature) {
+function drawStoryMarkerUnder(feature, status = "idle") {
+  const ready = status === "ready";
+  const done = status === "done";
   const pulse = 0.5 + 0.5 * Math.sin(state.time * 3.4 + feature.phase);
-  const radius = storyTriggerRadius(feature) * (0.72 + pulse * 0.05);
+  const radius = storyTriggerRadius(feature) * (ready ? 0.62 + pulse * 0.055 : done ? 0.38 + pulse * 0.016 : 0.46 + pulse * 0.028);
   ctx.save();
   ctx.globalCompositeOperation = "lighter";
-  ctx.globalAlpha = 0.38 + pulse * 0.16;
-  ctx.strokeStyle = "rgba(236, 186, 82, 0.78)";
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.ellipse(0, feature.r * 0.18, radius, radius * 0.28, 0, 0, TAU);
-  ctx.stroke();
-  ctx.globalAlpha = 0.18 + pulse * 0.14;
-  ctx.strokeStyle = feature.type === "foxfire" || feature.type === "rift" ? "rgba(224, 86, 60, 0.78)" : "rgba(84, 184, 138, 0.72)";
-  for (let i = 0; i < 6; i += 1) {
-    const a = (i / 6) * TAU + pulse * 0.08;
-    const x = Math.cos(a) * radius * 0.38;
-    const y = feature.r * 0.18 + Math.sin(a) * radius * 0.11;
-    ctx.beginPath();
-    ctx.ellipse(x, y, radius * 0.18, radius * 0.055, a * 0.3, 0, TAU);
-    ctx.stroke();
+  ctx.globalAlpha = ready ? 0.34 + pulse * 0.22 : done ? 0.08 + pulse * 0.04 : 0.18 + pulse * 0.1;
+  const img = assets.vfx.pickup_orb_burst || assets.vfx.phantom_mist_ring;
+  if (img) {
+    ctx.drawImage(img, -radius * 0.78, feature.r * 0.18 - radius * 0.32, radius * 1.56, radius * 0.64);
   }
+  ctx.strokeStyle = ready ? "rgba(236, 198, 98, 0.92)" : done ? "rgba(122, 160, 128, 0.42)" : "rgba(90, 190, 148, 0.62)";
+  ctx.lineWidth = ready ? 3.2 : done ? 1.4 : 1.9;
+  ctx.beginPath();
+  ctx.ellipse(0, feature.r * 0.18, radius * 0.72, radius * 0.22, -0.08, 0, TAU);
+  ctx.stroke();
+  ctx.globalCompositeOperation = "source-over";
+  ctx.globalAlpha = ready ? 0.38 : done ? 0.1 : 0.24;
+  ctx.fillStyle = ready ? "rgba(220, 165, 68, 0.36)" : done ? "rgba(82, 116, 97, 0.18)" : "rgba(82, 180, 137, 0.22)";
+  ctx.beginPath();
+  ctx.ellipse(0, feature.r * 0.18, radius * 0.5, radius * 0.13, -0.08, 0, TAU);
+  ctx.fill();
   ctx.restore();
 }
 
-function drawStoryMarkerOver(feature) {
+function drawStoryMarkerOver(feature, status = "idle") {
+  const ready = status === "ready";
+  const done = status === "done";
   const pulse = 0.5 + 0.5 * Math.sin(state.time * 4.2 + feature.phase);
+  const y = -feature.r * (feature.type === "foxfireVow" ? 1.62 : 1.48);
+  const size = feature.r * (ready ? 1.28 + pulse * 0.12 : done ? 0.88 + pulse * 0.03 : 1.02 + pulse * 0.05);
   ctx.save();
+  ctx.translate(0, y);
   ctx.globalCompositeOperation = "source-over";
-  ctx.translate(0, -feature.r * 1.72);
-  ctx.globalAlpha = 0.92;
-  ctx.fillStyle = "rgba(35, 25, 18, 0.72)";
-  ctx.strokeStyle = "rgba(231, 186, 86, 0.82)";
-  ctx.lineWidth = 2;
+  ctx.globalAlpha = done ? 0.62 : ready ? 1 : 0.92;
+  ctx.fillStyle = ready ? "rgba(37, 28, 18, 0.94)" : done ? "rgba(22, 25, 20, 0.68)" : "rgba(28, 24, 18, 0.86)";
+  ctx.strokeStyle = ready ? "rgba(236, 198, 98, 0.98)" : done ? "rgba(122, 160, 128, 0.58)" : "rgba(214, 165, 77, 0.82)";
+  ctx.lineWidth = Math.max(1.5, feature.r * 0.07);
   ctx.beginPath();
-  ctx.arc(0, -2, 19, 0, TAU);
+  ctx.arc(0, 0, size * 0.48, 0, TAU);
   ctx.fill();
   ctx.stroke();
-  ctx.fillStyle = "rgba(255, 226, 150, 0.95)";
-  ctx.font = "700 17px serif";
+  ctx.strokeStyle = ready ? "rgba(82, 180, 137, 0.84)" : done ? "rgba(82, 180, 137, 0.28)" : "rgba(82, 180, 137, 0.44)";
+  ctx.lineWidth = Math.max(1, feature.r * 0.035);
+  ctx.beginPath();
+  ctx.arc(0, 0, size * 0.62, -Math.PI * 0.18, Math.PI * 1.18);
+  ctx.stroke();
+  ctx.fillStyle = ready ? "rgba(255, 235, 166, 0.98)" : done ? "rgba(177, 205, 158, 0.8)" : "rgba(226, 190, 103, 0.86)";
+  ctx.font = `800 ${Math.max(15, size * 0.56)}px serif`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText("缘", 0, -2);
-  ctx.globalCompositeOperation = "lighter";
-  ctx.globalAlpha = 0.28 + pulse * 0.22;
-  ctx.strokeStyle = "rgba(84, 184, 138, 0.88)";
+  ctx.fillText(done ? "记" : "缘", 0, -1);
+  ctx.strokeStyle = "rgba(236, 198, 98, 0.64)";
+  ctx.lineWidth = Math.max(1, feature.r * 0.035);
   ctx.beginPath();
-  ctx.arc(0, -2, 22 + pulse * 4, 0, TAU);
+  ctx.moveTo(0, size * 0.48);
+  ctx.lineTo(0, size * 0.82);
   ctx.stroke();
+  if (ready) {
+    ctx.globalCompositeOperation = "lighter";
+    ctx.globalAlpha = 0.34 + pulse * 0.28;
+    ctx.strokeStyle = "rgba(236, 198, 98, 0.82)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(0, 0, size * (0.72 + pulse * 0.18), 0, TAU);
+    ctx.stroke();
+    ctx.fillStyle = "rgba(82, 180, 137, 0.2)";
+    ctx.beginPath();
+    ctx.arc(0, 0, size * (0.58 + pulse * 0.1), 0, TAU);
+    ctx.fill();
+    ctx.globalCompositeOperation = "source-over";
+    ctx.globalAlpha = 0.92;
+    ctx.fillStyle = "rgba(247, 226, 160, 0.95)";
+    ctx.font = `800 ${Math.max(11, feature.r * 0.34)}px "KaiTi", serif`;
+    ctx.textAlign = "center";
+    ctx.fillText("靠近记入轮回", 0, size * 1.25);
+  }
   ctx.restore();
+  return true;
 }
 
 function storyTriggerRadius(event) {
@@ -1803,9 +1951,17 @@ function drawMapFeature(feature) {
   const p = toView(feature);
   ctx.save();
   ctx.translate(p.x, p.y);
-  if (feature.event && !state.storySeen[storyKey(feature)]) drawStoryMarkerUnder(feature);
+  const seenEvent = feature.event && state.storySeen[storyKey(feature)];
+  const unseenEvent = feature.event && !seenEvent;
+  const eventReady = unseenEvent && dist(feature, state.player) < storyTriggerRadius(feature);
+  const eventStatus = seenEvent ? "done" : eventReady ? "ready" : "idle";
+  if (feature.event) drawStoryMarkerUnder(feature, eventStatus);
   if (feature.event && drawSceneEventFeature(feature)) {
-    if (!state.storySeen[storyKey(feature)]) drawStoryMarkerOver(feature);
+    drawStoryMarkerOver(feature, eventStatus);
+    ctx.restore();
+    return;
+  }
+  if (drawQingqiuPropFeature(feature)) {
     ctx.restore();
     return;
   }
@@ -1837,76 +1993,66 @@ function drawMapFeature(feature) {
     alpha: feature.event ? 0.96 : 0.82,
     anchorY: feature.type === "mist" ? 0.5 : 0.86
   })) {
-    if (feature.event && !state.storySeen[storyKey(feature)]) drawStoryMarkerOver(feature);
+    if (feature.event) drawStoryMarkerOver(feature, eventStatus);
     ctx.restore();
     return;
   }
-  const fallbackKey = feature.type === "spiritWell" ? "spirit" : feature.type;
-  if (feature.type === "spirit" || feature.type === "spiritWell") {
-    ctx.fillStyle = state.map.accentColor;
-    ctx.beginPath();
-    ctx.ellipse(0, 0, feature.r, feature.r * 0.24, -0.18, 0, TAU);
-    ctx.fill();
-    ctx.strokeStyle = "rgba(220, 247, 203, 0.32)";
-    ctx.stroke();
-    ctx.strokeStyle = "rgba(231, 186, 86, 0.42)";
-    ctx.beginPath();
-    ctx.arc(0, 0, feature.r * 0.38, 0, TAU);
-    ctx.stroke();
-  } else if (feature.type === "stone") {
-    ctx.fillStyle = "rgba(31, 29, 24, 0.42)";
-    ctx.beginPath();
-    ctx.ellipse(0, 0, feature.r * 1.2, feature.r * 0.45, -0.2, 0, TAU);
-    ctx.fill();
-    ctx.fillStyle = "rgba(190, 178, 139, 0.52)";
-    ctx.beginPath();
-    ctx.moveTo(-feature.r * 0.42, 0);
-    ctx.lineTo(-feature.r * 0.3, -feature.r * 1.45);
-    ctx.lineTo(feature.r * 0.32, -feature.r * 1.55);
-    ctx.lineTo(feature.r * 0.42, 0);
-    ctx.closePath();
-    ctx.fill();
-    ctx.strokeStyle = "rgba(231, 186, 86, 0.28)";
-    ctx.stroke();
-  } else if (feature.type === "rift") {
-    ctx.strokeStyle = "rgba(186, 59, 47, 0.7)";
-    ctx.lineWidth = feature.event ? 4 : 3;
-    ctx.beginPath();
-    ctx.moveTo(-feature.r * 0.7, -feature.r * 0.12);
-    ctx.lineTo(-feature.r * 0.22, feature.r * 0.18);
-    ctx.lineTo(feature.r * 0.15, -feature.r * 0.08);
-    ctx.lineTo(feature.r * 0.7, feature.r * 0.14);
-    ctx.stroke();
-  } else if (feature.type === "mist") {
-    ctx.globalAlpha = feature.event ? 0.44 : 0.3;
-    ctx.fillStyle = "#d98bd8";
-    ctx.beginPath();
-    ctx.ellipse(0, 0, feature.r, feature.r * 0.36, 0.1, 0, TAU);
-    ctx.fill();
-  } else if (feature.type === "foxfire") {
-    ctx.fillStyle = "rgba(231, 186, 86, 0.72)";
-    ctx.beginPath();
-    ctx.moveTo(0, -feature.r * 1.5);
-    ctx.quadraticCurveTo(feature.r * 0.9, -feature.r * 0.35, feature.r * 0.18, feature.r * 0.25);
-    ctx.quadraticCurveTo(-feature.r * 0.45, -feature.r * 0.18, 0, -feature.r * 1.5);
-    ctx.fill();
-    ctx.strokeStyle = "rgba(217, 139, 216, 0.6)";
-    ctx.stroke();
-  } else if (feature.type === "stele" || feature.type === "shrine") {
-    ctx.fillStyle = "rgba(42, 38, 48, 0.76)";
-    ctx.fillRect(-feature.r * 0.38, -feature.r * 1.8, feature.r * 0.76, feature.r * 1.8);
-    ctx.strokeStyle = "rgba(231, 186, 86, 0.45)";
-    ctx.strokeRect(-feature.r * 0.38, -feature.r * 1.8, feature.r * 0.76, feature.r * 1.8);
-    if (feature.event) {
-      ctx.fillStyle = "rgba(186, 59, 47, 0.68)";
-      ctx.fillRect(-feature.r * 0.18, -feature.r * 1.42, feature.r * 0.36, feature.r * 0.5);
-    }
-  }
-  if (feature.event && !state.storySeen[storyKey(feature)]) drawStoryMarkerOver(feature);
+  if (feature.event) drawStoryMarkerOver(feature, eventStatus);
   ctx.restore();
 }
 
+function drawQingqiuPropFeature(feature) {
+  if (state.map?.scenePack !== "qingqiu") return false;
+  const specs = {
+    qingqiuFoxfireSmall: { prefix: "foxfire_small", frames: 4, fps: 5.4, w: 2.1, h: 2.9, y: 0.44, alpha: 0.92, anchorY: 0.88 },
+    qingqiuFoxfireMedium: { prefix: "foxfire_medium", frames: 4, fps: 4.8, w: 2.35, h: 3.1, y: 0.46, alpha: 0.94, anchorY: 0.88 },
+    qingqiuFoxfireCluster: { prefix: "foxfire_cluster", frames: 4, fps: 4.2, w: 3.0, h: 3.2, y: 0.48, alpha: 0.9, anchorY: 0.88 },
+    qingqiuGrass: { prefix: "grass_low", variants: 5, w: 2.35, h: 1.25, y: 0.28, alpha: 0.76, anchorY: 0.8 },
+    foxMaskShard: { prefix: "fox_mask_shard", variants: 3, w: 2.5, h: 1.45, y: 0.26, alpha: 0.8, anchorY: 0.72 },
+    groundRibbon: { prefix: "ground_ribbon", variants: 4, w: 3.2, h: 1.05, y: 0.18, alpha: 0.66, anchorY: 0.62 }
+  };
+  const spec = specs[feature.type];
+  if (!spec) return false;
+  const frame = spec.frames
+    ? Math.floor((state.time + feature.phase) * spec.fps) % spec.frames
+    : Math.floor(feature.phase * 1000) % spec.variants;
+  return drawAsset("qingqiuProps", `${spec.prefix}_${frame}`, 0, feature.r * spec.y, feature.r * spec.w, feature.r * spec.h, {
+    alpha: spec.alpha,
+    anchorY: spec.anchorY,
+    rotate: feature.rotate || 0
+  });
+}
+
 function drawSceneEventFeature(feature) {
+  if (state.map?.scenePack === "qingqiu") {
+    const qingqiuEvent = {
+      foxfireVow: { idle: "foxfireVowIdle", ready: "foxfireVowReady", done: "foxfireVowDone", w: 4.15, h: 4.9, y: 0.42 },
+      oldVowStele: { idle: "oldVowSteleIdle", ready: "oldVowSteleReady", done: "oldVowSteleDone", w: 3.25, h: 4.35, y: 0.34 }
+    }[feature.type];
+    if (qingqiuEvent) {
+      const seen = state.storySeen[storyKey(feature)];
+      const ready = !seen && dist(feature, state.player) < storyTriggerRadius(feature);
+      const eventAsset = seen ? qingqiuEvent.done : ready ? qingqiuEvent.ready : qingqiuEvent.idle;
+      if (ready) {
+        const pulse = 0.5 + 0.5 * Math.sin(state.time * 4.1 + feature.phase);
+        const img = assets.vfx.level_lotus_burst || assets.vfx.pickup_orb_burst;
+        if (img) {
+          const r = feature.r * (2.8 + pulse * 0.24);
+          ctx.save();
+          ctx.globalCompositeOperation = "lighter";
+          ctx.globalAlpha = 0.18 + pulse * 0.1;
+          ctx.drawImage(img, -r * 0.62, feature.r * 0.08 - r * 0.28, r * 1.24, r * 0.56);
+          ctx.restore();
+        }
+      }
+      const ok = drawAsset("sceneEvents", eventAsset, 0, feature.r * qingqiuEvent.y, feature.r * qingqiuEvent.w, feature.r * qingqiuEvent.h, {
+        alpha: seen ? 0.58 : ready ? 1 : 0.92,
+        anchorY: 0.86
+      });
+      if (!ok) return false;
+      return true;
+    }
+  }
   const eventAsset = {
     brokenSword: "brokenSword",
     herbCauldron: "herbCauldron",
@@ -1914,7 +2060,6 @@ function drawSceneEventFeature(feature) {
     foxfire: state.map?.scenePack === "qingqiu" ? "foxfire" : ""
   }[feature.type];
   if (!eventAsset) return false;
-  const pulse = 0.5 + 0.5 * Math.sin(state.time * 3 + feature.phase);
   const w = feature.r * 5.3;
   const h = feature.r * 5.3;
   const ok = drawAsset("sceneEvents", eventAsset, 0, feature.r * 0.38, w, h, {
@@ -1922,31 +2067,21 @@ function drawSceneEventFeature(feature) {
     anchorY: 0.86
   });
   if (!ok) return false;
-  if (!state.storySeen[storyKey(feature)]) {
-    ctx.save();
-    ctx.globalCompositeOperation = "lighter";
-    ctx.globalAlpha = 0.18 + pulse * 0.14;
-    ctx.strokeStyle = feature.type === "brokenSword" ? "#f0c86a" : feature.type === "herbCauldron" ? "#54b88a" : "#d98bd8";
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.ellipse(0, feature.r * 0.28, feature.r * 2.65, feature.r * 0.75, 0, 0, TAU);
-    ctx.stroke();
-    ctx.restore();
-  }
   return true;
 }
 
-function drawShadow(entity, scale = 1) {
+function drawShadow(entity, scale = 1, options = {}) {
+  const { y = 0.72, alpha = 0.34, squash = 1 } = options;
   const p = toView(entity);
-  ctx.fillStyle = "rgba(0, 0, 0, 0.28)";
+  ctx.fillStyle = `rgba(0, 0, 0, ${alpha})`;
   ctx.beginPath();
-  ctx.ellipse(p.x, p.y + entity.r * 0.62, entity.r * 1.35 * scale, entity.r * 0.42 * scale, 0, 0, TAU);
+  ctx.ellipse(p.x, p.y + entity.r * y, entity.r * 1.38 * scale, entity.r * 0.34 * scale * squash, 0, 0, TAU);
   ctx.fill();
 }
 
 function drawPlayer(player) {
   const p = toView(player);
-  drawShadow(player, 1.35);
+  drawShadow(player, 1.28, { y: 0.82, alpha: 0.38, squash: 0.9 });
   const wobble = Math.sin(performance.now() * 0.006) * 0.035;
   const alpha = player.invuln > 0 ? 0.72 + Math.sin(performance.now() * 0.04) * 0.22 : 1;
   if (drawAnimatedAsset("characters", state.lineage.id, player.facing, 4, player.animTime, p.x, p.y + 16, player.r * 5.9, player.r * 6.35, {
@@ -1963,41 +2098,13 @@ function drawPlayer(player) {
   })) {
     return;
   }
-  ctx.save();
-  ctx.translate(p.x, p.y);
-  const mainColor = player.invuln > 0 ? "#f3df8b" : state.lineage.color;
-  ctx.strokeStyle = "rgba(231, 186, 86, 0.75)";
-  ctx.lineWidth = 2;
-  ctx.fillStyle = "rgba(29, 21, 16, 0.92)";
-  ctx.beginPath();
-  ctx.moveTo(0, -player.r * 1.75);
-  ctx.quadraticCurveTo(player.r * 0.82, -player.r * 0.68, player.r * 0.42, player.r * 0.6);
-  ctx.lineTo(-player.r * 0.42, player.r * 0.6);
-  ctx.quadraticCurveTo(-player.r * 0.82, -player.r * 0.68, 0, -player.r * 1.75);
-  ctx.fill();
-  ctx.stroke();
-  ctx.fillStyle = mainColor;
-  ctx.beginPath();
-  ctx.ellipse(0, -player.r * 0.54, player.r * 0.58, player.r * 0.92, 0, 0, TAU);
-  ctx.fill();
-  ctx.strokeStyle = "rgba(247, 239, 224, 0.46)";
-  ctx.stroke();
-  ctx.strokeStyle = "#ba3b2f";
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(6, -player.r * 1.2);
-  ctx.quadraticCurveTo(24, -player.r * 1.6, 11, -player.r * 0.35);
-  ctx.moveTo(-4, -player.r * 1.22);
-  ctx.quadraticCurveTo(-25, -player.r * 1.45, -12, -player.r * 0.2);
-  ctx.stroke();
-  ctx.restore();
 }
 
 function drawEnemy(enemy) {
   const p = toView(enemy);
   const s = screen();
   if (p.x < -120 || p.x > s.w + 120 || p.y < -140 || p.y > s.h + 140) return;
-  drawShadow(enemy, enemy.elite ? 1.35 : 1.2);
+  drawShadow(enemy, enemy.elite ? 1.3 : 1.12, { y: enemy.elite ? 0.78 : 0.74, alpha: enemy.elite ? 0.36 : 0.3, squash: 0.92 });
   const enemyKey = enemy.elite ? "elite" : "wraith";
   const pressureMode = state.enemies.length > 42 && !enemy.elite && dist(enemy, state.player) > 460;
   const sway = Math.sin((performance.now() * 0.005) + enemy.x * 0.02) * 0.04;
@@ -2063,38 +2170,6 @@ function drawEnemy(enemy) {
     ctx.restore();
     return;
   }
-  ctx.save();
-  ctx.translate(p.x, p.y);
-  const body = enemy.elite ? "#723452" : "#3d5344";
-  const trim = enemy.slowTime > 0 ? "#d98bd8" : enemy.elite ? "#e05b77" : "#9fc6a1";
-  ctx.fillStyle = body;
-  ctx.beginPath();
-  ctx.moveTo(-enemy.r * 0.95, -enemy.r * 0.32);
-  ctx.quadraticCurveTo(-enemy.r * 0.58, -enemy.r * 1.35, 0, -enemy.r * 1.15);
-  ctx.quadraticCurveTo(enemy.r * 0.92, -enemy.r * 1.0, enemy.r * 0.82, -enemy.r * 0.05);
-  ctx.quadraticCurveTo(enemy.r * 0.25, enemy.r * 0.55, -enemy.r * 0.78, enemy.r * 0.22);
-  ctx.closePath();
-  ctx.fill();
-  ctx.strokeStyle = trim;
-  ctx.lineWidth = 2;
-  ctx.stroke();
-  ctx.strokeStyle = "rgba(231, 186, 86, 0.52)";
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(-enemy.r * 0.2, -enemy.r * 1.05);
-  ctx.lineTo(-enemy.r * 0.52, -enemy.r * 1.62);
-  ctx.moveTo(enemy.r * 0.22, -enemy.r * 1.02);
-  ctx.lineTo(enemy.r * 0.58, -enemy.r * 1.52);
-  ctx.stroke();
-  if (enemy.marks > 0) {
-    ctx.fillStyle = "#dceeff";
-    ctx.fillText("x".repeat(enemy.marks), -enemy.r * 0.45, -enemy.r - 12);
-  }
-  ctx.fillStyle = "rgba(0, 0, 0, 0.45)";
-  ctx.fillRect(-enemy.r, enemy.r + 3, enemy.r * 2, 4);
-  ctx.fillStyle = enemy.elite ? "#e05b77" : "#74ba82";
-  ctx.fillRect(-enemy.r, enemy.r + 3, enemy.r * 2 * Math.max(0, enemy.hp / enemy.maxHp), 4);
-  ctx.restore();
 }
 
 function drawProjectile(projectile) {
@@ -2104,63 +2179,21 @@ function drawProjectile(projectile) {
   if (projectile.type === "sword") {
     const angle = Math.atan2(projectile.vy * 0.68, projectile.vx + projectile.vy * 0.22);
     ctx.restore();
+    if (drawVfxAsset("sword_projectile", p.x, p.y, 17, { rotate: angle, alpha: 0.78, w: 1.72, h: 0.62, anchorY: 0.5 })) return;
     if (drawAsset("skills", "sword", p.x, p.y, 44, 18, { rotate: angle, anchorY: 0.5 })) return;
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(angle);
-    const grad = ctx.createLinearGradient(-28, 0, 28, 0);
-    grad.addColorStop(0, "rgba(122, 213, 238, 0)");
-    grad.addColorStop(0.45, "#7ad5ee");
-    grad.addColorStop(1, "#fff8d7");
-    ctx.strokeStyle = grad;
-    ctx.shadowColor = "rgba(122, 213, 238, 0.65)";
-    ctx.shadowBlur = 10;
-    ctx.lineWidth = 5;
-    ctx.beginPath();
-    ctx.moveTo(-26, 0);
-    ctx.lineTo(26, 0);
-    ctx.stroke();
-    ctx.fillStyle = "#f7efe0";
-    ctx.beginPath();
-    ctx.arc(26, 0, 4, 0, TAU);
-    ctx.fill();
+    return;
   } else {
     const angle = Math.atan2(projectile.vy * 0.68, projectile.vx + projectile.vy * 0.22);
     ctx.restore();
+    if (drawVfxAsset("talisman_projectile", p.x, p.y, 20, { rotate: angle, alpha: 0.82, w: 1.58, h: 1.02, anchorY: 0.5 })) return;
     if (drawAsset("skills", "talisman", p.x, p.y, 28, 38, { rotate: angle + Math.sin(state.time * 8) * 0.35, anchorY: 0.5 })) return;
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(angle + Math.sin(state.time * 8) * 0.5);
-    ctx.shadowColor = "rgba(255, 240, 164, 0.6)";
-    ctx.shadowBlur = 10;
-    ctx.fillStyle = "#e7ba56";
-    ctx.fillRect(-6, -10, 12, 20);
-    ctx.strokeStyle = "#7f2d27";
-    ctx.strokeRect(-6, -10, 12, 20);
-    ctx.strokeStyle = "#fff0a4";
-    ctx.beginPath();
-    ctx.moveTo(-3, -4);
-    ctx.lineTo(3, -4);
-    ctx.moveTo(-3, 2);
-    ctx.lineTo(3, 2);
-    ctx.stroke();
+    return;
   }
-  ctx.restore();
 }
 
 function drawDrop(drop) {
   const p = toView(drop);
   const pulse = 1 + Math.sin(state.time * 8 + drop.x * 0.02) * 0.08;
-  ctx.save();
-  ctx.globalAlpha = drop.magnet ? 0.82 : 0.44;
-  ctx.strokeStyle = drop.fire ? "#d65d35" : "#52b489";
-  ctx.shadowColor = drop.fire ? "rgba(214, 93, 53, 0.48)" : "rgba(82, 180, 137, 0.48)";
-  ctx.shadowBlur = 12;
-  ctx.lineWidth = 2.5;
-  ctx.beginPath();
-  ctx.arc(p.x, p.y - 4, drop.r * 2.2 * pulse, 0, TAU);
-  ctx.stroke();
-  ctx.restore();
   ctx.save();
   ctx.translate(p.x, p.y);
   ctx.shadowColor = drop.fire ? "rgba(225, 105, 53, 0.82)" : "rgba(84, 184, 138, 0.82)";
@@ -2194,12 +2227,29 @@ function drawDrop(drop) {
 function drawPulse(pulse) {
   const t = 1 - pulse.life / pulse.maxLife;
   const p = toView(pulse);
+  const fade = Math.max(0, 1 - t);
+  if (pulse.kind === "phantom") {
+    if (drawVfxAsset("phantom_mist_ring", p.x, p.y, pulse.radius * (0.34 + t * 0.28), {
+      alpha: fade * 0.38,
+      w: 1.72,
+      h: 0.72,
+      anchorY: 0.5
+    })) return;
+  }
+  if (pulse.kind === "pickupBurst") {
+    if (drawVfxAsset("pickup_orb_burst", p.x, p.y, pulse.radius * (0.32 + t * 0.3), {
+      alpha: fade * 0.55,
+      w: 1.18,
+      h: 0.92,
+      anchorY: 0.5
+    })) return;
+  }
   ctx.save();
-  ctx.globalAlpha = Math.max(0, 1 - t);
-  ctx.strokeStyle = pulse.kind === "hurt" ? "#ba3b2f" : pulse.kind === "phantom" ? "rgba(159, 105, 176, 0.72)" : pulse.kind === "pickupBurst" ? "#54b88a" : "#e7ba56";
-  ctx.shadowColor = pulse.kind === "phantom" ? "rgba(216, 166, 77, 0.24)" : "transparent";
-  ctx.shadowBlur = pulse.kind === "phantom" ? 10 : 0;
-  ctx.lineWidth = pulse.kind === "phantom" ? 3 : 4;
+  ctx.globalAlpha = fade;
+  ctx.strokeStyle = pulse.kind === "hurt" ? "#ba3b2f" : "#e7ba56";
+  ctx.shadowColor = "transparent";
+  ctx.shadowBlur = 0;
+  ctx.lineWidth = 3;
   ctx.beginPath();
   ctx.ellipse(p.x, p.y, pulse.radius * (0.45 + t * 0.7), pulse.radius * (0.22 + t * 0.34), -0.1, 0, TAU);
   ctx.stroke();
@@ -2221,6 +2271,31 @@ function drawEffect(effect) {
   const p = toView(effect);
   const t = 1 - effect.life / effect.maxLife;
   const fade = Math.max(0, 1 - t);
+  const atlas = {
+    swordTrail: ["sword_slash", 1.02, 0.56, 0.62],
+    swordCast: ["sword_slash", 1.12, 0.62, 0.62],
+    swordImpact: ["hit_spark", 0.82, 0.66, 0.58],
+    talismanTrail: ["talisman_projectile", 1.28, 0.88, 0.76],
+    talismanCast: ["talisman_impact", 1.5, 1.26, 0.82],
+    talismanImpact: ["talisman_impact", 1.56, 1.3, 0.82],
+    flameRing: ["fire_explosion", 2.18, 1.82],
+    phantomMist: ["phantom_mist_ring", 1.7, 0.82, 0.72],
+    levelBurst: ["level_lotus_burst", 2.32, 1.64],
+    dashTrail: ["dash_wind_trail", 1.55, 0.7, 0.72],
+    hitSpark: ["hit_spark", 0.82, 0.7, 0.54],
+    killBloom: ["kill_bloom", 1.55, 1.28, 0.76],
+    pickupBurst: ["pickup_orb_burst", 1.3, 1.06, 0.74]
+  }[effect.type];
+  if (atlas) {
+    const angle = effect.angle || 0;
+    if (drawVfxAsset(atlas[0], p.x, p.y, effect.radius * (0.72 + t * 0.35), {
+      rotate: angle,
+      alpha: Math.min(1, fade * (atlas[3] || 1)),
+      w: atlas[1],
+      h: atlas[2],
+      anchorY: 0.5
+    })) return;
+  }
   ctx.save();
   ctx.translate(p.x, p.y);
   ctx.globalAlpha = fade;
@@ -2483,6 +2558,7 @@ function render() {
 
   for (const cloud of state.clouds) drawCloud(cloud);
   for (const effect of state.effects) drawEffect(effect);
+  for (const pulse of state.pulses) drawPulse(pulse);
   for (const drop of state.drops) drawDrop(drop);
   for (const projectile of state.projectiles) drawProjectile(projectile);
   state.enemies.sort((a, b) => a.y - b.y);
@@ -2495,18 +2571,31 @@ function render() {
     drawEnemy(enemy);
   }
   if (!playerDrawn) drawPlayer(state.player);
-  for (const pulse of state.pulses) drawPulse(pulse);
   for (const text of state.damageTexts) drawDamageText(text);
   ctx.restore();
 
-  ui.hpText.textContent = `${Math.max(0, Math.ceil(state.player.hp))}/${state.player.maxHp}`;
-  ui.hpBar.style.width = `${Math.max(0, state.player.hp / state.player.maxHp) * 100}%`;
+  const hpRatio = Math.max(0, state.player.hp / state.player.maxHp);
+  const hpValue = `${Math.max(0, Math.ceil(state.player.hp))}/${state.player.maxHp}`;
+  ui.hpText.textContent = hpValue;
+  ui.hpBar.style.width = `${hpRatio * 100}%`;
   const xpNeed = Math.max(0, state.player.nextXp - state.player.xp);
-  ui.xpText.textContent = `${state.player.xp}/${state.player.nextXp}  差${xpNeed}`;
-  ui.xpBar.style.width = `${(state.player.xp / state.player.nextXp) * 100}%`;
-  ui.levelText.textContent = CONFIG.realms[Math.min(CONFIG.realms.length - 1, state.player.level - 1)];
-  ui.timeText.textContent = formatTime(state.time);
-  ui.killText.textContent = state.kills;
+  const xpValue = `${state.player.xp}/${state.player.nextXp}  差${xpNeed}`;
+  const xpRatio = state.player.xp / state.player.nextXp;
+  const levelValue = CONFIG.realms[Math.min(CONFIG.realms.length - 1, state.player.level - 1)];
+  const timeValue = formatTime(state.time);
+  const killValue = String(state.kills);
+  ui.xpText.textContent = xpValue;
+  ui.xpBar.style.width = `${xpRatio * 100}%`;
+  ui.levelText.textContent = levelValue;
+  ui.timeText.textContent = timeValue;
+  ui.killText.textContent = killValue;
+  if (ui.mobileHpText) ui.mobileHpText.textContent = hpValue;
+  if (ui.mobileHpBar) ui.mobileHpBar.style.width = `${hpRatio * 100}%`;
+  if (ui.mobileXpText) ui.mobileXpText.textContent = `差${xpNeed}`;
+  if (ui.mobileXpBar) ui.mobileXpBar.style.width = `${xpRatio * 100}%`;
+  if (ui.mobileLevelText) ui.mobileLevelText.textContent = levelValue;
+  if (ui.mobileTimeText) ui.mobileTimeText.textContent = timeValue;
+  if (ui.mobileKillText) ui.mobileKillText.textContent = killValue;
   ui.soulText.textContent = state.resources.soul;
   ui.fireText.textContent = state.resources.fire;
   ui.dockLevelText.textContent = state.player.level;
@@ -2591,23 +2680,32 @@ ui.dashBtn.addEventListener("click", dashPlayer);
 ui.skipChoiceBtn.addEventListener("click", skipChoices);
 ui.storyChoiceBtn.addEventListener("click", closeStoryEvent);
 ui.pauseBtn.addEventListener("click", () => {
-  if (!state?.running || !ui.choices.classList.contains("hidden") || !ui.storyOverlay.classList.contains("hidden")) return;
+  if (!state?.running || !ui.choices.classList.contains("hidden") || !ui.storyOverlay.classList.contains("hidden") || !ui.buildOverlay?.classList.contains("hidden")) return;
   state.paused = !state.paused;
-  if (state.paused) renderBuildLedger();
   ui.pauseOverlay.classList.toggle("hidden", !state.paused);
   ui.pauseBtn.textContent = state.paused ? "续" : "暂";
   lastTime = performance.now();
 });
 ui.pauseOverlay.addEventListener("click", event => {
-  if (event.target?.dataset?.action !== "resume") return;
+  const action = event.target?.dataset?.action;
+  if (action === "build") {
+    openBuildPanel();
+    return;
+  }
+  if (action !== "resume") return;
   state.paused = false;
   ui.pauseOverlay.classList.add("hidden");
   ui.pauseBtn.textContent = "暂";
   lastTime = performance.now();
 });
+ui.buildOverlay?.addEventListener("click", event => {
+  if (event.target?.dataset?.action !== "close-build") return;
+  closeBuildPanel();
+});
 ui.restartBtn.addEventListener("click", () => {
   ui.gameOver.classList.add("hidden");
   ui.pauseOverlay.classList.add("hidden");
+  ui.buildOverlay?.classList.add("hidden");
   ui.start.classList.remove("hidden");
   renderLineageSelect();
 });

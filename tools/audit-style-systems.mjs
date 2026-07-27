@@ -12,17 +12,18 @@ const missingRuntimeFiles = runtimeManifest.assets
   .filter(file => !existsSync(join(root, file)));
 
 const requiredCssSprites = [
-  "assets/runtime/webp/ui/nineslice/hud_9.webp",
-  "assets/runtime/webp/ui/nineslice/card_9.webp",
-  "assets/runtime/webp/ui/nineslice/lineage_9.webp",
-  "assets/runtime/webp/ui/nineslice/panel_9.webp",
-  "assets/runtime/webp/ui/nineslice/dialogue_9.webp",
-  "assets/runtime/webp/ui/nineslice/button_9.webp",
-  "assets/runtime/webp/ui/nineslice/button_dark_9.webp",
-  "assets/runtime/webp/ui/nineslice/resource_9.webp",
-  "assets/runtime/webp/ui/nineslice/plaque_9.webp",
-  "assets/runtime/webp/ui/pause_seal.webp",
-  "assets/runtime/webp/ui/godpower_medallion.webp",
+  "assets/runtime/webp/ui/hud_scroll.webp",
+  "assets/runtime/webp/ui/mobile_hud_compact.webp",
+  "assets/runtime/webp/ui/mobile_controls_atlas.webp",
+  "assets/runtime/webp/ui/hud_atlas/hud_controls_atlas.webp",
+  "assets/runtime/webp/ui/title_plaque.webp",
+  "assets/runtime/webp/ui/lineage_card.webp",
+  "assets/runtime/webp/ui/choice_card_frame.webp",
+  "assets/runtime/webp/ui/button_continue.webp",
+  "assets/runtime/webp/ui/button_minor.webp",
+  "assets/runtime/webp/ui/pause_panel.webp",
+  "assets/runtime/webp/ui/result_panel.webp",
+  "assets/runtime/webp/ui/story/story_panel_art.webp",
   "assets/runtime/webp/ui/hp_bar.webp",
   "assets/runtime/webp/ui/xp_bar.webp"
 ];
@@ -39,11 +40,11 @@ const requiredRuntimeAssets = [
   "assets/maps/v032/qingqiu/event_foxfire_vow.webp",
   "assets/maps/v032/herb_marsh/event_herb_cauldron.webp",
   "assets/maps/v032/wilderness/event_memory_stele.webp",
-  "assets/runtime/webp/ui/nineslice/hud_9.webp",
-  "assets/runtime/webp/ui/nineslice/card_9.webp",
-  "assets/runtime/webp/ui/nineslice/lineage_9.webp",
-  "assets/runtime/webp/ui/nineslice/panel_9.webp",
-  "assets/runtime/webp/ui/nineslice/dialogue_9.webp"
+  "assets/runtime/webp/ui/hud_scroll.webp",
+  "assets/runtime/webp/ui/hud_atlas/hud_controls_atlas.webp",
+  "assets/runtime/webp/ui/lineage_card.webp",
+  "assets/runtime/webp/ui/choice_card_frame.webp",
+  "assets/runtime/webp/ui/story/story_panel_art.webp"
 ];
 const missingRequiredRuntimeAssets = requiredRuntimeAssets.filter(file => !existsSync(join(root, file)));
 
@@ -57,7 +58,11 @@ const forbiddenRuntimePrototypeRefs = [
 const forbiddenCssPrototypeRefs = [
   "assets/ui/atlas-v1/",
   "assets/generated/runtime-webp/ui/",
-  "assets/ui/icons/"
+  "assets/ui/icons/",
+  "assets/runtime/webp/ui/nineslice/",
+  "assets/runtime/webp/ui/icons/attr_",
+  "assets/runtime/webp/ui/pause_seal.webp",
+  "assets/runtime/webp/ui/godpower_medallion.webp"
 ].filter(ref => css.includes(ref));
 
 const requiredGameHooks = [
@@ -69,13 +74,13 @@ const requiredGameHooks = [
   "touchStick",
   "visibleMapFeatures",
   "drawSceneDecals",
-  "ASSET_VERSION = \"0.3.2-scene-map\""
+  "ASSET_VERSION = \"0.3.2b-ui-point-feedback\""
 ];
 const missingHooks = requiredGameHooks.filter(hook => !game.includes(hook) && !css.includes(hook));
 
 const forbiddenRuntimeAssetIds = runtimeManifest.assets
   .map(asset => asset.id)
-  .filter(id => id.startsWith("shadow_") || id.startsWith("ground_"));
+  .filter(id => id.startsWith("shadow_") || id.startsWith("ground_") || id.startsWith("attr_") || id.endsWith("_9") || id === "pause_seal" || id === "godpower_medallion");
 
 const styleKeywords = ["Dunhuang", "mineral", "cinnabar", "jade", "bronze", "lotus"];
 const missingChecklistKeywords = styleKeywords.filter(keyword => !checklist.includes(keyword));
@@ -93,7 +98,7 @@ const result = {
   missingHooks,
   missingChecklistKeywords,
   ok: runtimeManifest.version === "0.3.2-scene-map" &&
-    runtimeManifest.assetCount >= 110 &&
+    runtimeManifest.assetCount >= 90 &&
     runtimeManifest.totalBytes < 2_200_000 &&
     missingRuntimeFiles.length === 0 &&
     missingRequiredRuntimeAssets.length === 0 &&

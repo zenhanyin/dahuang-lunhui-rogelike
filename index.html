@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>大荒轮回录：荒境</title>
-  <link rel="stylesheet" href="./styles.css?v=0.3.2-online">
+  <link rel="stylesheet" href="./styles.css?v=0.3.2b-ui-point-feedback">
 </head>
 <body>
   <div id="game-shell">
@@ -30,6 +30,27 @@
         <span>斩妖 <strong id="killText">0</strong></span>
       </div>
       <div id="buildText" class="build-strip">构筑 未定</div>
+    </div>
+
+    <div id="mobileHud" class="mobile-status" aria-hidden="true">
+      <div class="mobile-status-title">
+        <span class="seal">荒</span>
+        <div>
+          <b>大荒轮回录：荒境</b>
+          <small id="mobileLineageText">择命入荒</small>
+        </div>
+      </div>
+      <div class="mobile-bars">
+        <label>气血 <span id="mobileHpText"></span></label>
+        <div class="bar hp"><span id="mobileHpBar"></span></div>
+        <label>修为 <span id="mobileXpText"></span></label>
+        <div class="bar xp"><span id="mobileXpBar"></span></div>
+      </div>
+      <div class="mobile-stats">
+        <span>境界 <strong id="mobileLevelText">炼气一层</strong></span>
+        <span>轮回 <strong id="mobileTimeText">00:00</strong></span>
+        <span>斩妖 <strong id="mobileKillText">0</strong></span>
+      </div>
     </div>
 
     <div id="topCounters" class="top-counters" aria-hidden="true">
@@ -70,6 +91,10 @@
     <div id="storyOverlay" class="overlay hidden">
       <div class="panel story-panel">
         <h2 id="storyTitle">大荒遗痕</h2>
+        <div class="story-portrait-wrap" aria-hidden="true">
+          <img id="storyPortrait" class="story-portrait" src="assets/runtime/webp/ui/portraits/reincarnation_spirit.webp" alt="">
+        </div>
+        <div id="storySpeaker" class="story-speaker">轮回残灵</div>
         <p id="storyText"></p>
         <div class="future-actions">
           <button id="storyChoiceBtn" type="button">记入轮回</button>
@@ -80,9 +105,22 @@
     <div id="pauseOverlay" class="overlay hidden">
       <div class="panel pause-panel">
         <h2>铜镜暂停</h2>
+        <div class="pause-menu" aria-label="暂停菜单">
+          <button type="button" data-action="resume">继续</button>
+          <button type="button" data-action="build">当前构筑</button>
+          <button type="button" data-action="codex" disabled>图鉴预留</button>
+          <button type="button" data-action="settings" disabled>设置预留</button>
+          <button type="button" data-action="exit" disabled>退出预留</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="buildOverlay" class="overlay hidden">
+      <div class="panel build-panel">
+        <h2>当局构筑</h2>
         <div id="buildLedger" class="build-ledger"></div>
         <div class="future-actions">
-          <button type="button" data-action="resume">继续</button>
+          <button type="button" data-action="close-build">返回</button>
         </div>
       </div>
     </div>
@@ -99,6 +137,6 @@
     </div>
   </div>
   <script src="./src/config.js?v=0.3.2-online"></script>
-  <script src="./src/game.js?v=0.3.2-online"></script>
+  <script src="./src/game.js?v=0.3.2b-ui-point-feedback"></script>
 </body>
 </html>

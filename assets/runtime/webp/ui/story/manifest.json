@@ -1,0 +1,50 @@
+{
+  "version": "0.3.2-story-ui-atlas",
+  "assets": [
+    {
+      "id": "story_panel",
+      "path": "assets/runtime/webp/ui/story/story_panel.webp",
+      "size": [
+        900,
+        386
+      ],
+      "bytes": 38290
+    },
+    {
+      "id": "story_panel_mobile",
+      "path": "assets/runtime/webp/ui/story/story_panel_mobile.webp",
+      "size": [
+        430,
+        560
+      ],
+      "bytes": 33810
+    },
+    {
+      "id": "story_title_plaque",
+      "path": "assets/runtime/webp/ui/story/story_title_plaque.webp",
+      "size": [
+        390,
+        88
+      ],
+      "bytes": 6070
+    },
+    {
+      "id": "story_button",
+      "path": "assets/runtime/webp/ui/story/story_button.webp",
+      "size": [
+        220,
+        66
+      ],
+      "bytes": 1304
+    },
+    {
+      "id": "story_divider",
+      "path": "assets/runtime/webp/ui/story/story_divider.webp",
+      "size": [
+        560,
+        42
+      ],
+      "bytes": 1132
+    }
+  ]
+}

@@ -85,8 +85,11 @@ function createCtx() {
 const ids = [
   "game", "hpText", "hpBar", "xpText", "xpBar", "levelText", "lineageText", "timeText",
   "killText", "soulText", "fireText", "dockLevelText", "pauseBtn", "dashBtn",
+  "mobileHud", "mobileHpText", "mobileHpBar", "mobileXpText", "mobileXpBar",
+  "mobileLevelText", "mobileLineageText", "mobileTimeText", "mobileKillText",
   "touchStick", "start", "startBtn", "lineageList", "choices", "choiceList", "pauseOverlay",
-  "skipChoiceBtn", "storyOverlay", "storyTitle", "storyText", "storyChoiceBtn",
+  "buildOverlay", "buildLedger",
+  "skipChoiceBtn", "storyOverlay", "storyTitle", "storyText", "storySpeaker", "storyPortrait", "storyChoiceBtn",
   "gameOver", "resultText", "metaPointText", "restartBtn"
 ];
 const elements = new Map(ids.map(id => [id, new ElementStub(id)]));
@@ -95,6 +98,7 @@ elements.get("touchStick").firstElementChild = new ElementStub("", "span");
 elements.get("choices").classList.add("hidden");
 elements.get("storyOverlay").classList.add("hidden");
 elements.get("pauseOverlay").classList.add("hidden");
+elements.get("buildOverlay").classList.add("hidden");
 elements.get("gameOver").classList.add("hidden");
 
 const document = {
@@ -216,7 +220,8 @@ globalThis.__SMOKE__ = {
   touchMoved,
   pauseVisible,
   metaPoints,
-  formalUiAssets: ASSET_VERSION === "0.3.2-scene-map"
+  formalUiAssets: Boolean(ASSET_PATHS.uiIcons?.sword && ASSET_PATHS.sceneEvents?.oldVowSteleReady),
+  qingqiuSceneAssets: Boolean(ASSET_PATHS.mapTiles?.qingqiu_base_final_01 && ASSET_PATHS.qingqiuProps?.foxfire_cluster_3)
 };
 `;
 

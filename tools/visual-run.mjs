@@ -2,7 +2,7 @@ import { mkdirSync } from "node:fs";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
-const { chromium } = require("C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/.pnpm/playwright@1.61.1/node_modules/playwright");
+const { chromium } = require("C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright");
 
 const outDir = "C:/Users/Administrator/.codex/visualizations/2026/07/21/019f83f5-c11c-75e0-8d28-c87682ead39a/dahuang-visual-qa";
 mkdirSync(outDir, { recursive: true });
@@ -124,12 +124,25 @@ const pressureProbe = await page.evaluate(async () => {
 
 await page.evaluate(() => {
   ui.choices.classList.add("hidden");
+  ui.storyOverlay.classList.add("hidden");
+  ui.buildOverlay?.classList.add("hidden");
+  ui.pauseOverlay.classList.remove("hidden");
   state.paused = false;
+  state.paused = true;
+  ui.pauseBtn.textContent = "续";
 });
-await page.click("#pauseBtn");
 await page.waitForTimeout(200);
 await page.screenshot({ path: `${outDir}/visual-pause.png` });
-await page.locator('[data-action="resume"]').click();
+await page.locator('[data-action="build"]').click();
+await page.waitForTimeout(200);
+await page.screenshot({ path: `${outDir}/visual-build.png` });
+await page.locator('[data-action="close-build"]').click();
+await page.evaluate(() => {
+  ui.pauseOverlay.classList.add("hidden");
+  ui.buildOverlay?.classList.add("hidden");
+  state.paused = false;
+  ui.pauseBtn.textContent = "暂";
+});
 await page.waitForTimeout(200);
 
 await page.evaluate(() => {

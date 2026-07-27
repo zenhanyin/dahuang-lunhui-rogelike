@@ -1,0 +1,52 @@
+{
+  "version": "0.3.2c-mobile-hud-atlas",
+  "image": "mobile_controls_atlas.webp",
+  "size": [
+    1024,
+    384
+  ],
+  "sprites": {
+    "resourceSoul": [
+      0,
+      0,
+      164,
+      76
+    ],
+    "resourceFire": [
+      176,
+      0,
+      164,
+      76
+    ],
+    "pause": [
+      368,
+      0,
+      84,
+      84
+    ],
+    "level": [
+      472,
+      0,
+      84,
+      84
+    ],
+    "dash": [
+      584,
+      0,
+      112,
+      112
+    ],
+    "stickBase": [
+      0,
+      112,
+      164,
+      164
+    ],
+    "stickKnob": [
+      192,
+      144,
+      92,
+      92
+    ]
+  }
+}

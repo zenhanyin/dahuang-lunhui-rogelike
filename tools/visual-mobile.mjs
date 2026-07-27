@@ -2,7 +2,7 @@ import { mkdirSync } from "node:fs";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
-const { chromium } = require("C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/.pnpm/playwright@1.61.1/node_modules/playwright");
+const { chromium } = require("C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright");
 
 const outDir = "C:/Users/Administrator/.codex/visualizations/2026/07/21/019f83f5-c11c-75e0-8d28-c87682ead39a/dahuang-mobile-qa";
 mkdirSync(outDir, { recursive: true });
@@ -90,12 +90,16 @@ await page.screenshot({ path: `${outDir}/mobile-story.png`, fullPage: true });
 
 const probe = await page.evaluate(() => {
   const hud = document.querySelector("#hud").getBoundingClientRect();
+  const mobileHud = document.querySelector("#mobileHud").getBoundingClientRect();
   const counters = document.querySelector(".top-counters").getBoundingClientRect();
   const dock = document.querySelector(".skill-dock").getBoundingClientRect();
   const choice = document.querySelector(".choice")?.getBoundingClientRect();
   return {
     viewport: { w: innerWidth, h: innerHeight },
     hud: { x: Math.round(hud.x), y: Math.round(hud.y), w: Math.round(hud.width), h: Math.round(hud.height) },
+    mobileHud: { x: Math.round(mobileHud.x), y: Math.round(mobileHud.y), w: Math.round(mobileHud.width), h: Math.round(mobileHud.height) },
+    hudDisplay: getComputedStyle(document.querySelector("#hud")).display,
+    mobileHudDisplay: getComputedStyle(document.querySelector("#mobileHud")).display,
     counters: { x: Math.round(counters.x), y: Math.round(counters.y), w: Math.round(counters.width), h: Math.round(counters.height) },
     dock: { x: Math.round(dock.x), y: Math.round(dock.y), w: Math.round(dock.width), h: Math.round(dock.height) },
     choice: choice && { x: Math.round(choice.x), y: Math.round(choice.y), w: Math.round(choice.width), h: Math.round(choice.height) },

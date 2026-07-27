@@ -1,8 +1,21 @@
 {
-  "version": "0.3.2a-qingqiu-seamless-base",
+  "version": "0.3.2a-qingqiu-final-ground-tile-pass",
   "tileSize": 512,
-  "tile": "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_seamless_01.webp",
-  "preview3x3": "assets/maps/v032_atlas/qingqiu_seamless/preview_3x3_same_tile.png",
-  "preview5x5": "assets/maps/v032_atlas/qingqiu_seamless/preview_5x5_same_tile.png",
-  "note": "Base tile only; decals and props should carry large Qingqiu features."
+  "runtimeTiles": [
+    "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_01.webp",
+    "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_02.webp",
+    "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_03.webp",
+    "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_04.webp"
+  ],
+  "preview3x3": "assets/maps/v032_atlas/qingqiu_seamless/preview_3x3_final_mixed_same_edge.png",
+  "metrics": "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_variants_metrics.txt",
+  "archivedCandidates": [
+    "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_seamless_safe.webp",
+    "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_seamless_01.webp",
+    "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_seamless_02.webp",
+    "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_seamless_03.webp",
+    "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_seamless_04.webp",
+    "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_seamless_05.webp"
+  ],
+  "note": "Runtime uses final same-edge variants only. Decals and props carry location identity; larger variation still needs Wang-tile style expansion."
 }

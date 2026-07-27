@@ -1,0 +1,5 @@
+final_01: left-right avg 0.00 max 0.00; top-bottom avg 0.00 max 0.00
+final_02: left-right avg 0.00 max 0.00; top-bottom avg 0.00 max 0.00
+final_03: left-right avg 0.00 max 0.00; top-bottom avg 0.00 max 0.00
+final_04: left-right avg 0.00 max 0.00; top-bottom avg 0.00 max 0.00
+less-blur narrow-edge pass

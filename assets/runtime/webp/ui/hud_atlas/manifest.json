@@ -1,0 +1,12 @@
+{
+  "version": "0.3.2a-hud-controls-atlas",
+  "image": "hud_controls_atlas.webp",
+  "size": [432, 96],
+  "sprites": {
+    "resourceSoul": { "x": 0, "y": 0, "w": 96, "h": 44 },
+    "resourceFire": { "x": 104, "y": 0, "w": 96, "h": 44 },
+    "pauseSeal": { "x": 208, "y": 0, "w": 52, "h": 52 },
+    "levelBadge": { "x": 268, "y": 0, "w": 56, "h": 56 },
+    "dashSeal": { "x": 332, "y": 0, "w": 72, "h": 72 }
+  }
+}

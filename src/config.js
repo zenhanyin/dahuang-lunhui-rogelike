@@ -156,29 +156,30 @@ window.DAHUANG_CONFIG = {
       accentColor: "rgba(183, 110, 177, 0.18)",
       enemyPool: ["wraith", "elite"],
       variants: [
-        { id: "mist-trace-heavy", name: "雾痕浓重", featureBias: { foxfire: 1 }, eventBias: { stele: 1 } },
-        { id: "foxfire-heavy", name: "狐火旺盛", featureBias: { foxfire: 4 }, eventBias: { foxfire: 2 } },
-        { id: "old-vow", name: "旧誓残碑", featureBias: { stele: 2 }, eventBias: { stele: 2 } }
+        { id: "mist-trace-heavy", name: "雾痕浓重", featureBias: { qingqiuGrass: 2, groundRibbon: 1 }, eventBias: { oldVowStele: 1 } },
+        { id: "foxfire-heavy", name: "狐火旺盛", featureBias: { qingqiuFoxfireSmall: 3, qingqiuFoxfireMedium: 2, qingqiuFoxfireCluster: 1 }, eventBias: { foxfireVow: 2 } },
+        { id: "old-vow", name: "旧誓残碑", featureBias: { foxMaskShard: 2, groundRibbon: 2 }, eventBias: { oldVowStele: 2 } }
       ],
       generation: {
         decals: [
-          { type: "groundMist", asset: "decal_qingqiu_ground_mist_01", count: [2, 4], radius: [100, 170] },
-          { type: "groundMist", asset: "decal_qingqiu_ground_mist_02", count: [1, 3], radius: [90, 150] },
-          { type: "groundMist", asset: "decal_qingqiu_ground_mist_03", count: [1, 2], radius: [70, 120] },
-          { type: "oldVowTrace", asset: "decal_qingqiu_old_vow_trace_01", count: [0, 2], radius: [90, 150] },
-          { type: "sceneCrack", asset: "decal_crack_01", count: [0, 1], radius: [58, 94] },
-          { type: "sceneCrack", asset: "decal_crack_02", count: [0, 1], radius: [56, 90] }
+          { type: "oldVowTrace", asset: "decal_qingqiu_old_vow_trace_ai_02", count: [1, 2], radius: [46, 82] },
+          { type: "oldVowTrace", asset: "decal_qingqiu_old_vow_trace_ai_03", count: [0, 2], radius: [42, 76] },
+          { type: "inkTealVein", asset: "decal_qingqiu_ink_teal_vein_ai_01", count: [0, 1], radius: [42, 76] },
+          { type: "inkTealVein", asset: "decal_qingqiu_ink_teal_vein_ai_02", count: [0, 2], radius: [40, 72] },
+          { type: "goldMuralLine", asset: "decal_qingqiu_gold_mural_lines_ai_01", count: [0, 1], radius: [38, 68] },
+          { type: "goldMuralLine", asset: "decal_qingqiu_gold_mural_lines_ai_02", count: [0, 2], radius: [36, 64] }
         ],
         features: [
-          { type: "foxfire", count: [5, 10], radius: [10, 18] },
-          { type: "stele", count: [2, 4], radius: [14, 24] },
-          { type: "grass", count: [4, 8], radius: [12, 22] },
-          { type: "bone", count: [0, 2], radius: [14, 24] }
+          { type: "qingqiuFoxfireSmall", count: [1, 3], radius: [9, 14] },
+          { type: "qingqiuFoxfireMedium", count: [0, 2], radius: [13, 20] },
+          { type: "qingqiuFoxfireCluster", count: [0, 1], radius: [16, 24] },
+          { type: "qingqiuGrass", count: [3, 6], radius: [12, 20] },
+          { type: "foxMaskShard", count: [0, 2], radius: [14, 22] },
+          { type: "groundRibbon", count: [1, 3], radius: [18, 32] }
         ],
         events: [
-          { type: "foxfire", count: [1, 3], radius: [20, 30] },
-          { type: "stele", count: [1, 2], radius: [24, 34] },
-          { type: "rift", count: [0, 1], radius: [34, 54] }
+          { type: "foxfireVow", count: [0, 1], radius: [24, 34], chunkChance: 0.08 },
+          { type: "oldVowStele", count: [0, 1], radius: [28, 38], chunkChance: 0.12 }
         ]
       }
     }

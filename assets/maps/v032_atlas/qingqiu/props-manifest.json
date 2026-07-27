@@ -1,0 +1,52 @@
+{
+  "version": "0.3.2b-qingqiu-props",
+  "tiles": [
+    "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_seamless_01.webp",
+    "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_seamless_02.webp",
+    "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_seamless_03.webp"
+  ],
+  "decals": [
+    "assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_old_vow_trace_02.webp",
+    "assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_ink_teal_vein_01.webp",
+    "assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_gold_mural_lines_01.webp"
+  ],
+  "props": [
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_small_0.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_small_1.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_small_2.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_small_3.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_medium_0.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_medium_1.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_medium_2.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_medium_3.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_cluster_0.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_cluster_1.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_cluster_2.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_cluster_3.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_grass_low_0.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_grass_low_1.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_grass_low_2.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_grass_low_3.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_grass_low_4.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_fox_mask_shard_0.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_fox_mask_shard_1.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_fox_mask_shard_2.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_ground_ribbon_0.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_ground_ribbon_1.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_ground_ribbon_2.webp",
+    "assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_ground_ribbon_3.webp"
+  ],
+  "events": [
+    "assets/maps/v032_atlas/qingqiu/events/event_qingqiu_foxfire_vow_idle.webp",
+    "assets/maps/v032_atlas/qingqiu/events/event_qingqiu_foxfire_vow_ready.webp",
+    "assets/maps/v032_atlas/qingqiu/events/event_qingqiu_foxfire_vow_done.webp",
+    "assets/maps/v032_atlas/qingqiu/events/event_qingqiu_old_vow_stele_idle.webp",
+    "assets/maps/v032_atlas/qingqiu/events/event_qingqiu_old_vow_stele_ready.webp",
+    "assets/maps/v032_atlas/qingqiu/events/event_qingqiu_old_vow_stele_done.webp"
+  ],
+  "rules": [
+    "ground tile variants share edge-safe quiet margins",
+    "props and events are transparent WebP and drawn in world space",
+    "event readiness must be communicated by asset state, not floating text"
+  ]
+}

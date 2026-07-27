@@ -1,0 +1,14 @@
+{
+  "generatedFor": "v0.3.2 qingqiu tile/decal enrichment",
+  "tilesAdded": [
+    "tile_qingqiu_base_seamless_04.webp",
+    "tile_qingqiu_base_seamless_05.webp"
+  ],
+  "decalsAdded": [
+    "decal_qingqiu_old_vow_trace_ai_02.webp",
+    "decal_qingqiu_ink_teal_vein_ai_02.webp",
+    "decal_qingqiu_gold_mural_lines_ai_02.webp",
+    "decal_qingqiu_old_vow_trace_ai_03.webp"
+  ],
+  "notes": "Low contrast seamless base variants and smaller ground trace decals; no large purple mist pool."
+}

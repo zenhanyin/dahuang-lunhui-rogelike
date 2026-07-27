@@ -6,8 +6,8 @@
     "lazyLoad": "bosses, chapter-specific panels, non-current map packs",
     "notes": "Use small WebP components and procedural canvas layers; do not load concept keyframes at runtime."
   },
-  "totalBytes": 1046691,
-  "assetCount": 110,
+  "totalBytes": 949249,
+  "assetCount": 93,
   "assets": [
     {
       "id": "alchemist_left_0",
@@ -736,28 +736,6 @@
       "preload": false
     },
     {
-      "id": "pause_seal",
-      "type": "ui",
-      "path": "assets/runtime/webp/ui/pause_seal.webp",
-      "size": [
-        96,
-        96
-      ],
-      "bytes": 4694,
-      "preload": true
-    },
-    {
-      "id": "godpower_medallion",
-      "type": "ui",
-      "path": "assets/runtime/webp/ui/godpower_medallion.webp",
-      "size": [
-        150,
-        150
-      ],
-      "bytes": 9486,
-      "preload": true
-    },
-    {
       "id": "hp_bar",
       "type": "ui",
       "path": "assets/runtime/webp/ui/hp_bar.webp",
@@ -789,213 +767,6 @@
       ],
       "bytes": 1686,
       "preload": false
-    },
-    {
-      "id": "attr_burst",
-      "type": "ui.icons",
-      "path": "assets/runtime/webp/ui/icons/attr_burst.webp",
-      "size": [
-        96,
-        96
-      ],
-      "bytes": 2878,
-      "preload": true
-    },
-    {
-      "id": "attr_clue",
-      "type": "ui.icons",
-      "path": "assets/runtime/webp/ui/icons/attr_clue.webp",
-      "size": [
-        96,
-        96
-      ],
-      "bytes": 2328,
-      "preload": true
-    },
-    {
-      "id": "attr_flame",
-      "type": "ui.icons",
-      "path": "assets/runtime/webp/ui/icons/attr_flame.webp",
-      "size": [
-        96,
-        96
-      ],
-      "bytes": 2614,
-      "preload": true
-    },
-    {
-      "id": "attr_heal",
-      "type": "ui.icons",
-      "path": "assets/runtime/webp/ui/icons/attr_heal.webp",
-      "size": [
-        96,
-        96
-      ],
-      "bytes": 2520,
-      "preload": true
-    },
-    {
-      "id": "attr_mist",
-      "type": "ui.icons",
-      "path": "assets/runtime/webp/ui/icons/attr_mist.webp",
-      "size": [
-        96,
-        96
-      ],
-      "bytes": 2616,
-      "preload": true
-    },
-    {
-      "id": "attr_shield",
-      "type": "ui.icons",
-      "path": "assets/runtime/webp/ui/icons/attr_shield.webp",
-      "size": [
-        96,
-        96
-      ],
-      "bytes": 2490,
-      "preload": true
-    },
-    {
-      "id": "attr_speed",
-      "type": "ui.icons",
-      "path": "assets/runtime/webp/ui/icons/attr_speed.webp",
-      "size": [
-        96,
-        96
-      ],
-      "bytes": 2648,
-      "preload": true
-    },
-    {
-      "id": "attr_sword",
-      "type": "ui.icons",
-      "path": "assets/runtime/webp/ui/icons/attr_sword.webp",
-      "size": [
-        96,
-        96
-      ],
-      "bytes": 2768,
-      "preload": true
-    },
-    {
-      "id": "attr_talisman",
-      "type": "ui.icons",
-      "path": "assets/runtime/webp/ui/icons/attr_talisman.webp",
-      "size": [
-        96,
-        96
-      ],
-      "bytes": 2344,
-      "preload": true
-    },
-    {
-      "id": "panel_9",
-      "type": "ui.nineslice",
-      "path": "assets/runtime/webp/ui/nineslice/panel_9.webp",
-      "size": [
-        240,
-        180
-      ],
-      "slice": 54,
-      "bytes": 14936,
-      "preload": true
-    },
-    {
-      "id": "hud_9",
-      "type": "ui.nineslice",
-      "path": "assets/runtime/webp/ui/nineslice/hud_9.webp",
-      "size": [
-        260,
-        190
-      ],
-      "slice": 58,
-      "bytes": 16320,
-      "preload": true
-    },
-    {
-      "id": "card_9",
-      "type": "ui.nineslice",
-      "path": "assets/runtime/webp/ui/nineslice/card_9.webp",
-      "size": [
-        220,
-        280
-      ],
-      "slice": 62,
-      "bytes": 19582,
-      "preload": true
-    },
-    {
-      "id": "lineage_9",
-      "type": "ui.nineslice",
-      "path": "assets/runtime/webp/ui/nineslice/lineage_9.webp",
-      "size": [
-        230,
-        300
-      ],
-      "slice": 64,
-      "bytes": 21900,
-      "preload": true
-    },
-    {
-      "id": "dialogue_9",
-      "type": "ui.nineslice",
-      "path": "assets/runtime/webp/ui/nineslice/dialogue_9.webp",
-      "size": [
-        260,
-        180
-      ],
-      "slice": 58,
-      "bytes": 15784,
-      "preload": true
-    },
-    {
-      "id": "resource_9",
-      "type": "ui.nineslice",
-      "path": "assets/runtime/webp/ui/nineslice/resource_9.webp",
-      "size": [
-        150,
-        74
-      ],
-      "slice": 28,
-      "bytes": 5834,
-      "preload": true
-    },
-    {
-      "id": "button_9",
-      "type": "ui.nineslice",
-      "path": "assets/runtime/webp/ui/nineslice/button_9.webp",
-      "size": [
-        128,
-        68
-      ],
-      "slice": 24,
-      "bytes": 5008,
-      "preload": true
-    },
-    {
-      "id": "button_dark_9",
-      "type": "ui.nineslice",
-      "path": "assets/runtime/webp/ui/nineslice/button_dark_9.webp",
-      "size": [
-        128,
-        58
-      ],
-      "slice": 22,
-      "bytes": 4418,
-      "preload": true
-    },
-    {
-      "id": "plaque_9",
-      "type": "ui.nineslice",
-      "path": "assets/runtime/webp/ui/nineslice/plaque_9.webp",
-      "size": [
-        180,
-        72
-      ],
-      "slice": 30,
-      "bytes": 5976,
-      "preload": true
     },
     {
       "id": "herb_marsh_event_herb_cauldron",
@@ -1164,6 +935,36 @@
       "size": null,
       "bytes": 8970,
       "preload": false
+    },
+    {
+      "id": "mobile_hud_compact",
+      "type": "ui.mobile",
+      "path": "assets/runtime/webp/ui/mobile_hud_compact.webp",
+      "size": [
+        320,
+        150
+      ],
+      "preload": true,
+      "bytes": 17338
+    },
+    {
+      "id": "mobile_controls_atlas",
+      "type": "ui.mobile",
+      "path": "assets/runtime/webp/ui/mobile_controls_atlas.webp",
+      "size": [
+        1024,
+        384
+      ],
+      "preload": true,
+      "bytes": 31772
+    },
+    {
+      "id": "mobile_controls_manifest",
+      "type": "ui.mobile.manifest",
+      "path": "assets/runtime/webp/ui/mobile_controls_atlas.json",
+      "size": null,
+      "preload": false,
+      "bytes": 592
     }
   ],
   "scenePacks": {
