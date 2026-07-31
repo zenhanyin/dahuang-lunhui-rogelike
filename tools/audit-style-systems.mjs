@@ -101,7 +101,7 @@ const requiredGameHooks = [
   "touchStick",
   "visibleMapFeatures",
   "drawSceneDecals",
-  "0.3.3j-3g-safe-area-corrections"
+  "0.3.3k-mobile-start-confirm"
 ];
 const missingHooks = requiredGameHooks.filter(hook => !game.includes(hook) && !css.includes(hook));
 
@@ -126,7 +126,7 @@ const result = {
   forbiddenRuntimeAssetIds,
   missingHooks,
   missingChecklistKeywords,
-  ok: game.includes("0.3.3j-3g-safe-area-corrections") &&
+  ok: (game.includes("0.3.3k-mobile-start-confirm") || css.includes("0.3.3k-mobile-start-confirm")) &&
     runtimeManifest.assetCount >= 70 &&
     runtimeManifest.totalBytes < 2_200_000 &&
     missingRuntimeFiles.length === 0 &&

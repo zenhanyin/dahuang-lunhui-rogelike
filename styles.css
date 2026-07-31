@@ -3884,3 +3884,118 @@ button:hover {
   }
 }
 
+/* V0.3.3k: portrait start confirmation is a separate flow, not a scaled desktop footer. */
+@media (max-width: 760px), (orientation: portrait) {
+  :root {
+    --ui-version: "0.3.3k-mobile-start-confirm";
+  }
+
+  #start.overlay {
+    align-items: stretch;
+    justify-content: flex-end;
+    padding: calc(12px + env(safe-area-inset-top)) 0 calc(154px + env(safe-area-inset-bottom));
+    overflow: hidden;
+  }
+
+  .start-panel {
+    width: 100vw;
+    max-height: calc(100dvh - 106px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    padding: 0;
+    overflow: visible;
+  }
+
+  .start-panel h2 {
+    position: fixed;
+    left: 50%;
+    top: max(18px, calc(env(safe-area-inset-top) + 16px));
+    z-index: 42;
+    transform: translateX(-50%);
+    margin: 0;
+  }
+
+  .start-panel .lineage-list {
+    height: calc(100dvh - 172px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    min-height: 440px;
+    align-items: center;
+    padding: 86px max(28px, calc((100vw - 278px) / 2)) 22px;
+  }
+
+  .start-panel .lineage {
+    width: min(278px, 76vw);
+    height: min(58svh, 526px);
+    min-height: 438px;
+    max-height: 526px;
+  }
+
+  .start-panel .lineage-art {
+    top: 82px;
+    height: 126px;
+  }
+
+  .start-panel .lineage-art img {
+    max-height: 136px;
+  }
+
+  .start-panel .lineage-copy {
+    top: 225px;
+    left: 34px;
+    right: 34px;
+  }
+
+  .start-panel .lineage h3 {
+    font-size: 22px;
+  }
+
+  .start-panel .lineage-copy > span {
+    display: none;
+  }
+
+  .start-panel .lineage-stats {
+    bottom: 56px;
+  }
+
+  .start-panel #startBtn {
+    position: fixed;
+    left: 50%;
+    bottom: max(86px, calc(env(safe-area-inset-bottom) + 72px));
+    z-index: 48;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: min(286px, calc(100vw - 64px));
+    min-height: 56px;
+    margin: 0;
+    padding: 0 34px 3px;
+    transform: translateX(-50%);
+    background: url("./assets/runtime/webp/ui/button_continue.webp?v=0.3.3k-mobile-start-confirm") center / 100% 100% no-repeat;
+    border: 0;
+    color: #432015;
+    font-family: "FZKai-Z03", "KaiTi", "STKaiti", serif;
+    font-size: clamp(18px, 5.2vw, 23px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255, 239, 184, 0.7);
+    filter:
+      drop-shadow(0 0 14px rgba(233, 190, 90, 0.26))
+      drop-shadow(0 12px 20px rgba(0, 0, 0, 0.42));
+  }
+
+  .start-panel #startBtn::after {
+    content: "左右滑动切换命格";
+    position: absolute;
+    left: 50%;
+    bottom: 58px;
+    width: max-content;
+    transform: translateX(-50%);
+    color: rgba(245, 219, 156, 0.82);
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-shadow: 0 2px 4px rgba(20, 10, 8, 0.82);
+    pointer-events: none;
+  }
+}
+

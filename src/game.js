@@ -60,7 +60,7 @@ let screenShake = 0;
 const touchMove = { active: false, id: null, originX: 0, originY: 0, dx: 0, dy: 0 };
 
 const RUNTIME_ASSET_ROOT = "assets/runtime/webp";
-const ASSET_VERSION = "0.3.3j-3g-safe-area-corrections";
+const ASSET_VERSION = "0.3.3k-mobile-start-confirm";
 const ASSET_PATHS = {
   characters: {
     sword_right_0: `${RUNTIME_ASSET_ROOT}/characters/sword_right_0.webp`,
@@ -912,6 +912,7 @@ function addDamageText(x, y, amount, kind = "damage") {
 
 function renderLineageSelect() {
   ui.lineageList.innerHTML = "";
+  if (ui.startBtn) ui.startBtn.textContent = `以${selectedLineage.name}开始`;
   let selectedButton = null;
   for (const lineage of CONFIG.lineages) {
     const button = document.createElement("button");
@@ -937,6 +938,7 @@ function renderLineageSelect() {
     `;
     button.addEventListener("click", () => {
       selectedLineage = lineage;
+      if (ui.startBtn) ui.startBtn.textContent = `以${selectedLineage.name}开始`;
       renderLineageSelect();
     });
     ui.lineageList.appendChild(button);
