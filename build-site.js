@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
-const deployDir = path.join(root, "deploy-root");
+const deployDir = process.env.SITES_PREVIEW_DIR || path.join(root, "deploy-root");
 const distDir = process.env.SITES_BUILD_STAGING || path.join(root, "dist");
 const clientDir = path.join(distDir, "client");
 const serverDir = path.join(distDir, "server");
@@ -12,14 +12,23 @@ const skipNames = new Set([
   ".agents",
   ".openai",
   "dist",
+  "dist-sites",
   "deploy-root",
+  "deploy-root-sites",
   "node_modules",
+  "tmp",
   "visual-qa"
 ]);
 
 function ensureInsideRoot(target) {
   const resolvedRoot = path.resolve(root).toLowerCase();
   const resolvedTarget = path.resolve(target).toLowerCase();
+  const visualRoot = path
+    .resolve("C:/Users/Administrator/.codex/visualizations/2026/07/21/019f83f5-c11c-75e0-8d28-c87682ead39a")
+    .toLowerCase();
+  if (resolvedTarget.startsWith(visualRoot + path.sep)) {
+    return;
+  }
   if (!resolvedTarget.startsWith(resolvedRoot + path.sep)) {
     throw new Error(`Refusing to write outside project root: ${target}`);
   }
@@ -36,14 +45,22 @@ function shouldSkipRelative(relativePath) {
   const normalized = relativePath.replaceAll("\\", "/");
   return normalized.startsWith("assets/concepts/")
     || normalized.startsWith("assets/generated/")
+    || normalized.startsWith("assets/runtime/raw_ai_atlas/")
+    || normalized.startsWith("assets/runtime/webp/ui/story_raw/")
     || normalized.startsWith("assets/sprites/")
     || normalized.startsWith("assets/ui/")
     || normalized === "assets/maps/qingqiu-final.webp"
     || normalized === "assets/maps/wilds-final.webp"
+    || normalized.startsWith("assets/maps/v032/sword_tomb/")
+    || normalized.startsWith("assets/maps/v032/qingqiu/")
+    || normalized.startsWith("assets/maps/v032/herb_marsh/")
+    || normalized.startsWith("assets/maps/v032_atlas/sword_tomb/")
+    || normalized.startsWith("assets/maps/v032_atlas/sword_tomb_seamless/")
     || normalized.startsWith("assets/maps/v032_atlas/qingqiu/tile_qingqiu_ground_")
     || normalized.startsWith("assets/maps/v032_atlas/qingqiu/preview")
     || normalized.startsWith("assets/maps/v032_atlas/qingqiu/decals/preview")
-    || normalized.startsWith("assets/maps/v032_atlas/qingqiu_seamless/preview");
+    || normalized.startsWith("assets/maps/v032_atlas/qingqiu_seamless/preview")
+    || normalized.includes("/preview_");
 }
 
 function copyDir(from, to, base = from) {

@@ -1,0 +1,51 @@
+{
+  "id": "xuanyuan",
+  "version": "0.3.3",
+  "tileAtlas": "xuanyuan_seamless",
+  "tileSize": 512,
+  "budgetKb": {
+    "baseTiles": 360,
+    "decals": 240,
+    "props": 360,
+    "events": 240,
+    "atmosphere": 160
+  },
+  "baseTiles": [
+    {
+      "id": "xuanyuan_base_01",
+      "path": "base_tiles/tile_xuanyuan_base_01.webp",
+      "size": [512, 512],
+      "weight": 1
+    }
+  ],
+  "decals": [
+    {
+      "id": "xuanyuan_bronze_crack_01",
+      "path": "decals/decal_xuanyuan_bronze_crack_01.webp",
+      "radius": [48, 96],
+      "count": [1, 3],
+      "blend": "multiply"
+    }
+  ],
+  "props_static": [
+    {
+      "id": "xuanyuan_broken_blade_01",
+      "path": "props_static/prop_xuanyuan_broken_blade_01.webp",
+      "radius": [18, 28],
+      "count": [1, 3],
+      "layer": "ground_prop"
+    }
+  ],
+  "story_markers": [
+    {
+      "id": "xuanyuan_broken_sword",
+      "states": {
+        "idle": "story_markers/xuanyuan_broken_sword_idle.webp",
+        "ready": "story_markers/xuanyuan_broken_sword_ready.webp",
+        "done": "story_markers/xuanyuan_broken_sword_done.webp"
+      }
+    }
+  ],
+  "events": []
+}
+

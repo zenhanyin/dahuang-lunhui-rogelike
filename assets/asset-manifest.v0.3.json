@@ -1,13 +1,13 @@
 {
-  "version": "0.3.2-scene-map",
+  "version": "0.3.3j-2-xuanyuan-seam-mobile-cards",
   "runtimeRoot": "assets/runtime/webp",
   "memoryPolicy": {
     "preload": "characters, enemies, core HUD and icon assets",
     "lazyLoad": "bosses, chapter-specific panels, non-current map packs",
     "notes": "Use small WebP components and procedural canvas layers; do not load concept keyframes at runtime."
   },
-  "totalBytes": 949249,
-  "assetCount": 93,
+  "totalBytes": 781081,
+  "assetCount": 73,
   "assets": [
     {
       "id": "alchemist_left_0",
@@ -681,61 +681,6 @@
       "preload": false
     },
     {
-      "id": "decal_crack_01",
-      "type": "scene.qingqiu",
-      "path": "assets/runtime/webp/scene/qingqiu/decal_crack_01.webp",
-      "size": [
-        320,
-        160
-      ],
-      "bytes": 2766,
-      "preload": false
-    },
-    {
-      "id": "decal_crack_02",
-      "type": "scene.qingqiu",
-      "path": "assets/runtime/webp/scene/qingqiu/decal_crack_02.webp",
-      "size": [
-        320,
-        160
-      ],
-      "bytes": 2814,
-      "preload": false
-    },
-    {
-      "id": "decal_mist_pool_01",
-      "type": "scene.qingqiu",
-      "path": "assets/runtime/webp/scene/qingqiu/decal_mist_pool_01.webp",
-      "size": [
-        384,
-        192
-      ],
-      "bytes": 10624,
-      "preload": false
-    },
-    {
-      "id": "decal_mist_pool_02",
-      "type": "scene.qingqiu",
-      "path": "assets/runtime/webp/scene/qingqiu/decal_mist_pool_02.webp",
-      "size": [
-        384,
-        192
-      ],
-      "bytes": 10062,
-      "preload": false
-    },
-    {
-      "id": "decal_mist_pool_03",
-      "type": "scene.qingqiu",
-      "path": "assets/runtime/webp/scene/qingqiu/decal_mist_pool_03.webp",
-      "size": [
-        384,
-        192
-      ],
-      "bytes": 12270,
-      "preload": false
-    },
-    {
       "id": "hp_bar",
       "type": "ui",
       "path": "assets/runtime/webp/ui/hp_bar.webp",
@@ -769,131 +714,11 @@
       "preload": false
     },
     {
-      "id": "herb_marsh_event_herb_cauldron",
-      "type": "scene-map",
-      "path": "assets/maps/v032/herb_marsh/event_herb_cauldron.webp",
-      "size": null,
-      "bytes": 3584,
-      "preload": false
-    },
-    {
-      "id": "herb_marsh_ground_a",
-      "type": "scene-map",
-      "path": "assets/maps/v032/herb_marsh/ground_a.webp",
-      "size": null,
-      "bytes": 6464,
-      "preload": true
-    },
-    {
-      "id": "herb_marsh_transition_1",
-      "type": "scene-map",
-      "path": "assets/maps/v032/herb_marsh/transition_1.webp",
-      "size": null,
-      "bytes": 11030,
-      "preload": false
-    },
-    {
-      "id": "herb_marsh_transition_2",
-      "type": "scene-map",
-      "path": "assets/maps/v032/herb_marsh/transition_2.webp",
-      "size": null,
-      "bytes": 10238,
-      "preload": false
-    },
-    {
-      "id": "herb_marsh_transition_3",
-      "type": "scene-map",
-      "path": "assets/maps/v032/herb_marsh/transition_3.webp",
-      "size": null,
-      "bytes": 9364,
-      "preload": false
-    },
-    {
-      "id": "qingqiu_event_foxfire_vow",
-      "type": "scene-map",
-      "path": "assets/maps/v032/qingqiu/event_foxfire_vow.webp",
-      "size": null,
-      "bytes": 4204,
-      "preload": false
-    },
-    {
-      "id": "qingqiu_ground_a",
-      "type": "scene-map",
-      "path": "assets/maps/v032/qingqiu/ground_a.webp",
-      "size": null,
-      "bytes": 11732,
-      "preload": true
-    },
-    {
-      "id": "qingqiu_transition_1",
-      "type": "scene-map",
-      "path": "assets/maps/v032/qingqiu/transition_1.webp",
-      "size": null,
-      "bytes": 10832,
-      "preload": false
-    },
-    {
-      "id": "qingqiu_transition_2",
-      "type": "scene-map",
-      "path": "assets/maps/v032/qingqiu/transition_2.webp",
-      "size": null,
-      "bytes": 10296,
-      "preload": false
-    },
-    {
-      "id": "qingqiu_transition_3",
-      "type": "scene-map",
-      "path": "assets/maps/v032/qingqiu/transition_3.webp",
-      "size": null,
-      "bytes": 10398,
-      "preload": false
-    },
-    {
       "id": "scene-map-manifest",
       "type": "scene-manifest",
       "path": "assets/maps/v032/scene-map-manifest.json",
       "size": null,
       "bytes": 1889,
-      "preload": false
-    },
-    {
-      "id": "sword_tomb_event_broken_sword",
-      "type": "scene-map",
-      "path": "assets/maps/v032/sword_tomb/event_broken_sword.webp",
-      "size": null,
-      "bytes": 3106,
-      "preload": false
-    },
-    {
-      "id": "sword_tomb_ground_a",
-      "type": "scene-map",
-      "path": "assets/maps/v032/sword_tomb/ground_a.webp",
-      "size": null,
-      "bytes": 5690,
-      "preload": true
-    },
-    {
-      "id": "sword_tomb_transition_1",
-      "type": "scene-map",
-      "path": "assets/maps/v032/sword_tomb/transition_1.webp",
-      "size": null,
-      "bytes": 10172,
-      "preload": false
-    },
-    {
-      "id": "sword_tomb_transition_2",
-      "type": "scene-map",
-      "path": "assets/maps/v032/sword_tomb/transition_2.webp",
-      "size": null,
-      "bytes": 11356,
-      "preload": false
-    },
-    {
-      "id": "sword_tomb_transition_3",
-      "type": "scene-map",
-      "path": "assets/maps/v032/sword_tomb/transition_3.webp",
-      "size": null,
-      "bytes": 11166,
       "preload": false
     },
     {
@@ -969,25 +794,38 @@
   ],
   "scenePacks": {
     "qingqiu": {
-      "id": "qingqiu-dream-abyss",
-      "name": "闂堟帊绗滃锔界瑐",
-      "decals": [
-        "decal_mist_pool_01",
-        "decal_mist_pool_02",
-        "decal_mist_pool_03",
-        "decal_crack_01",
-        "decal_crack_02"
-      ],
-      "props": [
-        "foxfire",
-        "stele",
-        "spiritWell",
-        "shrine",
-        "rift",
-        "grass",
-        "stone",
-        "bone"
-      ]
+      "id": "qingqiu",
+      "name": "青丘残梦",
+      "status": "runtime-ready-legacy-v032-atlas",
+      "scenePack": "qingqiu",
+      "tileAtlas": "qingqiu_seamless",
+      "runtimeRoot": "assets/maps/v032_atlas",
+      "notes": "Runtime-ready, but still lives in v032_atlas. Migrate to assets/maps/v033/qingqiu before treating it as final directory standard."
+    },
+    "xuanyuan": {
+      "id": "xuanyuan_ground",
+      "name": "轩辕荒境",
+      "status": "runtime-ready-v033j2-seam-reviewed",
+      "scenePack": "sword_tomb",
+      "tileAtlas": "xuanyuan_ground",
+      "manifest": "assets/maps/v033/xuanyuan_ground/manifest.json",
+      "version": "0.3.3j-2-xuanyuan-seam-reviewed",
+      "notes": "Formal top-down Dunhuang mineral ground sample. Four edge-locked base tiles passed seam review and are runtime-enabled; event feedback uses formal atlas prompt."
+    },
+    "shennong": {
+      "id": "shennong",
+      "name": "神农药泽",
+      "status": "planned-not-runtime-ready",
+      "scenePack": "herb_marsh",
+      "tileAtlas": "herb_marsh_seamless",
+      "runtimeRoot": "assets/maps/v032_atlas/herb_marsh",
+      "notes": "Current herb_marsh assets are legacy validation assets. Formal v033/shennong map pack is not built yet."
     }
+  },
+  "audit": {
+    "version": "0.3.3j-2",
+    "script": "tools/audit-style-systems.mjs",
+    "runtimeHook": "0.3.3j-2-xuanyuan-seam-mobile-cards",
+    "lastSynced": "2026-07-31"
   }
 }

@@ -1,7 +1,6 @@
 {
   "version": "0.3.2b-ai-atlas",
-  "qingqiu_source": "D:\\Acodex3\\dahuang-lunhui-lu\\assets\\runtime\\raw_ai_atlas\\qingqiu_props_events_ai_atlas.png",
-  "vfx_source": "D:\\Acodex3\\dahuang-lunhui-lu\\assets\\runtime\\raw_ai_atlas\\dunhuang_skill_vfx_ai_atlas.png",
+  "sourceNote": "Raw AI atlas PNG files are not runtime assets and are excluded from deploy/runtime cleanup.",
   "vfx": [
     "assets/runtime/webp/vfx/dunhuang/vfx_sword_projectile.webp",
     "assets/runtime/webp/vfx/dunhuang/vfx_sword_slash.webp",

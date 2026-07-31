@@ -1,48 +1,8 @@
 {
-  "version": "0.3.2-scene-map",
+  "version": "0.3.2-legacy-fallback",
+  "status": "legacy",
+  "note": "V0.3.3 map packs use tile atlases under assets/maps/v032_atlas and the V0.3.3a package spec. This manifest only keeps the old wilderness fallback alive until the first chapter common map is rebuilt.",
   "packs": {
-    "sword_tomb": {
-      "name": "剑冢荒境",
-      "grounds": [
-        "assets/maps/v032/sword_tomb/ground_a.webp"
-      ],
-      "transitions": [
-        "assets/maps/v032/sword_tomb/transition_1.webp",
-        "assets/maps/v032/sword_tomb/transition_2.webp",
-        "assets/maps/v032/sword_tomb/transition_3.webp"
-      ],
-      "events": {
-        "event_broken_sword": "assets/maps/v032/sword_tomb/event_broken_sword.webp"
-      }
-    },
-    "qingqiu": {
-      "name": "青丘残梦",
-      "grounds": [
-        "assets/maps/v032/qingqiu/ground_a.webp"
-      ],
-      "transitions": [
-        "assets/maps/v032/qingqiu/transition_1.webp",
-        "assets/maps/v032/qingqiu/transition_2.webp",
-        "assets/maps/v032/qingqiu/transition_3.webp"
-      ],
-      "events": {
-        "event_foxfire_vow": "assets/maps/v032/qingqiu/event_foxfire_vow.webp"
-      }
-    },
-    "herb_marsh": {
-      "name": "百草荒泽",
-      "grounds": [
-        "assets/maps/v032/herb_marsh/ground_a.webp"
-      ],
-      "transitions": [
-        "assets/maps/v032/herb_marsh/transition_1.webp",
-        "assets/maps/v032/herb_marsh/transition_2.webp",
-        "assets/maps/v032/herb_marsh/transition_3.webp"
-      ],
-      "events": {
-        "event_herb_cauldron": "assets/maps/v032/herb_marsh/event_herb_cauldron.webp"
-      }
-    },
     "wilderness": {
       "name": "荒境深处",
       "grounds": [

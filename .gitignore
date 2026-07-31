@@ -1,9 +1,14 @@
 dist/
+dist-sites/
 deploy-root/
+deploy-root-sites/
+tmp/
 *.tar.gz
 *.inspect.ndjson
 *.log
 node_modules/
+__pycache__/
+tools/__pycache__/
 visual-qa/
 assets/concepts/
 assets/generated/

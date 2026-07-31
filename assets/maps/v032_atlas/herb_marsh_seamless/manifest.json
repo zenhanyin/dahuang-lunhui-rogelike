@@ -1,0 +1,10 @@
+{
+  "id": "herb_marsh_seamless",
+  "tileSize": 512,
+  "baseTiles": [
+    "tile_herb_marsh_base_final_01.webp",
+    "tile_herb_marsh_base_final_02.webp",
+    "tile_herb_marsh_base_final_03.webp",
+    "tile_herb_marsh_base_final_04.webp"
+  ]
+}

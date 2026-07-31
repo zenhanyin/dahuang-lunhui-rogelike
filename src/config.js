@@ -26,29 +26,54 @@ window.DAHUANG_CONFIG = {
       name: "剑冢荒境",
       subtitle: "断剑、残旗与旧战痕",
       scenePack: "sword_tomb",
+      tileAtlas: "xuanyuan_ground",
+      tileSize: 1024,
+      tileOrigin: "center",
+      projection: "topdown",
       palette: ["#454034", "#3b3f42", "#211f20"],
       paperTint: "#b79a69",
       gridColor: "rgba(196, 158, 83, 0.08)",
       accentColor: "rgba(196, 158, 83, 0.18)",
       enemyPool: ["wraith", "elite"],
       variants: [
-        { id: "broken-vow", name: "旧战残碑", featureBias: { stone: 2, bone: 1 }, eventBias: { brokenSword: 1 } },
-        { id: "blade-dust", name: "剑尘荒径", featureBias: { stone: 3, grass: 1 }, eventBias: { memoryStele: 1 } }
+        { id: "broken-vow", name: "旧战残碑", featureBias: {}, eventBias: { brokenSword: 1 } },
+        { id: "blade-dust", name: "剑尘荒径", featureBias: {}, eventBias: { memoryStele: 1 } },
+        { id: "bronze-ruin", name: "青铜残阵", featureBias: {}, eventBias: { brokenSword: 1, memoryStele: 1 } }
       ],
       generation: {
         decals: [
-          { type: "sceneTransition", asset: "sword_tomb_transition_1", count: [1, 2], radius: [110, 180] },
-          { type: "sceneTransition", asset: "sword_tomb_transition_2", count: [0, 2], radius: [90, 150] }
+          { type: "xuanyuanSwordTrace", asset: "decal_xuanyuan_sword_trace_v033e_01", count: [0, 1], radius: [46, 72] },
+          { type: "xuanyuanSwordTrace", asset: "decal_xuanyuan_sword_trace_v033e_02", count: [0, 1], radius: [42, 68] },
+          { type: "xuanyuanCloudLine", asset: "decal_xuanyuan_cloud_line_v033e_01", count: [0, 1], radius: [40, 64] },
+          { type: "xuanyuanArrayDisk", asset: "decal_xuanyuan_array_disk_v033e_01", count: [0, 1], radius: [38, 58] },
+          { type: "xuanyuanCinnabarTrace", asset: "decal_xuanyuan_cinnabar_trace_v033e_01", count: [0, 1], radius: [34, 54] },
+          { type: "xuanyuanBronzeOxidation", asset: "decal_xuanyuan_bronze_oxidation_v033e_01", count: [0, 1], radius: [36, 56] },
+          { type: "xuanyuanDetailCracks", asset: "decal_xuanyuan_detail_cracks_a_v033g_01", count: [1, 2], radius: [30, 52] },
+          { type: "xuanyuanDetailCracks", asset: "decal_xuanyuan_detail_cracks_b_v033g_01", count: [0, 1], radius: [28, 48] },
+          { type: "xuanyuanDetailCloudFresco", asset: "decal_xuanyuan_detail_cloud_fresco_a_v033g_01", count: [0, 1], radius: [34, 56] },
+          { type: "xuanyuanDetailCloudFresco", asset: "decal_xuanyuan_detail_cloud_fresco_b_v033g_01", count: [0, 1], radius: [32, 54] },
+          { type: "xuanyuanDetailSwordEngraving", asset: "decal_xuanyuan_detail_sword_engraving_a_v033g_01", count: [0, 1], radius: [34, 58] },
+          { type: "xuanyuanDetailSwordEngraving", asset: "decal_xuanyuan_detail_sword_engraving_b_v033g_01", count: [0, 1], radius: [32, 54] },
+          { type: "xuanyuanDetailBronzeOxidation", asset: "decal_xuanyuan_detail_bronze_oxidation_a_v033g_01", count: [0, 1], radius: [30, 50] },
+          { type: "xuanyuanDetailCinnabarScrape", asset: "decal_xuanyuan_detail_cinnabar_scrape_a_v033g_01", count: [0, 1], radius: [26, 44] }
         ],
         features: [
-          { type: "stone", count: [5, 9], radius: [10, 22] },
-          { type: "grass", count: [3, 6], radius: [12, 22] },
-          { type: "bone", count: [2, 4], radius: [14, 24] },
-          { type: "rift", count: [0, 2], radius: [28, 48] }
+          { type: "xuanyuanCrackedStoneDisk", count: [0, 1], radius: [34, 50], chunkChance: 0.4 },
+          { type: "xuanyuanBronzeMuralShard", count: [0, 1], radius: [32, 48], chunkChance: 0.36 },
+          { type: "xuanyuanCinnabarOathCloth", count: [0, 1], radius: [32, 46], chunkChance: 0.34 },
+          { type: "xuanyuanCollapsedRitualBase", count: [0, 1], radius: [30, 44], chunkChance: 0.3 },
+          { type: "xuanyuanLowArrayRing", count: [0, 1], radius: [30, 44], chunkChance: 0.34 },
+          { type: "xuanyuanDryGrassClump", count: [0, 1], radius: [26, 40], chunkChance: 0.38 },
+          { type: "xuanyuanCloudMuralShard", count: [0, 1], radius: [28, 44], chunkChance: 0.32 },
+          { type: "xuanyuanBattlefieldRubble", count: [0, 1], radius: [28, 42], chunkChance: 0.3 },
+          { type: "xuanyuanBuriedSwordGrassF", count: [0, 1], radius: [28, 42], chunkChance: 0.22 },
+          { type: "xuanyuanSwordCluster", count: [0, 1], radius: [26, 38], chunkChance: 0.12 },
+          { type: "xuanyuanInscriptionSlab", count: [0, 1], radius: [26, 38], chunkChance: 0.14 },
+          { type: "xuanyuanBrokenScabbard", count: [0, 1], radius: [26, 38], chunkChance: 0.2 }
         ],
         events: [
-          { type: "brokenSword", count: [1, 2], radius: [34, 46] },
-          { type: "memoryStele", count: [1, 2], radius: [28, 40] }
+          { type: "brokenSword", count: [1, 2], radius: [42, 56], chunkChance: 0.16 },
+          { type: "memoryStele", count: [1, 1], radius: [40, 52], chunkChance: 0.14 }
         ]
       }
     },
@@ -57,25 +82,28 @@ window.DAHUANG_CONFIG = {
       name: "百草荒泽",
       subtitle: "丹火、灵井与赤土裂纹",
       scenePack: "herb_marsh",
+      tileAtlas: "herb_marsh_seamless",
+      tileSize: 512,
       palette: ["#3f4631", "#45543b", "#1d221c"],
       paperTint: "#b49866",
       gridColor: "rgba(91, 163, 128, 0.08)",
       accentColor: "rgba(91, 163, 128, 0.18)",
       enemyPool: ["wraith", "elite"],
       variants: [
-        { id: "cauldron-ash", name: "丹火余烬", featureBias: { grass: 2, spirit: 1 }, eventBias: { herbCauldron: 1 } },
-        { id: "spirit-herbs", name: "百草灵泽", featureBias: { grass: 4, spirit: 1 }, eventBias: { spiritWell: 1 } }
+        { id: "cauldron-ash", name: "丹火余烬", featureBias: { herbDanEmber: 2, herbMarshPool: 1 }, eventBias: { herbCauldron: 1 } },
+        { id: "spirit-herbs", name: "百草灵泽", featureBias: { herbCluster: 4, herbMarshPool: 1 }, eventBias: { spiritWell: 1 } }
       ],
       generation: {
         decals: [
-          { type: "sceneTransition", asset: "herb_marsh_transition_1", count: [1, 2], radius: [110, 180] },
-          { type: "sceneTransition", asset: "herb_marsh_transition_2", count: [0, 2], radius: [90, 150] }
+          { type: "herbGoldRoot", asset: "decal_herb_marsh_gold_root_01", count: [2, 4], radius: [50, 90] },
+          { type: "herbWetVein", asset: "decal_herb_marsh_wet_vein_01", count: [2, 4], radius: [54, 98] },
+          { type: "herbDanAsh", asset: "decal_herb_marsh_dan_ash_01", count: [1, 3], radius: [46, 82] }
         ],
         features: [
-          { type: "grass", count: [7, 12], radius: [12, 24] },
-          { type: "spirit", count: [2, 4], radius: [34, 62] },
-          { type: "foxfire", count: [2, 5], radius: [10, 18] },
-          { type: "rift", count: [0, 2], radius: [28, 48] }
+          { type: "herbCluster", count: [4, 9], radius: [12, 22] },
+          { type: "herbDanEmber", count: [1, 3], radius: [12, 20] },
+          { type: "herbMarshPool", count: [1, 3], radius: [24, 42] },
+          { type: "grass", count: [2, 4], radius: [12, 20] }
         ],
         events: [
           { type: "herbCauldron", count: [1, 2], radius: [34, 46] },
@@ -94,8 +122,8 @@ window.DAHUANG_CONFIG = {
       accentColor: "rgba(102, 145, 126, 0.18)",
       enemyPool: ["wraith", "elite"],
       variants: [
-        { id: "memory-waste", name: "轮回残碑", featureBias: { stele: 2, rift: 1 }, eventBias: { memoryStele: 2 } },
-        { id: "rift-waste", name: "赤裂深处", featureBias: { rift: 3, bone: 1 }, eventBias: { rift: 1 } }
+        { id: "memory-waste", name: "轮回残墟", featureBias: { stele: 2, rift: 1 }, eventBias: { memoryStele: 2 } },
+        { id: "rift-waste", name: "裂隙荒境", featureBias: { rift: 3, bone: 1 }, eventBias: { rift: 1 } }
       ],
       generation: {
         decals: [
@@ -117,7 +145,7 @@ window.DAHUANG_CONFIG = {
     {
       id: "wilds",
       name: "荒原试炼",
-      subtitle: "碎石、灵脉与游荡妖邪",
+      subtitle: "野火残痕与流沙古阵",
       palette: ["#7a5730", "#56623d", "#201a16"],
       paperTint: "#c9a86b",
       gridColor: "rgba(88, 55, 30, 0.16)",
@@ -125,8 +153,8 @@ window.DAHUANG_CONFIG = {
       enemyPool: ["wraith", "elite"],
       variants: [
         { id: "spirit-veins", name: "灵脉荒原", featureBias: { spirit: 2, grass: 2 }, eventBias: { spiritWell: 1 } },
-        { id: "rift-wilds", name: "赤裂荒原", featureBias: { rift: 2, stone: 1, bone: 1 }, eventBias: { rift: 1 } },
-        { id: "stone-array", name: "古阵荒原", featureBias: { stone: 6, stele: 1 }, eventBias: { shrine: 1 } }
+        { id: "rift-wilds", name: "裂隙荒原", featureBias: { rift: 2, stone: 1, bone: 1 }, eventBias: { rift: 1 } },
+        { id: "stone-array", name: "古石荒阵", featureBias: { stone: 6, stele: 1 }, eventBias: { shrine: 1 } }
       ],
       generation: {
         features: [
@@ -146,7 +174,7 @@ window.DAHUANG_CONFIG = {
     {
       id: "qingqiu",
       name: "青丘残梦",
-      subtitle: "幻雾、狐火与残碑",
+      subtitle: "青丘残梦、幻雾浓重",
       scenePack: "qingqiu",
       tileAtlas: "qingqiu_seamless",
       tileSize: 512,

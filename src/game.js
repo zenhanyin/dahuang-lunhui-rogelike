@@ -60,7 +60,7 @@ let screenShake = 0;
 const touchMove = { active: false, id: null, originX: 0, originY: 0, dx: 0, dy: 0 };
 
 const RUNTIME_ASSET_ROOT = "assets/runtime/webp";
-const ASSET_VERSION = "0.3.2b-ui-point-feedback";
+const ASSET_VERSION = "0.3.3j-3g-safe-area-corrections";
 const ASSET_PATHS = {
   characters: {
     sword_right_0: `${RUNTIME_ASSET_ROOT}/characters/sword_right_0.webp`,
@@ -149,15 +149,21 @@ const ASSET_PATHS = {
   },
   maps: {
     wilds: `assets/maps/wilds-runtime.webp`,
-    sword_tomb: `assets/maps/v032/sword_tomb/ground_a.webp`,
-    herb_marsh: `assets/maps/v032/herb_marsh/ground_a.webp`,
     wilderness: `assets/maps/v032/wilderness/ground_a.webp`
   },
   mapTiles: {
     qingqiu_base_final_01: `assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_01.webp`,
     qingqiu_base_final_02: `assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_02.webp`,
     qingqiu_base_final_03: `assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_03.webp`,
-    qingqiu_base_final_04: `assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_04.webp`
+    qingqiu_base_final_04: `assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_04.webp`,
+    xuanyuan_ground_base_final_01: `assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033j2_01.webp`,
+    xuanyuan_ground_base_final_02: `assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033j2_02.webp`,
+    xuanyuan_ground_base_final_03: `assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033j2_03.webp`,
+    xuanyuan_ground_base_final_04: `assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033j2_04.webp`,
+    herb_marsh_base_final_01: `assets/maps/v032_atlas/herb_marsh_seamless/tile_herb_marsh_base_final_01.webp`,
+    herb_marsh_base_final_02: `assets/maps/v032_atlas/herb_marsh_seamless/tile_herb_marsh_base_final_02.webp`,
+    herb_marsh_base_final_03: `assets/maps/v032_atlas/herb_marsh_seamless/tile_herb_marsh_base_final_03.webp`,
+    herb_marsh_base_final_04: `assets/maps/v032_atlas/herb_marsh_seamless/tile_herb_marsh_base_final_04.webp`
   },
   scene: {
     decal_qingqiu_old_vow_trace_01: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_old_vow_trace_01.webp`,
@@ -170,32 +176,79 @@ const ASSET_PATHS = {
     decal_qingqiu_ink_teal_vein_ai_02: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_ink_teal_vein_ai_02.webp`,
     decal_qingqiu_gold_mural_lines_ai_02: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_gold_mural_lines_ai_02.webp`,
     decal_qingqiu_old_vow_trace_ai_03: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_old_vow_trace_ai_03.webp`,
-    decal_crack_01: `${RUNTIME_ASSET_ROOT}/scene/qingqiu/decal_crack_01.webp`,
-    decal_crack_02: `${RUNTIME_ASSET_ROOT}/scene/qingqiu/decal_crack_02.webp`,
-    sword_tomb_transition_1: `assets/maps/v032/sword_tomb/transition_1.webp`,
-    sword_tomb_transition_2: `assets/maps/v032/sword_tomb/transition_2.webp`,
-    sword_tomb_transition_3: `assets/maps/v032/sword_tomb/transition_3.webp`,
-    qingqiu_transition_1: `assets/maps/v032/qingqiu/transition_1.webp`,
-    qingqiu_transition_2: `assets/maps/v032/qingqiu/transition_2.webp`,
-    qingqiu_transition_3: `assets/maps/v032/qingqiu/transition_3.webp`,
-    herb_marsh_transition_1: `assets/maps/v032/herb_marsh/transition_1.webp`,
-    herb_marsh_transition_2: `assets/maps/v032/herb_marsh/transition_2.webp`,
-    herb_marsh_transition_3: `assets/maps/v032/herb_marsh/transition_3.webp`,
+    decal_herb_marsh_gold_root_01: `assets/maps/v032_atlas/herb_marsh/decals/decal_herb_marsh_gold_root_01.webp`,
+    decal_herb_marsh_wet_vein_01: `assets/maps/v032_atlas/herb_marsh/decals/decal_herb_marsh_wet_vein_01.webp`,
+    decal_herb_marsh_dan_ash_01: `assets/maps/v032_atlas/herb_marsh/decals/decal_herb_marsh_dan_ash_01.webp`,
+    decal_xuanyuan_sword_trace_v033e_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_sword_trace_v033e_01.webp`,
+    decal_xuanyuan_sword_trace_v033e_02: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_sword_trace_v033e_02.webp`,
+    decal_xuanyuan_cloud_line_v033e_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_cloud_line_v033e_01.webp`,
+    decal_xuanyuan_array_disk_v033e_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_array_disk_v033e_01.webp`,
+    decal_xuanyuan_cinnabar_trace_v033e_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_cinnabar_trace_v033e_01.webp`,
+    decal_xuanyuan_bronze_oxidation_v033e_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_bronze_oxidation_v033e_01.webp`,
+    decal_xuanyuan_detail_cracks_a_v033g_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_detail_cracks_a_v033g_01.webp`,
+    decal_xuanyuan_detail_cracks_b_v033g_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_detail_cracks_b_v033g_01.webp`,
+    decal_xuanyuan_detail_cloud_fresco_a_v033g_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_detail_cloud_fresco_a_v033g_01.webp`,
+    decal_xuanyuan_detail_cloud_fresco_b_v033g_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_detail_cloud_fresco_b_v033g_01.webp`,
+    decal_xuanyuan_detail_sword_engraving_a_v033g_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_detail_sword_engraving_a_v033g_01.webp`,
+    decal_xuanyuan_detail_sword_engraving_b_v033g_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_detail_sword_engraving_b_v033g_01.webp`,
+    decal_xuanyuan_detail_bronze_oxidation_a_v033g_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_detail_bronze_oxidation_a_v033g_01.webp`,
+    decal_xuanyuan_detail_cinnabar_scrape_a_v033g_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_detail_cinnabar_scrape_a_v033g_01.webp`,
     wilderness_transition_1: `assets/maps/v032/wilderness/transition_1.webp`,
     wilderness_transition_2: `assets/maps/v032/wilderness/transition_2.webp`,
     wilderness_transition_3: `assets/maps/v032/wilderness/transition_3.webp`
   },
   sceneEvents: {
-    brokenSword: `assets/maps/v032/sword_tomb/event_broken_sword.webp`,
-    foxfire: `assets/maps/v032/qingqiu/event_foxfire_vow.webp`,
     foxfireVowIdle: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_foxfire_vow_idle.webp`,
     foxfireVowReady: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_foxfire_vow_ready.webp`,
     foxfireVowDone: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_foxfire_vow_done.webp`,
     oldVowSteleIdle: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_old_vow_stele_idle.webp`,
     oldVowSteleReady: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_old_vow_stele_ready.webp`,
     oldVowSteleDone: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_old_vow_stele_done.webp`,
-    herbCauldron: `assets/maps/v032/herb_marsh/event_herb_cauldron.webp`,
+    herbCauldronIdle: `assets/maps/v032_atlas/herb_marsh/events/event_herb_marsh_herb_cauldron_idle.webp`,
+    herbCauldronReady: `assets/maps/v032_atlas/herb_marsh/events/event_herb_marsh_herb_cauldron_ready.webp`,
+    herbCauldronDone: `assets/maps/v032_atlas/herb_marsh/events/event_herb_marsh_herb_cauldron_done.webp`,
+    herbSpiritWellIdle: `assets/maps/v032_atlas/herb_marsh/events/event_herb_marsh_spirit_well_idle.webp`,
+    herbSpiritWellReady: `assets/maps/v032_atlas/herb_marsh/events/event_herb_marsh_spirit_well_ready.webp`,
+    herbSpiritWellDone: `assets/maps/v032_atlas/herb_marsh/events/event_herb_marsh_spirit_well_done.webp`,
+    storyUnderIdle: `assets/maps/v032_atlas/qingqiu/events/event_marker_under_idle.webp`,
+    storyUnderReady: `assets/maps/v032_atlas/qingqiu/events/event_marker_under_ready.webp`,
+    storyUnderDone: `assets/maps/v032_atlas/qingqiu/events/event_marker_under_done.webp`,
+    storyBadgeIdle: `assets/maps/v032_atlas/qingqiu/events/event_marker_badge_idle.webp`,
+    storyBadgeReady: `assets/maps/v032_atlas/qingqiu/events/event_marker_badge_ready.webp`,
+    storyBadgeDone: `assets/maps/v032_atlas/qingqiu/events/event_marker_badge_done.webp`,
+    storyPromptReady: `assets/maps/v032_atlas/qingqiu/events/event_marker_prompt_ready.webp`,
+    xuanyuanStoneDiskIdle: `assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033e_idle.webp`,
+    xuanyuanStoneDiskReady: `assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033e_ready.webp`,
+    xuanyuanStoneDiskDone: `assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033e_done.webp`,
     memoryStele: `assets/maps/v032/wilderness/event_memory_stele.webp`
+  },
+  sceneProps: {
+    herb_marsh_herb_cluster_0: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_herb_cluster_0.webp`,
+    herb_marsh_herb_cluster_1: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_herb_cluster_1.webp`,
+    herb_marsh_herb_cluster_2: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_herb_cluster_2.webp`,
+    herb_marsh_dan_ember_0: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_dan_ember_0.webp`,
+    herb_marsh_dan_ember_1: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_dan_ember_1.webp`,
+    herb_marsh_dan_ember_2: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_dan_ember_2.webp`,
+    herb_marsh_dan_ember_3: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_dan_ember_3.webp`,
+    herb_marsh_marsh_pool_0: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_marsh_pool_0.webp`,
+    xuanyuan_buried_sword_grass_v033e_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_buried_sword_grass_v033e_0.webp`,
+    xuanyuan_broken_array_stone_v033e_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_broken_array_stone_v033e_0.webp`,
+    xuanyuan_low_oath_base_v033e_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_low_oath_base_v033e_0.webp`,
+    xuanyuan_cloth_trace_v033e_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_cloth_trace_v033e_0.webp`,
+    xuanyuan_sword_scatter_v033e_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_sword_scatter_v033e_0.webp`,
+    xuanyuan_bronze_fragment_v033e_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_bronze_fragment_v033e_0.webp`,
+    xuanyuan_buried_sword_grass_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_buried_sword_grass_v033f_0.webp`,
+    xuanyuan_sword_cluster_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_sword_cluster_v033f_0.webp`,
+    xuanyuan_cracked_stone_disk_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_cracked_stone_disk_v033f_0.webp`,
+    xuanyuan_bronze_mural_shard_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_bronze_mural_shard_v033f_0.webp`,
+    xuanyuan_cinnabar_oath_cloth_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_cinnabar_oath_cloth_v033f_0.webp`,
+    xuanyuan_collapsed_ritual_base_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_collapsed_ritual_base_v033f_0.webp`,
+    xuanyuan_inscription_slab_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_inscription_slab_v033f_0.webp`,
+    xuanyuan_low_array_ring_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_low_array_ring_v033f_0.webp`,
+    xuanyuan_dry_grass_clump_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_dry_grass_clump_v033f_0.webp`,
+    xuanyuan_broken_scabbard_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_broken_scabbard_v033f_0.webp`,
+    xuanyuan_cloud_mural_shard_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_cloud_mural_shard_v033f_0.webp`,
+    xuanyuan_battlefield_rubble_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_battlefield_rubble_v033f_0.webp`
   },
   qingqiuProps: {
     foxfire_small_0: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_small_0.webp`,
@@ -333,7 +386,23 @@ const DECAL_ALPHA = {
   oldVowTrace: 0.3,
   inkTealVein: 0.28,
   goldMuralLine: 0.24,
-  sceneCrack: 0.46
+  sceneCrack: 0.46,
+  xuanyuanSwordArrayTrace: 0.24,
+  xuanyuanBronzeCloudStain: 0.2,
+  xuanyuanBloodOath: 0.24,
+  xuanyuanOxidizedCrack: 0.22,
+  xuanyuanBuriedSwords: 0.24,
+  xuanyuanOldCloudLine: 0.18,
+  xuanyuanSwordTrace: 0.24,
+  xuanyuanCloudLine: 0.2,
+  xuanyuanArrayDisk: 0.18,
+  xuanyuanCinnabarTrace: 0.22,
+  xuanyuanBronzeOxidation: 0.18,
+  xuanyuanDetailCracks: 0.16,
+  xuanyuanDetailCloudFresco: 0.14,
+  xuanyuanDetailSwordEngraving: 0.15,
+  xuanyuanDetailBronzeOxidation: 0.13,
+  xuanyuanDetailCinnabarScrape: 0.14
 };
 
 function getAtPath(root, path) {
@@ -421,6 +490,11 @@ function renderBuildLedger() {
 function screen() {
   const rect = canvas.getBoundingClientRect();
   return { w: rect.width, h: rect.height };
+}
+
+function mapProjection(map = state?.map) {
+  if (map?.projection === "topdown") return { skew: 0, yScale: 1, yOffset: 0 };
+  return { skew: 0.22, yScale: 0.68, yOffset: 26 };
 }
 
 function hashSeed(seed, a, b) {
@@ -783,23 +857,25 @@ function resize() {
 function toView(point) {
   const s = screen();
   const cx = s.w / 2;
-  const cy = s.h / 2 + 26;
+  const projection = mapProjection();
+  const cy = s.h / 2 + projection.yOffset;
   const camera = state?.camera || { x: 0, y: 0 };
   const dx = point.x - camera.x;
   const dy = point.y - camera.y;
   return {
-    x: cx + dx + dy * 0.22,
-    y: cy + dy * 0.68
+    x: cx + dx + dy * projection.skew,
+    y: cy + dy * projection.yScale
   };
 }
 
 function toWorld(viewX, viewY) {
   const s = screen();
   const cx = s.w / 2;
-  const cy = s.h / 2 + 26;
+  const projection = mapProjection();
+  const cy = s.h / 2 + projection.yOffset;
   const camera = state?.camera || { x: 0, y: 0 };
-  const dy = (viewY - cy) / 0.68;
-  const dx = viewX - cx - dy * 0.22;
+  const dy = (viewY - cy) / projection.yScale;
+  const dx = viewX - cx - dy * projection.skew;
   return { x: camera.x + dx, y: camera.y + dy };
 }
 
@@ -836,10 +912,12 @@ function addDamageText(x, y, amount, kind = "damage") {
 
 function renderLineageSelect() {
   ui.lineageList.innerHTML = "";
+  let selectedButton = null;
   for (const lineage of CONFIG.lineages) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `lineage${lineage.id === selectedLineage.id ? " is-selected" : ""}`;
+    if (lineage.id === selectedLineage.id) selectedButton = button;
     const portrait = `${RUNTIME_ASSET_ROOT}/characters/${lineage.id}_right_1.webp?v=${ASSET_VERSION}`;
     const primaryWeapon = Object.entries(lineage.weapons)[0]?.[0] || "sword";
     const weaponName = CONFIG.weapons[primaryWeapon]?.ui?.name || "命格";
@@ -863,6 +941,12 @@ function renderLineageSelect() {
     });
     ui.lineageList.appendChild(button);
   }
+  if (selectedButton) {
+    ui.lineageList.scrollLeft = selectedButton.offsetLeft - (ui.lineageList.clientWidth - selectedButton.clientWidth) / 2;
+  }
+  requestAnimationFrame(() => {
+    selectedButton?.scrollIntoView?.({ behavior: "auto", block: "nearest", inline: "center" });
+  });
 }
 
 const UI_ICON_TEXT = {
@@ -1699,12 +1783,11 @@ function drawBackground(s) {
   const visible = visibleMapFeatures();
   drawSceneDecals(visible.chunks || []);
   for (const feature of [...state.map.features, ...visible.features]) drawMapFeature(feature);
-  for (const event of [...state.map.events, ...visible.events]) drawMapFeature(event);
   drawMuralFrame(s, map);
 }
 
 function drawMapBaseImage(s, map) {
-  if (map.tileAtlas === "qingqiu_seamless" && drawTiledMapBase(s, map)) return true;
+  if (map.tileAtlas && drawTiledMapBase(s, map)) return true;
   if (!assetReady("maps", map.id)) return false;
   const img = assets.maps[map.id];
   if (map.scenePack) {
@@ -1734,34 +1817,42 @@ function drawMapBaseImage(s, map) {
 }
 
 function drawTiledMapBase(s, map) {
-  const tileKeys = [
-    "qingqiu_base_final_01",
-    "qingqiu_base_final_02",
-    "qingqiu_base_final_03",
-    "qingqiu_base_final_04"
-  ].filter(key => assetReady("mapTiles", key));
+  const tilePrefix = {
+    qingqiu_seamless: "qingqiu",
+    sword_tomb_seamless: "sword_tomb",
+    xuanyuan_ground: "xuanyuan_ground",
+    herb_marsh_seamless: "herb_marsh"
+  }[map.tileAtlas];
+  if (!tilePrefix) return false;
+  const tileIndexes = map.tileAtlas === "xuanyuan_ground" ? [1, 2, 3, 4] : [1, 2, 3, 4, 5];
+  const tileKeys = tileIndexes
+    .map(index => `${tilePrefix}_base_final_0${index}`)
+    .filter(key => assetReady("mapTiles", key));
   if (!tileKeys.length) return false;
   const tileSize = map.tileSize || 512;
+  const originOffset = map.tileOrigin === "center" ? tileSize / 2 : 0;
   const camera = state?.camera || { x: 0, y: 0 };
   const cx = s.w / 2;
-  const cy = s.h / 2 + 26;
+  const projection = mapProjection(map);
+  const cy = s.h / 2 + projection.yOffset;
   const viewPad = tileSize * 2;
-  const minWorldY = camera.y + (-viewPad - cy) / 0.68;
-  const maxWorldY = camera.y + (s.h + viewPad - cy) / 0.68;
-  const minWorldX = camera.x + (-viewPad - cx) - (maxWorldY - camera.y) * 0.22;
-  const maxWorldX = camera.x + (s.w + viewPad - cx) - (minWorldY - camera.y) * 0.22;
-  const startTx = Math.floor(minWorldX / tileSize) - 1;
-  const endTx = Math.ceil(maxWorldX / tileSize) + 1;
-  const startTy = Math.floor(minWorldY / tileSize) - 1;
-  const endTy = Math.ceil(maxWorldY / tileSize) + 1;
+  const minWorldY = camera.y + (-viewPad - cy) / projection.yScale;
+  const maxWorldY = camera.y + (s.h + viewPad - cy) / projection.yScale;
+  const minWorldX = camera.x + (-viewPad - cx) - (maxWorldY - camera.y) * projection.skew;
+  const maxWorldX = camera.x + (s.w + viewPad - cx) - (minWorldY - camera.y) * projection.skew;
+  const startTx = Math.floor((minWorldX + originOffset) / tileSize) - 1;
+  const endTx = Math.ceil((maxWorldX + originOffset) / tileSize) + 1;
+  const startTy = Math.floor((minWorldY + originOffset) / tileSize) - 1;
+  const endTy = Math.ceil((maxWorldY + originOffset) / tileSize) + 1;
   ctx.save();
   ctx.globalAlpha = 1;
-  ctx.translate(cx - camera.x - camera.y * 0.22, cy - camera.y * 0.68);
-  ctx.transform(1, 0, 0.22, 0.68, 0, 0);
+  ctx.translate(cx - camera.x - camera.y * projection.skew, cy - camera.y * projection.yScale);
+  ctx.transform(1, 0, projection.skew, projection.yScale, 0, 0);
   for (let ty = startTy; ty <= endTy; ty += 1) {
     for (let tx = startTx; tx <= endTx; tx += 1) {
       const img = assets.mapTiles[tileKeys[hashSeed(map.seed, tx, ty) % tileKeys.length]];
-      ctx.drawImage(img, tx * tileSize, ty * tileSize, tileSize + 1, tileSize + 1);
+      const bleed = map.tileAtlas === "xuanyuan_ground" ? 3 : 1;
+      ctx.drawImage(img, tx * tileSize - originOffset - bleed * 0.5, ty * tileSize - originOffset - bleed * 0.5, tileSize + bleed, tileSize + bleed);
     }
   }
   ctx.restore();
@@ -1778,25 +1869,26 @@ function drawSceneDecals(chunks) {
   for (const item of chunks) {
     for (const decal of item.chunk.decals || []) {
       const p = toView(decal);
+      const isFormalAtlasDecal = Boolean(state.map.tileAtlas);
       const isQingqiuDecal = state.map.scenePack === "qingqiu" && (
         decal.type === "oldVowTrace" ||
         decal.type === "inkTealVein" ||
         decal.type === "goldMuralLine"
       );
-      const isPaintedGround = decal.type === "groundMist" || decal.type === "oldVowTrace";
+      const isPaintedGround = decal.type === "groundMist" || decal.type === "oldVowTrace" || isFormalAtlasDecal;
       const isImageDecal = Boolean(decal.asset && assetReady("scene", decal.asset));
-      const qingqiuScale = isQingqiuDecal ? 0.72 : 1;
-      const w = decal.r * (isPaintedGround ? 4.8 : decal.type === "sceneMist" || decal.type === "sceneTransition" ? 3.4 : 3.0) * qingqiuScale;
-      const h = decal.r * (isPaintedGround ? 2.15 : decal.type === "sceneMist" || decal.type === "sceneTransition" ? 1.35 : 1.25) * qingqiuScale;
+      const atlasScale = isQingqiuDecal ? 0.72 : isFormalAtlasDecal ? 0.86 : 1;
+      const w = decal.r * (isPaintedGround ? 4.8 : decal.type === "sceneMist" || decal.type === "sceneTransition" ? 3.4 : 3.0) * atlasScale;
+      const h = decal.r * (isPaintedGround ? 2.15 : decal.type === "sceneMist" || decal.type === "sceneTransition" ? 1.35 : 1.25) * atlasScale;
       if (p.x < -w || p.x > screen().w + w || p.y < -h || p.y > screen().h + h) continue;
       if (isImageDecal) {
         ctx.save();
-        if (isQingqiuDecal) {
+        if (isFormalAtlasDecal) {
           ctx.globalCompositeOperation = decal.type === "goldMuralLine" ? "source-over" : "multiply";
           ctx.filter = "saturate(0.82) contrast(0.92)";
         }
         const ok = drawAsset("scene", decal.asset, p.x, p.y, w, h, {
-          alpha: isQingqiuDecal ? decal.alpha * (decal.type === "goldMuralLine" ? 0.62 : 0.74) : decal.alpha,
+          alpha: isFormalAtlasDecal ? decal.alpha * (decal.type === "goldMuralLine" ? 0.62 : 0.74) : decal.alpha,
           rotate: decal.rotate,
           anchorY: 0.5
         });
@@ -1831,6 +1923,10 @@ function drawSceneDecals(chunks) {
 
 function drawMuralFrame(s, map) {
   ctx.save();
+  if (map.tileAtlas) {
+    ctx.restore();
+    return;
+  }
   const edge = map.id === "qingqiu" ? "rgba(18, 14, 17, 0.34)" : "rgba(64, 31, 18, 0.5)";
   const gradTop = ctx.createLinearGradient(0, 0, 0, s.h);
   gradTop.addColorStop(0, edge);
@@ -1839,11 +1935,6 @@ function drawMuralFrame(s, map) {
   gradTop.addColorStop(1, edge);
   ctx.fillStyle = gradTop;
   ctx.fillRect(0, 0, s.w, s.h);
-
-  if (map.tileAtlas) {
-    ctx.restore();
-    return;
-  }
 
   ctx.globalAlpha = map.id === "qingqiu" ? 0.18 : 0.26;
   ctx.strokeStyle = map.id === "qingqiu" ? "#b96eb1" : "#b74431";
@@ -1865,6 +1956,17 @@ function drawStoryMarkerUnder(feature, status = "idle") {
   const ready = status === "ready";
   const done = status === "done";
   const pulse = 0.5 + 0.5 * Math.sin(state.time * 3.4 + feature.phase);
+  const assetKey = done ? "storyUnderDone" : ready ? "storyUnderReady" : "storyUnderIdle";
+  const assetRadius = storyTriggerRadius(feature) * (ready ? 0.68 + pulse * 0.04 : done ? 0.52 + pulse * 0.012 : 0.58 + pulse * 0.02);
+  ctx.save();
+  ctx.globalCompositeOperation = ready ? "lighter" : "source-over";
+  ctx.globalAlpha *= ready ? 0.82 + pulse * 0.16 : done ? 0.46 + pulse * 0.08 : 0.62 + pulse * 0.12;
+  if (drawAsset("sceneEvents", assetKey, 0, feature.r * 0.24, assetRadius * 1.9, assetRadius * 0.88, { anchorY: 0.54 })) {
+    ctx.restore();
+    return true;
+  }
+  ctx.restore();
+
   const radius = storyTriggerRadius(feature) * (ready ? 0.62 + pulse * 0.055 : done ? 0.38 + pulse * 0.016 : 0.46 + pulse * 0.028);
   ctx.save();
   ctx.globalCompositeOperation = "lighter";
@@ -1892,6 +1994,21 @@ function drawStoryMarkerOver(feature, status = "idle") {
   const done = status === "done";
   const pulse = 0.5 + 0.5 * Math.sin(state.time * 4.2 + feature.phase);
   const y = -feature.r * (feature.type === "foxfireVow" ? 1.62 : 1.48);
+  const badgeKey = done ? "storyBadgeDone" : ready ? "storyBadgeReady" : "storyBadgeIdle";
+  const badgeW = feature.r * (ready ? 1.78 + pulse * 0.1 : done ? 1.2 + pulse * 0.02 : 1.42 + pulse * 0.04);
+  const badgeH = badgeW * 1.2;
+  ctx.save();
+  ctx.globalAlpha *= done ? 0.68 : ready ? 1 : 0.9;
+  const badgeOk = drawAsset("sceneEvents", badgeKey, 0, y, badgeW, badgeH, { anchorY: 0.52 });
+  if (badgeOk && ready) {
+    const promptW = feature.r * 4.2;
+    const promptH = promptW * 0.253;
+    ctx.globalAlpha *= 0.82 + pulse * 0.14;
+    drawAsset("sceneEvents", "storyPromptReady", 0, y + badgeH * 0.72, promptW, promptH, { anchorY: 0.5 });
+  }
+  ctx.restore();
+  if (badgeOk) return true;
+
   const size = feature.r * (ready ? 1.28 + pulse * 0.12 : done ? 0.88 + pulse * 0.03 : 1.02 + pulse * 0.05);
   ctx.save();
   ctx.translate(0, y);
@@ -1955,9 +2072,14 @@ function drawMapFeature(feature) {
   const unseenEvent = feature.event && !seenEvent;
   const eventReady = unseenEvent && dist(feature, state.player) < storyTriggerRadius(feature);
   const eventStatus = seenEvent ? "done" : eventReady ? "ready" : "idle";
-  if (feature.event) drawStoryMarkerUnder(feature, eventStatus);
+  const usesFormalSceneEventAtlas = feature.event && (state.map?.scenePack === "sword_tomb" || state.map?.scenePack === "herb_marsh");
+  if (feature.event && !usesFormalSceneEventAtlas) drawStoryMarkerUnder(feature, eventStatus);
   if (feature.event && drawSceneEventFeature(feature)) {
-    drawStoryMarkerOver(feature, eventStatus);
+    if (!usesFormalSceneEventAtlas) drawStoryMarkerOver(feature, eventStatus);
+    ctx.restore();
+    return;
+  }
+  if (drawScenePackPropFeature(feature)) {
     ctx.restore();
     return;
   }
@@ -2001,6 +2123,47 @@ function drawMapFeature(feature) {
   ctx.restore();
 }
 
+function drawScenePackPropFeature(feature) {
+  const pack = state.map?.scenePack;
+  const specs = {
+    sword_tomb: {
+      xuanyuanBuriedSwordGrass: { key: "xuanyuan_buried_sword_grass_v033e", variants: 1, w: 3.08, h: 1.5, y: 0.12, alpha: 0.9, anchorY: 0.56 },
+      xuanyuanBrokenArrayStone: { key: "xuanyuan_broken_array_stone_v033e", variants: 1, w: 2.85, h: 1.5, y: 0.1, alpha: 0.84, anchorY: 0.56 },
+      xuanyuanLowOathBase: { key: "xuanyuan_low_oath_base_v033e", variants: 1, w: 2.34, h: 1.22, y: 0.08, alpha: 0.8, anchorY: 0.54 },
+      xuanyuanClothTrace: { key: "xuanyuan_cloth_trace_v033e", variants: 1, w: 2.78, h: 1.18, y: 0.06, alpha: 0.76, anchorY: 0.54 },
+      xuanyuanSwordScatter: { key: "xuanyuan_sword_scatter_v033e", variants: 1, w: 2.34, h: 0.98, y: 0.06, alpha: 0.78, anchorY: 0.54 },
+      xuanyuanBronzeFragment: { key: "xuanyuan_bronze_fragment_v033e", variants: 1, w: 2.08, h: 0.94, y: 0.05, alpha: 0.76, anchorY: 0.54 },
+      xuanyuanBuriedSwordGrassF: { key: "xuanyuan_buried_sword_grass_v033f", variants: 1, w: 2.62, h: 1.72, y: 0.18, alpha: 0.9, anchorY: 0.68 },
+      xuanyuanSwordCluster: { key: "xuanyuan_sword_cluster_v033f", variants: 1, w: 2.52, h: 1.66, y: 0.16, alpha: 0.84, anchorY: 0.68 },
+      xuanyuanCrackedStoneDisk: { key: "xuanyuan_cracked_stone_disk_v033f", variants: 1, w: 2.95, h: 1.74, y: 0.1, alpha: 0.84, anchorY: 0.58 },
+      xuanyuanBronzeMuralShard: { key: "xuanyuan_bronze_mural_shard_v033f", variants: 1, w: 2.65, h: 1.6, y: 0.08, alpha: 0.8, anchorY: 0.56 },
+      xuanyuanCinnabarOathCloth: { key: "xuanyuan_cinnabar_oath_cloth_v033f", variants: 1, w: 3.14, h: 1.4, y: 0.06, alpha: 0.8, anchorY: 0.54 },
+      xuanyuanCollapsedRitualBase: { key: "xuanyuan_collapsed_ritual_base_v033f", variants: 1, w: 2.6, h: 1.34, y: 0.08, alpha: 0.78, anchorY: 0.54 },
+      xuanyuanInscriptionSlab: { key: "xuanyuan_inscription_slab_v033f", variants: 1, w: 2.4, h: 1.76, y: 0.14, alpha: 0.78, anchorY: 0.66 },
+      xuanyuanLowArrayRing: { key: "xuanyuan_low_array_ring_v033f", variants: 1, w: 2.86, h: 1.38, y: 0.06, alpha: 0.76, anchorY: 0.54 },
+      xuanyuanDryGrassClump: { key: "xuanyuan_dry_grass_clump_v033f", variants: 1, w: 2.48, h: 1.56, y: 0.14, alpha: 0.84, anchorY: 0.62 },
+      xuanyuanBrokenScabbard: { key: "xuanyuan_broken_scabbard_v033f", variants: 1, w: 2.58, h: 1.26, y: 0.07, alpha: 0.78, anchorY: 0.54 },
+      xuanyuanCloudMuralShard: { key: "xuanyuan_cloud_mural_shard_v033f", variants: 1, w: 2.84, h: 1.4, y: 0.06, alpha: 0.78, anchorY: 0.54 },
+      xuanyuanBattlefieldRubble: { key: "xuanyuan_battlefield_rubble_v033f", variants: 1, w: 2.38, h: 1.38, y: 0.08, alpha: 0.8, anchorY: 0.56 }
+    },
+    herb_marsh: {
+      herbCluster: { key: "herb_marsh_herb_cluster", variants: 3, w: 2.35, h: 1.55, y: 0.3, alpha: 0.76, anchorY: 0.78 },
+      herbDanEmber: { key: "herb_marsh_dan_ember", frames: 4, fps: 4.6, w: 2.35, h: 2.35, y: 0.42, alpha: 0.88, anchorY: 0.86 },
+      herbMarshPool: { key: "herb_marsh_marsh_pool", variants: 1, w: 3.1, h: 1.35, y: 0.24, alpha: 0.62, anchorY: 0.62 }
+    }
+  }[pack];
+  const spec = specs?.[feature.type];
+  if (!spec) return false;
+  const frame = spec.frames
+    ? Math.floor((state.time + feature.phase) * spec.fps) % spec.frames
+    : Math.floor(feature.phase * 1000) % spec.variants;
+  return drawAsset("sceneProps", `${spec.key}_${frame}`, 0, feature.r * spec.y, feature.r * spec.w, feature.r * spec.h, {
+    alpha: spec.alpha,
+    anchorY: spec.anchorY,
+    rotate: feature.rotate || 0
+  });
+}
+
 function drawQingqiuPropFeature(feature) {
   if (state.map?.scenePack !== "qingqiu") return false;
   const specs = {
@@ -2024,6 +2187,106 @@ function drawQingqiuPropFeature(feature) {
 }
 
 function drawSceneEventFeature(feature) {
+  if (state.map?.scenePack === "sword_tomb") {
+    const seen = state.storySeen[storyKey(feature)];
+    const ready = !seen && dist(feature, state.player) < storyTriggerRadius(feature);
+    const eventSpec = {
+      brokenSword: {
+        category: "sceneEvents",
+        key: ready ? "xuanyuanStoneDiskReady" : seen ? "xuanyuanStoneDiskDone" : "xuanyuanStoneDiskIdle",
+        w: ready ? 2.8 : 2.35,
+        h: ready ? 1.98 : 1.66,
+        y: 0.24,
+        anchorY: 0.58
+      },
+      memoryStele: {
+        category: "sceneEvents",
+        key: ready ? "xuanyuanStoneDiskReady" : seen ? "xuanyuanStoneDiskDone" : "xuanyuanStoneDiskIdle",
+        w: ready ? 2.8 : 2.35,
+        h: ready ? 1.98 : 1.66,
+        y: 0.24,
+        anchorY: 0.58
+      }
+    }[feature.type];
+    if (eventSpec && assetReady(eventSpec.category, eventSpec.key)) {
+      const pulse = 0.5 + 0.5 * Math.sin(state.time * 4.1 + feature.phase);
+      ctx.save();
+      ctx.globalCompositeOperation = "lighter";
+      ctx.globalAlpha = ready ? 0.2 + pulse * 0.12 : seen ? 0.045 + pulse * 0.025 : 0.11 + pulse * 0.055;
+      ctx.strokeStyle = ready ? "rgba(143, 227, 188, 0.72)" : "rgba(209, 175, 90, 0.62)";
+      ctx.lineWidth = ready ? 2.2 : 1.35;
+      ctx.beginPath();
+      ctx.ellipse(0, feature.r * 0.22, feature.r * (ready ? 1.42 : 1.16), feature.r * (ready ? 0.5 : 0.38), 0, 0, TAU);
+      ctx.stroke();
+      ctx.restore();
+      const eventDrawn = drawAsset(eventSpec.category, eventSpec.key, 0, feature.r * eventSpec.y, feature.r * eventSpec.w, feature.r * eventSpec.h, {
+        alpha: seen ? 0.58 : ready ? 1 : 0.94,
+        anchorY: eventSpec.anchorY
+      });
+      if (!seen) {
+        const lift = ready ? -feature.r * 1.18 + Math.sin(state.time * 4.8 + feature.phase) * 1.8 : -feature.r * 0.94;
+        ctx.save();
+        ctx.translate(0, lift);
+        ctx.globalCompositeOperation = "source-over";
+        ctx.globalAlpha = ready ? 0.98 : 0.82;
+        ctx.fillStyle = ready ? "rgba(34, 28, 18, 0.94)" : "rgba(30, 26, 19, 0.82)";
+        ctx.strokeStyle = ready ? "rgba(239, 199, 93, 0.98)" : "rgba(221, 176, 83, 0.84)";
+        ctx.lineWidth = Math.max(1.4, feature.r * 0.048);
+        ctx.beginPath();
+        ctx.arc(0, 0, feature.r * (ready ? 0.54 : 0.46), 0, TAU);
+        ctx.fill();
+        ctx.stroke();
+        ctx.strokeStyle = ready ? "rgba(108, 216, 176, 0.82)" : "rgba(100, 192, 158, 0.5)";
+        ctx.lineWidth = Math.max(1, feature.r * 0.032);
+        ctx.beginPath();
+        ctx.arc(0, 0, feature.r * (ready ? 0.7 + pulse * 0.08 : 0.58), -Math.PI * 0.16, Math.PI * 1.18);
+        ctx.stroke();
+        ctx.fillStyle = ready ? "rgba(255, 236, 154, 0.98)" : "rgba(229, 193, 103, 0.92)";
+        ctx.font = `900 ${Math.max(17, feature.r * (ready ? 0.58 : 0.5))}px "KaiTi", "STKaiti", serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.shadowColor = ready ? "rgba(244, 202, 105, 0.58)" : "rgba(0, 0, 0, 0.3)";
+        ctx.shadowBlur = ready ? 8 : 3;
+        ctx.fillText("缘", 0, -1);
+        if (ready) {
+          ctx.globalCompositeOperation = "lighter";
+          ctx.globalAlpha = 0.24 + pulse * 0.22;
+          ctx.strokeStyle = "rgba(239, 199, 93, 0.72)";
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(0, 0, feature.r * (0.86 + pulse * 0.18), 0, TAU);
+          ctx.stroke();
+          ctx.globalCompositeOperation = "source-over";
+          ctx.globalAlpha = 0.94;
+          ctx.shadowBlur = 0;
+          ctx.fillStyle = "rgba(255, 238, 176, 0.95)";
+          ctx.font = `800 ${Math.max(11, feature.r * 0.34)}px "KaiTi", "STKaiti", serif`;
+          ctx.fillText("靠近记入轮回", 0, feature.r * 1.15);
+        }
+        ctx.restore();
+      }
+      return eventDrawn;
+    }
+  }
+
+  const atlasEvents = {
+    herb_marsh: {
+      herbCauldron: { idle: "herbCauldronIdle", ready: "herbCauldronReady", done: "herbCauldronDone", w: 3.55, h: 3.9, y: 0.36 },
+      spiritWell: { idle: "herbSpiritWellIdle", ready: "herbSpiritWellReady", done: "herbSpiritWellDone", w: 3.45, h: 3.3, y: 0.3 }
+    }
+  }[state.map?.scenePack]?.[feature.type];
+  if (atlasEvents) {
+    const seen = state.storySeen[storyKey(feature)];
+    const ready = !seen && dist(feature, state.player) < storyTriggerRadius(feature);
+    const eventAsset = seen ? atlasEvents.done : ready ? atlasEvents.ready : atlasEvents.idle;
+    const ok = drawAsset("sceneEvents", eventAsset, 0, feature.r * atlasEvents.y, feature.r * atlasEvents.w, feature.r * atlasEvents.h, {
+      alpha: seen ? 0.58 : ready ? 1 : 0.9,
+      anchorY: 0.86
+    });
+    if (!ok) return false;
+    return true;
+  }
+
   if (state.map?.scenePack === "qingqiu") {
     const qingqiuEvent = {
       foxfireVow: { idle: "foxfireVowIdle", ready: "foxfireVowReady", done: "foxfireVowDone", w: 4.15, h: 4.9, y: 0.42 },
@@ -2561,14 +2824,22 @@ function render() {
   for (const pulse of state.pulses) drawPulse(pulse);
   for (const drop of state.drops) drawDrop(drop);
   for (const projectile of state.projectiles) drawProjectile(projectile);
-  state.enemies.sort((a, b) => a.y - b.y);
+  const visibleForWorldLayer = visibleMapFeatures();
+  const sceneEvents = [...state.map.events, ...visibleForWorldLayer.events]
+    .map(event => ({ ...event, __sceneEvent: true }));
+  const enemies = state.enemies.map(enemy => ({ ...enemy, __enemy: true }));
+  const worldItems = [...sceneEvents, ...enemies, { ...state.player, __player: true }]
+    .sort((a, b) => a.y - b.y);
   let playerDrawn = false;
-  for (const enemy of state.enemies) {
-    if (!playerDrawn && enemy.y > state.player.y) {
+  for (const item of worldItems) {
+    if (item.__sceneEvent) {
+      drawMapFeature(item);
+    } else if (item.__player) {
       drawPlayer(state.player);
       playerDrawn = true;
+    } else if (item.__enemy) {
+      drawEnemy(item);
     }
-    drawEnemy(enemy);
   }
   if (!playerDrawn) drawPlayer(state.player);
   for (const text of state.damageTexts) drawDamageText(text);

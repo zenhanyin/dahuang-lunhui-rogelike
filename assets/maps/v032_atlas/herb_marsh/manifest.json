@@ -1,0 +1,35 @@
+{
+  "id": "herb_marsh",
+  "tileAtlas": "herb_marsh_seamless",
+  "tileSize": 512,
+  "baseTiles": [
+    "tile_herb_marsh_base_final_01.webp",
+    "tile_herb_marsh_base_final_02.webp",
+    "tile_herb_marsh_base_final_03.webp",
+    "tile_herb_marsh_base_final_04.webp"
+  ],
+  "decals": [
+    "decal_herb_marsh_gold_root_01.webp",
+    "decal_herb_marsh_wet_vein_01.webp",
+    "decal_herb_marsh_dan_ash_01.webp"
+  ],
+  "props": [
+    "prop_herb_marsh_herb_cluster_0.webp",
+    "prop_herb_marsh_herb_cluster_1.webp",
+    "prop_herb_marsh_herb_cluster_2.webp",
+    "prop_herb_marsh_dan_ember_0.webp",
+    "prop_herb_marsh_dan_ember_1.webp",
+    "prop_herb_marsh_dan_ember_2.webp",
+    "prop_herb_marsh_dan_ember_3.webp",
+    "prop_herb_marsh_marsh_pool_0.webp"
+  ],
+  "events": [
+    "event_herb_marsh_herb_cauldron_idle.webp",
+    "event_herb_marsh_herb_cauldron_ready.webp",
+    "event_herb_marsh_herb_cauldron_done.webp",
+    "event_herb_marsh_spirit_well_idle.webp",
+    "event_herb_marsh_spirit_well_ready.webp",
+    "event_herb_marsh_spirit_well_done.webp"
+  ],
+  "budget": "V0.3.3 polished WebP atlas template; replace art in-place without changing runtime keys."
+}

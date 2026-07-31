@@ -1,0 +1,183 @@
+{
+  "id": "xuanyuan_ground",
+  "version": "0.3.3j-2-xuanyuan-seam-reviewed",
+  "tileSize": 1024,
+  "source": {
+    "confirmedKeyframe": "assets/art_direction/v033/xuanyuan_ground_rework/xuanyuan_confirmed_style_keyframe.png",
+    "runtimeAcceptanceKeyframe": "assets/art_direction/v033/xuanyuan_ground_rework/xuanyuan_runtime_acceptance_keyframe_v2.png",
+    "baseTileSheetV2": "assets/art_direction/v033/xuanyuan_ground_rework/xuanyuan_base_tile_sheet_v2.png",
+    "decalEventSheetV2": "assets/art_direction/v033/xuanyuan_ground_rework/xuanyuan_decal_event_sheet_v2.png",
+    "base": "assets/art_direction/v033/xuanyuan_ground_rework/xuanyuan_user_ref_clean_base.png",
+    "randomPattern": "assets/art_direction/v033/xuanyuan_ground_rework/xuanyuan_user_ref_random_pattern.png"
+  },
+  "style": "Confirmed Dunhuang mineral fresco, Xuanyuan top-down ground, ochre-gray cracked earth, teal oxidation, cinnabar stain, aged-gold sword/cloud engravings",
+  "runtimeReady": true,
+  "rules": [
+    "reference clean base is the ground layer",
+    "random pattern sheet is decal-only, never full-screen base",
+    "base tile uses 1024 size to reduce visible repetition",
+    "runtime uses one clean seamless primary base tile; variation belongs to decal and prop layers",
+    "v033c generated decal/prop/event sheets were rejected for gamey high-relief style and green-edge artifacts",
+    "decal alpha is pre-feathered, sparse and low-frequency",
+    "base texture density is reduced so characters and UI keep priority",
+    "no CSS placeholder marks inside terrain assets",
+    "confirmedKeyframe is the acceptance target for palette, density and visual weight",
+    "baseTileSheetV2 and decalEventSheetV2 are art-direction sources and must be sliced/processed before runtime use",
+    "avoid gray slabs, flags, cones, floating stickers and pseudo-3D props"
+  ],
+  "baseTiles": [
+    "base_tiles/tile_xuanyuan_ground_base_v033j2_01.webp",
+    "base_tiles/tile_xuanyuan_ground_base_v033j2_02.webp",
+    "base_tiles/tile_xuanyuan_ground_base_v033j2_03.webp",
+    "base_tiles/tile_xuanyuan_ground_base_v033j2_04.webp"
+  ],
+  "baseTileCandidates": [
+    "base_tiles/tile_xuanyuan_ground_base_v033e_01.webp",
+    "base_tiles/tile_xuanyuan_ground_base_v033e_02.webp",
+    "base_tiles/tile_xuanyuan_ground_base_v033e_03.webp",
+    "base_tiles/tile_xuanyuan_ground_base_v033e_04.webp"
+  ],
+  "decals": [
+    {
+      "id": "decal_xuanyuan_sword_trace_v033e_01",
+      "type": "xuanyuanSwordTrace",
+      "file": "decals/decal_xuanyuan_sword_trace_v033e_01.webp"
+    },
+    {
+      "id": "decal_xuanyuan_sword_trace_v033e_02",
+      "type": "xuanyuanSwordTrace",
+      "file": "decals/decal_xuanyuan_sword_trace_v033e_02.webp"
+    },
+    {
+      "id": "decal_xuanyuan_cloud_line_v033e_01",
+      "type": "xuanyuanCloudLine",
+      "file": "decals/decal_xuanyuan_cloud_line_v033e_01.webp"
+    },
+    {
+      "id": "decal_xuanyuan_array_disk_v033e_01",
+      "type": "xuanyuanArrayDisk",
+      "file": "decals/decal_xuanyuan_array_disk_v033e_01.webp"
+    },
+    {
+      "id": "decal_xuanyuan_cinnabar_trace_v033e_01",
+      "type": "xuanyuanCinnabarTrace",
+      "file": "decals/decal_xuanyuan_cinnabar_trace_v033e_01.webp"
+    },
+    {
+      "id": "decal_xuanyuan_bronze_oxidation_v033e_01",
+      "type": "xuanyuanBronzeOxidation",
+      "file": "decals/decal_xuanyuan_bronze_oxidation_v033e_01.webp"
+    },
+    {
+      "id": "decal_xuanyuan_detail_cracks_a_v033g_01",
+      "type": "xuanyuanDetailCracks",
+      "file": "decals/decal_xuanyuan_detail_cracks_a_v033g_01.webp"
+    },
+    {
+      "id": "decal_xuanyuan_detail_cracks_b_v033g_01",
+      "type": "xuanyuanDetailCracks",
+      "file": "decals/decal_xuanyuan_detail_cracks_b_v033g_01.webp"
+    },
+    {
+      "id": "decal_xuanyuan_detail_cloud_fresco_a_v033g_01",
+      "type": "xuanyuanDetailCloudFresco",
+      "file": "decals/decal_xuanyuan_detail_cloud_fresco_a_v033g_01.webp"
+    },
+    {
+      "id": "decal_xuanyuan_detail_cloud_fresco_b_v033g_01",
+      "type": "xuanyuanDetailCloudFresco",
+      "file": "decals/decal_xuanyuan_detail_cloud_fresco_b_v033g_01.webp"
+    },
+    {
+      "id": "decal_xuanyuan_detail_sword_engraving_a_v033g_01",
+      "type": "xuanyuanDetailSwordEngraving",
+      "file": "decals/decal_xuanyuan_detail_sword_engraving_a_v033g_01.webp"
+    },
+    {
+      "id": "decal_xuanyuan_detail_sword_engraving_b_v033g_01",
+      "type": "xuanyuanDetailSwordEngraving",
+      "file": "decals/decal_xuanyuan_detail_sword_engraving_b_v033g_01.webp"
+    },
+    {
+      "id": "decal_xuanyuan_detail_bronze_oxidation_a_v033g_01",
+      "type": "xuanyuanDetailBronzeOxidation",
+      "file": "decals/decal_xuanyuan_detail_bronze_oxidation_a_v033g_01.webp"
+    },
+    {
+      "id": "decal_xuanyuan_detail_cinnabar_scrape_a_v033g_01",
+      "type": "xuanyuanDetailCinnabarScrape",
+      "file": "decals/decal_xuanyuan_detail_cinnabar_scrape_a_v033g_01.webp"
+    }
+  ],
+  "preview": "preview_xuanyuan_ground_v033j2_3x3.webp",
+  "asset_mode": "formal_runtime_tiles_and_transparent_sprites",
+  "style_anchor": "assets/art_direction/v033/xuanyuan_ground_rework/keyframes",
+  "props": [
+    {
+      "id": "prop_xuanyuan_buried_sword_grass_v033e_0",
+      "type": "xuanyuanBuriedSwordGrass",
+      "file": "props/prop_xuanyuan_buried_sword_grass_v033e_0.webp"
+    },
+    {
+      "id": "prop_xuanyuan_broken_array_stone_v033e_0",
+      "type": "xuanyuanBrokenArrayStone",
+      "file": "props/prop_xuanyuan_broken_array_stone_v033e_0.webp"
+    },
+    {
+      "id": "prop_xuanyuan_low_oath_base_v033e_0",
+      "type": "xuanyuanLowOathBase",
+      "file": "props/prop_xuanyuan_low_oath_base_v033e_0.webp"
+    },
+    {
+      "id": "prop_xuanyuan_cloth_trace_v033e_0",
+      "type": "xuanyuanClothTrace",
+      "file": "props/prop_xuanyuan_cloth_trace_v033e_0.webp"
+    },
+    {
+      "id": "prop_xuanyuan_sword_scatter_v033e_0",
+      "type": "xuanyuanSwordScatter",
+      "file": "props/prop_xuanyuan_sword_scatter_v033e_0.webp"
+    },
+    {
+      "id": "prop_xuanyuan_bronze_fragment_v033e_0",
+      "type": "xuanyuanBronzeFragment",
+      "file": "props/prop_xuanyuan_bronze_fragment_v033e_0.webp"
+    }
+  ],
+  "events": [
+    {
+      "id": "event_xuanyuan_stone_disk_v033e_idle",
+      "state": "idle",
+      "file": "events/event_xuanyuan_stone_disk_v033e_idle.webp"
+    },
+    {
+      "id": "event_xuanyuan_stone_disk_v033e_ready",
+      "state": "ready",
+      "file": "events/event_xuanyuan_stone_disk_v033e_ready.webp"
+    },
+    {
+      "id": "event_xuanyuan_stone_disk_v033e_done",
+      "state": "done",
+      "file": "events/event_xuanyuan_stone_disk_v033e_done.webp"
+    }
+  ],
+  "notes": [
+    "Generated from the confirmed Xuanyuan Dunhuang keyframe direction.",
+    "V0.3.3j-2 uses four edge-locked base tile variants: the outer band stays consistent, the middle carries low-frequency fresco/crack/sword-line variation.",
+    "Decal/prop/event assets stay in transparent WebP layers; no CSS placeholder resources are intentionally used.",
+    "Event stone disk remains small; ready state uses subtle near-ground aura and an atlas prompt for readable interaction feedback.",
+    "Candidate v033e source tiles remain archived as candidates, not direct runtime tiles."
+  ],
+  "seamReview": {
+    "version": "0.3.3j-2",
+    "report": "docs/v0.3.3j-2-xuanyuan-tile-seam-review.json",
+    "strategy": "edge-locked variants generated from the approved Xuanyuan base tile",
+    "scores": {
+      "horizontalAvg": 13.505,
+      "horizontalMax": 13.515,
+      "verticalAvg": 14.808,
+      "verticalMax": 14.842
+    },
+    "runtimeEnabled": true
+  }
+}

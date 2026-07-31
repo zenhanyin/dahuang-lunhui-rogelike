@@ -1,0 +1,31 @@
+{
+  "version": "0.3.3j-2",
+  "sourceTiles": [
+    "assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033e_01.webp",
+    "assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033e_02.webp",
+    "assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033e_03.webp",
+    "assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033e_04.webp"
+  ],
+  "runtimeTiles": [
+    "assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033j2_01.webp",
+    "assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033j2_02.webp",
+    "assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033j2_03.webp",
+    "assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033j2_04.webp"
+  ],
+  "strategy": {
+    "edgeLockPx": 132,
+    "centerBlend": 0.58,
+    "goal": "keep infinite stitching stable while adding same-style center variation"
+  },
+  "scores": {
+    "horizontalAvg": 13.505,
+    "horizontalMax": 13.515,
+    "verticalAvg": 14.808,
+    "verticalMax": 14.842
+  },
+  "thresholds": {
+    "horizontalMax": 18.0,
+    "verticalMax": 18.0
+  },
+  "accepted": true
+}
