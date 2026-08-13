@@ -20,7 +20,7 @@ page.on("console", msg => {
 });
 
 const probes = [];
-for (const [index, id] of ["sword", "witch", "alchemist"].entries()) {
+for (const [index, id] of ["sword", "witch"].entries()) {
   await page.goto("file:///D:/Acodex3/dahuang-lunhui-lu/index.html", { waitUntil: "domcontentloaded" });
   await page.locator(".lineage").nth(index).click();
   await page.click("#startBtn");

@@ -48,7 +48,6 @@ async function captureLineage(index, label) {
 
 await captureLineage(0, "sword");
 await captureLineage(1, "qingqiu");
-await captureLineage(2, "herb");
 
 await browser.close();
 

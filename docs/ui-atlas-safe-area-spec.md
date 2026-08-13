@@ -144,3 +144,13 @@ Each formal UI atlas entry should eventually include:
 - Check 3-digit resource values, longest card title, longest body text, and a 6-character story title.
 - Compare against the latest accepted keyframe before merging.
 - If a fix requires more than 2 CSS overrides for the same component, update the atlas safe area or export a corrected UI piece instead.
+
+## V0.3.4a-9 Anchor And Safe-Area Lock
+
+- Text must align to the atlas `visualAxis`, not the DOM box center when the ornament is asymmetric.
+- Card title, body, tag, cost, icon and action button must share one explicit axis variable.
+- Do not define text zones as `left + right` if the art has a shifted visual center. Use fixed safe width plus centered transform.
+- Portrait cards may reuse temporary desktop art only for validation, but need a separate mobile atlas before formal release.
+- Resource numbers use right-aligned tabular digits inside a fixed numeric safe box. Three digits must fit without changing frame scale.
+- Selection, pause, dash, resource, level and choice affordances must use formal atlas pieces. CSS may position text, but must not draw visible frames, rings or placeholder panels.
+- Build, pause and result panels must not stretch `button_minor` as row frames. If a row needs a visible frame, export a row-specific atlas piece.

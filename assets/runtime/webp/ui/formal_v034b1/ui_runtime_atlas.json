@@ -1,0 +1,207 @@
+{
+  "version": "0.3.4b1-ui-pass2-runtime-ui",
+  "size": [
+    1024,
+    512
+  ],
+  "image": "ui_runtime_atlas.webp",
+  "hud": {
+    "image": "hud_panel_pc.webp",
+    "size": [
+      560,
+      244
+    ],
+    "safe": {
+      "brand": [
+        150,
+        66,
+        410,
+        42
+      ],
+      "bars": [
+        150,
+        116,
+        360,
+        58
+      ],
+      "stats": [
+        150,
+        182,
+        360,
+        26
+      ]
+    }
+  },
+  "sprites": {
+    "resource_soul_wide": {
+      "x": 0,
+      "y": 0,
+      "w": 176,
+      "h": 58
+    },
+    "resource_fire_wide": {
+      "x": 184,
+      "y": 0,
+      "w": 176,
+      "h": 58
+    },
+    "pause_seal": {
+      "x": 372,
+      "y": 0,
+      "w": 68,
+      "h": 68
+    },
+    "level_badge": {
+      "x": 448,
+      "y": 0,
+      "w": 70,
+      "h": 70
+    },
+    "dash_seal": {
+      "x": 528,
+      "y": 0,
+      "w": 94,
+      "h": 94
+    },
+    "title_plaque_wide": {
+      "x": 0,
+      "y": 96,
+      "w": 320,
+      "h": 70
+    },
+    "build_quick": {
+      "x": 336,
+      "y": 104,
+      "w": 190,
+      "h": 64
+    },
+    "chapter_alert": {
+      "x": 528,
+      "y": 104,
+      "w": 420,
+      "h": 80
+    },
+    "hud_hp_fill": {
+      "x": 0,
+      "y": 64,
+      "w": 280,
+      "h": 12
+    },
+    "hud_xp_fill": {
+      "x": 0,
+      "y": 78,
+      "w": 280,
+      "h": 12
+    },
+    "boss_name_plaque": {
+      "x": 536,
+      "y": 360,
+      "w": 392,
+      "h": 74
+    },
+    "boss_bar_track": {
+      "x": 536,
+      "y": 444,
+      "w": 358,
+      "h": 18
+    },
+    "boss_bar_fill": {
+      "x": 536,
+      "y": 470,
+      "w": 358,
+      "h": 18
+    },
+    "enemy_hp_track": {
+      "x": 840,
+      "y": 246,
+      "w": 88,
+      "h": 12
+    },
+    "enemy_hp_fill": {
+      "x": 840,
+      "y": 266,
+      "w": 88,
+      "h": 12
+    },
+    "elite_hp_fill": {
+      "x": 840,
+      "y": 286,
+      "w": 88,
+      "h": 12
+    },
+    "boss_hp_fill_small": {
+      "x": 840,
+      "y": 306,
+      "w": 118,
+      "h": 14
+    },
+    "selected_badge": {
+      "x": 0,
+      "y": 176,
+      "w": 92,
+      "h": 38
+    },
+    "start_confirm_mobile": {
+      "x": 104,
+      "y": 176,
+      "w": 260,
+      "h": 58
+    },
+    "card_select_glow": {
+      "x": 0,
+      "y": 240,
+      "w": 320,
+      "h": 272
+    },
+    "story_marker_idle_halo": {
+      "x": 344,
+      "y": 240,
+      "w": 150,
+      "h": 94
+    },
+    "story_marker_ready_halo": {
+      "x": 504,
+      "y": 240,
+      "w": 172,
+      "h": 104
+    },
+    "story_marker_done_halo": {
+      "x": 688,
+      "y": 240,
+      "w": 132,
+      "h": 84
+    }
+  },
+  "textSafe": {
+    "resource_number": [
+      76,
+      12,
+      82,
+      34
+    ],
+    "chapter_alert": [
+      112,
+      14,
+      232,
+      50
+    ],
+    "build_quick": [
+      36,
+      11,
+      106,
+      32
+    ],
+    "dash_label": [
+      24,
+      31,
+      46,
+      30
+    ],
+    "pause_label": [
+      19,
+      17,
+      30,
+      30
+    ]
+  }
+}

@@ -53,7 +53,6 @@ function shouldSkipRelative(relativePath) {
     || normalized === "assets/maps/wilds-final.webp"
     || normalized.startsWith("assets/maps/v032/sword_tomb/")
     || normalized.startsWith("assets/maps/v032/qingqiu/")
-    || normalized.startsWith("assets/maps/v032/herb_marsh/")
     || normalized.startsWith("assets/maps/v032_atlas/sword_tomb/")
     || normalized.startsWith("assets/maps/v032_atlas/sword_tomb_seamless/")
     || normalized.startsWith("assets/maps/v032_atlas/qingqiu/tile_qingqiu_ground_")

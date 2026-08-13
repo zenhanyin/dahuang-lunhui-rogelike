@@ -91,7 +91,6 @@ def make_preview():
     actors = [
         ("characters", "sword_right_1.webp", 620, 410, 105),
         ("characters", "witch_left_1.webp", 440, 470, 110),
-        ("characters", "alchemist_right_1.webp", 750, 500, 112),
         ("enemies", "wraith_left_1.webp", 520, 600, 82),
         ("enemies", "elite_right_1.webp", 900, 410, 92),
         ("enemies", "wraith_right_2.webp", 250, 420, 78),

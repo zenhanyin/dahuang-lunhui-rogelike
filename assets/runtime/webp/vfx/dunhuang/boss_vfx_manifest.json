@@ -1,0 +1,13 @@
+{
+  "version": "0.3.4a-5-boss-vfx",
+  "style": "Dunhuang cinnabar flame and bronze-green ritual marks, transparent WebP",
+  "files": [
+    "vfx_boss_entry.webp",
+    "vfx_boss_rupture_warning.webp",
+    "vfx_boss_rupture_burst.webp",
+    "vfx_boss_shockwave.webp",
+    "vfx_boss_phase_flare.webp",
+    "vfx_boss_death.webp"
+  ],
+  "runtimeNotes": "Lightweight Boss-only VFX atlas. Keeps canvas fallback available, but Boss actions prefer these assets."
+}

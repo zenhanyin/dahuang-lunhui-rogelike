@@ -15,6 +15,8 @@
 - Pause UI: continue now; codex, settings, exit reserved.
 - Result UI: run stats, build summary, meta points, unlock hooks.
 - Mobile portrait: joystick appears only on touch, bottom scroll stays compact, dash remains right-thumb active button.
+- Current build UI: compact combat entry plus a formal build panel. It must show owned skills, level, school tags, evolution hints and recorded story/memory influence.
+- Chapter objective UI: persistent readable wave/objective/timer/Boss countdown line. It should not be a temporary CSS-looking toast only.
 
 ## Icons
 
@@ -30,6 +32,7 @@
 - Level up: bottom level plaque and XP bar burst, then card drawer opens.
 - Dash: cooldown ring, ready glow, press burst.
 - Pause/result: scroll-panel open animation, no hard modern modal snap.
+- Current problem to close: selection rings, warning plaques, story marker rings, pickup orbs and several combat pulses still read as CSS/canvas primitives. Replace them with formal atlas sprites or VFX sheets when they are part of player-facing feedback.
 
 ## Skill VFX
 
@@ -50,6 +53,7 @@
 - Dash: wind ribbon sweep.
 - Hurt/death: muted drum and breath, not horror-heavy.
 - Boss warning: bronze gong + low drone.
+- Current production status: the runtime still does not have a real audio pack. Treat all music/SFX as verification hooks until dedicated audio files are added.
 
 ## Vampire-like MVP Entrances
 

@@ -1,6 +1,6 @@
 {
   "id": "xuanyuan_ground",
-  "version": "0.3.3j-2-xuanyuan-seam-reviewed",
+  "version": "0.3.3j-map-sample-closeout",
   "tileSize": 1024,
   "source": {
     "confirmedKeyframe": "assets/art_direction/v033/xuanyuan_ground_rework/xuanyuan_confirmed_style_keyframe.png",
@@ -23,7 +23,8 @@
     "no CSS placeholder marks inside terrain assets",
     "confirmedKeyframe is the acceptance target for palette, density and visual weight",
     "baseTileSheetV2 and decalEventSheetV2 are art-direction sources and must be sliced/processed before runtime use",
-    "avoid gray slabs, flags, cones, floating stickers and pseudo-3D props"
+    "avoid gray slabs, flags, cones, floating stickers and pseudo-3D props",
+    "v033j runtime props must use transparent source images; green-screen compressed v033e/v033f props are archive candidates only"
   ],
   "baseTiles": [
     "base_tiles/tile_xuanyuan_ground_base_v033j2_01.webp",
@@ -142,31 +143,58 @@
       "id": "prop_xuanyuan_bronze_fragment_v033e_0",
       "type": "xuanyuanBronzeFragment",
       "file": "props/prop_xuanyuan_bronze_fragment_v033e_0.webp"
+    },
+    {
+      "id": "prop_xuanyuan_sword_trace_low_v033j_0",
+      "type": "xuanyuanSwordTraceLow",
+      "file": "props/prop_xuanyuan_sword_trace_low_v033j_0.webp",
+      "runtime": true
+    },
+    {
+      "id": "prop_xuanyuan_broken_ring_low_v033j_0",
+      "type": "xuanyuanBrokenRingLow",
+      "file": "props/prop_xuanyuan_broken_ring_low_v033j_0.webp",
+      "runtime": true
+    },
+    {
+      "id": "prop_xuanyuan_cinnabar_scrape_low_v033j_0",
+      "type": "xuanyuanCinnabarScrapeLow",
+      "file": "props/prop_xuanyuan_cinnabar_scrape_low_v033j_0.webp",
+      "runtime": true
+    },
+    {
+      "id": "prop_xuanyuan_dry_grass_low_v033j_0",
+      "type": "xuanyuanDryGrassLow",
+      "file": "props/prop_xuanyuan_dry_grass_low_v033j_0.webp",
+      "runtime": true
     }
   ],
   "events": [
     {
-      "id": "event_xuanyuan_stone_disk_v033e_idle",
+      "id": "event_xuanyuan_stone_disk_v033j_idle",
       "state": "idle",
-      "file": "events/event_xuanyuan_stone_disk_v033e_idle.webp"
+      "file": "events/event_xuanyuan_stone_disk_v033j_idle.webp",
+      "runtime": true
     },
     {
-      "id": "event_xuanyuan_stone_disk_v033e_ready",
+      "id": "event_xuanyuan_stone_disk_v033j_ready",
       "state": "ready",
-      "file": "events/event_xuanyuan_stone_disk_v033e_ready.webp"
+      "file": "events/event_xuanyuan_stone_disk_v033j_ready.webp",
+      "runtime": true
     },
     {
-      "id": "event_xuanyuan_stone_disk_v033e_done",
+      "id": "event_xuanyuan_stone_disk_v033j_done",
       "state": "done",
-      "file": "events/event_xuanyuan_stone_disk_v033e_done.webp"
+      "file": "events/event_xuanyuan_stone_disk_v033j_done.webp",
+      "runtime": true
     }
   ],
   "notes": [
     "Generated from the confirmed Xuanyuan Dunhuang keyframe direction.",
     "V0.3.3j-2 uses four edge-locked base tile variants: the outer band stays consistent, the middle carries low-frequency fresco/crack/sword-line variation.",
     "Decal/prop/event assets stay in transparent WebP layers; no CSS placeholder resources are intentionally used.",
-    "Event stone disk remains small; ready state uses subtle near-ground aura and an atlas prompt for readable interaction feedback.",
-    "Candidate v033e source tiles remain archived as candidates, not direct runtime tiles."
+    "Event stone disk remains small; ready state uses subtle near-ground aura and a short prompt for readable interaction feedback.",
+    "Candidate v033e source tiles and green-screen-compressed v033e/v033f props remain archived as candidates, not direct runtime feature rules."
   ],
   "seamReview": {
     "version": "0.3.3j-2",

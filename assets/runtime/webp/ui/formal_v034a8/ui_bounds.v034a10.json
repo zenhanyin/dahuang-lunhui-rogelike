@@ -1,0 +1,55 @@
+{
+  "version": "0.3.4a-10-pc-hud-safe",
+  "principle": "Runtime text and icons align to visual and text safe boxes, not to transparent export bounds. PC HUD uses a dedicated readable WebP, while CSS only places live text inside the documented safe areas.",
+  "atlas": "ui_formal_atlas.webp",
+  "components": {
+    "hud_scroll_pc": {
+      "asset": "../hud_scroll_pc_v034a10.webp",
+      "outer": [0, 0, 813, 368],
+      "visual": [58, 38, 702, 278],
+      "text": {
+        "brand": [205, 99, 498, 56],
+        "bars": [205, 178, 498, 60],
+        "stats": [205, 258, 498, 36]
+      }
+    },
+    "resource_soul_wide": {
+      "sprite": [0, 0, 156, 58],
+      "visual": [3, 5, 142, 43],
+      "number": [84, 12, 48, 28],
+      "note": "Displayed at full 156px width; runtime number is constrained to the parchment safe area."
+    },
+    "resource_fire_wide": {
+      "sprite": [164, 0, 156, 58],
+      "visual": [3, 5, 142, 43],
+      "number": [84, 12, 48, 28]
+    },
+    "pause_seal": {
+      "sprite": [332, 0, 68, 68],
+      "visual": [5, 5, 58, 58],
+      "label": [19, 18, 30, 30]
+    },
+    "dash_seal": {
+      "sprite": [488, 0, 94, 94],
+      "visual": [7, 7, 80, 80],
+      "label": [21, 28, 52, 34]
+    },
+    "lineage_card": {
+      "outer": [0, 0, 276, 500],
+      "visualAxisX": 138,
+      "portrait": [60, 88, 156, 108],
+      "copy": [50, 228, 176, 92],
+      "stats": [63, 425, 150, 28],
+      "selectedBadge": [92, 73, 92, 38]
+    },
+    "choice_card_frame": {
+      "outer": [0, 0, 268, 344],
+      "visualAxisX": 134,
+      "icon": [98, 48, 72, 72],
+      "tag": [78, 122, 112, 22],
+      "title": [52, 151, 164, 44],
+      "body": [52, 200, 164, 82],
+      "button": [91, 288, 86, 31]
+    }
+  }
+}

@@ -27,14 +27,6 @@ PALETTES = {
         "accent": (178, 111, 183),
         "mist": (123, 74, 152, 120),
     },
-    "herb_marsh": {
-        "name": "百草荒泽",
-        "base": (62, 70, 49),
-        "deep": (29, 34, 28),
-        "warm": (139, 83, 45),
-        "accent": (91, 163, 128),
-        "mist": (74, 118, 92, 100),
-    },
     "wilderness": {
         "name": "荒境深处",
         "base": (70, 66, 51),
@@ -125,15 +117,6 @@ def make_base(pack_id, seed):
             for k in range(3):
                 md.arc((cx - rw * .65, cy - rh * .45 + k * 10, cx + rw * .65, cy + rh * .35 + k * 10), 190, 350, fill=(220, 160, 212, 56), width=2)
         img = Image.alpha_composite(img, mist_layer.filter(ImageFilter.GaussianBlur(1.4)))
-    elif pack_id == "herb_marsh":
-        herb_layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-        hd = ImageDraw.Draw(herb_layer, "RGBA")
-        for _ in range(26):
-            x, y = rng.randint(0, w), rng.randint(0, h)
-            for k in range(rng.randint(3, 7)):
-                a = -math.pi / 2 + (k - 3) * 0.22
-                hd.line((x, y, x + math.cos(a) * rng.randint(18, 38), y + math.sin(a) * rng.randint(20, 42)), fill=(145, 174, 100, 58), width=3)
-        img = Image.alpha_composite(img, herb_layer.filter(ImageFilter.GaussianBlur(0.35)))
     else:
         fog_layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
         fd = ImageDraw.Draw(fog_layer, "RGBA")
@@ -225,7 +208,6 @@ def main():
     event_specs = [
         ("sword_tomb", "event_broken_sword"),
         ("qingqiu", "event_foxfire_vow"),
-        ("herb_marsh", "event_herb_cauldron"),
         ("wilderness", "event_memory_stele"),
     ]
     for i, (pack_id, event_id) in enumerate(event_specs):

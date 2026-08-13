@@ -1,0 +1,66 @@
+{
+  "version": "0.3.4b-ui-layout-system",
+  "principle": "Runtime text, icons, portraits, and counters align to the real WebP asset coordinate system. CSS may position content, but visible frames, buttons, plaques, and seals must come from formal WebP assets.",
+  "notes": [
+    "Do not use the old 276x500 lineage coordinate system: lineage_card.webp is 307x581.",
+    "Do not use the old 268x344 choice coordinate system: choice_card_frame.webp is 358x542.",
+    "Safe areas are percentages-friendly and should scale from the rendered component box."
+  ],
+  "components": {
+    "hud_scroll_pc": {
+      "asset": "../hud_scroll_pc_v034a10.webp",
+      "outer": [0, 0, 813, 368],
+      "visual": [58, 38, 702, 278],
+      "text": {
+        "brand": [205, 99, 498, 56],
+        "bars": [205, 178, 498, 60],
+        "stats": [205, 258, 498, 36]
+      }
+    },
+    "resource_soul_wide": {
+      "asset": "../formal_v034a8/ui_formal_atlas.webp",
+      "sprite": [0, 0, 156, 58],
+      "visual": [3, 5, 142, 43],
+      "number": [78, 9, 58, 34]
+    },
+    "resource_fire_wide": {
+      "asset": "../formal_v034a8/ui_formal_atlas.webp",
+      "sprite": [164, 0, 156, 58],
+      "visual": [3, 5, 142, 43],
+      "number": [78, 9, 58, 34]
+    },
+    "pause_seal": {
+      "asset": "../formal_v034a8/ui_formal_atlas.webp",
+      "sprite": [332, 0, 68, 68],
+      "visual": [5, 5, 58, 58],
+      "label": [19, 18, 30, 30]
+    },
+    "dash_seal": {
+      "asset": "../formal_v034a8/ui_formal_atlas.webp",
+      "sprite": [488, 0, 94, 94],
+      "visual": [7, 7, 80, 80],
+      "label": [21, 28, 52, 34]
+    },
+    "lineage_card": {
+      "asset": "../lineage_card.webp",
+      "outer": [0, 0, 307, 581],
+      "visual": [8, 8, 299, 569],
+      "visualAxisX": 157.5,
+      "portrait": [68, 123, 172, 142],
+      "copy": [69, 278, 178, 116],
+      "stats": [74, 481, 160, 34],
+      "selectedBadge": [108, 93, 92, 38]
+    },
+    "choice_card_frame": {
+      "asset": "../choice_card_frame.webp",
+      "outer": [0, 0, 358, 542],
+      "visual": [4, 8, 354, 527],
+      "visualAxisX": 181,
+      "icon": [143, 91, 72, 72],
+      "tag": [103, 203, 152, 28],
+      "title": [86, 237, 186, 64],
+      "body": [86, 310, 186, 112],
+      "button": [121, 452, 116, 48]
+    }
+  }
+}

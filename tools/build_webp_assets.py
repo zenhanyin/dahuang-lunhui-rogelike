@@ -84,11 +84,6 @@ def build_motion():
     for i, col in enumerate([4, 5, 6]):
         mapping.append((1, col, f"witch_left_{i}"))
     mapping.append((1, 4, "witch_left_3"))
-    for i in range(4):
-        mapping.append((2, i, f"alchemist_right_{i}"))
-    for i, col in enumerate([4, 5, 6]):
-        mapping.append((2, col, f"alchemist_left_{i}"))
-    mapping.append((2, 4, "alchemist_left_3"))
     for i in range(3):
         mapping.append((3, i, f"wraith_right_{i}"))
         mapping.append((4, i, f"elite_right_{i}"))
@@ -109,7 +104,7 @@ def build_motion():
 
 def repair_partial_left_frames():
     for folder in ["characters", "enemies"]:
-        for prefix in ["sword", "witch", "alchemist", "wraith", "elite"]:
+        for prefix in ["sword", "witch", "wraith", "elite"]:
             src = OUT / folder / f"{prefix}_left_1.webp"
             dst = OUT / folder / f"{prefix}_left_2.webp"
             if src.exists() and dst.exists() and dst.stat().st_size < src.stat().st_size * 0.55:

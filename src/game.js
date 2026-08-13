@@ -1,6 +1,6 @@
 ﻿const CONFIG = window.DAHUANG_CONFIG;
 const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext("2d", { alpha: false, desynchronized: true }) || canvas.getContext("2d");
 
 const ui = {
   hpText: document.getElementById("hpText"),
@@ -14,6 +14,15 @@ const ui = {
   killText: document.getElementById("killText"),
   soulText: document.getElementById("soulText"),
   fireText: document.getElementById("fireText"),
+  buildQuickBtn: document.getElementById("buildQuickBtn"),
+  buildQuickText: document.getElementById("buildQuickText"),
+  chapterAlert: document.getElementById("chapterAlert"),
+  chapterAlertTitle: document.getElementById("chapterAlertTitle"),
+  chapterAlertText: document.getElementById("chapterAlertText"),
+  bossFrame: document.getElementById("bossFrame"),
+  bossNameText: document.getElementById("bossNameText"),
+  bossPhaseText: document.getElementById("bossPhaseText"),
+  bossHpBar: document.getElementById("bossHpBar"),
   dockLevelText: document.getElementById("dockLevelText"),
   mobileHud: document.getElementById("mobileHud"),
   mobileHpText: document.getElementById("mobileHpText"),
@@ -44,13 +53,18 @@ const ui = {
   buildLedger: document.getElementById("buildLedger"),
   gameOver: document.getElementById("gameOver"),
   resultText: document.getElementById("resultText"),
+  resultBuildSummary: document.getElementById("resultBuildSummary"),
   metaPointText: document.getElementById("metaPointText"),
   restartBtn: document.getElementById("restartBtn")
 };
 
 const keys = new Set();
 const TAU = Math.PI * 2;
-let selectedLineage = CONFIG.lineages[0];
+function playableLineages() {
+  return CONFIG.lineages.filter(lineage => !lineage.hidden);
+}
+
+let selectedLineage = playableLineages()[0] || CONFIG.lineages[0];
 let state;
 let lastTime = 0;
 let audioCtx;
@@ -58,9 +72,15 @@ let audioBudget = {};
 let musicNodes;
 let screenShake = 0;
 const touchMove = { active: false, id: null, originX: 0, originY: 0, dx: 0, dy: 0 };
+const touchStickKnob = ui.touchStick?.firstElementChild || null;
+const domTextCache = new WeakMap();
+const domWidthCache = new WeakMap();
+let lastUiSync = 0;
+let resizeQueued = false;
+const UI_SYNC_INTERVAL = 90;
 
 const RUNTIME_ASSET_ROOT = "assets/runtime/webp";
-const ASSET_VERSION = "0.3.3k-mobile-start-confirm";
+const ASSET_VERSION = "0.3.4b1-ui-pass2";
 const ASSET_PATHS = {
   characters: {
     sword_right_0: `${RUNTIME_ASSET_ROOT}/characters/sword_right_0.webp`,
@@ -78,15 +98,7 @@ const ASSET_PATHS = {
     witch_left_0: `${RUNTIME_ASSET_ROOT}/characters/witch_left_0.webp`,
     witch_left_1: `${RUNTIME_ASSET_ROOT}/characters/witch_left_1.webp`,
     witch_left_2: `${RUNTIME_ASSET_ROOT}/characters/witch_left_2.webp`,
-    witch_left_3: `${RUNTIME_ASSET_ROOT}/characters/witch_left_3.webp`,
-    alchemist_right_0: `${RUNTIME_ASSET_ROOT}/characters/alchemist_right_0.webp`,
-    alchemist_right_1: `${RUNTIME_ASSET_ROOT}/characters/alchemist_right_1.webp`,
-    alchemist_right_2: `${RUNTIME_ASSET_ROOT}/characters/alchemist_right_2.webp`,
-    alchemist_right_3: `${RUNTIME_ASSET_ROOT}/characters/alchemist_right_3.webp`,
-    alchemist_left_0: `${RUNTIME_ASSET_ROOT}/characters/alchemist_left_0.webp`,
-    alchemist_left_1: `${RUNTIME_ASSET_ROOT}/characters/alchemist_left_1.webp`,
-    alchemist_left_2: `${RUNTIME_ASSET_ROOT}/characters/alchemist_left_2.webp`,
-    alchemist_left_3: `${RUNTIME_ASSET_ROOT}/characters/alchemist_left_3.webp`
+    witch_left_3: `${RUNTIME_ASSET_ROOT}/characters/witch_left_3.webp`
   },
   enemies: {
     wraith_right_0: `${RUNTIME_ASSET_ROOT}/enemies/wraith_right_0.webp`,
@@ -100,7 +112,37 @@ const ASSET_PATHS = {
     elite_right_2: `${RUNTIME_ASSET_ROOT}/enemies/elite_right_2.webp`,
     elite_left_0: `${RUNTIME_ASSET_ROOT}/enemies/elite_left_0.webp`,
     elite_left_1: `${RUNTIME_ASSET_ROOT}/enemies/elite_left_1.webp`,
-    elite_left_2: `${RUNTIME_ASSET_ROOT}/enemies/elite_left_2.webp`
+    elite_left_2: `${RUNTIME_ASSET_ROOT}/enemies/elite_left_2.webp`,
+    blade_thrall_right_0: `${RUNTIME_ASSET_ROOT}/enemies/blade_thrall_right_0.webp`,
+    blade_thrall_right_1: `${RUNTIME_ASSET_ROOT}/enemies/blade_thrall_right_1.webp`,
+    blade_thrall_right_2: `${RUNTIME_ASSET_ROOT}/enemies/blade_thrall_right_2.webp`,
+    blade_thrall_left_0: `${RUNTIME_ASSET_ROOT}/enemies/blade_thrall_left_0.webp`,
+    blade_thrall_left_1: `${RUNTIME_ASSET_ROOT}/enemies/blade_thrall_left_1.webp`,
+    blade_thrall_left_2: `${RUNTIME_ASSET_ROOT}/enemies/blade_thrall_left_2.webp`,
+    foxshade_right_0: `${RUNTIME_ASSET_ROOT}/enemies/foxshade_right_0.webp`,
+    foxshade_right_1: `${RUNTIME_ASSET_ROOT}/enemies/foxshade_right_1.webp`,
+    foxshade_right_2: `${RUNTIME_ASSET_ROOT}/enemies/foxshade_right_2.webp`,
+    foxshade_left_0: `${RUNTIME_ASSET_ROOT}/enemies/foxshade_left_0.webp`,
+    foxshade_left_1: `${RUNTIME_ASSET_ROOT}/enemies/foxshade_left_1.webp`,
+    foxshade_left_2: `${RUNTIME_ASSET_ROOT}/enemies/foxshade_left_2.webp`,
+    stone_imp_right_0: `${RUNTIME_ASSET_ROOT}/enemies/stone_imp_right_0.webp`,
+    stone_imp_right_1: `${RUNTIME_ASSET_ROOT}/enemies/stone_imp_right_1.webp`,
+    stone_imp_right_2: `${RUNTIME_ASSET_ROOT}/enemies/stone_imp_right_2.webp`,
+    stone_imp_left_0: `${RUNTIME_ASSET_ROOT}/enemies/stone_imp_left_0.webp`,
+    stone_imp_left_1: `${RUNTIME_ASSET_ROOT}/enemies/stone_imp_left_1.webp`,
+    stone_imp_left_2: `${RUNTIME_ASSET_ROOT}/enemies/stone_imp_left_2.webp`,
+    cinnabar_guard_right_0: `${RUNTIME_ASSET_ROOT}/enemies/cinnabar_guard_right_0.webp`,
+    cinnabar_guard_right_1: `${RUNTIME_ASSET_ROOT}/enemies/cinnabar_guard_right_1.webp`,
+    cinnabar_guard_right_2: `${RUNTIME_ASSET_ROOT}/enemies/cinnabar_guard_right_2.webp`,
+    cinnabar_guard_left_0: `${RUNTIME_ASSET_ROOT}/enemies/cinnabar_guard_left_0.webp`,
+    cinnabar_guard_left_1: `${RUNTIME_ASSET_ROOT}/enemies/cinnabar_guard_left_1.webp`,
+    cinnabar_guard_left_2: `${RUNTIME_ASSET_ROOT}/enemies/cinnabar_guard_left_2.webp`,
+    chapter_red_flame_right_0: `${RUNTIME_ASSET_ROOT}/bosses/chapter_red_flame_right_0.webp`,
+    chapter_red_flame_right_1: `${RUNTIME_ASSET_ROOT}/bosses/chapter_red_flame_right_1.webp`,
+    chapter_red_flame_right_2: `${RUNTIME_ASSET_ROOT}/bosses/chapter_red_flame_right_2.webp`,
+    chapter_red_flame_left_0: `${RUNTIME_ASSET_ROOT}/bosses/chapter_red_flame_left_0.webp`,
+    chapter_red_flame_left_1: `${RUNTIME_ASSET_ROOT}/bosses/chapter_red_flame_left_1.webp`,
+    chapter_red_flame_left_2: `${RUNTIME_ASSET_ROOT}/bosses/chapter_red_flame_left_2.webp`
   },
   skills: {
     sword: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_sword.webp`,
@@ -118,7 +160,13 @@ const ASSET_PATHS = {
     pickup_orb_burst: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_pickup_orb_burst.webp`,
     level_lotus_burst: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_level_lotus_burst.webp`,
     hit_spark: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_hit_spark.webp`,
-    kill_bloom: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_kill_bloom.webp`
+    kill_bloom: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_kill_bloom.webp`,
+    boss_entry: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_boss_entry.webp`,
+    boss_rupture_warning: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_boss_rupture_warning.webp`,
+    boss_rupture_burst: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_boss_rupture_burst.webp`,
+    boss_shockwave: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_boss_shockwave.webp`,
+    boss_phase_flare: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_boss_phase_flare.webp`,
+    boss_death: `${RUNTIME_ASSET_ROOT}/vfx/dunhuang/vfx_boss_death.webp`
   },
   terrain: {
     foxfire_0: `${RUNTIME_ASSET_ROOT}/terrain/foxfire_0.webp`,
@@ -159,11 +207,7 @@ const ASSET_PATHS = {
     xuanyuan_ground_base_final_01: `assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033j2_01.webp`,
     xuanyuan_ground_base_final_02: `assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033j2_02.webp`,
     xuanyuan_ground_base_final_03: `assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033j2_03.webp`,
-    xuanyuan_ground_base_final_04: `assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033j2_04.webp`,
-    herb_marsh_base_final_01: `assets/maps/v032_atlas/herb_marsh_seamless/tile_herb_marsh_base_final_01.webp`,
-    herb_marsh_base_final_02: `assets/maps/v032_atlas/herb_marsh_seamless/tile_herb_marsh_base_final_02.webp`,
-    herb_marsh_base_final_03: `assets/maps/v032_atlas/herb_marsh_seamless/tile_herb_marsh_base_final_03.webp`,
-    herb_marsh_base_final_04: `assets/maps/v032_atlas/herb_marsh_seamless/tile_herb_marsh_base_final_04.webp`
+    xuanyuan_ground_base_final_04: `assets/maps/v033/xuanyuan_ground/base_tiles/tile_xuanyuan_ground_base_v033j2_04.webp`
   },
   scene: {
     decal_qingqiu_old_vow_trace_01: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_old_vow_trace_01.webp`,
@@ -176,9 +220,6 @@ const ASSET_PATHS = {
     decal_qingqiu_ink_teal_vein_ai_02: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_ink_teal_vein_ai_02.webp`,
     decal_qingqiu_gold_mural_lines_ai_02: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_gold_mural_lines_ai_02.webp`,
     decal_qingqiu_old_vow_trace_ai_03: `assets/maps/v032_atlas/qingqiu/decals/decal_qingqiu_old_vow_trace_ai_03.webp`,
-    decal_herb_marsh_gold_root_01: `assets/maps/v032_atlas/herb_marsh/decals/decal_herb_marsh_gold_root_01.webp`,
-    decal_herb_marsh_wet_vein_01: `assets/maps/v032_atlas/herb_marsh/decals/decal_herb_marsh_wet_vein_01.webp`,
-    decal_herb_marsh_dan_ash_01: `assets/maps/v032_atlas/herb_marsh/decals/decal_herb_marsh_dan_ash_01.webp`,
     decal_xuanyuan_sword_trace_v033e_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_sword_trace_v033e_01.webp`,
     decal_xuanyuan_sword_trace_v033e_02: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_sword_trace_v033e_02.webp`,
     decal_xuanyuan_cloud_line_v033e_01: `assets/maps/v033/xuanyuan_ground/decals/decal_xuanyuan_cloud_line_v033e_01.webp`,
@@ -204,12 +245,6 @@ const ASSET_PATHS = {
     oldVowSteleIdle: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_old_vow_stele_idle.webp`,
     oldVowSteleReady: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_old_vow_stele_ready.webp`,
     oldVowSteleDone: `assets/maps/v032_atlas/qingqiu/events/event_qingqiu_old_vow_stele_done.webp`,
-    herbCauldronIdle: `assets/maps/v032_atlas/herb_marsh/events/event_herb_marsh_herb_cauldron_idle.webp`,
-    herbCauldronReady: `assets/maps/v032_atlas/herb_marsh/events/event_herb_marsh_herb_cauldron_ready.webp`,
-    herbCauldronDone: `assets/maps/v032_atlas/herb_marsh/events/event_herb_marsh_herb_cauldron_done.webp`,
-    herbSpiritWellIdle: `assets/maps/v032_atlas/herb_marsh/events/event_herb_marsh_spirit_well_idle.webp`,
-    herbSpiritWellReady: `assets/maps/v032_atlas/herb_marsh/events/event_herb_marsh_spirit_well_ready.webp`,
-    herbSpiritWellDone: `assets/maps/v032_atlas/herb_marsh/events/event_herb_marsh_spirit_well_done.webp`,
     storyUnderIdle: `assets/maps/v032_atlas/qingqiu/events/event_marker_under_idle.webp`,
     storyUnderReady: `assets/maps/v032_atlas/qingqiu/events/event_marker_under_ready.webp`,
     storyUnderDone: `assets/maps/v032_atlas/qingqiu/events/event_marker_under_done.webp`,
@@ -217,20 +252,12 @@ const ASSET_PATHS = {
     storyBadgeReady: `assets/maps/v032_atlas/qingqiu/events/event_marker_badge_ready.webp`,
     storyBadgeDone: `assets/maps/v032_atlas/qingqiu/events/event_marker_badge_done.webp`,
     storyPromptReady: `assets/maps/v032_atlas/qingqiu/events/event_marker_prompt_ready.webp`,
-    xuanyuanStoneDiskIdle: `assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033e_idle.webp`,
-    xuanyuanStoneDiskReady: `assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033e_ready.webp`,
-    xuanyuanStoneDiskDone: `assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033e_done.webp`,
+    xuanyuanStoneDiskIdle: `assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033j_idle.webp`,
+    xuanyuanStoneDiskReady: `assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033j_ready.webp`,
+    xuanyuanStoneDiskDone: `assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033j_done.webp`,
     memoryStele: `assets/maps/v032/wilderness/event_memory_stele.webp`
   },
   sceneProps: {
-    herb_marsh_herb_cluster_0: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_herb_cluster_0.webp`,
-    herb_marsh_herb_cluster_1: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_herb_cluster_1.webp`,
-    herb_marsh_herb_cluster_2: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_herb_cluster_2.webp`,
-    herb_marsh_dan_ember_0: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_dan_ember_0.webp`,
-    herb_marsh_dan_ember_1: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_dan_ember_1.webp`,
-    herb_marsh_dan_ember_2: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_dan_ember_2.webp`,
-    herb_marsh_dan_ember_3: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_dan_ember_3.webp`,
-    herb_marsh_marsh_pool_0: `assets/maps/v032_atlas/herb_marsh/props/prop_herb_marsh_marsh_pool_0.webp`,
     xuanyuan_buried_sword_grass_v033e_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_buried_sword_grass_v033e_0.webp`,
     xuanyuan_broken_array_stone_v033e_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_broken_array_stone_v033e_0.webp`,
     xuanyuan_low_oath_base_v033e_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_low_oath_base_v033e_0.webp`,
@@ -248,7 +275,11 @@ const ASSET_PATHS = {
     xuanyuan_dry_grass_clump_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_dry_grass_clump_v033f_0.webp`,
     xuanyuan_broken_scabbard_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_broken_scabbard_v033f_0.webp`,
     xuanyuan_cloud_mural_shard_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_cloud_mural_shard_v033f_0.webp`,
-    xuanyuan_battlefield_rubble_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_battlefield_rubble_v033f_0.webp`
+    xuanyuan_battlefield_rubble_v033f_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_battlefield_rubble_v033f_0.webp`,
+    xuanyuan_sword_trace_low_v033j_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_sword_trace_low_v033j_0.webp`,
+    xuanyuan_broken_ring_low_v033j_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_broken_ring_low_v033j_0.webp`,
+    xuanyuan_cinnabar_scrape_low_v033j_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_cinnabar_scrape_low_v033j_0.webp`,
+    xuanyuan_dry_grass_low_v033j_0: `assets/maps/v033/xuanyuan_ground/props/prop_xuanyuan_dry_grass_low_v033j_0.webp`
   },
   qingqiuProps: {
     foxfire_small_0: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_foxfire_small_0.webp`,
@@ -276,6 +307,9 @@ const ASSET_PATHS = {
     ground_ribbon_2: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_ground_ribbon_2.webp`,
     ground_ribbon_3: `assets/maps/v032_atlas/qingqiu/props/prop_qingqiu_ground_ribbon_3.webp`
   },
+  formalUi: {
+    atlas: `${RUNTIME_ASSET_ROOT}/ui/formal_v034b1/ui_runtime_atlas.webp`
+  },
   uiIcons: {
     sword: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_sword.webp`,
     talisman: `${RUNTIME_ASSET_ROOT}/ui/icons/formal/icon_talisman.webp`,
@@ -297,16 +331,46 @@ const ASSET_PATHS = {
 };
 
 const assets = {};
+const FORMAL_UI_SPRITES = {
+  bossNamePlaque: [312, 92, 392, 74],
+  bossBarTrack: [312, 176, 358, 18],
+  bossBarFill: [312, 202, 358, 18],
+  enemyHpTrack: [720, 96, 88, 12],
+  enemyHpFill: [720, 116, 88, 12],
+  eliteHpFill: [720, 136, 88, 12],
+  bossHpFillSmall: [720, 156, 118, 14],
+  storyMarkerIdleHalo: [344, 240, 150, 94],
+  storyMarkerReadyHalo: [504, 240, 172, 104],
+  storyMarkerDoneHalo: [688, 240, 132, 84]
+};
 
 function loadAssets() {
   for (const [group, entries] of Object.entries(ASSET_PATHS)) {
     assets[group] = {};
     for (const [key, src] of Object.entries(entries)) {
       const img = new Image();
+      img.decoding = "async";
       img.src = `${src}?v=${ASSET_VERSION}`;
+      if (img.decode) img.decode().catch(() => {});
       assets[group][key] = img;
     }
   }
+}
+
+function setText(el, value) {
+  if (!el) return;
+  const next = String(value);
+  if (domTextCache.get(el) === next) return;
+  domTextCache.set(el, next);
+  el.textContent = next;
+}
+
+function setWidth(el, ratio) {
+  if (!el) return;
+  const next = `${Math.max(0, Math.min(100, ratio * 100)).toFixed(2)}%`;
+  if (domWidthCache.get(el) === next) return;
+  domWidthCache.set(el, next);
+  el.style.width = next;
 }
 
 function assetReady(group, key) {
@@ -323,6 +387,23 @@ function drawAsset(group, key, x, y, w, h, options = {}) {
   ctx.translate(x, y);
   ctx.rotate(rotate);
   ctx.drawImage(img, -w / 2, -h * anchorY, w, h);
+  ctx.restore();
+  return true;
+}
+
+function drawFormalUiSprite(name, x, y, w, h, options = {}) {
+  const img = assets.formalUi?.atlas;
+  const sprite = FORMAL_UI_SPRITES[name];
+  if (!img || !sprite || !img.complete) return false;
+  const { rotate = 0, alpha = 1, anchorY = 0.5, clipRatio = 1 } = options;
+  const [sx, sy, sw, sh] = sprite;
+  const ratio = Math.max(0, Math.min(1, clipRatio));
+  if (ratio <= 0) return false;
+  ctx.save();
+  ctx.globalAlpha *= alpha;
+  ctx.translate(x, y);
+  ctx.rotate(rotate);
+  ctx.drawImage(img, sx, sy, sw * ratio, sh, -w / 2, -h * anchorY, w * ratio, h);
   ctx.restore();
   return true;
 }
@@ -439,18 +520,279 @@ function recordBuild(upgrade) {
   if (!state?.build) return;
   const existing = state.build.find(item => item.id === upgrade.id);
   if (existing) existing.count += 1;
-  else state.build.push({ id: upgrade.id, name: upgrade.name, tag: buildTagFor(upgrade), count: 1 });
+  else {
+    state.build.push({
+      id: upgrade.id,
+      name: upgrade.name,
+      tag: buildTagFor(upgrade),
+      group: upgrade.group,
+      icon: upgrade.icon,
+      text: upgrade.text,
+      count: 1
+    });
+  }
+  setText(ui.buildQuickText, buildQuickSummary());
+}
+
+function buildTagCounts() {
+  const tags = new Map();
+  for (const item of state?.build || []) tags.set(item.tag, (tags.get(item.tag) || 0) + item.count);
+  return tags;
+}
+
+function dominantBuildEntry() {
+  return [...buildTagCounts().entries()].sort((a, b) => b[1] - a[1])[0] || ["未定", 0];
+}
+
+function buildRouteText(limit = 3) {
+  const entries = [...buildTagCounts().entries()].sort((a, b) => b[1] - a[1]).slice(0, limit);
+  return entries.length ? entries.map(([tag, count]) => `${tag}x${count}`).join(" · ") : "未定";
+}
+
+function buildEvolutionHint() {
+  const [tag, count] = dominantBuildEntry();
+  if (!state?.build?.length) return "尚未形成路线：先通过升级三选一领悟第一门功法。";
+  if (count >= 4) return `${tag}路线已成型：下一步应接入同系进化卡和Boss弱点联动。`;
+  if (count >= 2) return `${tag}路线正在成型：继续选择同系功法可点亮进化条件。`;
+  return "路线初定：再领悟同系功法，才能让构筑产生明显形态变化。";
 }
 
 function buildSummary() {
+  if (state?.chapter) return chapterHudText();
   if (!state?.build?.length) return "构筑 初定：尚未领悟机缘";
-  const tags = new Map();
-  for (const item of state.build) tags.set(item.tag, (tags.get(item.tag) || 0) + item.count);
-  return `构筑 ${[...tags.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([tag, count]) => `${tag}x${count}`).join(" · ")}`;
+  return `构筑 ${buildRouteText(3)}`;
+}
+
+function weaponBuildRows() {
+  if (!state?.weapons) return [];
+  const labels = {
+    sword: "剑气诀",
+    talisman: "符法",
+    flame: "离火术",
+    phantom: "幻雾步"
+  };
+  return Object.entries(state.weapons)
+    .filter(([, weapon]) => (weapon.level || 0) > 0 || (weapon.count || 0) > 0)
+    .map(([id, weapon]) => {
+      const uiMeta = weapon.ui || {};
+      const level = Math.max(weapon.level || 0, weapon.count ? 1 : 0);
+      const details = [];
+      if (weapon.count) details.push(`数量 ${weapon.count}`);
+      if (weapon.damage) details.push(`威力 ${Math.round(weapon.damage)}`);
+      if (weapon.radius) details.push(`范围 ${Math.round(weapon.radius)}`);
+      return {
+        id,
+        name: labels[id] || uiMeta.name || id,
+        icon: uiMeta.icon || id,
+        level,
+        details: details.join(" · ") || "已入局"
+      };
+    });
+}
+
+function resultBuildHtml() {
+  if (!state) return "";
+  const rows = weaponBuildRows();
+  const memories = state.chapter?.memories?.length || 0;
+  const bossState = state.chapter?.bossCleared ? "Boss 已破" : state.chapter?.bossSpawned ? "Boss 未破" : "Boss 未现";
+  const skillHtml = rows.slice(0, 4).map(row => `<span><b>${row.name}</b><i>Lv.${row.level}</i></span>`).join("");
+  return `
+    <div class="result-build-route"><strong>本局构筑</strong><em>${state.build?.length ? buildRouteText(3) : "尚未领悟"}</em></div>
+    <div class="result-build-skills">${skillHtml || "<span><b>无功法记录</b><i>Lv.0</i></span>"}</div>
+    <div class="result-build-route"><strong>章节记录</strong><em>记忆 ${memories} · ${bossState}</em></div>
+  `;
+}
+
+function selectedChoiceFeedback(option) {
+  const tag = buildTagFor(option);
+  const route = buildRouteText(2);
+  if (!state?.chapter) return `${tag}路线 ${route}`;
+  return `${tag}入局 · ${route} · ${state.chapter.objective}`;
+}
+
+function buildQuickSummary() {
+  if (!state?.build?.length) return "未定";
+  return [...buildTagCounts().entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 2)
+    .map(([tag, count]) => `${tag}x${count}`)
+    .join(" · ");
+}
+
+function syncBuildQuickUi() {
+  if (!ui.buildQuickBtn) return;
+  setText(ui.buildQuickText, buildQuickSummary());
+  const blocked = !state?.running
+    || !ui.start?.classList.contains("hidden")
+    || !ui.choices?.classList.contains("hidden")
+    || !ui.storyOverlay?.classList.contains("hidden")
+    || !ui.pauseOverlay?.classList.contains("hidden")
+    || !ui.buildOverlay?.classList.contains("hidden")
+    || !ui.gameOver?.classList.contains("hidden");
+  ui.buildQuickBtn.classList.toggle("is-hidden", blocked);
+}
+
+const CHAPTER_ONE_CONFIG = CONFIG.chapterOne || {};
+const CHAPTER_ONE_TIMELINE = CHAPTER_ONE_CONFIG.timeline || {
+  limit: 210,
+  firstStory: 14,
+  eliteWave: 42,
+  secondStory: 70,
+  bossWarning: 105,
+  bossSpawn: 120
+};
+
+const CHAPTER_ONE_STORY = CHAPTER_ONE_CONFIG.stories || {
+  first_memory: {
+    qingqiu: {
+      title: "青丘旧誓",
+      speaker: "青丘旧誓",
+      portrait: "qingqiu_witch",
+      text: "旧誓残碑亮起一线青金。幻雾不是逃避，而是青丘一族遮蔽天庭视线的古老法。",
+      objective: "撑过第一轮精英妖潮",
+      rewardText: "旧誓入魂：拾取范围提升，下一波妖潮放缓",
+      rewardSoul: 5,
+      healRatio: 0.08,
+      pickupBonus: 14
+    },
+    sword_tomb: {
+      title: "断剑初誓",
+      speaker: "轩辕遗剑",
+      portrait: "xuanyuan_swordsman",
+      text: "断剑仍埋在荒土里。你听见前世留下的誓言：若轮回不止，便以剑痕记路。",
+      objective: "撑过第一轮精英妖潮",
+      rewardText: "剑誓入魂：剑气伤害提升，下一波妖潮放缓",
+      rewardSoul: 5,
+      healRatio: 0.06,
+      swordDamage: 4
+    }
+  },
+  second_memory: {
+    qingqiu: {
+      title: "狐火旧约",
+      speaker: "青丘旧誓",
+      portrait: "qingqiu_witch",
+      text: "第二段残碑照见狐火旧约。你明白 Boss 的赤焰并非天罚，而是被丹火强行催熟的轮回余烬。",
+      objective: "击败章节 Boss，稳定轮回锚点",
+      rewardText: "旧约显形：Boss 入场气血削弱",
+      rewardSoul: 7,
+      bossWeaken: 0.12,
+      phantomRadius: 18
+    },
+    sword_tomb: {
+      title: "轮回残碑",
+      speaker: "轮回残灵",
+      portrait: "reincarnation_spirit",
+      text: "第二段残碑照见旧战裂口。你终于确认：第一章的 Boss 不是终点，而是通往真结局的第一道门。",
+      objective: "击败章节 Boss，稳定轮回锚点",
+      rewardText: "残碑共鸣：Boss 入场气血削弱",
+      rewardSoul: 7,
+      bossWeaken: 0.12,
+      swordDamage: 3
+    }
+  }
+};
+
+const CHAPTER_BOSS_CONFIG = CHAPTER_ONE_CONFIG.boss || {};
+const CHAPTER_BOSS_PHASES = CHAPTER_BOSS_CONFIG.phases || [
+  { threshold: 0.68, key: "summon", title: "Boss 转阶段", text: "赤焰召出护卫，妖潮压近" },
+  { threshold: 0.36, key: "enrage", title: "Boss 狂燃", text: "丹火失控，地面出现赤裂预警" }
+];
+const CHAPTER_ONE_PACING = CHAPTER_ONE_CONFIG.pacing || {};
+
+function pacingSection(section) {
+  return CHAPTER_ONE_PACING[section] || {};
+}
+
+function pacingValue(section, key, fallback) {
+  const table = pacingSection(section);
+  return table[key] ?? fallback;
+}
+
+function runtimeLimit(key, fallback) {
+  return pacingValue("runtimeLimits", key, tuningValue(key, fallback));
+}
+
+function chapterPressureConfig() {
+  return CHAPTER_ONE_CONFIG.pressure || {};
+}
+
+function compactTime(seconds) {
+  return formatTime(Math.max(0, seconds));
+}
+
+function chapterWaveLabel() {
+  const t = state.time;
+  if (state.chapter?.bossCleared) return "通关";
+  if (t >= CHAPTER_ONE_TIMELINE.bossSpawn) return "第4波 Boss";
+  if (t >= CHAPTER_ONE_TIMELINE.bossWarning) return "第3波 Boss预警";
+  if (t >= CHAPTER_ONE_TIMELINE.eliteWave) return "第2波 精英妖潮";
+  return "第1波 游妖试探";
+}
+
+function chapterNextBeatText() {
+  const t = state.time;
+  if (t < CHAPTER_ONE_TIMELINE.eliteWave) return `精英 ${compactTime(CHAPTER_ONE_TIMELINE.eliteWave - t)}`;
+  if (t < CHAPTER_ONE_TIMELINE.bossWarning) return `预警 ${compactTime(CHAPTER_ONE_TIMELINE.bossWarning - t)}`;
+  if (t < CHAPTER_ONE_TIMELINE.bossSpawn) return `Boss ${compactTime(CHAPTER_ONE_TIMELINE.bossSpawn - t)}`;
+  if (!state.chapter?.bossCleared) return `限时 ${compactTime(CHAPTER_ONE_TIMELINE.limit - t)}`;
+  return "轮回锚定";
+}
+
+function chapterHudText() {
+  return `${chapterWaveLabel()} · ${chapterNextBeatText()} · ${state.chapter.objective}`;
+}
+
+function chapterStoryData(chapterStory) {
+  const byLineage = CHAPTER_ONE_STORY[chapterStory];
+  if (!byLineage) return null;
+  return byLineage[state?.map?.id] || byLineage.sword_tomb || Object.values(byLineage)[0];
+}
+
+function chapterAlert(title, text, tone = "neutral", life = 2.8) {
+  if (!state?.chapter) return;
+  state.chapter.alert = { title, text, tone, life, maxLife: life };
+}
+
+function activeChapterBoss() {
+  if (!state?.chapter?.bossSpawned || state.chapter.bossCleared) return null;
+  return state.enemies.find(enemy => enemy.boss) || null;
+}
+
+function chapterSpawnMultiplier() {
+  if (!state?.chapter) return 1;
+  const t = state.time;
+  const pressure = chapterPressureConfig().spawnMultiplier || {};
+  if (t >= CHAPTER_ONE_TIMELINE.bossSpawn) return pressure.boss ?? 1.36;
+  if (t >= CHAPTER_ONE_TIMELINE.bossWarning) return pressure.bossWarning ?? 1.24;
+  if (t >= CHAPTER_ONE_TIMELINE.eliteWave) return pressure.eliteWave ?? 1.08;
+  if (t >= CHAPTER_ONE_TIMELINE.firstStory) return pressure.afterFirstStory ?? 0.94;
+  return pressure.opening ?? 0.82;
+}
+
+function chapterExtraSpawnChance() {
+  if (!state?.chapter) return state.time > 45 ? 0.35 : 0;
+  const t = state.time;
+  const pressure = chapterPressureConfig().extraSpawnChance || {};
+  if (t >= CHAPTER_ONE_TIMELINE.bossSpawn) return pressure.boss ?? 0.32;
+  if (t >= CHAPTER_ONE_TIMELINE.bossWarning) return pressure.bossWarning ?? 0.24;
+  if (t >= CHAPTER_ONE_TIMELINE.eliteWave) return pressure.eliteWave ?? 0.14;
+  return 0;
+}
+
+function chapterRandomEliteChance() {
+  if (!state?.chapter) return Math.min(0.08 + state.time / 900, 0.22);
+  const t = state.time;
+  const pressure = chapterPressureConfig().randomEliteChance || {};
+  if (t < CHAPTER_ONE_TIMELINE.eliteWave) return 0;
+  if (t < CHAPTER_ONE_TIMELINE.bossWarning) return pressure.betweenEliteAndWarning ?? 0.025;
+  if (t < CHAPTER_ONE_TIMELINE.bossSpawn) return pressure.betweenWarningAndBoss ?? 0.045;
+  return pressure.boss ?? 0.065;
 }
 
 function renderBuildLedger() {
   if (!ui.buildLedger || !state) return;
+  const weaponRows = weaponBuildRows();
   if (!state.build.length) {
     ui.buildLedger.innerHTML = `
       <div class="build-empty">
@@ -460,30 +802,26 @@ function renderBuildLedger() {
     `;
     return;
   }
-  const groups = new Map();
-  for (const item of state.build) groups.set(item.tag, (groups.get(item.tag) || 0) + item.count);
+  const groups = buildTagCounts();
   const routeHtml = [...groups.entries()]
     .sort((a, b) => b[1] - a[1])
     .map(([tag, count]) => `<span class="build-route"><b>${tag}</b><i>${count} 层</i></span>`)
     .join("");
-  const itemHtml = state.build
-    .slice()
-    .reverse()
-    .map(item => `
-      <span class="build-entry">
-        <b>${item.tag}</b>
-        <em>${item.name}</em>
-        <i>${item.count > 1 ? `${item.count} 层` : "初悟"}</i>
-      </span>
-    `)
-    .join("");
+  const weaponHtml = weaponRows.map(row => `
+    <span class="build-skill">
+      <i>${iconMarkup(row.icon, "build-skill-icon")}</i>
+      <b>${row.name}</b>
+      <em>Lv.${row.level}</em>
+      <small>${row.details}</small>
+    </span>
+  `).join("");
   ui.buildLedger.innerHTML = `
     <div class="build-routes">${routeHtml}</div>
     <div class="build-evolution">
-      <strong>${[...groups.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] || "未定"}线</strong>
-      <span>${state.build.length >= 3 ? "已形成初步功法方向，后续可接入进化组合。" : "继续领悟同系功法，可点亮进化线。"}</span>
+      <strong>${dominantBuildEntry()[0]}线</strong>
+      <span>${buildEvolutionHint()}</span>
     </div>
-    <div class="build-list">${itemHtml}</div>
+    <div class="build-skill-grid">${weaponHtml}</div>
   `;
 }
 
@@ -525,7 +863,7 @@ function freshState() {
       maxHp: 120,
       pickupBonus: 0,
       xp: 0,
-      nextXp: CONFIG.tuning.xpBase,
+      nextXp: pacingValue("xp", "base", CONFIG.tuning.xpBase),
       level: 1,
       invuln: 0,
       dashCooldown: 0,
@@ -537,13 +875,14 @@ function freshState() {
       animTime: 0
     },
     weapons,
-    passive: { alchemyHeal: 0 },
-    mechanics: { swordMark: 0, talismanSplit: 0, flameCloud: 0, pickupBurst: 0, guard: 0 },
+    passive: { pickupHeal: 0 },
+    mechanics: { swordMark: 0, talismanSplit: 0, pickupBurst: 0, guard: 0 },
     build: [],
     resources: { soul: 0, fire: 0, spent: 0 },
     storySeen: {},
     pendingStory: null,
-    storyCooldown: 2.5,
+    storyCooldown: 0.35,
+    chapter: freshChapterState(),
     enemies: [],
     projectiles: [],
     drops: [],
@@ -553,7 +892,7 @@ function freshState() {
     damageTexts: [],
     map: generateMap(mapTemplate, mapSeed, bounds),
     spawnTimer: 1.2,
-    spawnDelay: CONFIG.tuning.spawnDelay,
+    spawnDelay: pacingValue("spawn", "baseDelay", CONFIG.tuning.spawnDelay),
     camera: { x: 0, y: 0 },
     lineage: selectedLineage
   };
@@ -566,6 +905,30 @@ function freshState() {
     Object.assign(s.weapons[weaponId], override);
   }
   return s;
+}
+
+function freshChapterState() {
+  return {
+    id: "chapter_one",
+    name: "第一章：荒境旧誓",
+    objective: "寻到第一处轮回残痕",
+    stage: "opening",
+    firstStorySpawned: false,
+    eliteWaveSpawned: false,
+    secondStorySpawned: false,
+    bossWarned: false,
+    bossSpawned: false,
+    bossCleared: false,
+    timedOut: false,
+    timeLimit: CHAPTER_ONE_TIMELINE.limit,
+    bossId: "",
+    bossName: "",
+    bossWeaken: 0,
+    bossPhase: "入场压迫",
+    bossPhaseSeen: {},
+    alert: { title: "第1波", text: "游妖试探", life: 2.4, maxLife: 2.4, tone: "neutral" },
+    memories: []
+  };
 }
 
 function generateMap(template, seed, bounds) {
@@ -778,7 +1141,7 @@ function startMusic() {
 function playSound(name, priority = 1) {
   if (!audioCtx) return;
   const now = performance.now();
-  const cooldowns = { shoot: 55, hit: 42, pickup: 34, level: 200, flame: 180, hurt: 180, death: 800, boom: 90, kill: 55 };
+  const cooldowns = { shoot: 55, hit: 42, pickup: 34, level: 200, flame: 180, hurt: 180, death: 800, boom: 90, kill: 55, warning: 420, boss: 680 };
   const cooldown = cooldowns[name] || 80;
   const last = audioBudget[name] || 0;
   if (now - last < cooldown && priority < 3) return;
@@ -818,6 +1181,15 @@ function playSound(name, priority = 1) {
     tone(72, 0.15, "sawtooth", 0.05, 0.42);
     noiseBurst(0.12, 0.032, 180);
   }
+  if (name === "warning") {
+    tone(180, 0.16, "triangle", 0.038, 0.72);
+    setTimeout(() => tone(140, 0.18, "triangle", 0.034, 0.64), 120);
+  }
+  if (name === "boss") {
+    tone(82, 0.42, "sawtooth", 0.055, 0.38);
+    setTimeout(() => tone(164, 0.22, "triangle", 0.032, 0.7), 180);
+    noiseBurst(0.2, 0.035, 150);
+  }
 }
 
 function addShake(amount) {
@@ -843,7 +1215,7 @@ function addEffect(type, x, y, options = {}) {
     count: options.count || 1,
     fromX: options.fromX,
     fromY: options.fromY
-  }, tuningValue("maxEffects", 96));
+  }, runtimeLimit("maxEffects", 96));
 }
 
 function resize() {
@@ -852,6 +1224,16 @@ function resize() {
   canvas.width = Math.round(rect.width * scale);
   canvas.height = Math.round(rect.height * scale);
   ctx.setTransform(scale, 0, 0, scale, 0, 0);
+  syncRuntimeUi(true);
+}
+
+function scheduleResize() {
+  if (resizeQueued) return;
+  resizeQueued = true;
+  requestAnimationFrame(() => {
+    resizeQueued = false;
+    resize();
+  });
 }
 
 function toView(point) {
@@ -907,17 +1289,23 @@ function addDamageText(x, y, amount, kind = "damage") {
     fill: color.fill,
     edge: color.edge,
     scale: (crit ? 1.34 : 1) * (kind === "boom" ? 1.26 : kind === "hurt" ? 1.1 : 1)
-  }, tuningValue("maxDamageTexts", 54));
+  }, runtimeLimit("maxDamageTexts", 54));
 }
 
 function renderLineageSelect() {
   ui.lineageList.innerHTML = "";
+  const options = playableLineages();
+  ui.lineageList.dataset.count = String(options.length);
+  if (!options.includes(selectedLineage)) {
+    selectedLineage = options[0] || CONFIG.lineages[0];
+  }
   if (ui.startBtn) ui.startBtn.textContent = `以${selectedLineage.name}开始`;
   let selectedButton = null;
-  for (const lineage of CONFIG.lineages) {
+  for (const lineage of options) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `lineage${lineage.id === selectedLineage.id ? " is-selected" : ""}`;
+    button.dataset.lineage = lineage.id;
     if (lineage.id === selectedLineage.id) selectedButton = button;
     const portrait = `${RUNTIME_ASSET_ROOT}/characters/${lineage.id}_right_1.webp?v=${ASSET_VERSION}`;
     const primaryWeapon = Object.entries(lineage.weapons)[0]?.[0] || "sword";
@@ -977,6 +1365,9 @@ function iconMarkup(icon, className) {
 }
 
 function startGame() {
+  if (selectedLineage?.hidden) {
+    selectedLineage = playableLineages()[0] || CONFIG.lineages[0];
+  }
   ensureAudio();
   startMusic();
   state = freshState();
@@ -989,21 +1380,34 @@ function startGame() {
   ui.choices.classList.add("hidden");
   ui.pauseOverlay.classList.add("hidden");
   ui.buildOverlay?.classList.add("hidden");
+  ui.chapterAlert?.classList.add("hidden");
+  ui.bossFrame?.classList.add("hidden");
   ui.pauseBtn.textContent = "暂";
+  syncBuildQuickUi();
   lastTime = performance.now();
   playSound("level", 3);
 }
 
-function endGame() {
+function endGame(reason = "death") {
   if (!state.running) return;
   state.running = false;
   state.paused = true;
   ui.pauseOverlay.classList.add("hidden");
   ui.buildOverlay?.classList.add("hidden");
-  playSound("death", 3);
-  ui.resultText.textContent = `${state.lineage.name}在${state.map.name}坚持了 ${formatTime(state.time)}，斩妖 ${state.kills}。`;
+  ui.chapterAlert?.classList.add("hidden");
+  ui.bossFrame?.classList.add("hidden");
+  playSound(reason === "chapter_clear" ? "level" : "death", 3);
+  const memoryCount = state.chapter?.memories?.length || 0;
+  const clearText = reason === "chapter_clear"
+    ? "已击破第一章 Boss，轮回锚点暂时稳定。"
+    : reason === "chapter_timeout"
+      ? "章节限时已尽，荒境轮回失稳。残留记忆仍会回到下一世。"
+      : "此世未能突破荒境，残留记忆仍会回到轮回中。";
+  ui.resultText.textContent = `${state.lineage.name}在${state.map.name}坚持了 ${formatTime(state.time)}，斩妖 ${state.kills}。${clearText} 记忆 ${memoryCount} 段。`;
+  if (ui.resultBuildSummary) ui.resultBuildSummary.innerHTML = resultBuildHtml();
   if (ui.metaPointText) ui.metaPointText.textContent = Math.max(1, Math.floor(state.kills / 12) + Math.floor(state.time / 45));
   ui.gameOver.classList.remove("hidden");
+  syncBuildQuickUi();
 }
 
 function formatTime(t) {
@@ -1068,7 +1472,7 @@ function movementVector() {
 }
 
 function spawnEnemy() {
-  if (state.enemies.length >= tuningValue("maxEnemies", 90)) return;
+  if (state.enemies.length >= runtimeLimit("maxEnemies", 90)) return;
   const s = screen();
   const side = Math.floor(Math.random() * 4);
   const margin = 80;
@@ -1089,9 +1493,12 @@ function spawnEnemy() {
   }
   const spawnPoint = toWorld(vx, vy);
 
-  const elite = Math.random() < Math.min(0.08 + state.time / 900, 0.22);
   const pool = state.map.enemyPool || ["wraith", "elite"];
-  const enemyId = elite && pool.includes("elite") ? "elite" : pool[Math.floor(Math.random() * pool.length)] || "wraith";
+  const normalPool = pool.filter(id => !CONFIG.enemies[id]?.elite);
+  const elitePool = pool.filter(id => CONFIG.enemies[id]?.elite);
+  const elite = elitePool.length > 0 && Math.random() < chapterRandomEliteChance();
+  const activePool = elite ? elitePool : normalPool;
+  const enemyId = activePool[Math.floor(Math.random() * activePool.length)] || "wraith";
   const table = CONFIG.enemies[enemyId] || CONFIG.enemies.wraith;
   const hp = table.hp + state.time * table.hpRamp;
   pushCapped(state.enemies, {
@@ -1103,7 +1510,7 @@ function spawnEnemy() {
     speed: table.speed + state.time * table.speedRamp,
     damage: table.damage,
     xp: table.xp,
-    elite,
+    elite: Boolean(table.elite),
     type: enemyId,
     facing: spawnPoint.x < state.player.x ? "right" : "left",
     animTime: Math.random() * 10,
@@ -1111,7 +1518,343 @@ function spawnEnemy() {
     marks: 0,
     lastHit: "",
     hitFlash: 0
-  }, tuningValue("maxEnemies", 90));
+  }, runtimeLimit("maxEnemies", 90));
+}
+
+function spawnEnemyAt(enemyId, x, y, overrides = {}) {
+  const table = CONFIG.enemies[enemyId] || CONFIG.enemies.wraith;
+  const hp = (overrides.hp ?? table.hp) + state.time * (overrides.hpRamp ?? table.hpRamp ?? 0);
+  const enemy = {
+    x,
+    y,
+    r: overrides.radius ?? table.radius,
+    hp,
+    maxHp: hp,
+    speed: (overrides.speed ?? table.speed) + state.time * (overrides.speedRamp ?? table.speedRamp ?? 0),
+    damage: overrides.damage ?? table.damage,
+    xp: overrides.xp ?? table.xp,
+    elite: overrides.elite ?? Boolean(table.elite),
+    type: enemyId,
+    facing: x < state.player.x ? "right" : "left",
+    animTime: Math.random() * 10,
+    slowTime: 0,
+    marks: 0,
+    lastHit: "",
+    hitFlash: 0,
+    ...overrides
+  };
+  pushCapped(state.enemies, enemy, runtimeLimit("maxEnemies", 90));
+  return enemy;
+}
+
+function chapterEventPoint(type, distance, angle, chapterStory) {
+  const event = {
+    type,
+    x: state.player.x + Math.cos(angle) * distance,
+    y: state.player.y + Math.sin(angle) * distance,
+    r: type === "brokenSword" ? 50 : 48,
+    phase: Math.random() * TAU,
+    spin: 1,
+    event: true,
+    chapterStory,
+    triggerRadius: type === "brokenSword" ? 152 : 144
+  };
+  state.map.events.push(event);
+  return event;
+}
+
+function chapterNotice(text, kind = "resource", title = chapterWaveLabel(), tone = "neutral", life = 2.8) {
+  state.chapter.objective = text;
+  chapterAlert(title, text, tone, life);
+  addDamageText(state.player.x, state.player.y - 54, text, kind);
+}
+
+function spawnChapterEliteWave() {
+  const eliteConfig = CHAPTER_ONE_CONFIG.eliteWave || {};
+  const mapElite = eliteConfig.byMap?.[state.map.id] || eliteConfig.byMap?.sword_tomb || {};
+  const angles = eliteConfig.angles || [-0.52, 0.52];
+  const eliteType = mapElite.enemy || (state.map.id === "qingqiu" ? "elite" : "cinnabar_guard");
+  const memorySlowdown = state.chapter?.memories?.includes("first_memory") ? 0.88 : 1;
+  for (const angle of angles) {
+    spawnEnemyAt(eliteType, state.player.x + Math.cos(angle) * (eliteConfig.distanceX ?? 520), state.player.y + Math.sin(angle) * (eliteConfig.distanceY ?? 360), {
+      elite: true,
+      hp: mapElite.hp ?? (state.map.id === "qingqiu" ? 110 : 132),
+      damage: mapElite.damage ?? (state.map.id === "qingqiu" ? 20 : 23),
+      speed: (mapElite.speed ?? (state.map.id === "qingqiu" ? 58 : 64)) * (state.chapter?.memories?.includes("first_memory") ? (eliteConfig.firstMemorySpeedScale ?? memorySlowdown) : 1),
+      xp: mapElite.xp ?? 16,
+      chapterElite: true
+    });
+  }
+  addEffect("killBloom", state.player.x, state.player.y - 80, {
+    radius: 180,
+    life: 0.7,
+    color: "#e16935",
+    secondary: "#fff2c8",
+    count: 14
+  });
+  addShake(7);
+  playSound("boom", 3);
+}
+
+function spawnChapterBoss() {
+  const mapBoss = CHAPTER_BOSS_CONFIG.byMap?.[state.map.id] || CHAPTER_BOSS_CONFIG.byMap?.sword_tomb || {};
+  const angle = CHAPTER_BOSS_CONFIG.spawnAngle ?? -0.25;
+  const bossType = mapBoss.enemy || "cinnabar_guard";
+  const weaken = Math.max(0, Math.min(CHAPTER_BOSS_CONFIG.maxStoryWeaken ?? 0.35, state.chapter?.bossWeaken || 0));
+  const bossHp = Math.round(((CHAPTER_BOSS_CONFIG.hpBase ?? 430) + state.player.level * (CHAPTER_BOSS_CONFIG.hpPerLevel ?? 34)) * (1 - weaken));
+  const timers = CHAPTER_BOSS_CONFIG.timers || {};
+  const boss = spawnEnemyAt(bossType, state.player.x + Math.cos(angle) * (CHAPTER_BOSS_CONFIG.spawnDistanceX ?? 620), state.player.y + Math.sin(angle) * (CHAPTER_BOSS_CONFIG.spawnDistanceY ?? 380), {
+    boss: true,
+    elite: true,
+    radius: CHAPTER_BOSS_CONFIG.radius ?? 28,
+    hp: bossHp,
+    hpRamp: 0,
+    speed: CHAPTER_BOSS_CONFIG.speed ?? 54,
+    speedRamp: 0,
+    damage: CHAPTER_BOSS_CONFIG.damage ?? 30,
+    xp: CHAPTER_BOSS_CONFIG.xp ?? 36,
+    chapterBossName: mapBoss.name || (state.map.id === "qingqiu" ? "赤焰魇将" : "赤焰战魇"),
+    bossPhase: "entry",
+    bossPhaseIndex: 0,
+    spriteW: 7.2,
+    spriteH: 8.6,
+    spriteAnchorY: 0.94,
+    bossCastTimer: timers.cast ?? 1.8,
+    bossSummonTimer: timers.summon ?? 4.8,
+    bossBurstTimer: timers.burst ?? 7.2
+  });
+  state.chapter.bossId = `${boss.type}:${Math.round(boss.x)}:${Math.round(boss.y)}:${Date.now()}`;
+  state.chapter.bossName = boss.chapterBossName;
+  boss.chapterBossId = state.chapter.bossId;
+  addEffect("bossEntry", boss.x, boss.y, {
+    radius: 170,
+    life: 1.25,
+    color: "#e16935",
+    secondary: "#fff2c8",
+    count: 16
+  });
+  addShake(10);
+  chapterAlert("第4波", `${boss.chapterBossName} 入场${weaken ? " · 残碑削弱" : ""}`, "boss", 4.8);
+  playSound("boss", 3);
+}
+
+function bossPhaseText(enemy) {
+  if (!enemy?.boss) return "";
+  if (enemy.bossPhase === "enrage") return "三阶段 狂燃";
+  if (enemy.bossPhase === "summon") return "二阶段 召卫";
+  return "一阶段 入场";
+}
+
+function spawnBossMinions(enemy, count = 2) {
+  const pool = CHAPTER_BOSS_CONFIG.summons?.[state.map.id] || CHAPTER_BOSS_CONFIG.summons?.sword_tomb || (state.map.id === "qingqiu" ? ["foxshade", "wraith"] : ["blade_thrall", "stone_imp"]);
+  for (let i = 0; i < count; i += 1) {
+    const angle = (i / count) * TAU + Math.random() * 0.6;
+    const type = pool[i % pool.length];
+    spawnEnemyAt(type, enemy.x + Math.cos(angle) * 120, enemy.y + Math.sin(angle) * 84, {
+      hp: CONFIG.enemies[type].hp + 18 + state.player.level * 3,
+      damage: CONFIG.enemies[type].damage + 2,
+      speed: CONFIG.enemies[type].speed * 0.94,
+      xp: CONFIG.enemies[type].xp + 2,
+      chapterSummon: true
+    });
+  }
+}
+
+function damagePlayerAt(x, y, radius, damage) {
+  if (!state?.running) return false;
+  if (dist({ x, y }, state.player) >= radius + state.player.r || state.player.invuln > 0) return false;
+  state.player.hp -= damage;
+  state.player.invuln = 0.5;
+  addDamageText(state.player.x, state.player.y, damage, "hurt");
+  addShake(6);
+  playSound("hurt");
+  if (state.player.hp <= 0) endGame();
+  return true;
+}
+
+function bossGroundRupture(enemy, phase = "summon") {
+  const rupture = CHAPTER_BOSS_CONFIG.groundRupture?.[phase] || CHAPTER_BOSS_CONFIG.groundRupture?.summon || {};
+  const angle = Math.atan2(state.player.y - enemy.y, state.player.x - enemy.x);
+  const x = state.player.x + Math.cos(angle + (Math.random() - 0.5) * 0.9) * 34;
+  const y = state.player.y + Math.sin(angle + (Math.random() - 0.5) * 0.9) * 24;
+  enemy.bossCastFlash = 0.5;
+  addEffect("bossRuptureWarning", x, y, {
+    radius: rupture.warningRadius ?? (phase === "enrage" ? 118 : 92),
+    life: 0.5,
+    color: "#e16935",
+    secondary: "#fff2c8",
+    count: rupture.count ?? (phase === "enrage" ? 10 : 7)
+  });
+  setTimeout(() => {
+    if (!state?.running || state.paused || enemy.hp <= 0) return;
+    const radius = rupture.radius ?? (phase === "enrage" ? 94 : 72);
+    pushCapped(state.pulses, { x, y, radius, life: 0.32, maxLife: 0.32, kind: "hurt" }, runtimeLimit("maxPulses", 36));
+    addEffect("bossRuptureBurst", x, y, {
+      radius,
+      life: 0.42,
+      color: "#e16935",
+      secondary: "#fff2c8",
+      count: 9
+    });
+    damagePlayerAt(x, y, radius, rupture.damage ?? (phase === "enrage" ? 18 : 12));
+  }, 460);
+}
+
+function bossShockwave(enemy) {
+  const shockwave = CHAPTER_BOSS_CONFIG.shockwave?.[enemy.bossPhase] || CHAPTER_BOSS_CONFIG.shockwave?.summon || {};
+  const radius = shockwave.radius ?? (enemy.bossPhase === "enrage" ? 126 : 96);
+  pushCapped(state.pulses, { x: enemy.x, y: enemy.y, radius, life: 0.38, maxLife: 0.38, kind: "hurt" }, runtimeLimit("maxPulses", 36));
+  enemy.bossBurstFlash = 0.56;
+  addEffect("bossShockwave", enemy.x, enemy.y, {
+    radius,
+    life: 0.5,
+    color: "#e16935",
+    secondary: "#fff2c8",
+    count: shockwave.count ?? (enemy.bossPhase === "enrage" ? 14 : 10)
+  });
+  damagePlayerAt(enemy.x, enemy.y, radius, shockwave.damage ?? (enemy.bossPhase === "enrage" ? 28 : 18));
+  addShake(enemy.bossPhase === "enrage" ? 9 : 6);
+  playSound("boom", 3);
+}
+
+function bossPhaseConfig(key) {
+  return CHAPTER_BOSS_PHASES.find(phase => phase.key === key) || {};
+}
+
+function applyEnemyDamage(enemy, damage, kind) {
+  enemy.hp -= damage;
+  if (enemy.boss && enemy.bossGateTimer > 0) {
+    const floor = enemy.maxHp * (enemy.bossGateThreshold ?? 0);
+    if (floor > 0 && enemy.hp < floor) {
+      enemy.hp = floor;
+      if ((enemy.bossGateNoticeTimer || 0) <= 0) {
+        addDamageText(enemy.x, enemy.y - 36, "护体", "boom");
+        enemy.bossGateNoticeTimer = 0.48;
+      }
+    }
+  }
+  enemy.lastHit = kind;
+  enemy.hitFlash = 0.16;
+}
+
+function updateChapterBoss(enemy, dt) {
+  if (!enemy.boss || !state.chapter || state.chapter.bossCleared) return 1;
+  enemy.bossGateTimer = Math.max(0, (enemy.bossGateTimer || 0) - dt);
+  enemy.bossGateNoticeTimer = Math.max(0, (enemy.bossGateNoticeTimer || 0) - dt);
+  enemy.bossCastFlash = Math.max(0, (enemy.bossCastFlash || 0) - dt);
+  enemy.bossBurstFlash = Math.max(0, (enemy.bossBurstFlash || 0) - dt);
+  if (enemy.bossGateTimer <= 0) enemy.bossGateThreshold = 0;
+
+  const hpRatio = enemy.hp / enemy.maxHp;
+  for (const phase of CHAPTER_BOSS_PHASES) {
+    if (hpRatio <= phase.threshold && !state.chapter.bossPhaseSeen[phase.key]) {
+      state.chapter.bossPhaseSeen[phase.key] = true;
+      enemy.bossPhase = phase.key;
+      enemy.bossGateTimer = phase.gateDuration ?? CHAPTER_BOSS_CONFIG.phaseGateDuration ?? 0;
+      enemy.bossGateThreshold = phase.threshold;
+      enemy.hp = Math.max(enemy.hp, enemy.maxHp * phase.threshold);
+      state.chapter.bossPhase = phase.key === "enrage" ? "三阶段 狂燃" : "二阶段 召卫";
+      chapterNotice(phase.text, "boom", phase.title, phase.key === "enrage" ? "boss" : "warning", 3.8);
+      addEffect("bossPhaseFlare", enemy.x, enemy.y, {
+        radius: phase.key === "enrage" ? 150 : 126,
+        life: phase.key === "enrage" ? 1.05 : 0.82,
+        color: "#e16935",
+        secondary: "#fff2c8",
+        count: 14
+      });
+      spawnBossMinions(enemy, phase.key === "enrage" ? 3 : 2);
+      addShake(phase.key === "enrage" ? 10 : 7);
+      playSound(phase.key === "enrage" ? "boss" : "warning", 3);
+      break;
+    }
+  }
+
+  enemy.bossCastTimer = (enemy.bossCastTimer || 1.8) - dt;
+  enemy.bossSummonTimer = (enemy.bossSummonTimer || 4.8) - dt;
+  enemy.bossBurstTimer = (enemy.bossBurstTimer || 7.2) - dt;
+
+  if (enemy.bossCastTimer <= 0) {
+    const phaseConfig = bossPhaseConfig(enemy.bossPhase);
+    enemy.bossCastTimer = phaseConfig.castCooldown ?? (enemy.bossPhase === "enrage" ? 1.55 : enemy.bossPhase === "summon" ? 2.05 : 2.8);
+    bossGroundRupture(enemy, enemy.bossPhase);
+  }
+  if (enemy.bossSummonTimer <= 0) {
+    const phaseConfig = bossPhaseConfig(enemy.bossPhase);
+    enemy.bossSummonTimer = phaseConfig.summonCooldown ?? (enemy.bossPhase === "enrage" ? 5.0 : 6.8);
+    spawnBossMinions(enemy, enemy.bossPhase === "enrage" ? 2 : 1);
+    addDamageText(enemy.x, enemy.y - 38, "召卫", "boom");
+  }
+  if (enemy.bossBurstTimer <= 0) {
+    const phaseConfig = bossPhaseConfig(enemy.bossPhase);
+    enemy.bossBurstTimer = phaseConfig.burstCooldown ?? (enemy.bossPhase === "enrage" ? 5.8 : 8.5);
+    bossShockwave(enemy);
+  }
+
+  return bossPhaseConfig(enemy.bossPhase).speedScale ?? (enemy.bossPhase === "enrage" ? 1.18 : enemy.bossPhase === "summon" ? 1.06 : 0.96);
+}
+
+function updateChapterDirector() {
+  if (!state?.running || state.paused || !state.chapter || state.chapter.bossCleared) return;
+  const chapter = state.chapter;
+  if (state.time >= CHAPTER_ONE_TIMELINE.limit && !chapter.bossCleared) {
+    chapter.timedOut = true;
+    chapter.stage = "timeout";
+    chapter.objective = "轮回失稳";
+    endGame("chapter_timeout");
+    return;
+  }
+  if (!chapter.firstStorySpawned && state.time >= CHAPTER_ONE_TIMELINE.firstStory) {
+    chapter.firstStorySpawned = true;
+    chapter.stage = "first_story";
+    const type = state.map.id === "qingqiu" ? "oldVowStele" : "brokenSword";
+    chapterEventPoint(type, 360, -0.35, "first_memory");
+    chapterNotice("靠近残痕，记下第一段旧誓", "resource", "剧情点位", "story", 3.5);
+    playSound("level", 2);
+  }
+  if (!chapter.eliteWaveSpawned && state.time >= CHAPTER_ONE_TIMELINE.eliteWave) {
+    chapter.eliteWaveSpawned = true;
+    chapter.stage = "elite_wave";
+    chapterNotice("击破精英，夺取丹火", "boom", "第2波 精英妖潮", "elite", 4);
+    spawnChapterEliteWave();
+  }
+  if (!chapter.secondStorySpawned && state.time >= CHAPTER_ONE_TIMELINE.secondStory) {
+    chapter.secondStorySpawned = true;
+    chapter.stage = "second_story";
+    chapterEventPoint("memoryStele", 420, 0.7, "second_memory");
+    chapterNotice("寻找第二处轮回残碑", "resource", "剧情点位", "story", 3.5);
+    playSound("level", 2);
+  }
+  if (!chapter.bossWarned && state.time >= CHAPTER_ONE_TIMELINE.bossWarning) {
+    chapter.bossWarned = true;
+    chapter.stage = "boss_warning";
+    chapterNotice(`Boss 将在 ${compactTime(CHAPTER_ONE_TIMELINE.bossSpawn - state.time)} 后现身`, "boom", "第3波 Boss 预警", "warning", 4.2);
+    addEffect("levelBurst", state.player.x, state.player.y, {
+      radius: 210,
+      life: 1.0,
+      color: "#e16935",
+      secondary: "#fff2c8",
+      count: 12
+    });
+    addShake(7);
+    playSound("warning", 3);
+  }
+  if (!chapter.bossSpawned && state.time >= CHAPTER_ONE_TIMELINE.bossSpawn) {
+    chapter.bossSpawned = true;
+    chapter.stage = "boss";
+    chapterNotice("击败章节 Boss，稳定轮回锚点", "boom", "第4波 Boss", "boss", 4.5);
+    spawnChapterBoss();
+  }
+}
+
+function completeChapter() {
+  if (!state?.running || state.chapter?.bossCleared) return;
+  state.chapter.bossCleared = true;
+  state.chapter.stage = "cleared";
+  state.chapter.objective = "第一章已通关";
+  chapterAlert("Boss 已破", "轮回锚点暂时稳定", "clear", 4);
+  state.resources.fire += 2;
+  state.resources.soul += 18;
+  endGame("chapter_clear");
 }
 
 function fireSword() {
@@ -1145,7 +1888,7 @@ function fireSword() {
       type: "sword",
       angle,
       pierce: Math.max(0, Math.floor(visualLevel / 3))
-    }, tuningValue("maxProjectiles", 120));
+    }, runtimeLimit("maxProjectiles", 120));
     fired = true;
   }
   if (fired) playSound("shoot");
@@ -1174,7 +1917,7 @@ function fireTalisman() {
       type: "talisman",
       angle,
       spin: Math.random() > 0.5 ? 1 : -1
-    }, tuningValue("maxProjectiles", 120));
+    }, runtimeLimit("maxProjectiles", 120));
   }
   playSound("shoot");
 }
@@ -1182,7 +1925,7 @@ function fireTalisman() {
 function castFlame() {
   const w = state.weapons.flame;
   if (w.level <= 0) return;
-  pushCapped(state.pulses, { x: state.player.x, y: state.player.y, radius: w.radius, life: 0.45, maxLife: 0.45, kind: "flame" }, tuningValue("maxPulses", 36));
+  pushCapped(state.pulses, { x: state.player.x, y: state.player.y, radius: w.radius, life: 0.45, maxLife: 0.45, kind: "flame" }, runtimeLimit("maxPulses", 36));
   addEffect("flameRing", state.player.x, state.player.y, {
     radius: w.radius,
     life: 0.62,
@@ -1204,9 +1947,7 @@ function castFlame() {
   }
   for (const enemy of state.enemies) {
     if (dist(state.player, enemy) <= w.radius + enemy.r) {
-      enemy.hp -= w.damage;
-      enemy.lastHit = "flame";
-      enemy.hitFlash = 0.14;
+      applyEnemyDamage(enemy, w.damage, "flame");
       addDamageText(enemy.x, enemy.y, w.damage, "flame");
     }
   }
@@ -1217,7 +1958,7 @@ function castFlame() {
 function castPhantom() {
   const w = state.weapons.phantom;
   if (w.level <= 0) return;
-  pushCapped(state.pulses, { x: state.player.x, y: state.player.y, radius: w.radius, life: 2.2, maxLife: 2.2, kind: "phantom" }, tuningValue("maxPulses", 36));
+  pushCapped(state.pulses, { x: state.player.x, y: state.player.y, radius: w.radius, life: 2.2, maxLife: 2.2, kind: "phantom" }, runtimeLimit("maxPulses", 36));
   addEffect("phantomMist", state.player.x, state.player.y, {
     radius: w.radius,
     life: 1.2,
@@ -1232,12 +1973,10 @@ function castPhantom() {
 }
 
 function explodeAt(x, y, radius, damage, kind = "boom") {
-  pushCapped(state.pulses, { x, y, radius, life: 0.32, maxLife: 0.32, kind }, tuningValue("maxPulses", 36));
+  pushCapped(state.pulses, { x, y, radius, life: 0.32, maxLife: 0.32, kind }, runtimeLimit("maxPulses", 36));
   for (const enemy of state.enemies) {
     if (dist({ x, y }, enemy) <= radius + enemy.r) {
-      enemy.hp -= damage;
-      enemy.lastHit = kind;
-      enemy.hitFlash = 0.16;
+      applyEnemyDamage(enemy, damage, kind);
       addDamageText(enemy.x, enemy.y, damage, "boom");
     }
   }
@@ -1257,15 +1996,15 @@ function splitTalismanFrom(enemy) {
       life: 1.5,
       damage: Math.max(8, state.weapons.talisman.damage * 0.48),
       type: "talisman"
-    }, tuningValue("maxProjectiles", 120));
+    }, runtimeLimit("maxProjectiles", 120));
   }
 }
 
 function gainXp(amount) {
   state.player.xp += amount;
   state.resources.soul += amount;
-  if (state.passive.alchemyHeal > 0) {
-    state.player.hp = Math.min(state.player.maxHp, state.player.hp + amount * state.passive.alchemyHeal);
+  if (state.passive.pickupHeal > 0) {
+    state.player.hp = Math.min(state.player.maxHp, state.player.hp + amount * state.passive.pickupHeal);
   }
   if (state.mechanics.pickupBurst) {
     explodeAt(state.player.x, state.player.y, 58 + state.mechanics.pickupBurst * 8, 8 + state.mechanics.pickupBurst * 3, "pickupBurst");
@@ -1275,12 +2014,20 @@ function gainXp(amount) {
   while (state.player.xp >= state.player.nextXp) {
     state.player.xp -= state.player.nextXp;
     state.player.level += 1;
-    state.player.nextXp = Math.floor(state.player.nextXp * CONFIG.tuning.xpGrowth + CONFIG.tuning.xpAdd);
-    state.weapons.sword.damage += 2;
-    state.weapons.sword.range += 8;
-    state.weapons.sword.delay = Math.max(0.34, state.weapons.sword.delay * 0.97);
-    if (state.player.level % 3 === 0) state.weapons.sword.count += 1;
-    addDamageText(state.player.x, state.player.y - 46, "剑气增强", "resource");
+    state.player.nextXp = Math.floor(
+      state.player.nextXp * pacingValue("xp", "growth", CONFIG.tuning.xpGrowth)
+      + pacingValue("xp", "add", CONFIG.tuning.xpAdd)
+    );
+    const levelUpPacing = pacingSection("levelUp");
+    state.weapons.sword.damage += levelUpPacing.swordDamage ?? 2;
+    state.weapons.sword.range += levelUpPacing.swordRange ?? 8;
+    state.weapons.sword.delay = Math.max(
+      levelUpPacing.swordDelayMin ?? 0.34,
+      state.weapons.sword.delay * (levelUpPacing.swordDelayMul ?? 0.97)
+    );
+    const swordCountEvery = levelUpPacing.swordCountEvery ?? 3;
+    if (swordCountEvery > 0 && state.player.level % swordCountEvery === 0) state.weapons.sword.count += 1;
+    addDamageText(state.player.x, state.player.y - 46, levelUpPacing.feedbackText || "剑气增强", "resource");
     addEffect("swordCast", state.player.x, state.player.y, {
       angle: -Math.PI / 2,
       radius: 78 + state.player.level * 5,
@@ -1296,6 +2043,7 @@ function gainXp(amount) {
 function closeChoices() {
   ui.choices.classList.add("hidden");
   state.paused = false;
+  syncBuildQuickUi();
   lastTime = performance.now();
 }
 
@@ -1306,6 +2054,7 @@ function openBuildPanel() {
   ui.pauseOverlay.classList.add("hidden");
   ui.buildOverlay.classList.remove("hidden");
   ui.pauseBtn.textContent = "续";
+  syncBuildQuickUi();
 }
 
 function closeBuildPanel() {
@@ -1313,11 +2062,13 @@ function closeBuildPanel() {
   ui.buildOverlay.classList.add("hidden");
   state.paused = false;
   ui.pauseBtn.textContent = "暂";
+  syncBuildQuickUi();
   lastTime = performance.now();
 }
 
 function openChoices() {
   state.paused = true;
+  syncBuildQuickUi();
   ui.choiceList.innerHTML = "";
   playSound("level", 3);
   const pool = CONFIG.upgrades.filter(upgrade => upgrade.group === "common" || upgrade.group === state.lineage.id);
@@ -1326,7 +2077,7 @@ function openChoices() {
     const button = document.createElement("button");
     button.className = "choice";
     button.type = "button";
-    const color = option.group === "sword" ? "#72cfe9" : option.group === "witch" ? "#9ad9b9" : option.group === "alchemist" ? "#d75d34" : "#d8a64d";
+    const color = option.group === "sword" ? "#72cfe9" : option.group === "witch" ? "#9ad9b9" : "#d8a64d";
     button.style.setProperty("--choice-color", color);
     const tag = option.group === "common" ? "通用机缘" : state.lineage.name;
     button.innerHTML = `<span class="choice-icon">${iconMarkup(option.icon, "choice-icon-img")}</span><em class="choice-tag">${tag}</em><b>${option.name}</b><span>${option.text}</span><strong class="choice-cost">领悟</strong>`;
@@ -1350,6 +2101,7 @@ function openChoices() {
         fromX: state.player.x,
         fromY: state.player.y - 210
       });
+      chapterAlert("功法入局", selectedChoiceFeedback(option), "clear", 2.6);
       addDamageText(state.player.x, state.player.y - 28, option.name, "buy");
       addShake(5);
       playSound("level", 3);
@@ -1379,12 +2131,15 @@ function storyKey(event) {
 }
 
 function storyForEvent(event) {
+  if (event.chapterStory) {
+    return chapterStoryData(event.chapterStory);
+  }
   const table = {
     stele: {
       title: "残碑低语",
       speaker: "轮回残灵",
       portrait: "reincarnation_spirit",
-      text: "碑上刻着半句旧誓：若不死药重开，青丘、轩辕、神农三脉皆会被拖回同一场轮回。"
+      text: "碑上刻着半句旧誓：若不死药重开，青丘、轩辕两脉皆会被拖回同一场轮回。"
     },
     shrine: {
       title: "荒祠香火",
@@ -1428,12 +2183,6 @@ function storyForEvent(event) {
       portrait: "xuanyuan_swordsman",
       text: "断剑插在荒土里，剑脊仍有旧战余温。你听见前世在剑冢里留下的誓言：若轮回不止，便以剑痕记路。"
     },
-    herbCauldron: {
-      title: "丹炉遗火",
-      speaker: "神农丹徒",
-      portrait: "shennong_alchemist",
-      text: "残炉里有未熄的丹火，火色并不灼人，反而像在辨认你的气息。神农一脉的旧线索开始浮出。"
-    },
     memoryStele: {
       title: "轮回残碑",
       speaker: "轮回残灵",
@@ -1453,6 +2202,17 @@ function openStoryEvent(event) {
   const key = storyKey(event);
   if (state.storySeen[key]) return;
   state.storySeen[key] = true;
+  if (event.chapterStory && !state.chapter.memories.includes(event.chapterStory)) {
+    state.chapter.memories.push(event.chapterStory);
+    const data = chapterStoryData(event.chapterStory);
+    state.chapter.objective = data?.objective || (event.chapterStory === "first_memory" ? "撑过第一轮精英妖潮" : "等待 Boss 现身");
+    if (data?.bossWeaken) state.chapter.bossWeaken = Math.max(state.chapter.bossWeaken || 0, data.bossWeaken);
+    if (data?.pickupBonus) state.player.pickupBonus += data.pickupBonus;
+    if (data?.swordDamage) state.weapons.sword.damage += data.swordDamage;
+    if (data?.phantomRadius) state.weapons.phantom.radius += data.phantomRadius;
+    if (data?.healRatio) state.player.hp = Math.min(state.player.maxHp, state.player.hp + Math.ceil(state.player.maxHp * data.healRatio));
+    if (data?.rewardSoul) state.resources.soul += data.rewardSoul;
+  }
   state.pendingStory = { key, event };
   const story = storyForEvent(event);
   ui.storyTitle.textContent = story.title;
@@ -1462,20 +2222,24 @@ function openStoryEvent(event) {
   ui.storyChoiceBtn.textContent = "记入轮回";
   state.paused = true;
   ui.storyOverlay.classList.remove("hidden");
+  syncBuildQuickUi();
   addShake(3);
   playSound("level", 3);
 }
 
 function closeStoryEvent() {
   if (!state?.pendingStory) return;
-  const reward = 3;
+  const data = chapterStoryData(state.pendingStory.event?.chapterStory);
+  const reward = data?.rewardSoul ? 0 : 3;
   state.resources.soul += reward;
   const event = state.pendingStory.event;
   ui.storyOverlay.classList.add("hidden");
   state.pendingStory = null;
   state.paused = false;
-  state.storyCooldown = 18;
-  addDamageText(event.x, event.y - 18, reward, "resource");
+  state.storyCooldown = 2.2;
+  syncBuildQuickUi();
+  addDamageText(event.x, event.y - 18, data?.rewardText || reward, "resource");
+  if (data?.rewardText) chapterAlert("轮回记忆", data.rewardText, "story", 3.6);
   addEffect("cardLink", event.x, event.y, {
     radius: 180,
     life: 0.55,
@@ -1506,11 +2270,18 @@ function update(dt) {
   const s = screen();
   state.time += dt;
   state.storyCooldown = Math.max(0, (state.storyCooldown || 0) - dt);
-  state.spawnDelay = Math.max(CONFIG.tuning.spawnDelayMin, CONFIG.tuning.spawnDelay - state.time * CONFIG.tuning.spawnRamp);
+  if (state.chapter?.alert) state.chapter.alert.life = Math.max(0, state.chapter.alert.life - dt);
+  const spawnPacing = pacingSection("spawn");
+  const minSpawnDelay = spawnPacing.minDelay ?? CONFIG.tuning.spawnDelayMin;
+  const baseSpawnDelay = Math.max(
+    minSpawnDelay,
+    (spawnPacing.baseDelay ?? CONFIG.tuning.spawnDelay) - state.time * (spawnPacing.ramp ?? CONFIG.tuning.spawnRamp)
+  );
+  state.spawnDelay = Math.max(minSpawnDelay, baseSpawnDelay / chapterSpawnMultiplier());
   state.spawnTimer -= dt;
   while (state.spawnTimer <= 0) {
     spawnEnemy();
-    if (state.time > 45 && Math.random() < 0.35) spawnEnemy();
+    if (Math.random() < chapterExtraSpawnChance()) spawnEnemy();
     state.spawnTimer += state.spawnDelay;
   }
 
@@ -1560,6 +2331,7 @@ function update(dt) {
     castPhantom();
     state.weapons.phantom.cooldown = state.weapons.phantom.delay;
   }
+  updateChapterDirector();
   checkStoryEvents();
 
   for (const cloud of state.clouds) {
@@ -1569,9 +2341,7 @@ function update(dt) {
       cloud.tick = 0.36;
       for (const enemy of state.enemies) {
         if (dist(cloud, enemy) < cloud.radius + enemy.r) {
-          enemy.hp -= cloud.damage;
-          enemy.lastHit = "cloud";
-          enemy.hitFlash = 0.1;
+          applyEnemyDamage(enemy, cloud.damage, "cloud");
           addEffect("hitSpark", enemy.x, enemy.y, { radius: 22, life: 0.24, color: "#54b88a", secondary: "#fff2c8", count: 5 });
           addDamageText(enemy.x, enemy.y, cloud.damage, "flame");
         }
@@ -1583,8 +2353,9 @@ function update(dt) {
   for (const enemy of state.enemies) {
     const angle = Math.atan2(state.player.y - enemy.y, state.player.x - enemy.x);
     const slow = enemy.slowTime > 0 ? state.weapons.phantom.slow : 1;
-    enemy.x += Math.cos(angle) * enemy.speed * slow * dt;
-    enemy.y += Math.sin(angle) * enemy.speed * slow * dt;
+    const bossSpeed = updateChapterBoss(enemy, dt);
+    enemy.x += Math.cos(angle) * enemy.speed * slow * bossSpeed * dt;
+    enemy.y += Math.sin(angle) * enemy.speed * slow * bossSpeed * dt;
     enemy.facing = Math.cos(angle) < 0 ? "left" : "right";
     enemy.animTime += dt * (enemy.slowTime > 0 ? 0.55 : 1);
     enemy.slowTime = Math.max(0, enemy.slowTime - dt);
@@ -1594,7 +2365,7 @@ function update(dt) {
       const damage = Math.max(1, Math.round(enemy.damage * (guarded ? 0.78 : 1)));
       state.player.hp -= damage;
       state.player.invuln = guarded ? 0.72 : 0.48;
-      pushCapped(state.pulses, { x: state.player.x, y: state.player.y, radius: 54, life: 0.28, maxLife: 0.28, kind: "hurt" }, tuningValue("maxPulses", 36));
+      pushCapped(state.pulses, { x: state.player.x, y: state.player.y, radius: 54, life: 0.28, maxLife: 0.28, kind: "hurt" }, runtimeLimit("maxPulses", 36));
       if (guarded) {
         addEffect("guard", state.player.x, state.player.y, { radius: 76, life: 0.42, color: "#9bf0c0", secondary: "#fff2c8" });
       }
@@ -1639,12 +2410,10 @@ function update(dt) {
     }
     for (const enemy of state.enemies) {
       if (enemy.hp > 0 && dist(projectile, enemy) < projectile.r + enemy.r) {
-        enemy.hp -= projectile.damage;
-        enemy.lastHit = projectile.type;
-        enemy.hitFlash = 0.16;
+        applyEnemyDamage(enemy, projectile.damage, projectile.type);
         if ((projectile.pierce || 0) > 0) projectile.pierce -= 1;
         else projectile.life = 0;
-        pushCapped(state.pulses, { x: enemy.x, y: enemy.y, radius: 22, life: 0.18, maxLife: 0.18, kind: "hit" }, tuningValue("maxPulses", 36));
+        pushCapped(state.pulses, { x: enemy.x, y: enemy.y, radius: 22, life: 0.18, maxLife: 0.18, kind: "hit" }, runtimeLimit("maxPulses", 36));
         addEffect(projectile.type === "sword" ? "swordImpact" : "talismanImpact", enemy.x, enemy.y, {
           angle: projectile.angle || 0,
           radius: projectile.type === "sword" ? 42 : 52,
@@ -1679,18 +2448,19 @@ function update(dt) {
   for (let i = state.enemies.length - 1; i >= 0; i -= 1) {
     const enemy = state.enemies[i];
     if (enemy.hp <= 0) {
+      const chapterBossKilled = Boolean(enemy.boss && state.chapter?.bossSpawned && !state.chapter?.bossCleared);
       state.kills += 1;
-      pushCapped(state.pulses, { x: enemy.x, y: enemy.y, radius: enemy.elite ? 68 : 42, life: 0.24, maxLife: 0.24, kind: enemy.elite ? "boom" : "kill" }, tuningValue("maxPulses", 36));
-      addEffect("killBloom", enemy.x, enemy.y, {
-        radius: enemy.elite ? 92 : 62,
-        life: enemy.elite ? 0.62 : 0.42,
+      pushCapped(state.pulses, { x: enemy.x, y: enemy.y, radius: enemy.elite ? 68 : 42, life: 0.24, maxLife: 0.24, kind: enemy.elite ? "boom" : "kill" }, runtimeLimit("maxPulses", 36));
+      addEffect(chapterBossKilled ? "bossDeath" : "killBloom", enemy.x, enemy.y, {
+        radius: chapterBossKilled ? 168 : enemy.elite ? 92 : 62,
+        life: chapterBossKilled ? 1.05 : enemy.elite ? 0.62 : 0.42,
         color: enemy.elite ? "#e16935" : "#54b88a",
         secondary: "#fff2c8",
-        count: enemy.elite ? 12 : 8
+        count: chapterBossKilled ? 18 : enemy.elite ? 12 : 8
       });
-      addDamageText(enemy.x, enemy.y - 8, enemy.elite ? 88 : 36, enemy.elite ? "boom" : "pickupBurst");
-      addShake(enemy.elite ? 8 : 3);
-      playSound(enemy.elite ? "boom" : "kill");
+      addDamageText(enemy.x, enemy.y - 8, chapterBossKilled ? "破魇" : enemy.elite ? 88 : 36, chapterBossKilled ? "boom" : enemy.elite ? "boom" : "pickupBurst");
+      addShake(chapterBossKilled ? 13 : enemy.elite ? 8 : 3);
+      playSound(chapterBossKilled ? "boss" : enemy.elite ? "boom" : "kill");
       pushCapped(state.drops, {
         x: enemy.x,
         y: enemy.y,
@@ -1698,18 +2468,19 @@ function update(dt) {
         xp: enemy.xp,
         soul: enemy.xp,
         fire: enemy.elite ? 1 : 0
-      }, tuningValue("maxDrops", 80));
-      if (state.mechanics.flameCloud && (enemy.lastHit === "flame" || enemy.lastHit === "cloud")) {
-        pushCapped(state.clouds, { x: enemy.x, y: enemy.y, radius: 72, damage: 7 + state.weapons.flame.level * 2, life: 3.4, tick: 0.1 }, tuningValue("maxClouds", 18));
-      }
+      }, runtimeLimit("maxDrops", 80));
       state.enemies.splice(i, 1);
+      if (chapterBossKilled) {
+        completeChapter();
+        return;
+      }
     }
   }
 
   for (let i = state.drops.length - 1; i >= 0; i -= 1) {
     const drop = state.drops[i];
     drop.magnet = Math.max(0, (drop.magnet || 0) - dt);
-    const range = CONFIG.tuning.pickupRange + state.player.pickupBonus;
+    const range = pacingValue("xp", "pickupRange", CONFIG.tuning.pickupRange) + state.player.pickupBonus;
     const d = dist(state.player, drop);
     if (d < range * 2.2) {
       const angle = Math.atan2(state.player.y - drop.y, state.player.x - drop.x);
@@ -1822,8 +2593,7 @@ function drawTiledMapBase(s, map) {
   const tilePrefix = {
     qingqiu_seamless: "qingqiu",
     sword_tomb_seamless: "sword_tomb",
-    xuanyuan_ground: "xuanyuan_ground",
-    herb_marsh_seamless: "herb_marsh"
+    xuanyuan_ground: "xuanyuan_ground"
   }[map.tileAtlas];
   if (!tilePrefix) return false;
   const tileIndexes = map.tileAtlas === "xuanyuan_ground" ? [1, 2, 3, 4] : [1, 2, 3, 4, 5];
@@ -2063,7 +2833,7 @@ function drawStoryMarkerOver(feature, status = "idle") {
 }
 
 function storyTriggerRadius(event) {
-  return Math.max(116, event.r * 3.15 + 42);
+  return Math.max(event.triggerRadius || 0, 132, event.r * 3.35 + 48);
 }
 
 function drawMapFeature(feature) {
@@ -2074,7 +2844,7 @@ function drawMapFeature(feature) {
   const unseenEvent = feature.event && !seenEvent;
   const eventReady = unseenEvent && dist(feature, state.player) < storyTriggerRadius(feature);
   const eventStatus = seenEvent ? "done" : eventReady ? "ready" : "idle";
-  const usesFormalSceneEventAtlas = feature.event && (state.map?.scenePack === "sword_tomb" || state.map?.scenePack === "herb_marsh");
+  const usesFormalSceneEventAtlas = feature.event && state.map?.scenePack === "sword_tomb";
   if (feature.event && !usesFormalSceneEventAtlas) drawStoryMarkerUnder(feature, eventStatus);
   if (feature.event && drawSceneEventFeature(feature)) {
     if (!usesFormalSceneEventAtlas) drawStoryMarkerOver(feature, eventStatus);
@@ -2146,12 +2916,11 @@ function drawScenePackPropFeature(feature) {
       xuanyuanDryGrassClump: { key: "xuanyuan_dry_grass_clump_v033f", variants: 1, w: 2.48, h: 1.56, y: 0.14, alpha: 0.84, anchorY: 0.62 },
       xuanyuanBrokenScabbard: { key: "xuanyuan_broken_scabbard_v033f", variants: 1, w: 2.58, h: 1.26, y: 0.07, alpha: 0.78, anchorY: 0.54 },
       xuanyuanCloudMuralShard: { key: "xuanyuan_cloud_mural_shard_v033f", variants: 1, w: 2.84, h: 1.4, y: 0.06, alpha: 0.78, anchorY: 0.54 },
-      xuanyuanBattlefieldRubble: { key: "xuanyuan_battlefield_rubble_v033f", variants: 1, w: 2.38, h: 1.38, y: 0.08, alpha: 0.8, anchorY: 0.56 }
-    },
-    herb_marsh: {
-      herbCluster: { key: "herb_marsh_herb_cluster", variants: 3, w: 2.35, h: 1.55, y: 0.3, alpha: 0.76, anchorY: 0.78 },
-      herbDanEmber: { key: "herb_marsh_dan_ember", frames: 4, fps: 4.6, w: 2.35, h: 2.35, y: 0.42, alpha: 0.88, anchorY: 0.86 },
-      herbMarshPool: { key: "herb_marsh_marsh_pool", variants: 1, w: 3.1, h: 1.35, y: 0.24, alpha: 0.62, anchorY: 0.62 }
+      xuanyuanBattlefieldRubble: { key: "xuanyuan_battlefield_rubble_v033f", variants: 1, w: 2.38, h: 1.38, y: 0.08, alpha: 0.8, anchorY: 0.56 },
+      xuanyuanSwordTraceLow: { key: "xuanyuan_sword_trace_low_v033j", variants: 1, w: 3.35, h: 1.45, y: 0.12, alpha: 0.72, anchorY: 0.58 },
+      xuanyuanBrokenRingLow: { key: "xuanyuan_broken_ring_low_v033j", variants: 1, w: 2.95, h: 1.48, y: 0.1, alpha: 0.7, anchorY: 0.56 },
+      xuanyuanCinnabarScrapeLow: { key: "xuanyuan_cinnabar_scrape_low_v033j", variants: 1, w: 3.25, h: 1.28, y: 0.08, alpha: 0.62, anchorY: 0.54 },
+      xuanyuanDryGrassLow: { key: "xuanyuan_dry_grass_low_v033j", variants: 1, w: 2.45, h: 1.36, y: 0.12, alpha: 0.66, anchorY: 0.58 }
     }
   }[pack];
   const spec = specs?.[feature.type];
@@ -2215,78 +2984,34 @@ function drawSceneEventFeature(feature) {
       ctx.save();
       ctx.globalCompositeOperation = "lighter";
       ctx.globalAlpha = ready ? 0.2 + pulse * 0.12 : seen ? 0.045 + pulse * 0.025 : 0.11 + pulse * 0.055;
-      ctx.strokeStyle = ready ? "rgba(143, 227, 188, 0.72)" : "rgba(209, 175, 90, 0.62)";
-      ctx.lineWidth = ready ? 2.2 : 1.35;
-      ctx.beginPath();
-      ctx.ellipse(0, feature.r * 0.22, feature.r * (ready ? 1.42 : 1.16), feature.r * (ready ? 0.5 : 0.38), 0, 0, TAU);
-      ctx.stroke();
+      drawFormalUiSprite(
+        ready ? "storyMarkerReadyHalo" : seen ? "storyMarkerDoneHalo" : "storyMarkerIdleHalo",
+        0,
+        feature.r * 0.34,
+        feature.r * (ready ? 3.2 : 2.62),
+        feature.r * (ready ? 1.86 : 1.46),
+        { anchorY: 0.58 }
+      );
       ctx.restore();
       const eventDrawn = drawAsset(eventSpec.category, eventSpec.key, 0, feature.r * eventSpec.y, feature.r * eventSpec.w, feature.r * eventSpec.h, {
         alpha: seen ? 0.58 : ready ? 1 : 0.94,
         anchorY: eventSpec.anchorY
       });
-      if (!seen) {
-        const lift = ready ? -feature.r * 1.18 + Math.sin(state.time * 4.8 + feature.phase) * 1.8 : -feature.r * 0.94;
+      if (ready) {
         ctx.save();
-        ctx.translate(0, lift);
         ctx.globalCompositeOperation = "source-over";
-        ctx.globalAlpha = ready ? 0.98 : 0.82;
-        ctx.fillStyle = ready ? "rgba(34, 28, 18, 0.94)" : "rgba(30, 26, 19, 0.82)";
-        ctx.strokeStyle = ready ? "rgba(239, 199, 93, 0.98)" : "rgba(221, 176, 83, 0.84)";
-        ctx.lineWidth = Math.max(1.4, feature.r * 0.048);
-        ctx.beginPath();
-        ctx.arc(0, 0, feature.r * (ready ? 0.54 : 0.46), 0, TAU);
-        ctx.fill();
-        ctx.stroke();
-        ctx.strokeStyle = ready ? "rgba(108, 216, 176, 0.82)" : "rgba(100, 192, 158, 0.5)";
-        ctx.lineWidth = Math.max(1, feature.r * 0.032);
-        ctx.beginPath();
-        ctx.arc(0, 0, feature.r * (ready ? 0.7 + pulse * 0.08 : 0.58), -Math.PI * 0.16, Math.PI * 1.18);
-        ctx.stroke();
-        ctx.fillStyle = ready ? "rgba(255, 236, 154, 0.98)" : "rgba(229, 193, 103, 0.92)";
-        ctx.font = `900 ${Math.max(17, feature.r * (ready ? 0.58 : 0.5))}px "KaiTi", "STKaiti", serif`;
+        ctx.globalAlpha = 0.78 + pulse * 0.16;
+        ctx.fillStyle = "rgba(255, 232, 156, 0.92)";
+        ctx.font = `800 ${Math.max(11, feature.r * 0.32)}px "KaiTi", "STKaiti", serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.shadowColor = ready ? "rgba(244, 202, 105, 0.58)" : "rgba(0, 0, 0, 0.3)";
-        ctx.shadowBlur = ready ? 8 : 3;
-        ctx.fillText("缘", 0, -1);
-        if (ready) {
-          ctx.globalCompositeOperation = "lighter";
-          ctx.globalAlpha = 0.24 + pulse * 0.22;
-          ctx.strokeStyle = "rgba(239, 199, 93, 0.72)";
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.arc(0, 0, feature.r * (0.86 + pulse * 0.18), 0, TAU);
-          ctx.stroke();
-          ctx.globalCompositeOperation = "source-over";
-          ctx.globalAlpha = 0.94;
-          ctx.shadowBlur = 0;
-          ctx.fillStyle = "rgba(255, 238, 176, 0.95)";
-          ctx.font = `800 ${Math.max(11, feature.r * 0.34)}px "KaiTi", "STKaiti", serif`;
-          ctx.fillText("靠近记入轮回", 0, feature.r * 1.15);
-        }
+        ctx.shadowColor = "rgba(0, 0, 0, 0.48)";
+        ctx.shadowBlur = 4;
+        ctx.fillText("靠近记入轮回", 0, -feature.r * 0.98);
         ctx.restore();
       }
       return eventDrawn;
     }
-  }
-
-  const atlasEvents = {
-    herb_marsh: {
-      herbCauldron: { idle: "herbCauldronIdle", ready: "herbCauldronReady", done: "herbCauldronDone", w: 3.55, h: 3.9, y: 0.36 },
-      spiritWell: { idle: "herbSpiritWellIdle", ready: "herbSpiritWellReady", done: "herbSpiritWellDone", w: 3.45, h: 3.3, y: 0.3 }
-    }
-  }[state.map?.scenePack]?.[feature.type];
-  if (atlasEvents) {
-    const seen = state.storySeen[storyKey(feature)];
-    const ready = !seen && dist(feature, state.player) < storyTriggerRadius(feature);
-    const eventAsset = seen ? atlasEvents.done : ready ? atlasEvents.ready : atlasEvents.idle;
-    const ok = drawAsset("sceneEvents", eventAsset, 0, feature.r * atlasEvents.y, feature.r * atlasEvents.w, feature.r * atlasEvents.h, {
-      alpha: seen ? 0.58 : ready ? 1 : 0.9,
-      anchorY: 0.86
-    });
-    if (!ok) return false;
-    return true;
   }
 
   if (state.map?.scenePack === "qingqiu") {
@@ -2320,7 +3045,6 @@ function drawSceneEventFeature(feature) {
   }
   const eventAsset = {
     brokenSword: "brokenSword",
-    herbCauldron: "herbCauldron",
     memoryStele: "memoryStele",
     foxfire: state.map?.scenePack === "qingqiu" ? "foxfire" : ""
   }[feature.type];
@@ -2365,19 +3089,86 @@ function drawPlayer(player) {
   }
 }
 
+function drawEnemyBossTag(enemy) {
+  if (!enemy.boss) return;
+  const label = enemy.chapterBossName || state.chapter?.bossName || "章节 Boss";
+  const y = -enemy.r * 3.55;
+  ctx.save();
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = "900 15px KaiTi, STKaiti, Microsoft YaHei, serif";
+  const w = Math.max(128, ctx.measureText(label).width + 56);
+  drawFormalUiSprite("bossNamePlaque", 0, y + 5, w, 32, { anchorY: 0.5, alpha: 0.95 });
+  ctx.fillStyle = "#ffe9a9";
+  ctx.shadowColor = "rgba(230, 109, 58, 0.52)";
+  ctx.shadowBlur = 8;
+  ctx.fillText(label, 0, y);
+  ctx.font = "800 10px Microsoft YaHei, sans-serif";
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = "rgba(255, 232, 176, 0.78)";
+  ctx.fillText("章节 Boss", 0, y + 18);
+  ctx.restore();
+}
+
+function drawEnemyHealthBar(enemy) {
+  const isBoss = Boolean(enemy.boss);
+  const barW = enemy.r * (isBoss ? 3.15 : 2.25);
+  const barH = isBoss ? 8 : 6;
+  const y = enemy.r + 7;
+  const fillKey = isBoss ? "bossHpFillSmall" : enemy.elite ? "eliteHpFill" : "enemyHpFill";
+  if (!drawFormalUiSprite("enemyHpTrack", 0, y, barW, barH, { anchorY: 0.5, alpha: isBoss ? 0.9 : 0.78 })) {
+    return false;
+  }
+  drawFormalUiSprite(fillKey, -barW * (1 - Math.max(0, enemy.hp / enemy.maxHp)) / 2, y, barW, barH, {
+    anchorY: 0.5,
+    clipRatio: Math.max(0, enemy.hp / enemy.maxHp),
+    alpha: isBoss ? 0.95 : 0.88
+  });
+  return true;
+}
+
 function drawEnemy(enemy) {
   const p = toView(enemy);
   const s = screen();
   if (p.x < -120 || p.x > s.w + 120 || p.y < -140 || p.y > s.h + 140) return;
-  drawShadow(enemy, enemy.elite ? 1.3 : 1.12, { y: enemy.elite ? 0.78 : 0.74, alpha: enemy.elite ? 0.36 : 0.3, squash: 0.92 });
-  const enemyKey = enemy.elite ? "elite" : "wraith";
+  const isBoss = Boolean(enemy.boss);
+  drawShadow(enemy, isBoss ? 1.78 : enemy.elite ? 1.3 : 1.12, {
+    y: isBoss ? 0.96 : enemy.elite ? 0.78 : 0.74,
+    alpha: isBoss ? 0.42 : enemy.elite ? 0.36 : 0.3,
+    squash: isBoss ? 0.82 : 0.92
+  });
+  if (isBoss) {
+    const phasePulse = enemy.bossPhase === "enrage" ? 0.52 : enemy.bossPhase === "summon" ? 0.36 : 0.24;
+    const flash = Math.max(enemy.bossCastFlash || 0, enemy.bossBurstFlash || 0);
+    const auraAlpha = Math.min(0.62, phasePulse + flash * 0.82);
+    drawVfxAsset(flash > 0.34 ? "boss_phase_flare" : "boss_entry", p.x, p.y + enemy.r * 0.55, enemy.r * (2.6 + flash * 1.6), {
+      rotate: Math.sin(state.time * 1.8) * 0.08,
+      alpha: auraAlpha,
+      w: flash > 0.34 ? 0.92 : 1.44,
+      h: flash > 0.34 ? 1.24 : 0.72,
+      anchorY: 0.62
+    });
+  }
+  const enemyKey = enemy.type || (enemy.elite ? "elite" : "wraith");
+  const fallbackEnemyKey = enemy.elite ? "elite" : "wraith";
   const pressureMode = state.enemies.length > 42 && !enemy.elite && dist(enemy, state.player) > 460;
   const sway = Math.sin((performance.now() * 0.005) + enemy.x * 0.02) * 0.04;
-  if (!pressureMode && drawAnimatedAsset("enemies", enemyKey, enemy.facing || "right", 3, enemy.animTime, p.x, p.y + 12, enemy.r * (enemy.elite ? 5.0 : 4.7), enemy.r * (enemy.elite ? 5.35 : 5.05), {
+  const spriteW = enemy.r * (isBoss ? (enemy.spriteW ?? 7.2) : enemy.elite ? 5.0 : 4.7);
+  const spriteH = enemy.r * (isBoss ? (enemy.spriteH ?? 8.6) : enemy.elite ? 5.35 : 5.05);
+  const spriteAnchorY = isBoss ? (enemy.spriteAnchorY ?? 0.94) : 0.9;
+  const spriteFps = isBoss ? 5 : enemy.elite ? 6 : 7;
+  if (!pressureMode && (
+    drawAnimatedAsset("enemies", enemyKey, enemy.facing || "right", 3, enemy.animTime, p.x, p.y + (isBoss ? 18 : 12), spriteW, spriteH, {
+      alpha: enemy.slowTime > 0 ? 0.78 : 1,
+      anchorY: spriteAnchorY,
+      fps: spriteFps
+    }) ||
+    drawAnimatedAsset("enemies", fallbackEnemyKey, enemy.facing || "right", 3, enemy.animTime, p.x, p.y + (isBoss ? 18 : 12), spriteW, spriteH, {
     alpha: enemy.slowTime > 0 ? 0.78 : 1,
-    anchorY: 0.9,
-    fps: enemy.elite ? 6 : 7
-  })) {
+    anchorY: spriteAnchorY,
+    fps: spriteFps
+    })
+  )) {
     ctx.save();
     ctx.translate(p.x, p.y);
     if (enemy.hitFlash > 0) {
@@ -2397,18 +3188,23 @@ function drawEnemy(enemy) {
       ctx.strokeText("剑".repeat(enemy.marks), 0, -enemy.r * 2.8);
       ctx.fillText("剑".repeat(enemy.marks), 0, -enemy.r * 2.8);
     }
-    ctx.fillStyle = "rgba(0, 0, 0, 0.45)";
-    ctx.fillRect(-enemy.r, enemy.r + 3, enemy.r * 2, 4);
-    ctx.fillStyle = enemy.elite ? "#e05b77" : "#74ba82";
-    ctx.fillRect(-enemy.r, enemy.r + 3, enemy.r * 2 * Math.max(0, enemy.hp / enemy.maxHp), 4);
+    drawEnemyBossTag(enemy);
+    drawEnemyHealthBar(enemy);
     ctx.restore();
     return;
   }
-  if (drawAsset("enemies", `${enemyKey}_${enemy.facing || "right"}_1`, p.x, p.y + 10, enemy.r * (enemy.elite ? 4.35 : 4.0), enemy.r * (enemy.elite ? 4.85 : 4.45), {
+  if (
+    drawAsset("enemies", `${enemyKey}_${enemy.facing || "right"}_1`, p.x, p.y + 10, enemy.r * (enemy.elite ? 4.35 : 4.0), enemy.r * (enemy.elite ? 4.85 : 4.45), {
+      rotate: sway,
+      alpha: enemy.slowTime > 0 ? 0.78 : 1,
+      anchorY: 0.86
+    }) ||
+    drawAsset("enemies", `${fallbackEnemyKey}_${enemy.facing || "right"}_1`, p.x, p.y + 10, enemy.r * (enemy.elite ? 4.35 : 4.0), enemy.r * (enemy.elite ? 4.85 : 4.45), {
     rotate: sway,
     alpha: enemy.slowTime > 0 ? 0.78 : 1,
     anchorY: 0.86
-  })) {
+    })
+  ) {
     ctx.save();
     ctx.translate(p.x, p.y);
     if (enemy.hitFlash > 0) {
@@ -2428,10 +3224,8 @@ function drawEnemy(enemy) {
       ctx.strokeText("剑".repeat(enemy.marks), 0, -enemy.r * 2.5);
       ctx.fillText("剑".repeat(enemy.marks), 0, -enemy.r * 2.5);
     }
-    ctx.fillStyle = "rgba(0, 0, 0, 0.45)";
-    ctx.fillRect(-enemy.r, enemy.r + 3, enemy.r * 2, 4);
-    ctx.fillStyle = enemy.elite ? "#e05b77" : "#74ba82";
-    ctx.fillRect(-enemy.r, enemy.r + 3, enemy.r * 2 * Math.max(0, enemy.hp / enemy.maxHp), 4);
+    drawEnemyBossTag(enemy);
+    drawEnemyHealthBar(enemy);
     ctx.restore();
     return;
   }
@@ -2549,7 +3343,13 @@ function drawEffect(effect) {
     dashTrail: ["dash_wind_trail", 1.55, 0.7, 0.72],
     hitSpark: ["hit_spark", 0.82, 0.7, 0.54],
     killBloom: ["kill_bloom", 1.55, 1.28, 0.76],
-    pickupBurst: ["pickup_orb_burst", 1.3, 1.06, 0.74]
+    pickupBurst: ["pickup_orb_burst", 1.3, 1.06, 0.74],
+    bossEntry: ["boss_entry", 2.35, 1.22, 0.88],
+    bossRuptureWarning: ["boss_rupture_warning", 1.78, 1.02, 0.76],
+    bossRuptureBurst: ["boss_rupture_burst", 1.92, 1.08, 0.9],
+    bossShockwave: ["boss_shockwave", 2.24, 1.18, 0.82],
+    bossPhaseFlare: ["boss_phase_flare", 1.34, 1.72, 0.82],
+    bossDeath: ["boss_death", 2.35, 1.35, 0.92]
   }[effect.type];
   if (atlas) {
     const angle = effect.angle || 0;
@@ -2806,6 +3606,78 @@ function drawDamageText(text) {
   ctx.restore();
 }
 
+function syncRuntimeUi(force = false) {
+  if (!state) return;
+  const now = performance.now();
+  if (!force && now - lastUiSync < UI_SYNC_INTERVAL) return;
+  lastUiSync = now;
+
+  const hpRatio = Math.max(0, state.player.hp / state.player.maxHp);
+  const hpValue = `${Math.max(0, Math.ceil(state.player.hp))}/${state.player.maxHp}`;
+  const xpNeed = Math.max(0, state.player.nextXp - state.player.xp);
+  const xpValue = `${state.player.xp}/${state.player.nextXp}  差${xpNeed}`;
+  const xpRatio = state.player.xp / state.player.nextXp;
+  const levelValue = CONFIG.realms[Math.min(CONFIG.realms.length - 1, state.player.level - 1)];
+  const timeValue = formatTime(state.time);
+  const killValue = String(state.kills);
+
+  setText(ui.hpText, hpValue);
+  setWidth(ui.hpBar, hpRatio);
+  setText(ui.xpText, xpValue);
+  setWidth(ui.xpBar, xpRatio);
+  setText(ui.levelText, levelValue);
+  setText(ui.timeText, timeValue);
+  setText(ui.killText, killValue);
+  setText(ui.mobileHpText, hpValue);
+  setWidth(ui.mobileHpBar, hpRatio);
+  setText(ui.mobileXpText, `差${xpNeed}`);
+  setWidth(ui.mobileXpBar, xpRatio);
+  setText(ui.mobileLevelText, levelValue);
+  setText(ui.mobileTimeText, timeValue);
+  setText(ui.mobileKillText, killValue);
+  setText(ui.soulText, state.resources.soul);
+  setText(ui.fireText, state.resources.fire);
+  setText(ui.dockLevelText, state.player.level);
+  setText(ui.buildText, buildSummary());
+  setText(ui.buildQuickText, buildQuickSummary());
+  syncBuildQuickUi();
+  syncChapterReadabilityUi();
+
+  if (ui.dashBtn) {
+    const ready = state.player.dashCooldown <= 0;
+    ui.dashBtn.classList.toggle("is-ready", ready);
+    setText(ui.dashBtn, ready ? "冲刺" : state.player.dashCooldown.toFixed(1));
+  }
+}
+
+function syncChapterReadabilityUi() {
+  const alert = state.chapter?.alert;
+  const overlayOpen = !ui.choices?.classList.contains("hidden")
+    || !ui.storyOverlay?.classList.contains("hidden")
+    || !ui.start?.classList.contains("hidden")
+    || !ui.gameOver?.classList.contains("hidden");
+  const showAlert = Boolean(alert && alert.life > 0 && !overlayOpen);
+  if (ui.chapterAlert) {
+    ui.chapterAlert.classList.toggle("hidden", !showAlert);
+    if (showAlert) {
+      ui.chapterAlert.dataset.tone = alert.tone || "neutral";
+      ui.chapterAlert.style.setProperty("--alert-life", Math.max(0, Math.min(1, alert.life / alert.maxLife)).toFixed(3));
+      setText(ui.chapterAlertTitle, alert.title);
+      setText(ui.chapterAlertText, alert.text);
+    }
+  }
+
+  const boss = activeChapterBoss();
+  if (ui.bossFrame) {
+    ui.bossFrame.classList.toggle("hidden", !boss);
+    if (boss) {
+      setText(ui.bossNameText, boss.chapterBossName || state.chapter.bossName || "章节 Boss");
+      setText(ui.bossPhaseText, `${bossPhaseText(boss)} · 限时 ${compactTime(CHAPTER_ONE_TIMELINE.limit - state.time)}`);
+      setWidth(ui.bossHpBar, boss.hp / boss.maxHp);
+    }
+  }
+}
+
 function render() {
   const s = screen();
   ctx.clearRect(0, 0, s.w, s.h);
@@ -2847,37 +3719,7 @@ function render() {
   for (const text of state.damageTexts) drawDamageText(text);
   ctx.restore();
 
-  const hpRatio = Math.max(0, state.player.hp / state.player.maxHp);
-  const hpValue = `${Math.max(0, Math.ceil(state.player.hp))}/${state.player.maxHp}`;
-  ui.hpText.textContent = hpValue;
-  ui.hpBar.style.width = `${hpRatio * 100}%`;
-  const xpNeed = Math.max(0, state.player.nextXp - state.player.xp);
-  const xpValue = `${state.player.xp}/${state.player.nextXp}  差${xpNeed}`;
-  const xpRatio = state.player.xp / state.player.nextXp;
-  const levelValue = CONFIG.realms[Math.min(CONFIG.realms.length - 1, state.player.level - 1)];
-  const timeValue = formatTime(state.time);
-  const killValue = String(state.kills);
-  ui.xpText.textContent = xpValue;
-  ui.xpBar.style.width = `${xpRatio * 100}%`;
-  ui.levelText.textContent = levelValue;
-  ui.timeText.textContent = timeValue;
-  ui.killText.textContent = killValue;
-  if (ui.mobileHpText) ui.mobileHpText.textContent = hpValue;
-  if (ui.mobileHpBar) ui.mobileHpBar.style.width = `${hpRatio * 100}%`;
-  if (ui.mobileXpText) ui.mobileXpText.textContent = `差${xpNeed}`;
-  if (ui.mobileXpBar) ui.mobileXpBar.style.width = `${xpRatio * 100}%`;
-  if (ui.mobileLevelText) ui.mobileLevelText.textContent = levelValue;
-  if (ui.mobileTimeText) ui.mobileTimeText.textContent = timeValue;
-  if (ui.mobileKillText) ui.mobileKillText.textContent = killValue;
-  ui.soulText.textContent = state.resources.soul;
-  ui.fireText.textContent = state.resources.fire;
-  ui.dockLevelText.textContent = state.player.level;
-  if (ui.buildText) ui.buildText.textContent = buildSummary();
-  if (ui.dashBtn) {
-    const ready = state.player.dashCooldown <= 0;
-    ui.dashBtn.classList.toggle("is-ready", ready);
-    ui.dashBtn.textContent = ready ? "冲刺" : state.player.dashCooldown.toFixed(1);
-  }
+  syncRuntimeUi();
 }
 
 function loop(now) {
@@ -2901,7 +3743,7 @@ function updateTouchStick(clientX, clientY) {
   if (ui.touchStick) {
     ui.touchStick.style.left = `${touchMove.originX}px`;
     ui.touchStick.style.top = `${touchMove.originY}px`;
-    ui.touchStick.firstElementChild.style.transform = `translate(${nx * clamped}px, ${ny * clamped}px)`;
+    if (touchStickKnob) touchStickKnob.style.transform = `translate(${nx * clamped}px, ${ny * clamped}px)`;
   }
 }
 
@@ -2912,7 +3754,7 @@ function hideTouchStick() {
   touchMove.dy = 0;
   if (ui.touchStick) {
     ui.touchStick.classList.remove("is-active");
-    ui.touchStick.firstElementChild.style.transform = "";
+    if (touchStickKnob) touchStickKnob.style.transform = "";
   }
 }
 
@@ -2924,9 +3766,11 @@ window.addEventListener("keydown", event => {
   }
 });
 window.addEventListener("keyup", event => keys.delete(event.key.toLowerCase()));
-window.addEventListener("resize", resize);
+window.addEventListener("resize", scheduleResize, { passive: true });
+window.visualViewport?.addEventListener("resize", scheduleResize, { passive: true });
 canvas.addEventListener("pointerdown", event => {
   if (!state?.running || state.paused || event.pointerType === "mouse") return;
+  event.preventDefault();
   const rect = canvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
   if (x > rect.width * 0.62) return;
@@ -2940,6 +3784,7 @@ canvas.addEventListener("pointerdown", event => {
 });
 canvas.addEventListener("pointermove", event => {
   if (!touchMove.active || touchMove.id !== event.pointerId) return;
+  event.preventDefault();
   updateTouchStick(event.clientX, event.clientY);
 });
 canvas.addEventListener("pointerup", event => {
@@ -2952,11 +3797,16 @@ ui.startBtn.addEventListener("click", startGame);
 ui.dashBtn.addEventListener("click", dashPlayer);
 ui.skipChoiceBtn.addEventListener("click", skipChoices);
 ui.storyChoiceBtn.addEventListener("click", closeStoryEvent);
+ui.buildQuickBtn?.addEventListener("click", () => {
+  if (!state?.running || !ui.choices.classList.contains("hidden") || !ui.storyOverlay.classList.contains("hidden") || !ui.gameOver.classList.contains("hidden")) return;
+  openBuildPanel();
+});
 ui.pauseBtn.addEventListener("click", () => {
   if (!state?.running || !ui.choices.classList.contains("hidden") || !ui.storyOverlay.classList.contains("hidden") || !ui.buildOverlay?.classList.contains("hidden")) return;
   state.paused = !state.paused;
   ui.pauseOverlay.classList.toggle("hidden", !state.paused);
   ui.pauseBtn.textContent = state.paused ? "续" : "暂";
+  syncBuildQuickUi();
   lastTime = performance.now();
 });
 ui.pauseOverlay.addEventListener("click", event => {
@@ -2969,6 +3819,7 @@ ui.pauseOverlay.addEventListener("click", event => {
   state.paused = false;
   ui.pauseOverlay.classList.add("hidden");
   ui.pauseBtn.textContent = "暂";
+  syncBuildQuickUi();
   lastTime = performance.now();
 });
 ui.buildOverlay?.addEventListener("click", event => {
@@ -2980,6 +3831,7 @@ ui.restartBtn.addEventListener("click", () => {
   ui.pauseOverlay.classList.add("hidden");
   ui.buildOverlay?.classList.add("hidden");
   ui.start.classList.remove("hidden");
+  syncBuildQuickUi();
   renderLineageSelect();
 });
 

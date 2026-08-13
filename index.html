@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>大荒轮回录：荒境</title>
-  <link rel="stylesheet" href="./styles.css?v=0.3.3k-mobile-start-confirm">
+  <link rel="stylesheet" href="./styles.css?v=0.3.4b1-ui-pass2">
+  <link rel="stylesheet" href="./styles-ui.css?v=0.3.4b1-ui-pass2">
+  <link rel="stylesheet" href="./styles-mobile.css?v=0.3.4b1-ui-pass2" media="(max-width: 760px), (orientation: portrait)">
 </head>
 <body>
   <div id="game-shell">
@@ -59,6 +61,23 @@
       <button id="pauseBtn" class="pause-btn" type="button" aria-label="暂停">暂</button>
     </div>
 
+    <div id="chapterAlert" class="chapter-alert hidden" aria-live="assertive">
+      <b id="chapterAlertTitle">第1波</b>
+      <span id="chapterAlertText">游妖试探</span>
+    </div>
+
+    <button id="buildQuickBtn" class="build-quick-btn" type="button" aria-label="当前构筑">
+      <b>构筑</b><span id="buildQuickText">未定</span>
+    </button>
+
+    <div id="bossFrame" class="boss-frame hidden" aria-live="polite">
+      <div>
+        <b id="bossNameText">章节 Boss</b>
+        <span id="bossPhaseText">第一阶段</span>
+      </div>
+      <div class="boss-bar"><span id="bossHpBar"></span></div>
+    </div>
+
     <div id="touchStick" class="touch-stick" aria-hidden="true">
       <span></span>
     </div>
@@ -71,10 +90,10 @@
     <div id="start" class="overlay">
       <div class="panel start-panel">
         <h2>择命入荒</h2>
-        <p>选择一个主角开局，在随机生成的大荒地图中存活、斩妖、突破修为。当前版本验证 WebP 图集、随机场景摆件、角色行走帧、竖版 UI、功法构筑与剧情点位。</p>
+        <p>选择一个主角开局，在随机生成的大荒地图中存活、斩妖、突破修为。当前版本验证 WebP 图集、随机场景摆件、角色行走帧、正式 UI、功法构筑与剧情点位。</p>
         <div id="lineageList" class="lineage-list"></div>
         <button id="startBtn" type="button">开始轮回</button>
-        <small>WASD / 方向键移动，功法自动释放，升级免费选择修为；灵髓用于略过补偿、刷新和后续事件。</small>
+        <small>WASD / 方向键移动，功法自动释放；升级免费选择修为，灵髓用于略过补偿、刷新和后续事件。</small>
       </div>
     </div>
 
@@ -129,6 +148,7 @@
       <div class="panel result-panel">
         <h2>此世已尽</h2>
         <p id="resultText"></p>
+        <div id="resultBuildSummary" class="result-build-summary"></div>
         <div class="run-summary" aria-label="轮回结算入口">
           <span>轮回点 <b id="metaPointText">0</b></span>
         </div>
@@ -136,7 +156,7 @@
       </div>
     </div>
   </div>
-  <script src="./src/config.js?v=0.3.3k-mobile-start-confirm"></script>
-  <script src="./src/game.js?v=0.3.3k-mobile-start-confirm"></script>
+  <script src="./src/config.js?v=0.3.4b1-ui-pass2"></script>
+  <script src="./src/game.js?v=0.3.4b1-ui-pass2"></script>
 </body>
 </html>

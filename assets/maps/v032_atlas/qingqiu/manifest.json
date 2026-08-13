@@ -1,8 +1,10 @@
 {
-  "version": "0.3.2a-qingqiu-tile-atlas",
+  "version": "0.3.3h-qingqiu-runtime-v032-atlas",
   "tileSize": 512,
   "edgeBlend": 82,
   "style": "Dunhuang mineral fresco, Qingqiu gray-purple and ink-teal terrain",
+  "runtimeReady": true,
+  "status": "accepted-runtime-sample-legacy-directory",
   "runtimeTiles": [
     "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_01.webp",
     "assets/maps/v032_atlas/qingqiu_seamless/tile_qingqiu_base_final_02.webp",
@@ -14,5 +16,10 @@
     "no large fog pool, monument, character, enemy, grass cluster, or bone pile in base tile",
     "no tile-local vignette or center spotlight",
     "noise selects tiles and decals, it does not draw main ground"
+  ],
+  "notes": [
+    "Qingqiu is visually accepted for runtime, but still lives under v032_atlas.",
+    "Do not add program-drawn purple fog pools back into the base layer.",
+    "Future formalization may move the same resource keys into assets/maps/v033/qingqiu."
   ]
 }

@@ -3,14 +3,20 @@ import { join } from "node:path";
 
 const root = process.cwd();
 const game = readFileSync("src/game.js", "utf8");
-const css = readFileSync("styles.css", "utf8");
+const baseCss = readFileSync("styles.css", "utf8");
+const formalUiCss = readFileSync("styles-ui.css", "utf8");
+const mobileCss = readFileSync("styles-mobile.css", "utf8");
+const css = [
+  baseCss,
+  formalUiCss,
+  mobileCss
+].join("\n");
 const checklist = readFileSync("docs/formal-ui-audio-vfx-checklist.md", "utf8");
 const runtimeManifest = JSON.parse(readFileSync("assets/asset-manifest.v0.3.json", "utf8").replace(/^\uFEFF/, ""));
 
 const deprecatedRuntimePrefixes = [
   "assets/maps/v032/sword_tomb/",
   "assets/maps/v032/qingqiu/",
-  "assets/maps/v032/herb_marsh/",
   "assets/runtime/webp/scene/qingqiu/",
   "assets/runtime/raw_ai_atlas/",
   "assets/runtime/webp/ui/story_raw/"
@@ -29,7 +35,7 @@ const requiredCssSprites = [
   "assets/runtime/webp/ui/hud_scroll.webp",
   "assets/runtime/webp/ui/mobile_hud_compact.webp",
   "assets/runtime/webp/ui/mobile_controls_atlas.webp",
-  "assets/runtime/webp/ui/hud_atlas/hud_controls_atlas.webp",
+  "assets/runtime/webp/ui/formal_v034a6/ui_formal_atlas.webp",
   "assets/runtime/webp/ui/title_plaque.webp",
   "assets/runtime/webp/ui/lineage_card.webp",
   "assets/runtime/webp/ui/choice_card_frame.webp",
@@ -56,10 +62,8 @@ const requiredRuntimeAssets = [
   "assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033e_idle.webp",
   "assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033e_ready.webp",
   "assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033e_done.webp",
-  "assets/maps/v032_atlas/herb_marsh_seamless/tile_herb_marsh_base_final_01.webp",
-  "assets/maps/v032_atlas/herb_marsh/events/event_herb_marsh_herb_cauldron_idle.webp",
   "assets/runtime/webp/ui/hud_scroll.webp",
-  "assets/runtime/webp/ui/hud_atlas/hud_controls_atlas.webp",
+  "assets/runtime/webp/ui/formal_v034a6/ui_formal_atlas.webp",
   "assets/runtime/webp/ui/lineage_card.webp",
   "assets/runtime/webp/ui/choice_card_frame.webp",
   "assets/runtime/webp/ui/story/story_panel_art.webp"
@@ -86,7 +90,6 @@ const forbiddenCssPrototypeRefs = [
 const forbiddenRuntimeLegacyRefs = [
   "assets/maps/v032/sword_tomb/",
   "assets/maps/v032/qingqiu/",
-  "assets/maps/v032/herb_marsh/",
   "assets/runtime/webp/scene/qingqiu/",
   "assets/runtime/raw_ai_atlas/",
   "assets/runtime/webp/ui/story_raw/"
@@ -101,7 +104,7 @@ const requiredGameHooks = [
   "touchStick",
   "visibleMapFeatures",
   "drawSceneDecals",
-  "0.3.3k-mobile-start-confirm"
+  "0.3.4a-7-ui-trigger-fix"
 ];
 const missingHooks = requiredGameHooks.filter(hook => !game.includes(hook) && !css.includes(hook));
 
@@ -112,6 +115,50 @@ const forbiddenRuntimeAssetIds = runtimeManifest.assets
 
 const styleKeywords = ["Dunhuang", "mineral", "cinnabar", "jade", "bronze", "lotus"];
 const missingChecklistKeywords = styleKeywords.filter(keyword => !checklist.includes(keyword));
+const forbiddenBaseUiPatterns = [
+  /^#hud\b/m,
+  /^\.mobile-status\b/m,
+  /^\.top-counters\b/m,
+  /^\.touch-stick\b/m,
+  /^\.skill-dock\b/m,
+  /^\.overlay\b/m,
+  /^\.panel\b/m,
+  /^\.start-panel\b/m,
+  /^\.choice\b/m,
+  /^\.lineage\b/m,
+  /^\.story-panel\b/m,
+  /^\.pause-panel\b/m,
+  /^\.result-panel\b/m,
+  /^\.resource-pill\b/m,
+  /^\.level-overlay\b/m,
+  /^\.choice-panel\b/m,
+  /^\.choice-list\b/m,
+  /^@media\s+\(max-width:\s*760px\)/m
+];
+const forbiddenBaseUiSelectors = forbiddenBaseUiPatterns
+  .filter(pattern => pattern.test(baseCss))
+  .map(pattern => pattern.source);
+const forbiddenFormalUiMobileMedia = [
+  "@media (max-width: 700px) and (orientation: portrait)",
+  "@media (max-width: 760px), (orientation: portrait)"
+].filter(ref => formalUiCss.includes(ref));
+const uiAuthorityChecks = {
+  baseRemovedHistoricalPatches: !baseCss.includes("V0.3.2b: formal UI close pass")
+    && !baseCss.includes("V0.3.3j-2: mobile option flow")
+    && !baseCss.includes("V0.3.3k: portrait start confirmation")
+    && baseCss.includes("0.3.3i-base-only")
+    && forbiddenBaseUiSelectors.length === 0,
+  formalUiAuthorityLoaded: formalUiCss.includes("0.3.3l-formal-ui-authority")
+    && formalUiCss.includes(".start-panel .lineage")
+    && formalUiCss.includes(".level-overlay .choice")
+    && formalUiCss.includes(".story-panel h2")
+    && forbiddenFormalUiMobileMedia.length === 0,
+  mobileAuthorityLoaded: mobileCss.includes("0.3.4a-7-ui-trigger-fix")
+    && mobileCss.includes("#hud")
+    && mobileCss.includes("#mobileHud")
+    && mobileCss.includes(".start-panel #startBtn")
+    && mobileCss.includes(".level-overlay .choice")
+};
 
 const result = {
   runtimeVersion: runtimeManifest.version,
@@ -124,9 +171,12 @@ const result = {
   forbiddenCssPrototypeRefs,
   forbiddenRuntimeLegacyRefs,
   forbiddenRuntimeAssetIds,
+  forbiddenBaseUiSelectors,
+  forbiddenFormalUiMobileMedia,
   missingHooks,
   missingChecklistKeywords,
-  ok: (game.includes("0.3.3k-mobile-start-confirm") || css.includes("0.3.3k-mobile-start-confirm")) &&
+  uiAuthorityChecks,
+  ok: (game.includes("0.3.4a-7-ui-trigger-fix") || css.includes("0.3.4a-7-ui-trigger-fix")) &&
     runtimeManifest.assetCount >= 70 &&
     runtimeManifest.totalBytes < 2_200_000 &&
     missingRuntimeFiles.length === 0 &&
@@ -137,7 +187,8 @@ const result = {
     forbiddenRuntimeLegacyRefs.length === 0 &&
     forbiddenRuntimeAssetIds.length === 0 &&
     missingHooks.length === 0 &&
-    missingChecklistKeywords.length === 0
+    missingChecklistKeywords.length === 0 &&
+    Object.values(uiAuthorityChecks).every(Boolean)
 };
 
 console.log(JSON.stringify(result, null, 2));

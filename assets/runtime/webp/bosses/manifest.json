@@ -1,0 +1,14 @@
+{
+  "version": "0.3.4a-boss-formal-asset-pass",
+  "style": "Dunhuang fresco, cinnabar flame, oxidized bronze, 2D sprite",
+  "source": "assets/art_direction/v034/boss/boss_chapter_red_flame_sheet_source.png",
+  "frames": [
+    "chapter_red_flame_right_0.webp",
+    "chapter_red_flame_right_1.webp",
+    "chapter_red_flame_right_2.webp",
+    "chapter_red_flame_left_0.webp",
+    "chapter_red_flame_left_1.webp",
+    "chapter_red_flame_left_2.webp"
+  ],
+  "runtimeNotes": "Six transparent WebP frames for chapter Boss validation. Attack/death frames are still pending."
+}

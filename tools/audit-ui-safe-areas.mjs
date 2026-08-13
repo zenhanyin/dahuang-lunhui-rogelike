@@ -1,9 +1,11 @@
 import { createRequire } from "node:module";
+import fs from "node:fs";
 
 const require = createRequire(import.meta.url);
 const { chromium } = require("C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright");
 
 const URL = "http://127.0.0.1:4177/index.html?qa=safe-area";
+const bounds = JSON.parse(fs.readFileSync("assets/runtime/webp/ui/formal_v034a8/ui_bounds.v034b.json", "utf8"));
 const browser = await chromium.launch({
   headless: true,
   executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe"
@@ -26,6 +28,35 @@ function inside(inner, outer, pad = 1) {
 function roundBox(box) {
   if (!box) return null;
   return Object.fromEntries(Object.entries(box).map(([key, value]) => [key, Math.round(value)]));
+}
+
+function centerDelta(inner, outer) {
+  return {
+    dx: Math.round((inner.left + inner.width / 2) - (outer.left + outer.width / 2)),
+    dy: Math.round((inner.top + inner.height / 2) - (outer.top + outer.height / 2))
+  };
+}
+
+function scaledSafe(card, component, key) {
+  const base = bounds.components[component].outer;
+  const safe = bounds.components[component][key];
+  const sx = card.width / base[2];
+  const sy = card.height / base[3];
+  return {
+    left: card.left + safe[0] * sx,
+    top: card.top + safe[1] * sy,
+    right: card.left + (safe[0] + safe[2]) * sx,
+    bottom: card.top + (safe[1] + safe[3]) * sy,
+    width: safe[2] * sx,
+    height: safe[3] * sy
+  };
+}
+
+function pushIfOffAxis(issues, meta, box, safe, maxDx = 10, maxDy = 12) {
+  const delta = centerDelta(box, safe);
+  if (!inside(box, safe, 8) || Math.abs(delta.dx) > maxDx || Math.abs(delta.dy) > maxDy) {
+    issues.push({ ...meta, box: roundBox(box), safe: roundBox(safe), centerDelta: delta });
+  }
 }
 
 async function makePage(viewport) {
@@ -51,32 +82,20 @@ async function auditDesktop() {
     };
     return [...document.querySelectorAll(".lineage")].map((card, index) => {
       const c = rect(card);
-      const safe = {
-        portrait: { left: c.left + 48 / 276 * c.width, top: c.top + 82 / 500 * c.height, right: c.left + 228 / 276 * c.width, bottom: c.top + 188 / 500 * c.height },
-        role: { left: c.left + 48 / 276 * c.width, top: c.top + 226 / 500 * c.height, right: c.left + 228 / 276 * c.width, bottom: c.top + 246 / 500 * c.height },
-        name: { left: c.left + 42 / 276 * c.width, top: c.top + 250 / 500 * c.height, right: c.left + 234 / 276 * c.width, bottom: c.top + 282 / 500 * c.height },
-        skill: { left: c.left + 48 / 276 * c.width, top: c.top + 286 / 500 * c.height, right: c.left + 228 / 276 * c.width, bottom: c.top + 316 / 500 * c.height },
-        stats: { left: c.left + 60 / 276 * c.width, top: c.top + 424 / 500 * c.height, right: c.left + 216 / 276 * c.width, bottom: c.top + 456 / 500 * c.height }
-      };
       return {
         index,
         card: rect(card),
         portrait: rect(card.querySelector(".lineage-art img")),
-        role: rect(card.querySelector(".lineage-copy em")),
-        name: rect(card.querySelector(".lineage h3")),
-        skill: rect(card.querySelector(".lineage strong")),
-        stats: rect(card.querySelector(".lineage-stats")),
-        safe
+        copy: rect(card.querySelector(".lineage-copy")),
+        stats: rect(card.querySelector(".lineage-stats"))
       };
     });
   });
 
   for (const item of start) {
-    for (const key of ["portrait", "role", "name", "skill", "stats"]) {
-      if (!inside(item[key], item.safe[key], 10)) {
-        issues.push({ screen: "start", index: item.index, key, box: roundBox(item[key]), safe: roundBox(item.safe[key]) });
-      }
-    }
+    pushIfOffAxis(issues, { screen: "start", index: item.index, key: "portrait" }, item.portrait, scaledSafe(item.card, "lineage_card", "portrait"), 12, 16);
+    pushIfOffAxis(issues, { screen: "start", index: item.index, key: "copy" }, item.copy, scaledSafe(item.card, "lineage_card", "copy"), 12, 16);
+    pushIfOffAxis(issues, { screen: "start", index: item.index, key: "stats" }, item.stats, scaledSafe(item.card, "lineage_card", "stats"), 12, 12);
   }
 
   await page.click("#startBtn");
@@ -96,13 +115,6 @@ async function auditDesktop() {
     };
     return [...document.querySelectorAll(".level-overlay .choice")].map((card, index) => {
       const c = rect(card);
-      const safe = {
-        icon: { left: c.left + 92 / 268 * c.width, top: c.top + 50 / 344 * c.height, right: c.left + 164 / 268 * c.width, bottom: c.top + 122 / 344 * c.height },
-        tag: { left: c.left + 70 / 268 * c.width, top: c.top + 124 / 344 * c.height, right: c.left + 194 / 268 * c.width, bottom: c.top + 146 / 344 * c.height },
-        title: { left: c.left + 48 / 268 * c.width, top: c.top + 154 / 344 * c.height, right: c.left + 214 / 268 * c.width, bottom: c.top + 194 / 344 * c.height },
-        body: { left: c.left + 54 / 268 * c.width, top: c.top + 204 / 344 * c.height, right: c.left + 210 / 268 * c.width, bottom: c.top + 286 / 344 * c.height },
-        cost: { left: c.left + 82 / 268 * c.width, top: c.top + 286 / 344 * c.height, right: c.left + 178 / 268 * c.width, bottom: c.top + 326 / 344 * c.height }
-      };
       return {
         index,
         card: c,
@@ -111,17 +123,16 @@ async function auditDesktop() {
         title: rect(card.querySelector("b")),
         body: rect(card.querySelector("span:not(.choice-icon):not(.choice-tag)")),
         cost: rect(card.querySelector(".choice-cost")),
-        safe
       };
     });
   });
 
   for (const item of choices) {
-    for (const key of ["icon", "tag", "title", "body", "cost"]) {
-      if (!inside(item[key], item.safe[key], key === "icon" ? 8 : 4)) {
-        issues.push({ screen: "choices", index: item.index, key, box: roundBox(item[key]), safe: roundBox(item.safe[key]) });
-      }
-    }
+    pushIfOffAxis(issues, { screen: "choices", index: item.index, key: "icon" }, item.icon, scaledSafe(item.card, "choice_card_frame", "icon"), 8, 8);
+    pushIfOffAxis(issues, { screen: "choices", index: item.index, key: "tag" }, item.tag, scaledSafe(item.card, "choice_card_frame", "tag"), 10, 8);
+    pushIfOffAxis(issues, { screen: "choices", index: item.index, key: "title" }, item.title, scaledSafe(item.card, "choice_card_frame", "title"), 10, 10);
+    pushIfOffAxis(issues, { screen: "choices", index: item.index, key: "body" }, item.body, scaledSafe(item.card, "choice_card_frame", "body"), 12, 12);
+    pushIfOffAxis(issues, { screen: "choices", index: item.index, key: "cost" }, item.cost, scaledSafe(item.card, "choice_card_frame", "button"), 12, 8);
   }
 
   await page.evaluate(() => {
@@ -189,7 +200,7 @@ async function auditDesktop() {
   for (const key of ["soul", "fire"]) {
     const frame = counter[`${key}Frame`];
     const num = counter[key];
-    const safe = { left: frame.right - 50, top: frame.top + 7, right: frame.right - 8, bottom: frame.bottom - 7 };
+    const safe = { left: frame.right - 82, top: frame.top + 7, right: frame.right - 16, bottom: frame.bottom - 7, width: 66, height: frame.height - 14 };
     if (!inside(num, safe, 1)) {
       issues.push({ screen: "counter", key, box: roundBox(num), safe: roundBox(safe) });
     }

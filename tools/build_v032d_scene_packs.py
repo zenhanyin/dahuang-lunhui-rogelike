@@ -191,20 +191,8 @@ def draw_prop(pack, name, frame=0):
             for i in range(5):
                 line(d, [(48 + i * 10, 118), (55 + i * 9, 72 + i % 2 * 9)], rgba("#a98c52", 120), 1.4)
     else:
-        if name == "herb_cluster":
-            for i in range(8):
-                x = 42 + i * 9
-                line(d, [(x, 121), (x + rng_like(frame, i, -12, 12), 72 + (i % 3) * 9)], rgba("#738855", 150), 2)
-                ellipse(d, x + (i % 2) * 8, 78 + (i % 3) * 8, 7, 14, fill=rgba("#8aa667", 126))
-        elif name == "dan_ember":
-            pulse = [0, 4, 7, 3][frame % 4]
-            ellipse(d, cx, cy - 14, 27 + pulse, 34 + pulse, fill=rgba("#d45f32", 96))
-            ellipse(d, cx, cy - 18, 14 + pulse * 0.5, 22 + pulse, fill=rgba("#f0bd61", 154))
-            ellipse(d, cx, cy - 22, 6 + pulse * 0.3, 14 + pulse, fill=rgba("#77d0a4", 145))
-        else:
-            ellipse(d, cx, cy, 48, 14, fill=rgba("#2d5f52", 88), outline=rgba("#b5a161", 92), width=1)
-            for i in range(3):
-                ellipse(d, cx + (i - 1) * 21, cy - 4, 18, 5, fill=rgba("#8ba163", 88))
+        for i in range(5):
+            line(d, [(48 + i * 10, 118), (55 + i * 9, 72 + i % 2 * 9)], rgba("#a98c52", 120), 1.4)
     return img.filter(ImageFilter.GaussianBlur(0.12 * SCALE))
 
 
@@ -232,13 +220,6 @@ def draw_event(pack, kind, state):
         d.rounded_rectangle((48 * SCALE, 46 * SCALE, 142 * SCALE, 170 * SCALE), radius=15 * SCALE, fill=rgba("#594d38", alpha), outline=rgba("#b89655", 132), width=2 * SCALE)
         for y in (80, 102, 124):
             line(d, [(68, y), (122, y + 3)], rgba("#d1ad66", 70), 1.2)
-    elif kind == "herb_cauldron":
-        ellipse(d, cx, cy, 54, 20, fill=rgba("#5b4931", alpha), outline=rgba("#c69a56", 128), width=2)
-        d.rectangle((55 * SCALE, 116 * SCALE, 135 * SCALE, 146 * SCALE), fill=rgba("#6a5131", alpha))
-        for x in (66, 124):
-            line(d, [(x, 144), (x - 9 if x < cx else x + 9, 174)], rgba("#3d2c1d", alpha), 3)
-        flame = ["#7bd8a7", "#f1c168", "#dc6332"][0 if state == "done" else 1 if state == "idle" else 2]
-        ellipse(d, cx, 88, 19 if state != "ready" else 25, 34 if state != "ready" else 42, fill=rgba(flame, 112))
     else:
         ellipse(d, cx, cy, 52, 16, fill=rgba("#2c6455", alpha), outline=rgba("#c1a45b", 105), width=2)
         ellipse(d, cx, cy - 2, 26, 8, fill=rgba("#78d0aa", 80 if state != "done" else 38))
@@ -285,13 +266,7 @@ def main():
         "props": [("broken_blade", 1), ("torn_flag", 1), ("dry_grass", 3)],
         "events": ["broken_sword", "vow_stele"]
     })
-    build_pack("herb_marsh", {
-        "tile": ("#34402f", "#3e4d38", "#262f29", "#9e8b52"),
-        "decals": [("gold_root_01", "root"), ("wet_vein_01", "wet"), ("dan_ash_01", "ash")],
-        "props": [("herb_cluster", 3), ("dan_ember", 4), ("marsh_pool", 1)],
-        "events": ["herb_cauldron", "spirit_well"]
-    })
-    print("Built V0.3.3 polished sword_tomb and herb_marsh scene packs.")
+    print("Built V0.3.3 polished sword_tomb scene pack.")
 
 
 if __name__ == "__main__":
