@@ -1,5 +1,5 @@
 {
-  "version": "0.3.4a-7-ui-trigger-fix",
+  "version": "0.3.4b1-ui-pass2",
   "runtimeRoot": "assets/runtime/webp",
   "memoryPolicy": {
     "preload": "characters, enemies, core HUD and icon assets",
@@ -1171,9 +1171,9 @@
     }
   },
   "audit": {
-    "version": "0.3.4a-7-ui-trigger-fix",
+    "version": "0.3.4b1-ui-pass2",
     "script": "tools/audit-style-systems.mjs + tools/audit-assets.mjs",
-    "runtimeHook": "0.3.4a-7-ui-trigger-fix",
+    "runtimeHook": "0.3.4b1-ui-pass2",
     "runtimeCodeRefs": 116,
     "runtimeManifestAssets": 103,
     "sourceOnlyRoots": [
@@ -1192,7 +1192,7 @@
       "assets/runtime/raw_ai_atlas/",
       "assets/runtime/webp/ui/story_raw/"
     ],
-    "lastSynced": "2026-08-09"
+    "lastSynced": "2026-08-13"
   },
-  "runtimeHook": "0.3.4a-7-ui-trigger-fix"
+  "runtimeHook": "0.3.4b1-ui-pass2"
 }

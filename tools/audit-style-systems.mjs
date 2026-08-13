@@ -13,6 +13,7 @@ const css = [
 ].join("\n");
 const checklist = readFileSync("docs/formal-ui-audio-vfx-checklist.md", "utf8");
 const runtimeManifest = JSON.parse(readFileSync("assets/asset-manifest.v0.3.json", "utf8").replace(/^\uFEFF/, ""));
+const expectedRuntimeHook = "0.3.4b1-ui-pass2";
 
 const deprecatedRuntimePrefixes = [
   "assets/maps/v032/sword_tomb/",
@@ -32,10 +33,10 @@ const missingRuntimeFiles = runtimeManifest.assets
   .filter(file => !existsSync(join(root, file)));
 
 const requiredCssSprites = [
-  "assets/runtime/webp/ui/hud_scroll.webp",
+  "assets/runtime/webp/ui/formal_v034b1/hud_panel_pc.webp",
+  "assets/runtime/webp/ui/formal_v034b1/ui_runtime_atlas.webp",
   "assets/runtime/webp/ui/mobile_hud_compact.webp",
   "assets/runtime/webp/ui/mobile_controls_atlas.webp",
-  "assets/runtime/webp/ui/formal_v034a6/ui_formal_atlas.webp",
   "assets/runtime/webp/ui/title_plaque.webp",
   "assets/runtime/webp/ui/lineage_card.webp",
   "assets/runtime/webp/ui/choice_card_frame.webp",
@@ -62,8 +63,8 @@ const requiredRuntimeAssets = [
   "assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033e_idle.webp",
   "assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033e_ready.webp",
   "assets/maps/v033/xuanyuan_ground/events/event_xuanyuan_stone_disk_v033e_done.webp",
-  "assets/runtime/webp/ui/hud_scroll.webp",
-  "assets/runtime/webp/ui/formal_v034a6/ui_formal_atlas.webp",
+  "assets/runtime/webp/ui/formal_v034b1/hud_panel_pc.webp",
+  "assets/runtime/webp/ui/formal_v034b1/ui_runtime_atlas.webp",
   "assets/runtime/webp/ui/lineage_card.webp",
   "assets/runtime/webp/ui/choice_card_frame.webp",
   "assets/runtime/webp/ui/story/story_panel_art.webp"
@@ -104,7 +105,7 @@ const requiredGameHooks = [
   "touchStick",
   "visibleMapFeatures",
   "drawSceneDecals",
-  "0.3.4a-7-ui-trigger-fix"
+  expectedRuntimeHook
 ];
 const missingHooks = requiredGameHooks.filter(hook => !game.includes(hook) && !css.includes(hook));
 
@@ -149,11 +150,12 @@ const uiAuthorityChecks = {
     && baseCss.includes("0.3.3i-base-only")
     && forbiddenBaseUiSelectors.length === 0,
   formalUiAuthorityLoaded: formalUiCss.includes("0.3.3l-formal-ui-authority")
+    && formalUiCss.includes(expectedRuntimeHook)
     && formalUiCss.includes(".start-panel .lineage")
     && formalUiCss.includes(".level-overlay .choice")
     && formalUiCss.includes(".story-panel h2")
     && forbiddenFormalUiMobileMedia.length === 0,
-  mobileAuthorityLoaded: mobileCss.includes("0.3.4a-7-ui-trigger-fix")
+  mobileAuthorityLoaded: mobileCss.includes("0.3.4b1-mobile-safe")
     && mobileCss.includes("#hud")
     && mobileCss.includes("#mobileHud")
     && mobileCss.includes(".start-panel #startBtn")
@@ -176,7 +178,7 @@ const result = {
   missingHooks,
   missingChecklistKeywords,
   uiAuthorityChecks,
-  ok: (game.includes("0.3.4a-7-ui-trigger-fix") || css.includes("0.3.4a-7-ui-trigger-fix")) &&
+  ok: (game.includes(expectedRuntimeHook) || css.includes(expectedRuntimeHook)) &&
     runtimeManifest.assetCount >= 70 &&
     runtimeManifest.totalBytes < 2_200_000 &&
     missingRuntimeFiles.length === 0 &&

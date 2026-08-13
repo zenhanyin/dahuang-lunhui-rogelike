@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { dirname, join, normalize } from "node:path";
 
 const root = process.cwd();
-const expectedRuntimeHook = "0.3.4a-7-ui-trigger-fix";
+const expectedRuntimeHook = "0.3.4b1-ui-pass2";
 const codeFiles = ["src/game.js", "src/config.js", "styles.css", "styles-ui.css", "styles-mobile.css", "index.html"];
 const manifestFile = "assets/asset-manifest.v0.3.json";
 const mapManifestFiles = [
