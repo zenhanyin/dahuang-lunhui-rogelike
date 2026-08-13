@@ -4,6 +4,7 @@
     "build": "node build-site.js",
     "audit:assets": "node tools/audit-assets.mjs",
     "audit:style": "node tools/audit-style-systems.mjs",
+    "verify:release": "node tools/verify-release-source.mjs",
     "preview": "python -m http.server 5173 -d deploy-root"
   },
   "devDependencies": {}
