@@ -60,6 +60,18 @@ const ui = {
 
 const keys = new Set();
 const TAU = Math.PI * 2;
+const RUN_PHASE = Object.freeze({
+  LINEAGE_SELECT: "lineage_select",
+  RUNNING: "running",
+  CHOICE: "choice",
+  STORY: "story",
+  PAUSE: "pause",
+  BUILD: "build",
+  BOSS_INTRO: "boss_intro",
+  RESULT: "result"
+});
+const GAMEPLAY_ACTIVE_PHASES = new Set([RUN_PHASE.RUNNING]);
+
 function playableLineages() {
   return CONFIG.lineages.filter(lineage => !lineage.hidden);
 }
@@ -78,6 +90,20 @@ const domWidthCache = new WeakMap();
 let lastUiSync = 0;
 let resizeQueued = false;
 const UI_SYNC_INTERVAL = 90;
+
+function currentPhase() {
+  return state?.phase || RUN_PHASE.LINEAGE_SELECT;
+}
+
+function isGameplayActive() {
+  return Boolean(state?.running && GAMEPLAY_ACTIVE_PHASES.has(currentPhase()));
+}
+
+function setRunPhase(phase) {
+  if (!state) return;
+  state.phase = phase;
+  state.paused = !GAMEPLAY_ACTIVE_PHASES.has(phase);
+}
 
 const RUNTIME_ASSET_ROOT = "assets/runtime/webp";
 const ASSET_VERSION = "0.3.4b1-ui-pass2";
@@ -622,13 +648,7 @@ function buildQuickSummary() {
 function syncBuildQuickUi() {
   if (!ui.buildQuickBtn) return;
   setText(ui.buildQuickText, buildQuickSummary());
-  const blocked = !state?.running
-    || !ui.start?.classList.contains("hidden")
-    || !ui.choices?.classList.contains("hidden")
-    || !ui.storyOverlay?.classList.contains("hidden")
-    || !ui.pauseOverlay?.classList.contains("hidden")
-    || !ui.buildOverlay?.classList.contains("hidden")
-    || !ui.gameOver?.classList.contains("hidden");
+  const blocked = !state?.running || currentPhase() !== RUN_PHASE.RUNNING;
   ui.buildQuickBtn.classList.toggle("is-hidden", blocked);
 }
 
@@ -852,6 +872,7 @@ function freshState() {
   const s = {
     running: false,
     paused: true,
+    phase: RUN_PHASE.LINEAGE_SELECT,
     time: 0,
     kills: 0,
     player: {
@@ -1372,7 +1393,7 @@ function startGame() {
   startMusic();
   state = freshState();
   state.running = true;
-  state.paused = false;
+  setRunPhase(RUN_PHASE.RUNNING);
   ui.lineageText.textContent = `${state.lineage.name} · ${state.map.name} · ${state.map.variant.name}`;
   if (ui.mobileLineageText) ui.mobileLineageText.textContent = `${state.lineage.name} · ${state.map.variant.name}`;
   ui.start.classList.add("hidden");
@@ -1391,7 +1412,7 @@ function startGame() {
 function endGame(reason = "death") {
   if (!state.running) return;
   state.running = false;
-  state.paused = true;
+  setRunPhase(RUN_PHASE.RESULT);
   ui.pauseOverlay.classList.add("hidden");
   ui.buildOverlay?.classList.add("hidden");
   ui.chapterAlert?.classList.add("hidden");
@@ -1430,7 +1451,7 @@ function pickNearest(maxRange, from = state.player) {
 }
 
 function dashPlayer() {
-  if (!state?.running || state.paused || state.player.dashCooldown > 0) return;
+  if (!isGameplayActive() || state.player.dashCooldown > 0) return;
   let { dx, dy } = movementVector();
   if (!dx && !dy) dx = state.player.facing === "left" ? -1 : 1;
   const len = Math.hypot(dx, dy) || 1;
@@ -1686,7 +1707,7 @@ function bossGroundRupture(enemy, phase = "summon") {
     count: rupture.count ?? (phase === "enrage" ? 10 : 7)
   });
   setTimeout(() => {
-    if (!state?.running || state.paused || enemy.hp <= 0) return;
+    if (!isGameplayActive() || enemy.hp <= 0) return;
     const radius = rupture.radius ?? (phase === "enrage" ? 94 : 72);
     pushCapped(state.pulses, { x, y, radius, life: 0.32, maxLife: 0.32, kind: "hurt" }, runtimeLimit("maxPulses", 36));
     addEffect("bossRuptureBurst", x, y, {
@@ -1794,7 +1815,7 @@ function updateChapterBoss(enemy, dt) {
 }
 
 function updateChapterDirector() {
-  if (!state?.running || state.paused || !state.chapter || state.chapter.bossCleared) return;
+  if (!isGameplayActive() || !state.chapter || state.chapter.bossCleared) return;
   const chapter = state.chapter;
   if (state.time >= CHAPTER_ONE_TIMELINE.limit && !chapter.bossCleared) {
     chapter.timedOut = true;
@@ -2042,7 +2063,7 @@ function gainXp(amount) {
 
 function closeChoices() {
   ui.choices.classList.add("hidden");
-  state.paused = false;
+  setRunPhase(RUN_PHASE.RUNNING);
   syncBuildQuickUi();
   lastTime = performance.now();
 }
@@ -2050,7 +2071,7 @@ function closeChoices() {
 function openBuildPanel() {
   if (!state?.running || !ui.buildOverlay) return;
   renderBuildLedger();
-  state.paused = true;
+  setRunPhase(RUN_PHASE.BUILD);
   ui.pauseOverlay.classList.add("hidden");
   ui.buildOverlay.classList.remove("hidden");
   ui.pauseBtn.textContent = "续";
@@ -2060,14 +2081,14 @@ function openBuildPanel() {
 function closeBuildPanel() {
   if (!state?.running || !ui.buildOverlay) return;
   ui.buildOverlay.classList.add("hidden");
-  state.paused = false;
+  setRunPhase(RUN_PHASE.RUNNING);
   ui.pauseBtn.textContent = "暂";
   syncBuildQuickUi();
   lastTime = performance.now();
 }
 
 function openChoices() {
-  state.paused = true;
+  setRunPhase(RUN_PHASE.CHOICE);
   syncBuildQuickUi();
   ui.choiceList.innerHTML = "";
   playSound("level", 3);
@@ -2112,7 +2133,7 @@ function openChoices() {
 }
 
 function skipChoices() {
-  if (!state?.running || ui.choices.classList.contains("hidden")) return;
+  if (!state?.running || currentPhase() !== RUN_PHASE.CHOICE) return;
   state.resources.soul += 2;
   closeChoices();
   addDamageText(state.player.x, state.player.y - 22, 2, "resource");
@@ -2220,7 +2241,7 @@ function openStoryEvent(event) {
   ui.storySpeaker.textContent = story.speaker;
   ui.storyPortrait.src = `assets/runtime/webp/ui/portraits/${story.portrait}.webp`;
   ui.storyChoiceBtn.textContent = "记入轮回";
-  state.paused = true;
+  setRunPhase(RUN_PHASE.STORY);
   ui.storyOverlay.classList.remove("hidden");
   syncBuildQuickUi();
   addShake(3);
@@ -2235,7 +2256,7 @@ function closeStoryEvent() {
   const event = state.pendingStory.event;
   ui.storyOverlay.classList.add("hidden");
   state.pendingStory = null;
-  state.paused = false;
+  setRunPhase(RUN_PHASE.RUNNING);
   state.storyCooldown = 2.2;
   syncBuildQuickUi();
   addDamageText(event.x, event.y - 18, data?.rewardText || reward, "resource");
@@ -2253,7 +2274,7 @@ function closeStoryEvent() {
 }
 
 function checkStoryEvents() {
-  if (!state?.running || state.paused || !ui.storyOverlay.classList.contains("hidden") || !ui.choices.classList.contains("hidden") || !ui.buildOverlay?.classList.contains("hidden")) return;
+  if (!isGameplayActive()) return;
   if (state.storyCooldown > 0) return;
   const visible = visibleMapFeatures();
   const events = [...state.map.events, ...visible.events];
@@ -3652,10 +3673,12 @@ function syncRuntimeUi(force = false) {
 
 function syncChapterReadabilityUi() {
   const alert = state.chapter?.alert;
-  const overlayOpen = !ui.choices?.classList.contains("hidden")
-    || !ui.storyOverlay?.classList.contains("hidden")
-    || !ui.start?.classList.contains("hidden")
-    || !ui.gameOver?.classList.contains("hidden");
+  const overlayOpen = [
+    RUN_PHASE.LINEAGE_SELECT,
+    RUN_PHASE.CHOICE,
+    RUN_PHASE.STORY,
+    RUN_PHASE.RESULT
+  ].includes(currentPhase());
   const showAlert = Boolean(alert && alert.life > 0 && !overlayOpen);
   if (ui.chapterAlert) {
     ui.chapterAlert.classList.toggle("hidden", !showAlert);
@@ -3725,7 +3748,7 @@ function render() {
 function loop(now) {
   const dt = Math.min(0.033, (now - lastTime) / 1000 || 0);
   lastTime = now;
-  if (state && state.running && !state.paused) update(dt);
+  if (isGameplayActive()) update(dt);
   render();
   requestAnimationFrame(loop);
 }
@@ -3769,7 +3792,7 @@ window.addEventListener("keyup", event => keys.delete(event.key.toLowerCase()));
 window.addEventListener("resize", scheduleResize, { passive: true });
 window.visualViewport?.addEventListener("resize", scheduleResize, { passive: true });
 canvas.addEventListener("pointerdown", event => {
-  if (!state?.running || state.paused || event.pointerType === "mouse") return;
+  if (!isGameplayActive() || event.pointerType === "mouse") return;
   event.preventDefault();
   const rect = canvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
@@ -3798,14 +3821,15 @@ ui.dashBtn.addEventListener("click", dashPlayer);
 ui.skipChoiceBtn.addEventListener("click", skipChoices);
 ui.storyChoiceBtn.addEventListener("click", closeStoryEvent);
 ui.buildQuickBtn?.addEventListener("click", () => {
-  if (!state?.running || !ui.choices.classList.contains("hidden") || !ui.storyOverlay.classList.contains("hidden") || !ui.gameOver.classList.contains("hidden")) return;
+  if (!isGameplayActive()) return;
   openBuildPanel();
 });
 ui.pauseBtn.addEventListener("click", () => {
-  if (!state?.running || !ui.choices.classList.contains("hidden") || !ui.storyOverlay.classList.contains("hidden") || !ui.buildOverlay?.classList.contains("hidden")) return;
-  state.paused = !state.paused;
-  ui.pauseOverlay.classList.toggle("hidden", !state.paused);
-  ui.pauseBtn.textContent = state.paused ? "续" : "暂";
+  if (!state?.running || ![RUN_PHASE.RUNNING, RUN_PHASE.PAUSE].includes(currentPhase())) return;
+  const nextPhase = currentPhase() === RUN_PHASE.PAUSE ? RUN_PHASE.RUNNING : RUN_PHASE.PAUSE;
+  setRunPhase(nextPhase);
+  ui.pauseOverlay.classList.toggle("hidden", nextPhase !== RUN_PHASE.PAUSE);
+  ui.pauseBtn.textContent = nextPhase === RUN_PHASE.PAUSE ? "续" : "暂";
   syncBuildQuickUi();
   lastTime = performance.now();
 });
@@ -3816,7 +3840,7 @@ ui.pauseOverlay.addEventListener("click", event => {
     return;
   }
   if (action !== "resume") return;
-  state.paused = false;
+  setRunPhase(RUN_PHASE.RUNNING);
   ui.pauseOverlay.classList.add("hidden");
   ui.pauseBtn.textContent = "暂";
   syncBuildQuickUi();
@@ -3827,6 +3851,7 @@ ui.buildOverlay?.addEventListener("click", event => {
   closeBuildPanel();
 });
 ui.restartBtn.addEventListener("click", () => {
+  if (state) setRunPhase(RUN_PHASE.LINEAGE_SELECT);
   ui.gameOver.classList.add("hidden");
   ui.pauseOverlay.classList.add("hidden");
   ui.buildOverlay?.classList.add("hidden");

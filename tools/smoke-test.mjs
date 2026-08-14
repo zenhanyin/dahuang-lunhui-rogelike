@@ -181,7 +181,10 @@ context.globalThis = context;
 const config = readFileSync("src/config.js", "utf8");
 const game = readFileSync("src/game.js", "utf8");
 const probe = `
+const phaseTransitions = {};
+phaseTransitions.initial = currentPhase();
 startGame();
+phaseTransitions.startRunning = currentPhase();
 const before = { x: state.player.x, y: state.player.y };
 keys.add("d");
 for (let i = 0; i < 420; i += 1) update(1 / 60);
@@ -192,24 +195,47 @@ const crossedScreen = moved.x > 1280;
 const chunked = moved.chunks > 0;
 state.resources.soul = 0;
 openChoices();
+phaseTransitions.choiceOpen = currentPhase();
 const disabledChoices = Array.from(ui.choiceList.children).filter(button => button.disabled).length;
 const freeChoices = Array.from(ui.choiceList.children).every(button => !button.disabled && button.innerHTML.includes("领悟"));
 const beforeSkipSoul = state.resources.soul;
 skipChoices();
-const skipRewarded = state.resources.soul === beforeSkipSoul + 2 && ui.choices.classList.contains("hidden") && !state.paused;
+phaseTransitions.choiceClosed = currentPhase();
+const skipRewarded = state.resources.soul === beforeSkipSoul + 2 && currentPhase() === RUN_PHASE.RUNNING;
+openStoryEvent({ type: "memoryStele", x: state.player.x + 80, y: state.player.y, r: 28, phase: 0 });
+phaseTransitions.storyOpen = currentPhase();
+closeStoryEvent();
+phaseTransitions.storyClosed = currentPhase();
+ui.pauseBtn.eventHandlers.click?.();
+phaseTransitions.pauseOpen = currentPhase();
+ui.pauseOverlay.eventHandlers.click?.({ target: { dataset: { action: "resume" } } });
+phaseTransitions.pauseClosed = currentPhase();
+openBuildPanel();
+phaseTransitions.buildOpen = currentPhase();
+closeBuildPanel();
+phaseTransitions.buildClosed = currentPhase();
 touchMove.active = true;
 touchMove.dx = 1;
 touchMove.dy = 0;
 update(1 / 10);
 touchMove.active = false;
 const touchMoved = state.player.x > moved.x;
-if (!ui.storyOverlay.classList.contains("hidden")) closeStoryEvent();
-state.paused = false;
-ui.pauseBtn.eventHandlers.click?.();
-const pauseVisible = !ui.pauseOverlay.classList.contains("hidden") && state.paused;
 endGame();
+phaseTransitions.result = currentPhase();
 const metaPoints = Number(ui.metaPointText.textContent);
+const phaseSmokePassed = phaseTransitions.startRunning === RUN_PHASE.RUNNING
+  && phaseTransitions.choiceOpen === RUN_PHASE.CHOICE
+  && phaseTransitions.choiceClosed === RUN_PHASE.RUNNING
+  && phaseTransitions.storyOpen === RUN_PHASE.STORY
+  && phaseTransitions.storyClosed === RUN_PHASE.RUNNING
+  && phaseTransitions.pauseOpen === RUN_PHASE.PAUSE
+  && phaseTransitions.pauseClosed === RUN_PHASE.RUNNING
+  && phaseTransitions.buildOpen === RUN_PHASE.BUILD
+  && phaseTransitions.buildClosed === RUN_PHASE.RUNNING
+  && phaseTransitions.result === RUN_PHASE.RESULT;
 globalThis.__SMOKE__ = {
+  phaseTransitions,
+  phaseSmokePassed,
   before,
   moved,
   crossedScreen,
@@ -218,7 +244,6 @@ globalThis.__SMOKE__ = {
   freeChoices,
   skipRewarded,
   touchMoved,
-  pauseVisible,
   metaPoints,
   formalUiAssets: Boolean(ASSET_PATHS.uiIcons?.sword && ASSET_PATHS.sceneEvents?.oldVowSteleReady),
   qingqiuSceneAssets: Boolean(ASSET_PATHS.mapTiles?.qingqiu_base_final_01 && ASSET_PATHS.qingqiuProps?.foxfire_cluster_3)
