@@ -1,0 +1,826 @@
+{
+  "generatedAt": "2026-08-14T06:41:35.224Z",
+  "commit": "84514f546a3e",
+  "fullCommit": "84514f546a3ef569fa38d0d435837c4930cd037a",
+  "uiAssetSet": "0.3.4b1-ui-pass2",
+  "viewport": {
+    "name": "pc-1920x1080",
+    "width": 1920,
+    "height": 1080
+  },
+  "dpr": 1,
+  "component": "choice",
+  "state": "stress-debug",
+  "metadataStatus": "TBD",
+  "components": [
+    {
+      "selector": "#choices",
+      "index": 0,
+      "label": "#choices",
+      "rect": {
+        "x": 320,
+        "y": 180,
+        "width": 1280,
+        "height": 720,
+        "left": 320,
+        "top": 180,
+        "right": 1600,
+        "bottom": 900
+      },
+      "visualAxis": {
+        "x": 960,
+        "y": 540,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": "h2",
+          "text": "选择修为",
+          "rect": {
+            "x": 831,
+            "y": 339.27,
+            "width": 258,
+            "height": 61,
+            "left": 831,
+            "top": 339.27,
+            "right": 1089,
+            "bottom": 400.27
+          },
+          "scrollWidth": 258,
+          "clientWidth": 258,
+          "scrollHeight": 61,
+          "clientHeight": 61,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice",
+          "text": "通用机缘压力女娲息壤超长压力长文本用于检查卡牌安全区、按钮锚点、技能图标中心点与正文换行表现。领悟",
+          "rect": {
+            "x": 470,
+            "y": 412.27,
+            "width": 268,
+            "height": 405.73,
+            "left": 470,
+            "top": 412.27,
+            "right": 738,
+            "bottom": 818
+          },
+          "scrollWidth": 268,
+          "clientWidth": 268,
+          "scrollHeight": 406,
+          "clientHeight": 406,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-icon",
+          "text": "",
+          "rect": {
+            "x": 576.59,
+            "y": 474.73,
+            "width": 58,
+            "height": 58,
+            "left": 576.59,
+            "top": 474.73,
+            "right": 634.59,
+            "bottom": 532.73
+          },
+          "scrollWidth": 58,
+          "clientWidth": 58,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-tag",
+          "text": "通用机缘压力",
+          "rect": {
+            "x": 561.59,
+            "y": 569.69,
+            "width": 88,
+            "height": 16,
+            "left": 561.59,
+            "top": 569.69,
+            "right": 649.59,
+            "bottom": 585.69
+          },
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "scrollHeight": 16,
+          "clientHeight": 16,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "b",
+          "text": "女娲息壤超长压力",
+          "rect": {
+            "x": 535.91,
+            "y": 597.27,
+            "width": 139.36,
+            "height": 48.72,
+            "left": 535.91,
+            "top": 597.27,
+            "right": 675.27,
+            "bottom": 645.98
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 49,
+          "clientHeight": 49,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "长文本用于检查卡牌安全区、按钮锚点、技能图标中心点与正文换行表现。",
+          "rect": {
+            "x": 535.91,
+            "y": 653.67,
+            "width": 139.36,
+            "height": 76,
+            "left": 535.91,
+            "top": 653.67,
+            "right": 675.27,
+            "bottom": 729.67
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 77,
+          "clientHeight": 76,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-cost",
+          "text": "领悟",
+          "rect": {
+            "x": 564.59,
+            "y": 752.3,
+            "width": 82,
+            "height": 30,
+            "left": 564.59,
+            "top": 752.3,
+            "right": 646.59,
+            "bottom": 782.3
+          },
+          "scrollWidth": 82,
+          "clientWidth": 82,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice",
+          "text": "轩辕遗剑长机缘轩辕剑意叠层强化长文本用于检查卡牌安全区、按钮锚点、技能图标中心点与正文换行表现。领悟",
+          "rect": {
+            "x": 826,
+            "y": 412.27,
+            "width": 268,
+            "height": 405.73,
+            "left": 826,
+            "top": 412.27,
+            "right": 1094,
+            "bottom": 818
+          },
+          "scrollWidth": 268,
+          "clientWidth": 268,
+          "scrollHeight": 406,
+          "clientHeight": 406,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-icon",
+          "text": "",
+          "rect": {
+            "x": 932.59,
+            "y": 474.73,
+            "width": 58,
+            "height": 58,
+            "left": 932.59,
+            "top": 474.73,
+            "right": 990.59,
+            "bottom": 532.73
+          },
+          "scrollWidth": 58,
+          "clientWidth": 58,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-tag",
+          "text": "轩辕遗剑长机缘",
+          "rect": {
+            "x": 917.59,
+            "y": 569.69,
+            "width": 88,
+            "height": 16,
+            "left": 917.59,
+            "top": 569.69,
+            "right": 1005.59,
+            "bottom": 585.69
+          },
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "scrollHeight": 16,
+          "clientHeight": 16,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "b",
+          "text": "轩辕剑意叠层强化",
+          "rect": {
+            "x": 891.91,
+            "y": 597.27,
+            "width": 139.36,
+            "height": 48.72,
+            "left": 891.91,
+            "top": 597.27,
+            "right": 1031.27,
+            "bottom": 645.98
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 49,
+          "clientHeight": 49,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "长文本用于检查卡牌安全区、按钮锚点、技能图标中心点与正文换行表现。",
+          "rect": {
+            "x": 891.91,
+            "y": 653.67,
+            "width": 139.36,
+            "height": 76,
+            "left": 891.91,
+            "top": 653.67,
+            "right": 1031.27,
+            "bottom": 729.67
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 77,
+          "clientHeight": 76,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-cost",
+          "text": "领悟",
+          "rect": {
+            "x": 920.59,
+            "y": 752.3,
+            "width": 82,
+            "height": 30,
+            "left": 920.59,
+            "top": 752.3,
+            "right": 1002.59,
+            "bottom": 782.3
+          },
+          "scrollWidth": 82,
+          "clientWidth": 82,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice",
+          "text": "通用机缘压力青风诀移动与气血上限长文本用于检查卡牌安全区、按钮锚点、技能图标中心点与正文换行表现。领悟",
+          "rect": {
+            "x": 1182,
+            "y": 412.27,
+            "width": 268,
+            "height": 405.73,
+            "left": 1182,
+            "top": 412.27,
+            "right": 1450,
+            "bottom": 818
+          },
+          "scrollWidth": 268,
+          "clientWidth": 268,
+          "scrollHeight": 406,
+          "clientHeight": 406,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-icon",
+          "text": "",
+          "rect": {
+            "x": 1288.59,
+            "y": 474.73,
+            "width": 58,
+            "height": 58,
+            "left": 1288.59,
+            "top": 474.73,
+            "right": 1346.59,
+            "bottom": 532.73
+          },
+          "scrollWidth": 58,
+          "clientWidth": 58,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-tag",
+          "text": "通用机缘压力",
+          "rect": {
+            "x": 1273.59,
+            "y": 569.69,
+            "width": 88,
+            "height": 16,
+            "left": 1273.59,
+            "top": 569.69,
+            "right": 1361.59,
+            "bottom": 585.69
+          },
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "scrollHeight": 16,
+          "clientHeight": 16,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "b",
+          "text": "青风诀移动与气血上限",
+          "rect": {
+            "x": 1247.91,
+            "y": 597.27,
+            "width": 139.36,
+            "height": 48.72,
+            "left": 1247.91,
+            "top": 597.27,
+            "right": 1387.27,
+            "bottom": 645.98
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 49,
+          "clientHeight": 49,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "长文本用于检查卡牌安全区、按钮锚点、技能图标中心点与正文换行表现。",
+          "rect": {
+            "x": 1247.91,
+            "y": 653.67,
+            "width": 139.36,
+            "height": 76,
+            "left": 1247.91,
+            "top": 653.67,
+            "right": 1387.27,
+            "bottom": 729.67
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 77,
+          "clientHeight": 76,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-cost",
+          "text": "领悟",
+          "rect": {
+            "x": 1276.59,
+            "y": 752.3,
+            "width": 82,
+            "height": 30,
+            "left": 1276.59,
+            "top": 752.3,
+            "right": 1358.59,
+            "bottom": 782.3
+          },
+          "scrollWidth": 82,
+          "clientWidth": 82,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#skipChoiceBtn",
+          "text": "略过悟道 +2 灵髓",
+          "rect": {
+            "x": 878.2,
+            "y": 826,
+            "width": 163.58,
+            "height": 36,
+            "left": 878.2,
+            "top": 826,
+            "right": 1041.78,
+            "bottom": 862
+          },
+          "scrollWidth": 164,
+          "clientWidth": 164,
+          "scrollHeight": 36,
+          "clientHeight": 36,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#choiceList .choice",
+      "index": 0,
+      "label": ".choice",
+      "rect": {
+        "x": 470,
+        "y": 412.27,
+        "width": 268,
+        "height": 405.73,
+        "left": 470,
+        "top": 412.27,
+        "right": 738,
+        "bottom": 818
+      },
+      "visualAxis": {
+        "x": 604,
+        "y": 615.13,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": ".choice-icon",
+          "text": "",
+          "rect": {
+            "x": 576.59,
+            "y": 474.73,
+            "width": 58,
+            "height": 58,
+            "left": 576.59,
+            "top": 474.73,
+            "right": 634.59,
+            "bottom": 532.73
+          },
+          "scrollWidth": 58,
+          "clientWidth": 58,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-tag",
+          "text": "通用机缘压力",
+          "rect": {
+            "x": 561.59,
+            "y": 569.69,
+            "width": 88,
+            "height": 16,
+            "left": 561.59,
+            "top": 569.69,
+            "right": 649.59,
+            "bottom": 585.69
+          },
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "scrollHeight": 16,
+          "clientHeight": 16,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "b",
+          "text": "女娲息壤超长压力",
+          "rect": {
+            "x": 535.91,
+            "y": 597.27,
+            "width": 139.36,
+            "height": 48.72,
+            "left": 535.91,
+            "top": 597.27,
+            "right": 675.27,
+            "bottom": 645.98
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 49,
+          "clientHeight": 49,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "长文本用于检查卡牌安全区、按钮锚点、技能图标中心点与正文换行表现。",
+          "rect": {
+            "x": 535.91,
+            "y": 653.67,
+            "width": 139.36,
+            "height": 76,
+            "left": 535.91,
+            "top": 653.67,
+            "right": 675.27,
+            "bottom": 729.67
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 77,
+          "clientHeight": 76,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-cost",
+          "text": "领悟",
+          "rect": {
+            "x": 564.59,
+            "y": 752.3,
+            "width": 82,
+            "height": 30,
+            "left": 564.59,
+            "top": 752.3,
+            "right": 646.59,
+            "bottom": 782.3
+          },
+          "scrollWidth": 82,
+          "clientWidth": 82,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#choiceList .choice",
+      "index": 1,
+      "label": ".choice",
+      "rect": {
+        "x": 826,
+        "y": 412.27,
+        "width": 268,
+        "height": 405.73,
+        "left": 826,
+        "top": 412.27,
+        "right": 1094,
+        "bottom": 818
+      },
+      "visualAxis": {
+        "x": 960,
+        "y": 615.13,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": ".choice-icon",
+          "text": "",
+          "rect": {
+            "x": 932.59,
+            "y": 474.73,
+            "width": 58,
+            "height": 58,
+            "left": 932.59,
+            "top": 474.73,
+            "right": 990.59,
+            "bottom": 532.73
+          },
+          "scrollWidth": 58,
+          "clientWidth": 58,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-tag",
+          "text": "轩辕遗剑长机缘",
+          "rect": {
+            "x": 917.59,
+            "y": 569.69,
+            "width": 88,
+            "height": 16,
+            "left": 917.59,
+            "top": 569.69,
+            "right": 1005.59,
+            "bottom": 585.69
+          },
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "scrollHeight": 16,
+          "clientHeight": 16,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "b",
+          "text": "轩辕剑意叠层强化",
+          "rect": {
+            "x": 891.91,
+            "y": 597.27,
+            "width": 139.36,
+            "height": 48.72,
+            "left": 891.91,
+            "top": 597.27,
+            "right": 1031.27,
+            "bottom": 645.98
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 49,
+          "clientHeight": 49,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "长文本用于检查卡牌安全区、按钮锚点、技能图标中心点与正文换行表现。",
+          "rect": {
+            "x": 891.91,
+            "y": 653.67,
+            "width": 139.36,
+            "height": 76,
+            "left": 891.91,
+            "top": 653.67,
+            "right": 1031.27,
+            "bottom": 729.67
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 77,
+          "clientHeight": 76,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-cost",
+          "text": "领悟",
+          "rect": {
+            "x": 920.59,
+            "y": 752.3,
+            "width": 82,
+            "height": 30,
+            "left": 920.59,
+            "top": 752.3,
+            "right": 1002.59,
+            "bottom": 782.3
+          },
+          "scrollWidth": 82,
+          "clientWidth": 82,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#choiceList .choice",
+      "index": 2,
+      "label": ".choice",
+      "rect": {
+        "x": 1182,
+        "y": 412.27,
+        "width": 268,
+        "height": 405.73,
+        "left": 1182,
+        "top": 412.27,
+        "right": 1450,
+        "bottom": 818
+      },
+      "visualAxis": {
+        "x": 1316,
+        "y": 615.13,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": ".choice-icon",
+          "text": "",
+          "rect": {
+            "x": 1288.59,
+            "y": 474.73,
+            "width": 58,
+            "height": 58,
+            "left": 1288.59,
+            "top": 474.73,
+            "right": 1346.59,
+            "bottom": 532.73
+          },
+          "scrollWidth": 58,
+          "clientWidth": 58,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-tag",
+          "text": "通用机缘压力",
+          "rect": {
+            "x": 1273.59,
+            "y": 569.69,
+            "width": 88,
+            "height": 16,
+            "left": 1273.59,
+            "top": 569.69,
+            "right": 1361.59,
+            "bottom": 585.69
+          },
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "scrollHeight": 16,
+          "clientHeight": 16,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "b",
+          "text": "青风诀移动与气血上限",
+          "rect": {
+            "x": 1247.91,
+            "y": 597.27,
+            "width": 139.36,
+            "height": 48.72,
+            "left": 1247.91,
+            "top": 597.27,
+            "right": 1387.27,
+            "bottom": 645.98
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 49,
+          "clientHeight": 49,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "长文本用于检查卡牌安全区、按钮锚点、技能图标中心点与正文换行表现。",
+          "rect": {
+            "x": 1247.91,
+            "y": 653.67,
+            "width": 139.36,
+            "height": 76,
+            "left": 1247.91,
+            "top": 653.67,
+            "right": 1387.27,
+            "bottom": 729.67
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 77,
+          "clientHeight": 76,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-cost",
+          "text": "领悟",
+          "rect": {
+            "x": 1276.59,
+            "y": 752.3,
+            "width": 82,
+            "height": 30,
+            "left": 1276.59,
+            "top": 752.3,
+            "right": 1358.59,
+            "bottom": 782.3
+          },
+          "scrollWidth": 82,
+          "clientWidth": 82,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#skipChoiceBtn",
+      "index": 0,
+      "label": "#skipChoiceBtn",
+      "rect": {
+        "x": 878.2,
+        "y": 826,
+        "width": 163.58,
+        "height": 36,
+        "left": 878.2,
+        "top": 826,
+        "right": 1041.78,
+        "bottom": 862
+      },
+      "visualAxis": {
+        "x": 959.99,
+        "y": 844,
+        "source": "DOM center"
+      },
+      "textBoxes": []
+    }
+  ]
+}

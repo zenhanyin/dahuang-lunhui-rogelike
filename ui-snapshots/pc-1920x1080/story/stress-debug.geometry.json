@@ -1,0 +1,203 @@
+{
+  "generatedAt": "2026-08-14T06:41:40.615Z",
+  "commit": "84514f546a3e",
+  "fullCommit": "84514f546a3ef569fa38d0d435837c4930cd037a",
+  "uiAssetSet": "0.3.4b1-ui-pass2",
+  "viewport": {
+    "name": "pc-1920x1080",
+    "width": 1920,
+    "height": 1080
+  },
+  "dpr": 1,
+  "component": "story",
+  "state": "stress-debug",
+  "metadataStatus": "TBD",
+  "components": [
+    {
+      "selector": "#storyOverlay .story-panel",
+      "index": 0,
+      "label": ".panel.story-panel",
+      "rect": {
+        "x": 500,
+        "y": 368.42,
+        "width": 920,
+        "height": 343.14,
+        "left": 500,
+        "top": 368.42,
+        "right": 1420,
+        "bottom": 711.56
+      },
+      "visualAxis": {
+        "x": 960,
+        "y": 539.99,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": "#storyTitle",
+          "text": "断剑残誓长标题压力测试",
+          "rect": {
+            "x": 695.03,
+            "y": 397.23,
+            "width": 247.47,
+            "height": 30.53,
+            "left": 695.03,
+            "top": 397.23,
+            "right": 942.5,
+            "bottom": 427.77
+          },
+          "scrollWidth": 247,
+          "clientWidth": 247,
+          "scrollHeight": 38,
+          "clientHeight": 31,
+          "overflowX": false,
+          "overflowY": true
+        },
+        {
+          "selector": "#storySpeaker",
+          "text": "轩辕遗剑长名压力测试",
+          "rect": {
+            "x": 570.83,
+            "y": 541.7,
+            "width": 125.11,
+            "height": 49.59,
+            "left": 570.83,
+            "top": 541.7,
+            "right": 695.94,
+            "bottom": 591.3
+          },
+          "scrollWidth": 125,
+          "clientWidth": 125,
+          "scrollHeight": 50,
+          "clientHeight": 50,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#storyText",
+          "text": "断剑插在荒土里，剑脊仍有旧战余温。这一段文本用于检查剧情框正文安全区、头像落点、按钮锚点和标题牌文字是否仍在图件内部。",
+          "rect": {
+            "x": 744.72,
+            "y": 483.7,
+            "width": 579.61,
+            "height": 67.66,
+            "left": 744.72,
+            "top": 483.7,
+            "right": 1324.33,
+            "bottom": 551.36
+          },
+          "scrollWidth": 580,
+          "clientWidth": 580,
+          "scrollHeight": 68,
+          "clientHeight": 68,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#storyChoiceBtn",
+          "text": "记入轮回",
+          "rect": {
+            "x": 617.75,
+            "y": 625.25,
+            "width": 144,
+            "height": 40,
+            "left": 617.75,
+            "top": 625.25,
+            "right": 761.75,
+            "bottom": 665.25
+          },
+          "scrollWidth": 144,
+          "clientWidth": 144,
+          "scrollHeight": 40,
+          "clientHeight": 40,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#storyTitle",
+      "index": 0,
+      "label": "#storyTitle",
+      "rect": {
+        "x": 695.03,
+        "y": 397.23,
+        "width": 247.47,
+        "height": 30.53,
+        "left": 695.03,
+        "top": 397.23,
+        "right": 942.5,
+        "bottom": 427.77
+      },
+      "visualAxis": {
+        "x": 818.76,
+        "y": 412.5,
+        "source": "DOM center"
+      },
+      "textBoxes": []
+    },
+    {
+      "selector": "#storyText",
+      "index": 0,
+      "label": "#storyText",
+      "rect": {
+        "x": 744.72,
+        "y": 483.7,
+        "width": 579.61,
+        "height": 67.66,
+        "left": 744.72,
+        "top": 483.7,
+        "right": 1324.33,
+        "bottom": 551.36
+      },
+      "visualAxis": {
+        "x": 1034.53,
+        "y": 517.53,
+        "source": "DOM center"
+      },
+      "textBoxes": []
+    },
+    {
+      "selector": "#storySpeaker",
+      "index": 0,
+      "label": "#storySpeaker",
+      "rect": {
+        "x": 570.83,
+        "y": 541.7,
+        "width": 125.11,
+        "height": 49.59,
+        "left": 570.83,
+        "top": 541.7,
+        "right": 695.94,
+        "bottom": 591.3
+      },
+      "visualAxis": {
+        "x": 633.38,
+        "y": 566.5,
+        "source": "DOM center"
+      },
+      "textBoxes": []
+    },
+    {
+      "selector": "#storyChoiceBtn",
+      "index": 0,
+      "label": "#storyChoiceBtn",
+      "rect": {
+        "x": 617.75,
+        "y": 625.25,
+        "width": 144,
+        "height": 40,
+        "left": 617.75,
+        "top": 625.25,
+        "right": 761.75,
+        "bottom": 665.25
+      },
+      "visualAxis": {
+        "x": 689.75,
+        "y": 645.25,
+        "source": "DOM center"
+      },
+      "textBoxes": []
+    }
+  ]
+}

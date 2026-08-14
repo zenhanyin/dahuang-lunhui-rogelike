@@ -1,0 +1,864 @@
+{
+  "generatedAt": "2026-08-14T06:41:25.635Z",
+  "commit": "84514f546a3e",
+  "fullCommit": "84514f546a3ef569fa38d0d435837c4930cd037a",
+  "uiAssetSet": "0.3.4b1-ui-pass2",
+  "viewport": {
+    "name": "pc-1920x1080",
+    "width": 1920,
+    "height": 1080
+  },
+  "dpr": 1,
+  "component": "lineage",
+  "state": "normal",
+  "metadataStatus": "TBD",
+  "components": [
+    {
+      "selector": "#start",
+      "index": 0,
+      "label": "#start",
+      "rect": {
+        "x": 320,
+        "y": 180,
+        "width": 1280,
+        "height": 720,
+        "left": 320,
+        "top": 180,
+        "right": 1600,
+        "bottom": 900
+      },
+      "visualAxis": {
+        "x": 960,
+        "y": 540,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": "h2",
+          "text": "择命入荒",
+          "rect": {
+            "x": 831,
+            "y": 213.33,
+            "width": 258,
+            "height": 61,
+            "left": 831,
+            "top": 213.33,
+            "right": 1089,
+            "bottom": 274.33
+          },
+          "scrollWidth": 258,
+          "clientWidth": 258,
+          "scrollHeight": 61,
+          "clientHeight": 61,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "p",
+          "text": "选择一个主角开局，在随机生成的大荒地图中存活、斩妖、突破修为。当前版本验证 WebP 图集、随机场景摆件、角色行走帧、正式 UI、功法构筑与剧情点位。",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage.is-selected",
+          "text": "轩\n      \n      \n        飞剑直伤\n        轩辕遗剑\n        剑气诀\n        前世曾守不周山，梦中总有一柄断剑回响。\n      \n      \n        气血 118\n        身",
+          "rect": {
+            "x": 661,
+            "y": 286.33,
+            "width": 276,
+            "height": 522.33,
+            "left": 661,
+            "top": 286.33,
+            "right": 937,
+            "bottom": 808.66
+          },
+          "scrollWidth": 276,
+          "clientWidth": 276,
+          "scrollHeight": 522,
+          "clientHeight": 522,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-seal",
+          "text": "轩",
+          "rect": {
+            "x": 679.06,
+            "y": 308.39,
+            "width": 33.88,
+            "height": 33.88,
+            "left": 679.06,
+            "top": 308.39,
+            "right": 712.94,
+            "bottom": 342.27
+          },
+          "scrollWidth": 30,
+          "clientWidth": 30,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-art",
+          "text": "",
+          "rect": {
+            "x": 725.3,
+            "y": 403.33,
+            "width": 154.55,
+            "height": 114.91,
+            "left": 725.3,
+            "top": 403.33,
+            "right": 879.85,
+            "bottom": 518.23
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 118,
+          "clientHeight": 115,
+          "overflowX": false,
+          "overflowY": true
+        },
+        {
+          "selector": ".lineage-copy",
+          "text": "飞剑直伤\n        轩辕遗剑\n        剑气诀\n        前世曾守不周山，梦中总有一柄断剑回响。",
+          "rect": {
+            "x": 725.3,
+            "y": 544.34,
+            "width": 154.55,
+            "height": 65.73,
+            "left": 725.3,
+            "top": 544.34,
+            "right": 879.85,
+            "bottom": 610.08
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 67,
+          "clientHeight": 66,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "em",
+          "text": "飞剑直伤",
+          "rect": {
+            "x": 778.57,
+            "y": 544.34,
+            "width": 48,
+            "height": 13.44,
+            "left": 778.57,
+            "top": 544.34,
+            "right": 826.57,
+            "bottom": 557.78
+          },
+          "scrollWidth": 48,
+          "clientWidth": 48,
+          "scrollHeight": 14,
+          "clientHeight": 13,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "h3",
+          "text": "轩辕遗剑",
+          "rect": {
+            "x": 764.57,
+            "y": 563.78,
+            "width": 76,
+            "height": 21.27,
+            "left": 764.57,
+            "top": 563.78,
+            "right": 840.57,
+            "bottom": 585.05
+          },
+          "scrollWidth": 76,
+          "clientWidth": 76,
+          "scrollHeight": 21,
+          "clientHeight": 21,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "strong",
+          "text": "剑气诀",
+          "rect": {
+            "x": 777.07,
+            "y": 591.05,
+            "width": 51,
+            "height": 19.03,
+            "left": 777.07,
+            "top": 591.05,
+            "right": 828.07,
+            "bottom": 610.08
+          },
+          "scrollWidth": 51,
+          "clientWidth": 51,
+          "scrollHeight": 20,
+          "clientHeight": 19,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "前世曾守不周山，梦中总有一柄断剑回响。",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-stats",
+          "text": "气血 118\n        身法 255",
+          "rect": {
+            "x": 726.68,
+            "y": 720.84,
+            "width": 151.8,
+            "height": 22,
+            "left": 726.68,
+            "top": 720.84,
+            "right": 878.48,
+            "bottom": 742.84
+          },
+          "scrollWidth": 152,
+          "clientWidth": 152,
+          "scrollHeight": 22,
+          "clientHeight": 22,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage",
+          "text": "青\n      \n      \n        幻身控场\n        青丘巫女\n        剑气诀\n        狐族旧誓尚未焚尽，幻雾会替你挡下一线生机。\n      \n      \n        气血 104\n       ",
+          "rect": {
+            "x": 983,
+            "y": 286.33,
+            "width": 276,
+            "height": 522.33,
+            "left": 983,
+            "top": 286.33,
+            "right": 1259,
+            "bottom": 808.66
+          },
+          "scrollWidth": 276,
+          "clientWidth": 276,
+          "scrollHeight": 522,
+          "clientHeight": 522,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-seal",
+          "text": "青",
+          "rect": {
+            "x": 1001.06,
+            "y": 308.39,
+            "width": 33.88,
+            "height": 33.88,
+            "left": 1001.06,
+            "top": 308.39,
+            "right": 1034.94,
+            "bottom": 342.27
+          },
+          "scrollWidth": 30,
+          "clientWidth": 30,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-art",
+          "text": "",
+          "rect": {
+            "x": 1047.3,
+            "y": 403.33,
+            "width": 154.55,
+            "height": 114.91,
+            "left": 1047.3,
+            "top": 403.33,
+            "right": 1201.85,
+            "bottom": 518.23
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 120,
+          "clientHeight": 115,
+          "overflowX": false,
+          "overflowY": true
+        },
+        {
+          "selector": ".lineage-copy",
+          "text": "幻身控场\n        青丘巫女\n        剑气诀\n        狐族旧誓尚未焚尽，幻雾会替你挡下一线生机。",
+          "rect": {
+            "x": 1047.3,
+            "y": 544.34,
+            "width": 154.55,
+            "height": 65.73,
+            "left": 1047.3,
+            "top": 544.34,
+            "right": 1201.85,
+            "bottom": 610.08
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 67,
+          "clientHeight": 66,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "em",
+          "text": "幻身控场",
+          "rect": {
+            "x": 1100.57,
+            "y": 544.34,
+            "width": 48,
+            "height": 13.44,
+            "left": 1100.57,
+            "top": 544.34,
+            "right": 1148.57,
+            "bottom": 557.78
+          },
+          "scrollWidth": 48,
+          "clientWidth": 48,
+          "scrollHeight": 14,
+          "clientHeight": 13,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "h3",
+          "text": "青丘巫女",
+          "rect": {
+            "x": 1086.57,
+            "y": 563.78,
+            "width": 76,
+            "height": 21.27,
+            "left": 1086.57,
+            "top": 563.78,
+            "right": 1162.57,
+            "bottom": 585.05
+          },
+          "scrollWidth": 76,
+          "clientWidth": 76,
+          "scrollHeight": 21,
+          "clientHeight": 21,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "strong",
+          "text": "剑气诀",
+          "rect": {
+            "x": 1099.07,
+            "y": 591.05,
+            "width": 51,
+            "height": 19.03,
+            "left": 1099.07,
+            "top": 591.05,
+            "right": 1150.07,
+            "bottom": 610.08
+          },
+          "scrollWidth": 51,
+          "clientWidth": 51,
+          "scrollHeight": 20,
+          "clientHeight": 19,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "狐族旧誓尚未焚尽，幻雾会替你挡下一线生机。",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-stats",
+          "text": "气血 104\n        身法 270",
+          "rect": {
+            "x": 1048.68,
+            "y": 720.84,
+            "width": 151.8,
+            "height": 22,
+            "left": 1048.68,
+            "top": 720.84,
+            "right": 1200.48,
+            "bottom": 742.84
+          },
+          "scrollWidth": 152,
+          "clientWidth": 152,
+          "scrollHeight": 22,
+          "clientHeight": 22,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#startBtn",
+          "text": "以轩辕遗剑开始",
+          "rect": {
+            "x": 851,
+            "y": 820.66,
+            "width": 218,
+            "height": 46,
+            "left": 851,
+            "top": 820.66,
+            "right": 1069,
+            "bottom": 866.66
+          },
+          "scrollWidth": 218,
+          "clientWidth": 218,
+          "scrollHeight": 46,
+          "clientHeight": 46,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "small",
+          "text": "WASD / 方向键移动，功法自动释放；升级免费选择修为，灵髓用于略过补偿、刷新和后续事件。",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#lineageList .lineage",
+      "index": 0,
+      "label": ".lineage.is-selected",
+      "rect": {
+        "x": 661,
+        "y": 286.33,
+        "width": 276,
+        "height": 522.33,
+        "left": 661,
+        "top": 286.33,
+        "right": 937,
+        "bottom": 808.66
+      },
+      "visualAxis": {
+        "x": 799,
+        "y": 547.5,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": ".lineage-seal",
+          "text": "轩",
+          "rect": {
+            "x": 679.06,
+            "y": 308.39,
+            "width": 33.88,
+            "height": 33.88,
+            "left": 679.06,
+            "top": 308.39,
+            "right": 712.94,
+            "bottom": 342.27
+          },
+          "scrollWidth": 30,
+          "clientWidth": 30,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-art",
+          "text": "",
+          "rect": {
+            "x": 725.3,
+            "y": 403.33,
+            "width": 154.55,
+            "height": 114.91,
+            "left": 725.3,
+            "top": 403.33,
+            "right": 879.85,
+            "bottom": 518.23
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 118,
+          "clientHeight": 115,
+          "overflowX": false,
+          "overflowY": true
+        },
+        {
+          "selector": ".lineage-copy",
+          "text": "飞剑直伤\n        轩辕遗剑\n        剑气诀\n        前世曾守不周山，梦中总有一柄断剑回响。",
+          "rect": {
+            "x": 725.3,
+            "y": 544.34,
+            "width": 154.55,
+            "height": 65.73,
+            "left": 725.3,
+            "top": 544.34,
+            "right": 879.85,
+            "bottom": 610.08
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 67,
+          "clientHeight": 66,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "em",
+          "text": "飞剑直伤",
+          "rect": {
+            "x": 778.57,
+            "y": 544.34,
+            "width": 48,
+            "height": 13.44,
+            "left": 778.57,
+            "top": 544.34,
+            "right": 826.57,
+            "bottom": 557.78
+          },
+          "scrollWidth": 48,
+          "clientWidth": 48,
+          "scrollHeight": 14,
+          "clientHeight": 13,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "h3",
+          "text": "轩辕遗剑",
+          "rect": {
+            "x": 764.57,
+            "y": 563.78,
+            "width": 76,
+            "height": 21.27,
+            "left": 764.57,
+            "top": 563.78,
+            "right": 840.57,
+            "bottom": 585.05
+          },
+          "scrollWidth": 76,
+          "clientWidth": 76,
+          "scrollHeight": 21,
+          "clientHeight": 21,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "strong",
+          "text": "剑气诀",
+          "rect": {
+            "x": 777.07,
+            "y": 591.05,
+            "width": 51,
+            "height": 19.03,
+            "left": 777.07,
+            "top": 591.05,
+            "right": 828.07,
+            "bottom": 610.08
+          },
+          "scrollWidth": 51,
+          "clientWidth": 51,
+          "scrollHeight": 20,
+          "clientHeight": 19,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "前世曾守不周山，梦中总有一柄断剑回响。",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-stats",
+          "text": "气血 118\n        身法 255",
+          "rect": {
+            "x": 726.68,
+            "y": 720.84,
+            "width": 151.8,
+            "height": 22,
+            "left": 726.68,
+            "top": 720.84,
+            "right": 878.48,
+            "bottom": 742.84
+          },
+          "scrollWidth": 152,
+          "clientWidth": 152,
+          "scrollHeight": 22,
+          "clientHeight": 22,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#lineageList .lineage",
+      "index": 1,
+      "label": ".lineage",
+      "rect": {
+        "x": 983,
+        "y": 286.33,
+        "width": 276,
+        "height": 522.33,
+        "left": 983,
+        "top": 286.33,
+        "right": 1259,
+        "bottom": 808.66
+      },
+      "visualAxis": {
+        "x": 1121,
+        "y": 547.5,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": ".lineage-seal",
+          "text": "青",
+          "rect": {
+            "x": 1001.06,
+            "y": 308.39,
+            "width": 33.88,
+            "height": 33.88,
+            "left": 1001.06,
+            "top": 308.39,
+            "right": 1034.94,
+            "bottom": 342.27
+          },
+          "scrollWidth": 30,
+          "clientWidth": 30,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-art",
+          "text": "",
+          "rect": {
+            "x": 1047.3,
+            "y": 403.33,
+            "width": 154.55,
+            "height": 114.91,
+            "left": 1047.3,
+            "top": 403.33,
+            "right": 1201.85,
+            "bottom": 518.23
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 120,
+          "clientHeight": 115,
+          "overflowX": false,
+          "overflowY": true
+        },
+        {
+          "selector": ".lineage-copy",
+          "text": "幻身控场\n        青丘巫女\n        剑气诀\n        狐族旧誓尚未焚尽，幻雾会替你挡下一线生机。",
+          "rect": {
+            "x": 1047.3,
+            "y": 544.34,
+            "width": 154.55,
+            "height": 65.73,
+            "left": 1047.3,
+            "top": 544.34,
+            "right": 1201.85,
+            "bottom": 610.08
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 67,
+          "clientHeight": 66,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "em",
+          "text": "幻身控场",
+          "rect": {
+            "x": 1100.57,
+            "y": 544.34,
+            "width": 48,
+            "height": 13.44,
+            "left": 1100.57,
+            "top": 544.34,
+            "right": 1148.57,
+            "bottom": 557.78
+          },
+          "scrollWidth": 48,
+          "clientWidth": 48,
+          "scrollHeight": 14,
+          "clientHeight": 13,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "h3",
+          "text": "青丘巫女",
+          "rect": {
+            "x": 1086.57,
+            "y": 563.78,
+            "width": 76,
+            "height": 21.27,
+            "left": 1086.57,
+            "top": 563.78,
+            "right": 1162.57,
+            "bottom": 585.05
+          },
+          "scrollWidth": 76,
+          "clientWidth": 76,
+          "scrollHeight": 21,
+          "clientHeight": 21,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "strong",
+          "text": "剑气诀",
+          "rect": {
+            "x": 1099.07,
+            "y": 591.05,
+            "width": 51,
+            "height": 19.03,
+            "left": 1099.07,
+            "top": 591.05,
+            "right": 1150.07,
+            "bottom": 610.08
+          },
+          "scrollWidth": 51,
+          "clientWidth": 51,
+          "scrollHeight": 20,
+          "clientHeight": 19,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "狐族旧誓尚未焚尽，幻雾会替你挡下一线生机。",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-stats",
+          "text": "气血 104\n        身法 270",
+          "rect": {
+            "x": 1048.68,
+            "y": 720.84,
+            "width": 151.8,
+            "height": 22,
+            "left": 1048.68,
+            "top": 720.84,
+            "right": 1200.48,
+            "bottom": 742.84
+          },
+          "scrollWidth": 152,
+          "clientWidth": 152,
+          "scrollHeight": 22,
+          "clientHeight": 22,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#startBtn",
+      "index": 0,
+      "label": "#startBtn",
+      "rect": {
+        "x": 851,
+        "y": 820.66,
+        "width": 218,
+        "height": 46,
+        "left": 851,
+        "top": 820.66,
+        "right": 1069,
+        "bottom": 866.66
+      },
+      "visualAxis": {
+        "x": 960,
+        "y": 843.66,
+        "source": "DOM center"
+      },
+      "textBoxes": []
+    }
+  ]
+}

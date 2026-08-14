@@ -5,6 +5,7 @@
     "audit:assets": "node tools/audit-assets.mjs",
     "audit:style": "node tools/audit-style-systems.mjs",
     "validate:ui-metadata": "node tools/validate-ui-metadata.mjs",
+    "snapshots:ui": "node tools/generate-ui-snapshots.mjs",
     "verify:release": "node tools/verify-release-source.mjs",
     "preview": "python -m http.server 5173 -d deploy-root"
   },

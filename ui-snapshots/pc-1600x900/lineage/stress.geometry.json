@@ -1,0 +1,864 @@
+{
+  "generatedAt": "2026-08-14T06:42:01.194Z",
+  "commit": "84514f546a3e",
+  "fullCommit": "84514f546a3ef569fa38d0d435837c4930cd037a",
+  "uiAssetSet": "0.3.4b1-ui-pass2",
+  "viewport": {
+    "name": "pc-1600x900",
+    "width": 1600,
+    "height": 900
+  },
+  "dpr": 1,
+  "component": "lineage",
+  "state": "stress",
+  "metadataStatus": "TBD",
+  "components": [
+    {
+      "selector": "#start",
+      "index": 0,
+      "label": "#start",
+      "rect": {
+        "x": 160,
+        "y": 90,
+        "width": 1280,
+        "height": 720,
+        "left": 160,
+        "top": 90,
+        "right": 1440,
+        "bottom": 810
+      },
+      "visualAxis": {
+        "x": 800,
+        "y": 450,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": "h2",
+          "text": "择命入荒",
+          "rect": {
+            "x": 671,
+            "y": 123.33,
+            "width": 258,
+            "height": 61,
+            "left": 671,
+            "top": 123.33,
+            "right": 929,
+            "bottom": 184.33
+          },
+          "scrollWidth": 258,
+          "clientWidth": 258,
+          "scrollHeight": 61,
+          "clientHeight": 61,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "p",
+          "text": "选择一个主角开局，在随机生成的大荒地图中存活、斩妖、突破修为。当前版本验证 WebP 图集、随机场景摆件、角色行走帧、正式 UI、功法构筑与剧情点位。",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage.is-selected",
+          "text": "轩\n      \n      \n        飞剑直伤\n        轩辕遗剑长名压力测试\n        剑气诀\n        这是一段用于检查开局卡文字安全区、人物立绘中心点与属性章是否溢出的长文本。\n      \n      \n",
+          "rect": {
+            "x": 501,
+            "y": 196.33,
+            "width": 276,
+            "height": 522.33,
+            "left": 501,
+            "top": 196.33,
+            "right": 777,
+            "bottom": 718.66
+          },
+          "scrollWidth": 276,
+          "clientWidth": 276,
+          "scrollHeight": 522,
+          "clientHeight": 522,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-seal",
+          "text": "轩",
+          "rect": {
+            "x": 519.06,
+            "y": 218.39,
+            "width": 33.88,
+            "height": 33.88,
+            "left": 519.06,
+            "top": 218.39,
+            "right": 552.94,
+            "bottom": 252.27
+          },
+          "scrollWidth": 30,
+          "clientWidth": 30,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-art",
+          "text": "",
+          "rect": {
+            "x": 565.3,
+            "y": 313.33,
+            "width": 154.55,
+            "height": 114.91,
+            "left": 565.3,
+            "top": 313.33,
+            "right": 719.85,
+            "bottom": 428.23
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 118,
+          "clientHeight": 115,
+          "overflowX": false,
+          "overflowY": true
+        },
+        {
+          "selector": ".lineage-copy",
+          "text": "飞剑直伤\n        轩辕遗剑长名压力测试\n        剑气诀\n        这是一段用于检查开局卡文字安全区、人物立绘中心点与属性章是否溢出的长文本。",
+          "rect": {
+            "x": 565.3,
+            "y": 454.34,
+            "width": 154.55,
+            "height": 87,
+            "left": 565.3,
+            "top": 454.34,
+            "right": 719.85,
+            "bottom": 541.34
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 88,
+          "clientHeight": 87,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "em",
+          "text": "飞剑直伤",
+          "rect": {
+            "x": 618.57,
+            "y": 454.34,
+            "width": 48,
+            "height": 13.44,
+            "left": 618.57,
+            "top": 454.34,
+            "right": 666.57,
+            "bottom": 467.78
+          },
+          "scrollWidth": 48,
+          "clientWidth": 48,
+          "scrollHeight": 14,
+          "clientHeight": 13,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "h3",
+          "text": "轩辕遗剑长名压力测试",
+          "rect": {
+            "x": 565.3,
+            "y": 473.78,
+            "width": 154.55,
+            "height": 42.53,
+            "left": 565.3,
+            "top": 473.78,
+            "right": 719.85,
+            "bottom": 516.31
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 43,
+          "clientHeight": 43,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "strong",
+          "text": "剑气诀",
+          "rect": {
+            "x": 617.07,
+            "y": 522.31,
+            "width": 51,
+            "height": 19.03,
+            "left": 617.07,
+            "top": 522.31,
+            "right": 668.07,
+            "bottom": 541.34
+          },
+          "scrollWidth": 51,
+          "clientWidth": 51,
+          "scrollHeight": 20,
+          "clientHeight": 19,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "这是一段用于检查开局卡文字安全区、人物立绘中心点与属性章是否溢出的长文本。",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-stats",
+          "text": "气血 118\n        身法 255",
+          "rect": {
+            "x": 566.68,
+            "y": 630.84,
+            "width": 151.8,
+            "height": 22,
+            "left": 566.68,
+            "top": 630.84,
+            "right": 718.48,
+            "bottom": 652.84
+          },
+          "scrollWidth": 152,
+          "clientWidth": 152,
+          "scrollHeight": 22,
+          "clientHeight": 22,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage",
+          "text": "青\n      \n      \n        幻身控场\n        青丘巫女长名压力测试\n        剑气诀\n        这是一段用于检查开局卡文字安全区、人物立绘中心点与属性章是否溢出的长文本。\n      \n      \n",
+          "rect": {
+            "x": 823,
+            "y": 196.33,
+            "width": 276,
+            "height": 522.33,
+            "left": 823,
+            "top": 196.33,
+            "right": 1099,
+            "bottom": 718.66
+          },
+          "scrollWidth": 276,
+          "clientWidth": 276,
+          "scrollHeight": 522,
+          "clientHeight": 522,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-seal",
+          "text": "青",
+          "rect": {
+            "x": 841.06,
+            "y": 218.39,
+            "width": 33.88,
+            "height": 33.88,
+            "left": 841.06,
+            "top": 218.39,
+            "right": 874.94,
+            "bottom": 252.27
+          },
+          "scrollWidth": 30,
+          "clientWidth": 30,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-art",
+          "text": "",
+          "rect": {
+            "x": 887.3,
+            "y": 313.33,
+            "width": 154.55,
+            "height": 114.91,
+            "left": 887.3,
+            "top": 313.33,
+            "right": 1041.85,
+            "bottom": 428.23
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 120,
+          "clientHeight": 115,
+          "overflowX": false,
+          "overflowY": true
+        },
+        {
+          "selector": ".lineage-copy",
+          "text": "幻身控场\n        青丘巫女长名压力测试\n        剑气诀\n        这是一段用于检查开局卡文字安全区、人物立绘中心点与属性章是否溢出的长文本。",
+          "rect": {
+            "x": 887.3,
+            "y": 454.34,
+            "width": 154.55,
+            "height": 87,
+            "left": 887.3,
+            "top": 454.34,
+            "right": 1041.85,
+            "bottom": 541.34
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 88,
+          "clientHeight": 87,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "em",
+          "text": "幻身控场",
+          "rect": {
+            "x": 940.57,
+            "y": 454.34,
+            "width": 48,
+            "height": 13.44,
+            "left": 940.57,
+            "top": 454.34,
+            "right": 988.57,
+            "bottom": 467.78
+          },
+          "scrollWidth": 48,
+          "clientWidth": 48,
+          "scrollHeight": 14,
+          "clientHeight": 13,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "h3",
+          "text": "青丘巫女长名压力测试",
+          "rect": {
+            "x": 887.3,
+            "y": 473.78,
+            "width": 154.55,
+            "height": 42.53,
+            "left": 887.3,
+            "top": 473.78,
+            "right": 1041.85,
+            "bottom": 516.31
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 43,
+          "clientHeight": 43,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "strong",
+          "text": "剑气诀",
+          "rect": {
+            "x": 939.07,
+            "y": 522.31,
+            "width": 51,
+            "height": 19.03,
+            "left": 939.07,
+            "top": 522.31,
+            "right": 990.07,
+            "bottom": 541.34
+          },
+          "scrollWidth": 51,
+          "clientWidth": 51,
+          "scrollHeight": 20,
+          "clientHeight": 19,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "这是一段用于检查开局卡文字安全区、人物立绘中心点与属性章是否溢出的长文本。",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-stats",
+          "text": "气血 104\n        身法 270",
+          "rect": {
+            "x": 888.68,
+            "y": 630.84,
+            "width": 151.8,
+            "height": 22,
+            "left": 888.68,
+            "top": 630.84,
+            "right": 1040.48,
+            "bottom": 652.84
+          },
+          "scrollWidth": 152,
+          "clientWidth": 152,
+          "scrollHeight": 22,
+          "clientHeight": 22,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#startBtn",
+          "text": "以轩辕遗剑开始",
+          "rect": {
+            "x": 691,
+            "y": 730.66,
+            "width": 218,
+            "height": 46,
+            "left": 691,
+            "top": 730.66,
+            "right": 909,
+            "bottom": 776.66
+          },
+          "scrollWidth": 218,
+          "clientWidth": 218,
+          "scrollHeight": 46,
+          "clientHeight": 46,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "small",
+          "text": "WASD / 方向键移动，功法自动释放；升级免费选择修为，灵髓用于略过补偿、刷新和后续事件。",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#lineageList .lineage",
+      "index": 0,
+      "label": ".lineage.is-selected",
+      "rect": {
+        "x": 501,
+        "y": 196.33,
+        "width": 276,
+        "height": 522.33,
+        "left": 501,
+        "top": 196.33,
+        "right": 777,
+        "bottom": 718.66
+      },
+      "visualAxis": {
+        "x": 639,
+        "y": 457.5,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": ".lineage-seal",
+          "text": "轩",
+          "rect": {
+            "x": 519.06,
+            "y": 218.39,
+            "width": 33.88,
+            "height": 33.88,
+            "left": 519.06,
+            "top": 218.39,
+            "right": 552.94,
+            "bottom": 252.27
+          },
+          "scrollWidth": 30,
+          "clientWidth": 30,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-art",
+          "text": "",
+          "rect": {
+            "x": 565.3,
+            "y": 313.33,
+            "width": 154.55,
+            "height": 114.91,
+            "left": 565.3,
+            "top": 313.33,
+            "right": 719.85,
+            "bottom": 428.23
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 118,
+          "clientHeight": 115,
+          "overflowX": false,
+          "overflowY": true
+        },
+        {
+          "selector": ".lineage-copy",
+          "text": "飞剑直伤\n        轩辕遗剑长名压力测试\n        剑气诀\n        这是一段用于检查开局卡文字安全区、人物立绘中心点与属性章是否溢出的长文本。",
+          "rect": {
+            "x": 565.3,
+            "y": 454.34,
+            "width": 154.55,
+            "height": 87,
+            "left": 565.3,
+            "top": 454.34,
+            "right": 719.85,
+            "bottom": 541.34
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 88,
+          "clientHeight": 87,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "em",
+          "text": "飞剑直伤",
+          "rect": {
+            "x": 618.57,
+            "y": 454.34,
+            "width": 48,
+            "height": 13.44,
+            "left": 618.57,
+            "top": 454.34,
+            "right": 666.57,
+            "bottom": 467.78
+          },
+          "scrollWidth": 48,
+          "clientWidth": 48,
+          "scrollHeight": 14,
+          "clientHeight": 13,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "h3",
+          "text": "轩辕遗剑长名压力测试",
+          "rect": {
+            "x": 565.3,
+            "y": 473.78,
+            "width": 154.55,
+            "height": 42.53,
+            "left": 565.3,
+            "top": 473.78,
+            "right": 719.85,
+            "bottom": 516.31
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 43,
+          "clientHeight": 43,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "strong",
+          "text": "剑气诀",
+          "rect": {
+            "x": 617.07,
+            "y": 522.31,
+            "width": 51,
+            "height": 19.03,
+            "left": 617.07,
+            "top": 522.31,
+            "right": 668.07,
+            "bottom": 541.34
+          },
+          "scrollWidth": 51,
+          "clientWidth": 51,
+          "scrollHeight": 20,
+          "clientHeight": 19,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "这是一段用于检查开局卡文字安全区、人物立绘中心点与属性章是否溢出的长文本。",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-stats",
+          "text": "气血 118\n        身法 255",
+          "rect": {
+            "x": 566.68,
+            "y": 630.84,
+            "width": 151.8,
+            "height": 22,
+            "left": 566.68,
+            "top": 630.84,
+            "right": 718.48,
+            "bottom": 652.84
+          },
+          "scrollWidth": 152,
+          "clientWidth": 152,
+          "scrollHeight": 22,
+          "clientHeight": 22,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#lineageList .lineage",
+      "index": 1,
+      "label": ".lineage",
+      "rect": {
+        "x": 823,
+        "y": 196.33,
+        "width": 276,
+        "height": 522.33,
+        "left": 823,
+        "top": 196.33,
+        "right": 1099,
+        "bottom": 718.66
+      },
+      "visualAxis": {
+        "x": 961,
+        "y": 457.5,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": ".lineage-seal",
+          "text": "青",
+          "rect": {
+            "x": 841.06,
+            "y": 218.39,
+            "width": 33.88,
+            "height": 33.88,
+            "left": 841.06,
+            "top": 218.39,
+            "right": 874.94,
+            "bottom": 252.27
+          },
+          "scrollWidth": 30,
+          "clientWidth": 30,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-art",
+          "text": "",
+          "rect": {
+            "x": 887.3,
+            "y": 313.33,
+            "width": 154.55,
+            "height": 114.91,
+            "left": 887.3,
+            "top": 313.33,
+            "right": 1041.85,
+            "bottom": 428.23
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 120,
+          "clientHeight": 115,
+          "overflowX": false,
+          "overflowY": true
+        },
+        {
+          "selector": ".lineage-copy",
+          "text": "幻身控场\n        青丘巫女长名压力测试\n        剑气诀\n        这是一段用于检查开局卡文字安全区、人物立绘中心点与属性章是否溢出的长文本。",
+          "rect": {
+            "x": 887.3,
+            "y": 454.34,
+            "width": 154.55,
+            "height": 87,
+            "left": 887.3,
+            "top": 454.34,
+            "right": 1041.85,
+            "bottom": 541.34
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 88,
+          "clientHeight": 87,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "em",
+          "text": "幻身控场",
+          "rect": {
+            "x": 940.57,
+            "y": 454.34,
+            "width": 48,
+            "height": 13.44,
+            "left": 940.57,
+            "top": 454.34,
+            "right": 988.57,
+            "bottom": 467.78
+          },
+          "scrollWidth": 48,
+          "clientWidth": 48,
+          "scrollHeight": 14,
+          "clientHeight": 13,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "h3",
+          "text": "青丘巫女长名压力测试",
+          "rect": {
+            "x": 887.3,
+            "y": 473.78,
+            "width": 154.55,
+            "height": 42.53,
+            "left": 887.3,
+            "top": 473.78,
+            "right": 1041.85,
+            "bottom": 516.31
+          },
+          "scrollWidth": 155,
+          "clientWidth": 155,
+          "scrollHeight": 43,
+          "clientHeight": 43,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "strong",
+          "text": "剑气诀",
+          "rect": {
+            "x": 939.07,
+            "y": 522.31,
+            "width": 51,
+            "height": 19.03,
+            "left": 939.07,
+            "top": 522.31,
+            "right": 990.07,
+            "bottom": 541.34
+          },
+          "scrollWidth": 51,
+          "clientWidth": 51,
+          "scrollHeight": 20,
+          "clientHeight": 19,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "这是一段用于检查开局卡文字安全区、人物立绘中心点与属性章是否溢出的长文本。",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".lineage-stats",
+          "text": "气血 104\n        身法 270",
+          "rect": {
+            "x": 888.68,
+            "y": 630.84,
+            "width": 151.8,
+            "height": 22,
+            "left": 888.68,
+            "top": 630.84,
+            "right": 1040.48,
+            "bottom": 652.84
+          },
+          "scrollWidth": 152,
+          "clientWidth": 152,
+          "scrollHeight": 22,
+          "clientHeight": 22,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#startBtn",
+      "index": 0,
+      "label": "#startBtn",
+      "rect": {
+        "x": 691,
+        "y": 730.66,
+        "width": 218,
+        "height": 46,
+        "left": 691,
+        "top": 730.66,
+        "right": 909,
+        "bottom": 776.66
+      },
+      "visualAxis": {
+        "x": 800,
+        "y": 753.66,
+        "source": "DOM center"
+      },
+      "textBoxes": []
+    }
+  ]
+}

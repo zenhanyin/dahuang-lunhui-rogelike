@@ -1,0 +1,244 @@
+{
+  "generatedAt": "2026-08-14T06:42:24.875Z",
+  "commit": "84514f546a3e",
+  "fullCommit": "84514f546a3ef569fa38d0d435837c4930cd037a",
+  "uiAssetSet": "0.3.4b1-ui-pass2",
+  "viewport": {
+    "name": "pc-1366x768",
+    "width": 1366,
+    "height": 768
+  },
+  "dpr": 1,
+  "component": "resource",
+  "state": "normal",
+  "metadataStatus": "CURRENT",
+  "components": [
+    {
+      "selector": "#topCounters",
+      "index": 0,
+      "label": "#topCounters",
+      "rect": {
+        "x": 846.03,
+        "y": 52,
+        "width": 436,
+        "height": 62,
+        "left": 846.03,
+        "top": 52,
+        "right": 1282.03,
+        "bottom": 114
+      },
+      "visualAxis": {
+        "x": 1064.03,
+        "y": 83,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": ".counter.soul",
+          "text": "86",
+          "rect": {
+            "x": 846.03,
+            "y": 54,
+            "width": 176,
+            "height": 58,
+            "left": 846.03,
+            "top": 54,
+            "right": 1022.03,
+            "bottom": 112
+          },
+          "scrollWidth": 176,
+          "clientWidth": 176,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#soulText",
+          "text": "86",
+          "rect": {
+            "x": 940.03,
+            "y": 74,
+            "width": 64,
+            "height": 18,
+            "left": 940.03,
+            "top": 74,
+            "right": 1004.03,
+            "bottom": 92
+          },
+          "scrollWidth": 64,
+          "clientWidth": 64,
+          "scrollHeight": 21,
+          "clientHeight": 18,
+          "overflowX": false,
+          "overflowY": true
+        },
+        {
+          "selector": ".counter.fire",
+          "text": "4",
+          "rect": {
+            "x": 1030.03,
+            "y": 54,
+            "width": 176,
+            "height": 58,
+            "left": 1030.03,
+            "top": 54,
+            "right": 1206.03,
+            "bottom": 112
+          },
+          "scrollWidth": 176,
+          "clientWidth": 176,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#fireText",
+          "text": "4",
+          "rect": {
+            "x": 1124.03,
+            "y": 74,
+            "width": 64,
+            "height": 18,
+            "left": 1124.03,
+            "top": 74,
+            "right": 1188.03,
+            "bottom": 92
+          },
+          "scrollWidth": 64,
+          "clientWidth": 64,
+          "scrollHeight": 21,
+          "clientHeight": 18,
+          "overflowX": false,
+          "overflowY": true
+        },
+        {
+          "selector": "#pauseBtn",
+          "text": "暂",
+          "rect": {
+            "x": 1214.03,
+            "y": 49,
+            "width": 68,
+            "height": 68,
+            "left": 1214.03,
+            "top": 49,
+            "right": 1282.03,
+            "bottom": 117
+          },
+          "scrollWidth": 68,
+          "clientWidth": 68,
+          "scrollHeight": 68,
+          "clientHeight": 68,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#topCounters .counter.soul",
+      "index": 0,
+      "label": ".counter.soul",
+      "rect": {
+        "x": 846.03,
+        "y": 54,
+        "width": 176,
+        "height": 58,
+        "left": 846.03,
+        "top": 54,
+        "right": 1022.03,
+        "bottom": 112
+      },
+      "visualAxis": {
+        "x": 934.03,
+        "y": 83,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": "#soulText",
+          "text": "86",
+          "rect": {
+            "x": 940.03,
+            "y": 74,
+            "width": 64,
+            "height": 18,
+            "left": 940.03,
+            "top": 74,
+            "right": 1004.03,
+            "bottom": 92
+          },
+          "scrollWidth": 64,
+          "clientWidth": 64,
+          "scrollHeight": 21,
+          "clientHeight": 18,
+          "overflowX": false,
+          "overflowY": true
+        }
+      ]
+    },
+    {
+      "selector": "#topCounters .counter.fire",
+      "index": 0,
+      "label": ".counter.fire",
+      "rect": {
+        "x": 1030.03,
+        "y": 54,
+        "width": 176,
+        "height": 58,
+        "left": 1030.03,
+        "top": 54,
+        "right": 1206.03,
+        "bottom": 112
+      },
+      "visualAxis": {
+        "x": 1118.03,
+        "y": 83,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": "#fireText",
+          "text": "4",
+          "rect": {
+            "x": 1124.03,
+            "y": 74,
+            "width": 64,
+            "height": 18,
+            "left": 1124.03,
+            "top": 74,
+            "right": 1188.03,
+            "bottom": 92
+          },
+          "scrollWidth": 64,
+          "clientWidth": 64,
+          "scrollHeight": 21,
+          "clientHeight": 18,
+          "overflowX": false,
+          "overflowY": true
+        }
+      ]
+    },
+    {
+      "selector": "#pauseBtn",
+      "index": 0,
+      "label": "#pauseBtn",
+      "rect": {
+        "x": 1214.03,
+        "y": 49,
+        "width": 68,
+        "height": 68,
+        "left": 1214.03,
+        "top": 49,
+        "right": 1282.03,
+        "bottom": 117
+      },
+      "visualAxis": {
+        "x": 1248.03,
+        "y": 83,
+        "source": "DOM center"
+      },
+      "textBoxes": []
+    }
+  ]
+}

@@ -1,0 +1,665 @@
+{
+  "generatedAt": "2026-08-14T06:41:43.723Z",
+  "commit": "84514f546a3e",
+  "fullCommit": "84514f546a3ef569fa38d0d435837c4930cd037a",
+  "uiAssetSet": "0.3.4b1-ui-pass2",
+  "viewport": {
+    "name": "pc-1920x1080",
+    "width": 1920,
+    "height": 1080
+  },
+  "dpr": 1,
+  "component": "boss",
+  "state": "debug",
+  "metadataStatus": "TBD",
+  "components": [
+    {
+      "selector": "#bossFrame",
+      "index": 0,
+      "label": "#bossFrame",
+      "rect": {
+        "x": 764,
+        "y": 292,
+        "width": 392,
+        "height": 74,
+        "left": 764,
+        "top": 292,
+        "right": 1156,
+        "bottom": 366
+      },
+      "visualAxis": {
+        "x": 960,
+        "y": 329,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": "#bossNameText",
+          "text": "赤焰战魇",
+          "rect": {
+            "x": 794,
+            "y": 302,
+            "width": 100,
+            "height": 29,
+            "left": 794,
+            "top": 302,
+            "right": 894,
+            "bottom": 331
+          },
+          "scrollWidth": 100,
+          "clientWidth": 100,
+          "scrollHeight": 29,
+          "clientHeight": 29,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#bossPhaseText",
+          "text": "二阶段 召卫 · 限时 02:16",
+          "rect": {
+            "x": 966.63,
+            "y": 310,
+            "width": 159.38,
+            "height": 19,
+            "left": 966.63,
+            "top": 310,
+            "right": 1126,
+            "bottom": 329
+          },
+          "scrollWidth": 159,
+          "clientWidth": 159,
+          "scrollHeight": 19,
+          "clientHeight": 19,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#bossHpBar",
+          "text": "",
+          "rect": {
+            "x": 794,
+            "y": 338,
+            "width": 225.75,
+            "height": 10,
+            "left": 794,
+            "top": 338,
+            "right": 1019.75,
+            "bottom": 348
+          },
+          "scrollWidth": 226,
+          "clientWidth": 226,
+          "scrollHeight": 10,
+          "clientHeight": 10,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#chapterAlert",
+      "index": 0,
+      "label": "#chapterAlert",
+      "rect": {
+        "x": 1090,
+        "y": 307.86,
+        "width": 420,
+        "height": 80,
+        "left": 1090,
+        "top": 307.86,
+        "right": 1510,
+        "bottom": 387.86
+      },
+      "visualAxis": {
+        "x": 1300,
+        "y": 347.86,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": "#chapterAlertTitle",
+          "text": "Boss 转阶段",
+          "rect": {
+            "x": 1223,
+            "y": 324.96,
+            "width": 154,
+            "height": 28,
+            "left": 1223,
+            "top": 324.96,
+            "right": 1377,
+            "bottom": 352.96
+          },
+          "scrollWidth": 154,
+          "clientWidth": 154,
+          "scrollHeight": 28,
+          "clientHeight": 28,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#chapterAlertText",
+          "text": "赤焰召出护卫，妖潮压近",
+          "rect": {
+            "x": 1223,
+            "y": 353.96,
+            "width": 154,
+            "height": 16.8,
+            "left": 1223,
+            "top": 353.96,
+            "right": 1377,
+            "bottom": 370.75
+          },
+          "scrollWidth": 154,
+          "clientWidth": 154,
+          "scrollHeight": 17,
+          "clientHeight": 17,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#hud",
+      "index": 0,
+      "label": "#hud",
+      "rect": {
+        "x": 344,
+        "y": 204,
+        "width": 520,
+        "height": 226.56,
+        "left": 344,
+        "top": 204,
+        "right": 864,
+        "bottom": 430.56
+      },
+      "visualAxis": {
+        "x": 604,
+        "y": 317.28,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": ".brand",
+          "text": "荒\n        \n          大荒轮回录：荒境\n          轩辕遗剑 · 剑冢荒境 · 剑尘荒径",
+          "rect": {
+            "x": 488.55,
+            "y": 280.58,
+            "width": 303.7,
+            "height": 30.59,
+            "left": 488.55,
+            "top": 280.58,
+            "right": 792.25,
+            "bottom": 311.17
+          },
+          "scrollWidth": 304,
+          "clientWidth": 304,
+          "scrollHeight": 31,
+          "clientHeight": 31,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".seal",
+          "text": "荒",
+          "rect": {
+            "x": 486.73,
+            "y": 280.06,
+            "width": 31.62,
+            "height": 31.62,
+            "left": 486.73,
+            "top": 280.06,
+            "right": 518.36,
+            "bottom": 311.69
+          },
+          "scrollWidth": 28,
+          "clientWidth": 28,
+          "scrollHeight": 28,
+          "clientHeight": 28,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "h1",
+          "text": "大荒轮回录：荒境",
+          "rect": {
+            "x": 522.55,
+            "y": 280.58,
+            "width": 159.89,
+            "height": 16.8,
+            "left": 522.55,
+            "top": 280.58,
+            "right": 682.44,
+            "bottom": 297.38
+          },
+          "scrollWidth": 160,
+          "clientWidth": 160,
+          "scrollHeight": 18,
+          "clientHeight": 17,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#lineageText",
+          "text": "轩辕遗剑 · 剑冢荒境 · 剑尘荒径",
+          "rect": {
+            "x": 522.55,
+            "y": 297.38,
+            "width": 159.89,
+            "height": 13.8,
+            "left": 522.55,
+            "top": 297.38,
+            "right": 682.44,
+            "bottom": 311.17
+          },
+          "scrollWidth": 160,
+          "clientWidth": 160,
+          "scrollHeight": 14,
+          "clientHeight": 14,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".bars",
+          "text": "气血 142/186\n        \n        修为 84/120  差36",
+          "rect": {
+            "x": 488.55,
+            "y": 329.06,
+            "width": 303.7,
+            "height": 47.94,
+            "left": 488.55,
+            "top": 329.06,
+            "right": 792.25,
+            "bottom": 377
+          },
+          "scrollWidth": 304,
+          "clientWidth": 304,
+          "scrollHeight": 48,
+          "clientHeight": 48,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "label",
+          "text": "气血 142/186",
+          "rect": {
+            "x": 488.55,
+            "y": 329.06,
+            "width": 303.7,
+            "height": 12.97,
+            "left": 488.55,
+            "top": 329.06,
+            "right": 792.25,
+            "bottom": 342.03
+          },
+          "scrollWidth": 304,
+          "clientWidth": 304,
+          "scrollHeight": 13,
+          "clientHeight": 13,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#hpText",
+          "text": "142/186",
+          "rect": {
+            "x": 743,
+            "y": 329.06,
+            "width": 49.25,
+            "height": 12.97,
+            "left": 743,
+            "top": 329.06,
+            "right": 792.25,
+            "bottom": 342.03
+          },
+          "scrollWidth": 49,
+          "clientWidth": 49,
+          "scrollHeight": 13,
+          "clientHeight": 13,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#hpBar",
+          "text": "",
+          "rect": {
+            "x": 495.55,
+            "y": 346.03,
+            "width": 221.16,
+            "height": 3,
+            "left": 495.55,
+            "top": 346.03,
+            "right": 716.7,
+            "bottom": 349.03
+          },
+          "scrollWidth": 221,
+          "clientWidth": 221,
+          "scrollHeight": 3,
+          "clientHeight": 3,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "label",
+          "text": "修为 84/120  差36",
+          "rect": {
+            "x": 488.55,
+            "y": 354.03,
+            "width": 303.7,
+            "height": 12.97,
+            "left": 488.55,
+            "top": 354.03,
+            "right": 792.25,
+            "bottom": 367
+          },
+          "scrollWidth": 304,
+          "clientWidth": 304,
+          "scrollHeight": 13,
+          "clientHeight": 13,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#xpText",
+          "text": "84/120  差36",
+          "rect": {
+            "x": 720.41,
+            "y": 354.03,
+            "width": 71.84,
+            "height": 12.97,
+            "left": 720.41,
+            "top": 354.03,
+            "right": 792.25,
+            "bottom": 367
+          },
+          "scrollWidth": 72,
+          "clientWidth": 72,
+          "scrollHeight": 13,
+          "clientHeight": 13,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#xpBar",
+          "text": "",
+          "rect": {
+            "x": 495.55,
+            "y": 371,
+            "width": 202.78,
+            "height": 3,
+            "left": 495.55,
+            "top": 371,
+            "right": 698.33,
+            "bottom": 374
+          },
+          "scrollWidth": 203,
+          "clientWidth": 203,
+          "scrollHeight": 3,
+          "clientHeight": 3,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".stats",
+          "text": "境界 返虚入荒\n        轮回 01:13\n        斩妖 37",
+          "rect": {
+            "x": 488.55,
+            "y": 380.27,
+            "width": 303.7,
+            "height": 13.67,
+            "left": 488.55,
+            "top": 380.27,
+            "right": 792.25,
+            "bottom": 393.94
+          },
+          "scrollWidth": 304,
+          "clientWidth": 304,
+          "scrollHeight": 14,
+          "clientHeight": 14,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "境界 返虚入荒",
+          "rect": {
+            "x": 488.55,
+            "y": 380.27,
+            "width": 119.02,
+            "height": 13.67,
+            "left": 488.55,
+            "top": 380.27,
+            "right": 607.56,
+            "bottom": 393.94
+          },
+          "scrollWidth": 119,
+          "clientWidth": 119,
+          "scrollHeight": 14,
+          "clientHeight": 14,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#levelText",
+          "text": "返虚入荒",
+          "rect": {
+            "x": 515.2,
+            "y": 379.27,
+            "width": 46.41,
+            "height": 15,
+            "left": 515.2,
+            "top": 379.27,
+            "right": 561.61,
+            "bottom": 394.27
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "轮回 01:13",
+          "rect": {
+            "x": 613.56,
+            "y": 380.27,
+            "width": 92.69,
+            "height": 13.67,
+            "left": 613.56,
+            "top": 380.27,
+            "right": 706.25,
+            "bottom": 393.94
+          },
+          "scrollWidth": 93,
+          "clientWidth": 93,
+          "scrollHeight": 14,
+          "clientHeight": 14,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#timeText",
+          "text": "01:13",
+          "rect": {
+            "x": 640.22,
+            "y": 379.27,
+            "width": 31.94,
+            "height": 15,
+            "left": 640.22,
+            "top": 379.27,
+            "right": 672.16,
+            "bottom": 394.27
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "斩妖 37",
+          "rect": {
+            "x": 712.25,
+            "y": 380.27,
+            "width": 79.98,
+            "height": 13.67,
+            "left": 712.25,
+            "top": 380.27,
+            "right": 792.23,
+            "bottom": 393.94
+          },
+          "scrollWidth": 80,
+          "clientWidth": 80,
+          "scrollHeight": 14,
+          "clientHeight": 14,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#killText",
+          "text": "37",
+          "rect": {
+            "x": 738.91,
+            "y": 379.27,
+            "width": 14.31,
+            "height": 15,
+            "left": 738.91,
+            "top": 379.27,
+            "right": 753.22,
+            "bottom": 394.27
+          },
+          "scrollWidth": 0,
+          "clientWidth": 0,
+          "scrollHeight": 0,
+          "clientHeight": 0,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#topCounters",
+      "index": 0,
+      "label": "#topCounters",
+      "rect": {
+        "x": 1122,
+        "y": 208,
+        "width": 436,
+        "height": 62,
+        "left": 1122,
+        "top": 208,
+        "right": 1558,
+        "bottom": 270
+      },
+      "visualAxis": {
+        "x": 1340,
+        "y": 239,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": ".counter.soul",
+          "text": "86",
+          "rect": {
+            "x": 1122,
+            "y": 210,
+            "width": 176,
+            "height": 58,
+            "left": 1122,
+            "top": 210,
+            "right": 1298,
+            "bottom": 268
+          },
+          "scrollWidth": 176,
+          "clientWidth": 176,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#soulText",
+          "text": "86",
+          "rect": {
+            "x": 1216,
+            "y": 230,
+            "width": 64,
+            "height": 18,
+            "left": 1216,
+            "top": 230,
+            "right": 1280,
+            "bottom": 248
+          },
+          "scrollWidth": 64,
+          "clientWidth": 64,
+          "scrollHeight": 21,
+          "clientHeight": 18,
+          "overflowX": false,
+          "overflowY": true
+        },
+        {
+          "selector": ".counter.fire",
+          "text": "4",
+          "rect": {
+            "x": 1306,
+            "y": 210,
+            "width": 176,
+            "height": 58,
+            "left": 1306,
+            "top": 210,
+            "right": 1482,
+            "bottom": 268
+          },
+          "scrollWidth": 176,
+          "clientWidth": 176,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#fireText",
+          "text": "4",
+          "rect": {
+            "x": 1400,
+            "y": 230,
+            "width": 64,
+            "height": 18,
+            "left": 1400,
+            "top": 230,
+            "right": 1464,
+            "bottom": 248
+          },
+          "scrollWidth": 64,
+          "clientWidth": 64,
+          "scrollHeight": 21,
+          "clientHeight": 18,
+          "overflowX": false,
+          "overflowY": true
+        },
+        {
+          "selector": "#pauseBtn",
+          "text": "暂",
+          "rect": {
+            "x": 1490,
+            "y": 205,
+            "width": 68,
+            "height": 68,
+            "left": 1490,
+            "top": 205,
+            "right": 1558,
+            "bottom": 273
+          },
+          "scrollWidth": 68,
+          "clientWidth": 68,
+          "scrollHeight": 68,
+          "clientHeight": 68,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    }
+  ]
+}

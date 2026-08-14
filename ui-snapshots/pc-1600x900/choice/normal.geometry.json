@@ -1,0 +1,826 @@
+{
+  "generatedAt": "2026-08-14T06:42:03.649Z",
+  "commit": "84514f546a3e",
+  "fullCommit": "84514f546a3ef569fa38d0d435837c4930cd037a",
+  "uiAssetSet": "0.3.4b1-ui-pass2",
+  "viewport": {
+    "name": "pc-1600x900",
+    "width": 1600,
+    "height": 900
+  },
+  "dpr": 1,
+  "component": "choice",
+  "state": "normal",
+  "metadataStatus": "TBD",
+  "components": [
+    {
+      "selector": "#choices",
+      "index": 0,
+      "label": "#choices",
+      "rect": {
+        "x": 160,
+        "y": 90,
+        "width": 1280,
+        "height": 720,
+        "left": 160,
+        "top": 90,
+        "right": 1440,
+        "bottom": 810
+      },
+      "visualAxis": {
+        "x": 800,
+        "y": 450,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": "h2",
+          "text": "选择修为",
+          "rect": {
+            "x": 671,
+            "y": 249.27,
+            "width": 258,
+            "height": 61,
+            "left": 671,
+            "top": 249.27,
+            "right": 929,
+            "bottom": 310.27
+          },
+          "scrollWidth": 258,
+          "clientWidth": 258,
+          "scrollHeight": 61,
+          "clientHeight": 61,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice",
+          "text": "通用机缘后羿残弦飞行功法射程增加，灵剑冷却缩短。领悟",
+          "rect": {
+            "x": 310,
+            "y": 322.27,
+            "width": 268,
+            "height": 405.73,
+            "left": 310,
+            "top": 322.27,
+            "right": 578,
+            "bottom": 728
+          },
+          "scrollWidth": 268,
+          "clientWidth": 268,
+          "scrollHeight": 406,
+          "clientHeight": 406,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-icon",
+          "text": "",
+          "rect": {
+            "x": 416.59,
+            "y": 384.73,
+            "width": 58,
+            "height": 58,
+            "left": 416.59,
+            "top": 384.73,
+            "right": 474.59,
+            "bottom": 442.73
+          },
+          "scrollWidth": 58,
+          "clientWidth": 58,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-tag",
+          "text": "通用机缘",
+          "rect": {
+            "x": 401.59,
+            "y": 479.69,
+            "width": 88,
+            "height": 16,
+            "left": 401.59,
+            "top": 479.69,
+            "right": 489.59,
+            "bottom": 495.69
+          },
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "scrollHeight": 16,
+          "clientHeight": 16,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "b",
+          "text": "后羿残弦",
+          "rect": {
+            "x": 375.91,
+            "y": 507.27,
+            "width": 139.36,
+            "height": 34,
+            "left": 375.91,
+            "top": 507.27,
+            "right": 515.27,
+            "bottom": 541.27
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 34,
+          "clientHeight": 34,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "飞行功法射程增加，灵剑冷却缩短。",
+          "rect": {
+            "x": 375.91,
+            "y": 563.67,
+            "width": 139.36,
+            "height": 70,
+            "left": 375.91,
+            "top": 563.67,
+            "right": 515.27,
+            "bottom": 633.67
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 70,
+          "clientHeight": 70,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-cost",
+          "text": "领悟",
+          "rect": {
+            "x": 404.59,
+            "y": 662.3,
+            "width": 82,
+            "height": 30,
+            "left": 404.59,
+            "top": 662.3,
+            "right": 486.59,
+            "bottom": 692.3
+          },
+          "scrollWidth": 82,
+          "clientWidth": 82,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice",
+          "text": "通用机缘甘露回生立即回复 45 点气血，并提高气血上限。领悟",
+          "rect": {
+            "x": 666,
+            "y": 322.27,
+            "width": 268,
+            "height": 405.73,
+            "left": 666,
+            "top": 322.27,
+            "right": 934,
+            "bottom": 728
+          },
+          "scrollWidth": 268,
+          "clientWidth": 268,
+          "scrollHeight": 406,
+          "clientHeight": 406,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-icon",
+          "text": "",
+          "rect": {
+            "x": 772.59,
+            "y": 384.73,
+            "width": 58,
+            "height": 58,
+            "left": 772.59,
+            "top": 384.73,
+            "right": 830.59,
+            "bottom": 442.73
+          },
+          "scrollWidth": 58,
+          "clientWidth": 58,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-tag",
+          "text": "通用机缘",
+          "rect": {
+            "x": 757.59,
+            "y": 479.69,
+            "width": 88,
+            "height": 16,
+            "left": 757.59,
+            "top": 479.69,
+            "right": 845.59,
+            "bottom": 495.69
+          },
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "scrollHeight": 16,
+          "clientHeight": 16,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "b",
+          "text": "甘露回生",
+          "rect": {
+            "x": 731.91,
+            "y": 507.27,
+            "width": 139.36,
+            "height": 34,
+            "left": 731.91,
+            "top": 507.27,
+            "right": 871.27,
+            "bottom": 541.27
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 34,
+          "clientHeight": 34,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "立即回复 45 点气血，并提高气血上限。",
+          "rect": {
+            "x": 731.91,
+            "y": 563.67,
+            "width": 139.36,
+            "height": 70,
+            "left": 731.91,
+            "top": 563.67,
+            "right": 871.27,
+            "bottom": 633.67
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 70,
+          "clientHeight": 70,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-cost",
+          "text": "领悟",
+          "rect": {
+            "x": 760.59,
+            "y": 662.3,
+            "width": 82,
+            "height": 30,
+            "left": 760.59,
+            "top": 662.3,
+            "right": 842.59,
+            "bottom": 692.3
+          },
+          "scrollWidth": 82,
+          "clientWidth": 82,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice",
+          "text": "通用机缘血玉护命每次拾取妖丹额外回复少量气血。领悟",
+          "rect": {
+            "x": 1022,
+            "y": 322.27,
+            "width": 268,
+            "height": 405.73,
+            "left": 1022,
+            "top": 322.27,
+            "right": 1290,
+            "bottom": 728
+          },
+          "scrollWidth": 268,
+          "clientWidth": 268,
+          "scrollHeight": 406,
+          "clientHeight": 406,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-icon",
+          "text": "",
+          "rect": {
+            "x": 1128.59,
+            "y": 384.73,
+            "width": 58,
+            "height": 58,
+            "left": 1128.59,
+            "top": 384.73,
+            "right": 1186.59,
+            "bottom": 442.73
+          },
+          "scrollWidth": 58,
+          "clientWidth": 58,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-tag",
+          "text": "通用机缘",
+          "rect": {
+            "x": 1113.59,
+            "y": 479.69,
+            "width": 88,
+            "height": 16,
+            "left": 1113.59,
+            "top": 479.69,
+            "right": 1201.59,
+            "bottom": 495.69
+          },
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "scrollHeight": 16,
+          "clientHeight": 16,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "b",
+          "text": "血玉护命",
+          "rect": {
+            "x": 1087.91,
+            "y": 507.27,
+            "width": 139.36,
+            "height": 34,
+            "left": 1087.91,
+            "top": 507.27,
+            "right": 1227.27,
+            "bottom": 541.27
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 34,
+          "clientHeight": 34,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "每次拾取妖丹额外回复少量气血。",
+          "rect": {
+            "x": 1087.91,
+            "y": 563.67,
+            "width": 139.36,
+            "height": 70,
+            "left": 1087.91,
+            "top": 563.67,
+            "right": 1227.27,
+            "bottom": 633.67
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 70,
+          "clientHeight": 70,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-cost",
+          "text": "领悟",
+          "rect": {
+            "x": 1116.59,
+            "y": 662.3,
+            "width": 82,
+            "height": 30,
+            "left": 1116.59,
+            "top": 662.3,
+            "right": 1198.59,
+            "bottom": 692.3
+          },
+          "scrollWidth": 82,
+          "clientWidth": 82,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#skipChoiceBtn",
+          "text": "略过悟道 +2 灵髓",
+          "rect": {
+            "x": 718.2,
+            "y": 736,
+            "width": 163.58,
+            "height": 36,
+            "left": 718.2,
+            "top": 736,
+            "right": 881.78,
+            "bottom": 772
+          },
+          "scrollWidth": 164,
+          "clientWidth": 164,
+          "scrollHeight": 36,
+          "clientHeight": 36,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#choiceList .choice",
+      "index": 0,
+      "label": ".choice",
+      "rect": {
+        "x": 310,
+        "y": 322.27,
+        "width": 268,
+        "height": 405.73,
+        "left": 310,
+        "top": 322.27,
+        "right": 578,
+        "bottom": 728
+      },
+      "visualAxis": {
+        "x": 444,
+        "y": 525.13,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": ".choice-icon",
+          "text": "",
+          "rect": {
+            "x": 416.59,
+            "y": 384.73,
+            "width": 58,
+            "height": 58,
+            "left": 416.59,
+            "top": 384.73,
+            "right": 474.59,
+            "bottom": 442.73
+          },
+          "scrollWidth": 58,
+          "clientWidth": 58,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-tag",
+          "text": "通用机缘",
+          "rect": {
+            "x": 401.59,
+            "y": 479.69,
+            "width": 88,
+            "height": 16,
+            "left": 401.59,
+            "top": 479.69,
+            "right": 489.59,
+            "bottom": 495.69
+          },
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "scrollHeight": 16,
+          "clientHeight": 16,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "b",
+          "text": "后羿残弦",
+          "rect": {
+            "x": 375.91,
+            "y": 507.27,
+            "width": 139.36,
+            "height": 34,
+            "left": 375.91,
+            "top": 507.27,
+            "right": 515.27,
+            "bottom": 541.27
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 34,
+          "clientHeight": 34,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "飞行功法射程增加，灵剑冷却缩短。",
+          "rect": {
+            "x": 375.91,
+            "y": 563.67,
+            "width": 139.36,
+            "height": 70,
+            "left": 375.91,
+            "top": 563.67,
+            "right": 515.27,
+            "bottom": 633.67
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 70,
+          "clientHeight": 70,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-cost",
+          "text": "领悟",
+          "rect": {
+            "x": 404.59,
+            "y": 662.3,
+            "width": 82,
+            "height": 30,
+            "left": 404.59,
+            "top": 662.3,
+            "right": 486.59,
+            "bottom": 692.3
+          },
+          "scrollWidth": 82,
+          "clientWidth": 82,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#choiceList .choice",
+      "index": 1,
+      "label": ".choice",
+      "rect": {
+        "x": 666,
+        "y": 322.27,
+        "width": 268,
+        "height": 405.73,
+        "left": 666,
+        "top": 322.27,
+        "right": 934,
+        "bottom": 728
+      },
+      "visualAxis": {
+        "x": 800,
+        "y": 525.13,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": ".choice-icon",
+          "text": "",
+          "rect": {
+            "x": 772.59,
+            "y": 384.73,
+            "width": 58,
+            "height": 58,
+            "left": 772.59,
+            "top": 384.73,
+            "right": 830.59,
+            "bottom": 442.73
+          },
+          "scrollWidth": 58,
+          "clientWidth": 58,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-tag",
+          "text": "通用机缘",
+          "rect": {
+            "x": 757.59,
+            "y": 479.69,
+            "width": 88,
+            "height": 16,
+            "left": 757.59,
+            "top": 479.69,
+            "right": 845.59,
+            "bottom": 495.69
+          },
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "scrollHeight": 16,
+          "clientHeight": 16,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "b",
+          "text": "甘露回生",
+          "rect": {
+            "x": 731.91,
+            "y": 507.27,
+            "width": 139.36,
+            "height": 34,
+            "left": 731.91,
+            "top": 507.27,
+            "right": 871.27,
+            "bottom": 541.27
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 34,
+          "clientHeight": 34,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "立即回复 45 点气血，并提高气血上限。",
+          "rect": {
+            "x": 731.91,
+            "y": 563.67,
+            "width": 139.36,
+            "height": 70,
+            "left": 731.91,
+            "top": 563.67,
+            "right": 871.27,
+            "bottom": 633.67
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 70,
+          "clientHeight": 70,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-cost",
+          "text": "领悟",
+          "rect": {
+            "x": 760.59,
+            "y": 662.3,
+            "width": 82,
+            "height": 30,
+            "left": 760.59,
+            "top": 662.3,
+            "right": 842.59,
+            "bottom": 692.3
+          },
+          "scrollWidth": 82,
+          "clientWidth": 82,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#choiceList .choice",
+      "index": 2,
+      "label": ".choice",
+      "rect": {
+        "x": 1022,
+        "y": 322.27,
+        "width": 268,
+        "height": 405.73,
+        "left": 1022,
+        "top": 322.27,
+        "right": 1290,
+        "bottom": 728
+      },
+      "visualAxis": {
+        "x": 1156,
+        "y": 525.13,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": ".choice-icon",
+          "text": "",
+          "rect": {
+            "x": 1128.59,
+            "y": 384.73,
+            "width": 58,
+            "height": 58,
+            "left": 1128.59,
+            "top": 384.73,
+            "right": 1186.59,
+            "bottom": 442.73
+          },
+          "scrollWidth": 58,
+          "clientWidth": 58,
+          "scrollHeight": 58,
+          "clientHeight": 58,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-tag",
+          "text": "通用机缘",
+          "rect": {
+            "x": 1113.59,
+            "y": 479.69,
+            "width": 88,
+            "height": 16,
+            "left": 1113.59,
+            "top": 479.69,
+            "right": 1201.59,
+            "bottom": 495.69
+          },
+          "scrollWidth": 88,
+          "clientWidth": 88,
+          "scrollHeight": 16,
+          "clientHeight": 16,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "b",
+          "text": "血玉护命",
+          "rect": {
+            "x": 1087.91,
+            "y": 507.27,
+            "width": 139.36,
+            "height": 34,
+            "left": 1087.91,
+            "top": 507.27,
+            "right": 1227.27,
+            "bottom": 541.27
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 34,
+          "clientHeight": 34,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "span",
+          "text": "每次拾取妖丹额外回复少量气血。",
+          "rect": {
+            "x": 1087.91,
+            "y": 563.67,
+            "width": 139.36,
+            "height": 70,
+            "left": 1087.91,
+            "top": 563.67,
+            "right": 1227.27,
+            "bottom": 633.67
+          },
+          "scrollWidth": 139,
+          "clientWidth": 139,
+          "scrollHeight": 70,
+          "clientHeight": 70,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": ".choice-cost",
+          "text": "领悟",
+          "rect": {
+            "x": 1116.59,
+            "y": 662.3,
+            "width": 82,
+            "height": 30,
+            "left": 1116.59,
+            "top": 662.3,
+            "right": 1198.59,
+            "bottom": 692.3
+          },
+          "scrollWidth": 82,
+          "clientWidth": 82,
+          "scrollHeight": 30,
+          "clientHeight": 30,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#skipChoiceBtn",
+      "index": 0,
+      "label": "#skipChoiceBtn",
+      "rect": {
+        "x": 718.2,
+        "y": 736,
+        "width": 163.58,
+        "height": 36,
+        "left": 718.2,
+        "top": 736,
+        "right": 881.78,
+        "bottom": 772
+      },
+      "visualAxis": {
+        "x": 799.99,
+        "y": 754,
+        "source": "DOM center"
+      },
+      "textBoxes": []
+    }
+  ]
+}

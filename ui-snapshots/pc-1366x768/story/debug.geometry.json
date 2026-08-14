@@ -1,0 +1,203 @@
+{
+  "generatedAt": "2026-08-14T06:42:40.522Z",
+  "commit": "84514f546a3e",
+  "fullCommit": "84514f546a3ef569fa38d0d435837c4930cd037a",
+  "uiAssetSet": "0.3.4b1-ui-pass2",
+  "viewport": {
+    "name": "pc-1366x768",
+    "width": 1366,
+    "height": 768
+  },
+  "dpr": 1,
+  "component": "story",
+  "state": "debug",
+  "metadataStatus": "TBD",
+  "components": [
+    {
+      "selector": "#storyOverlay .story-panel",
+      "index": 0,
+      "label": ".panel.story-panel",
+      "rect": {
+        "x": 223,
+        "y": 212.42,
+        "width": 920,
+        "height": 343.14,
+        "left": 223,
+        "top": 212.42,
+        "right": 1143,
+        "bottom": 555.56
+      },
+      "visualAxis": {
+        "x": 683,
+        "y": 383.99,
+        "source": "DOM center"
+      },
+      "textBoxes": [
+        {
+          "selector": "#storyTitle",
+          "text": "断剑初誓",
+          "rect": {
+            "x": 418.03,
+            "y": 241.23,
+            "width": 247.47,
+            "height": 30.53,
+            "left": 418.03,
+            "top": 241.23,
+            "right": 665.5,
+            "bottom": 271.77
+          },
+          "scrollWidth": 247,
+          "clientWidth": 247,
+          "scrollHeight": 31,
+          "clientHeight": 31,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#storySpeaker",
+          "text": "轩辕遗剑",
+          "rect": {
+            "x": 293.83,
+            "y": 385.7,
+            "width": 125.11,
+            "height": 26.13,
+            "left": 293.83,
+            "top": 385.7,
+            "right": 418.94,
+            "bottom": 411.83
+          },
+          "scrollWidth": 125,
+          "clientWidth": 125,
+          "scrollHeight": 26,
+          "clientHeight": 26,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#storyText",
+          "text": "断剑仍埋在荒土里。你听见前世留下的誓言：若轮回不止，便以剑痕记路。",
+          "rect": {
+            "x": 467.72,
+            "y": 327.7,
+            "width": 579.61,
+            "height": 67.66,
+            "left": 467.72,
+            "top": 327.7,
+            "right": 1047.33,
+            "bottom": 395.36
+          },
+          "scrollWidth": 580,
+          "clientWidth": 580,
+          "scrollHeight": 68,
+          "clientHeight": 68,
+          "overflowX": false,
+          "overflowY": false
+        },
+        {
+          "selector": "#storyChoiceBtn",
+          "text": "记入轮回",
+          "rect": {
+            "x": 340.75,
+            "y": 469.25,
+            "width": 144,
+            "height": 40,
+            "left": 340.75,
+            "top": 469.25,
+            "right": 484.75,
+            "bottom": 509.25
+          },
+          "scrollWidth": 144,
+          "clientWidth": 144,
+          "scrollHeight": 40,
+          "clientHeight": 40,
+          "overflowX": false,
+          "overflowY": false
+        }
+      ]
+    },
+    {
+      "selector": "#storyTitle",
+      "index": 0,
+      "label": "#storyTitle",
+      "rect": {
+        "x": 418.03,
+        "y": 241.23,
+        "width": 247.47,
+        "height": 30.53,
+        "left": 418.03,
+        "top": 241.23,
+        "right": 665.5,
+        "bottom": 271.77
+      },
+      "visualAxis": {
+        "x": 541.76,
+        "y": 256.5,
+        "source": "DOM center"
+      },
+      "textBoxes": []
+    },
+    {
+      "selector": "#storyText",
+      "index": 0,
+      "label": "#storyText",
+      "rect": {
+        "x": 467.72,
+        "y": 327.7,
+        "width": 579.61,
+        "height": 67.66,
+        "left": 467.72,
+        "top": 327.7,
+        "right": 1047.33,
+        "bottom": 395.36
+      },
+      "visualAxis": {
+        "x": 757.53,
+        "y": 361.53,
+        "source": "DOM center"
+      },
+      "textBoxes": []
+    },
+    {
+      "selector": "#storySpeaker",
+      "index": 0,
+      "label": "#storySpeaker",
+      "rect": {
+        "x": 293.83,
+        "y": 385.7,
+        "width": 125.11,
+        "height": 26.13,
+        "left": 293.83,
+        "top": 385.7,
+        "right": 418.94,
+        "bottom": 411.83
+      },
+      "visualAxis": {
+        "x": 356.38,
+        "y": 398.76,
+        "source": "DOM center"
+      },
+      "textBoxes": []
+    },
+    {
+      "selector": "#storyChoiceBtn",
+      "index": 0,
+      "label": "#storyChoiceBtn",
+      "rect": {
+        "x": 340.75,
+        "y": 469.25,
+        "width": 144,
+        "height": 40,
+        "left": 340.75,
+        "top": 469.25,
+        "right": 484.75,
+        "bottom": 509.25
+      },
+      "visualAxis": {
+        "x": 412.75,
+        "y": 489.25,
+        "source": "DOM center"
+      },
+      "textBoxes": []
+    }
+  ]
+}

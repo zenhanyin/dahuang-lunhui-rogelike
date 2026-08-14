@@ -1,0 +1,624 @@
+{
+  "generatedAt": "2026-08-14T06:41:13.346Z",
+  "commit": "84514f546a3e",
+  "fullCommit": "84514f546a3ef569fa38d0d435837c4930cd037a",
+  "uiAssetSet": "0.3.4b1-ui-pass2",
+  "dpr": 1,
+  "viewports": [
+    {
+      "name": "pc-1920x1080",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "name": "pc-1600x900",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "name": "pc-1366x768",
+      "width": 1366,
+      "height": 768
+    }
+  ],
+  "components": [
+    "hud",
+    "resource",
+    "lineage",
+    "choice",
+    "story",
+    "boss"
+  ],
+  "states": [
+    "normal",
+    "debug",
+    "stress",
+    "stress-debug"
+  ],
+  "snapshots": [
+    {
+      "viewport": "pc-1920x1080",
+      "component": "hud",
+      "state": "normal",
+      "png": "pc-1920x1080\\hud\\normal.png",
+      "geometry": "pc-1920x1080\\hud\\normal.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "hud",
+      "state": "debug",
+      "png": "pc-1920x1080\\hud\\debug.png",
+      "geometry": "pc-1920x1080\\hud\\debug.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "hud",
+      "state": "stress",
+      "png": "pc-1920x1080\\hud\\stress.png",
+      "geometry": "pc-1920x1080\\hud\\stress.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "hud",
+      "state": "stress-debug",
+      "png": "pc-1920x1080\\hud\\stress-debug.png",
+      "geometry": "pc-1920x1080\\hud\\stress-debug.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "resource",
+      "state": "normal",
+      "png": "pc-1920x1080\\resource\\normal.png",
+      "geometry": "pc-1920x1080\\resource\\normal.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "resource",
+      "state": "debug",
+      "png": "pc-1920x1080\\resource\\debug.png",
+      "geometry": "pc-1920x1080\\resource\\debug.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "resource",
+      "state": "stress",
+      "png": "pc-1920x1080\\resource\\stress.png",
+      "geometry": "pc-1920x1080\\resource\\stress.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "resource",
+      "state": "stress-debug",
+      "png": "pc-1920x1080\\resource\\stress-debug.png",
+      "geometry": "pc-1920x1080\\resource\\stress-debug.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "lineage",
+      "state": "normal",
+      "png": "pc-1920x1080\\lineage\\normal.png",
+      "geometry": "pc-1920x1080\\lineage\\normal.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "lineage",
+      "state": "debug",
+      "png": "pc-1920x1080\\lineage\\debug.png",
+      "geometry": "pc-1920x1080\\lineage\\debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "lineage",
+      "state": "stress",
+      "png": "pc-1920x1080\\lineage\\stress.png",
+      "geometry": "pc-1920x1080\\lineage\\stress.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "lineage",
+      "state": "stress-debug",
+      "png": "pc-1920x1080\\lineage\\stress-debug.png",
+      "geometry": "pc-1920x1080\\lineage\\stress-debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "choice",
+      "state": "normal",
+      "png": "pc-1920x1080\\choice\\normal.png",
+      "geometry": "pc-1920x1080\\choice\\normal.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "choice",
+      "state": "debug",
+      "png": "pc-1920x1080\\choice\\debug.png",
+      "geometry": "pc-1920x1080\\choice\\debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "choice",
+      "state": "stress",
+      "png": "pc-1920x1080\\choice\\stress.png",
+      "geometry": "pc-1920x1080\\choice\\stress.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "choice",
+      "state": "stress-debug",
+      "png": "pc-1920x1080\\choice\\stress-debug.png",
+      "geometry": "pc-1920x1080\\choice\\stress-debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "story",
+      "state": "normal",
+      "png": "pc-1920x1080\\story\\normal.png",
+      "geometry": "pc-1920x1080\\story\\normal.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "story",
+      "state": "debug",
+      "png": "pc-1920x1080\\story\\debug.png",
+      "geometry": "pc-1920x1080\\story\\debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "story",
+      "state": "stress",
+      "png": "pc-1920x1080\\story\\stress.png",
+      "geometry": "pc-1920x1080\\story\\stress.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "story",
+      "state": "stress-debug",
+      "png": "pc-1920x1080\\story\\stress-debug.png",
+      "geometry": "pc-1920x1080\\story\\stress-debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "boss",
+      "state": "normal",
+      "png": "pc-1920x1080\\boss\\normal.png",
+      "geometry": "pc-1920x1080\\boss\\normal.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "boss",
+      "state": "debug",
+      "png": "pc-1920x1080\\boss\\debug.png",
+      "geometry": "pc-1920x1080\\boss\\debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "boss",
+      "state": "stress",
+      "png": "pc-1920x1080\\boss\\stress.png",
+      "geometry": "pc-1920x1080\\boss\\stress.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1920x1080",
+      "component": "boss",
+      "state": "stress-debug",
+      "png": "pc-1920x1080\\boss\\stress-debug.png",
+      "geometry": "pc-1920x1080\\boss\\stress-debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "hud",
+      "state": "normal",
+      "png": "pc-1600x900\\hud\\normal.png",
+      "geometry": "pc-1600x900\\hud\\normal.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "hud",
+      "state": "debug",
+      "png": "pc-1600x900\\hud\\debug.png",
+      "geometry": "pc-1600x900\\hud\\debug.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "hud",
+      "state": "stress",
+      "png": "pc-1600x900\\hud\\stress.png",
+      "geometry": "pc-1600x900\\hud\\stress.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "hud",
+      "state": "stress-debug",
+      "png": "pc-1600x900\\hud\\stress-debug.png",
+      "geometry": "pc-1600x900\\hud\\stress-debug.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "resource",
+      "state": "normal",
+      "png": "pc-1600x900\\resource\\normal.png",
+      "geometry": "pc-1600x900\\resource\\normal.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "resource",
+      "state": "debug",
+      "png": "pc-1600x900\\resource\\debug.png",
+      "geometry": "pc-1600x900\\resource\\debug.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "resource",
+      "state": "stress",
+      "png": "pc-1600x900\\resource\\stress.png",
+      "geometry": "pc-1600x900\\resource\\stress.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "resource",
+      "state": "stress-debug",
+      "png": "pc-1600x900\\resource\\stress-debug.png",
+      "geometry": "pc-1600x900\\resource\\stress-debug.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "lineage",
+      "state": "normal",
+      "png": "pc-1600x900\\lineage\\normal.png",
+      "geometry": "pc-1600x900\\lineage\\normal.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "lineage",
+      "state": "debug",
+      "png": "pc-1600x900\\lineage\\debug.png",
+      "geometry": "pc-1600x900\\lineage\\debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "lineage",
+      "state": "stress",
+      "png": "pc-1600x900\\lineage\\stress.png",
+      "geometry": "pc-1600x900\\lineage\\stress.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "lineage",
+      "state": "stress-debug",
+      "png": "pc-1600x900\\lineage\\stress-debug.png",
+      "geometry": "pc-1600x900\\lineage\\stress-debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "choice",
+      "state": "normal",
+      "png": "pc-1600x900\\choice\\normal.png",
+      "geometry": "pc-1600x900\\choice\\normal.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "choice",
+      "state": "debug",
+      "png": "pc-1600x900\\choice\\debug.png",
+      "geometry": "pc-1600x900\\choice\\debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "choice",
+      "state": "stress",
+      "png": "pc-1600x900\\choice\\stress.png",
+      "geometry": "pc-1600x900\\choice\\stress.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "choice",
+      "state": "stress-debug",
+      "png": "pc-1600x900\\choice\\stress-debug.png",
+      "geometry": "pc-1600x900\\choice\\stress-debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "story",
+      "state": "normal",
+      "png": "pc-1600x900\\story\\normal.png",
+      "geometry": "pc-1600x900\\story\\normal.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "story",
+      "state": "debug",
+      "png": "pc-1600x900\\story\\debug.png",
+      "geometry": "pc-1600x900\\story\\debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "story",
+      "state": "stress",
+      "png": "pc-1600x900\\story\\stress.png",
+      "geometry": "pc-1600x900\\story\\stress.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "story",
+      "state": "stress-debug",
+      "png": "pc-1600x900\\story\\stress-debug.png",
+      "geometry": "pc-1600x900\\story\\stress-debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "boss",
+      "state": "normal",
+      "png": "pc-1600x900\\boss\\normal.png",
+      "geometry": "pc-1600x900\\boss\\normal.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "boss",
+      "state": "debug",
+      "png": "pc-1600x900\\boss\\debug.png",
+      "geometry": "pc-1600x900\\boss\\debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "boss",
+      "state": "stress",
+      "png": "pc-1600x900\\boss\\stress.png",
+      "geometry": "pc-1600x900\\boss\\stress.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1600x900",
+      "component": "boss",
+      "state": "stress-debug",
+      "png": "pc-1600x900\\boss\\stress-debug.png",
+      "geometry": "pc-1600x900\\boss\\stress-debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "hud",
+      "state": "normal",
+      "png": "pc-1366x768\\hud\\normal.png",
+      "geometry": "pc-1366x768\\hud\\normal.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "hud",
+      "state": "debug",
+      "png": "pc-1366x768\\hud\\debug.png",
+      "geometry": "pc-1366x768\\hud\\debug.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "hud",
+      "state": "stress",
+      "png": "pc-1366x768\\hud\\stress.png",
+      "geometry": "pc-1366x768\\hud\\stress.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "hud",
+      "state": "stress-debug",
+      "png": "pc-1366x768\\hud\\stress-debug.png",
+      "geometry": "pc-1366x768\\hud\\stress-debug.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "resource",
+      "state": "normal",
+      "png": "pc-1366x768\\resource\\normal.png",
+      "geometry": "pc-1366x768\\resource\\normal.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "resource",
+      "state": "debug",
+      "png": "pc-1366x768\\resource\\debug.png",
+      "geometry": "pc-1366x768\\resource\\debug.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "resource",
+      "state": "stress",
+      "png": "pc-1366x768\\resource\\stress.png",
+      "geometry": "pc-1366x768\\resource\\stress.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "resource",
+      "state": "stress-debug",
+      "png": "pc-1366x768\\resource\\stress-debug.png",
+      "geometry": "pc-1366x768\\resource\\stress-debug.geometry.json",
+      "metadataStatus": "CURRENT"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "lineage",
+      "state": "normal",
+      "png": "pc-1366x768\\lineage\\normal.png",
+      "geometry": "pc-1366x768\\lineage\\normal.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "lineage",
+      "state": "debug",
+      "png": "pc-1366x768\\lineage\\debug.png",
+      "geometry": "pc-1366x768\\lineage\\debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "lineage",
+      "state": "stress",
+      "png": "pc-1366x768\\lineage\\stress.png",
+      "geometry": "pc-1366x768\\lineage\\stress.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "lineage",
+      "state": "stress-debug",
+      "png": "pc-1366x768\\lineage\\stress-debug.png",
+      "geometry": "pc-1366x768\\lineage\\stress-debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "choice",
+      "state": "normal",
+      "png": "pc-1366x768\\choice\\normal.png",
+      "geometry": "pc-1366x768\\choice\\normal.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "choice",
+      "state": "debug",
+      "png": "pc-1366x768\\choice\\debug.png",
+      "geometry": "pc-1366x768\\choice\\debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "choice",
+      "state": "stress",
+      "png": "pc-1366x768\\choice\\stress.png",
+      "geometry": "pc-1366x768\\choice\\stress.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "choice",
+      "state": "stress-debug",
+      "png": "pc-1366x768\\choice\\stress-debug.png",
+      "geometry": "pc-1366x768\\choice\\stress-debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "story",
+      "state": "normal",
+      "png": "pc-1366x768\\story\\normal.png",
+      "geometry": "pc-1366x768\\story\\normal.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "story",
+      "state": "debug",
+      "png": "pc-1366x768\\story\\debug.png",
+      "geometry": "pc-1366x768\\story\\debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "story",
+      "state": "stress",
+      "png": "pc-1366x768\\story\\stress.png",
+      "geometry": "pc-1366x768\\story\\stress.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "story",
+      "state": "stress-debug",
+      "png": "pc-1366x768\\story\\stress-debug.png",
+      "geometry": "pc-1366x768\\story\\stress-debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "boss",
+      "state": "normal",
+      "png": "pc-1366x768\\boss\\normal.png",
+      "geometry": "pc-1366x768\\boss\\normal.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "boss",
+      "state": "debug",
+      "png": "pc-1366x768\\boss\\debug.png",
+      "geometry": "pc-1366x768\\boss\\debug.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "boss",
+      "state": "stress",
+      "png": "pc-1366x768\\boss\\stress.png",
+      "geometry": "pc-1366x768\\boss\\stress.geometry.json",
+      "metadataStatus": "TBD"
+    },
+    {
+      "viewport": "pc-1366x768",
+      "component": "boss",
+      "state": "stress-debug",
+      "png": "pc-1366x768\\boss\\stress-debug.png",
+      "geometry": "pc-1366x768\\boss\\stress-debug.geometry.json",
+      "metadataStatus": "TBD"
+    }
+  ],
+  "blocked": [],
+  "browserVersion": "151.0.7922.137",
+  "metadataValidation": {
+    "command": "node tools/validate-ui-metadata.mjs",
+    "status": 1,
+    "stdout": "{\n  \"phase\": \"UI Governance Phase 2\",\n  \"scope\": \"Metadata Validator: read-only checks for asset dimensions, metadata source size, safe/text box bounds, and size conflicts.\",\n  \"checkedAt\": \"2026-08-14T06:42:49.861Z\",\n  \"results\": [\n    {\n      \"component\": \"HUD\",\n      \"asset\": \"assets/runtime/webp/ui/formal_v034b1/hud_panel_pc.webp\",\n      \"metadata\": \"assets/runtime/webp/ui/formal_v034b1/ui_runtime_atlas.json\",\n      \"status\": \"PASS\",\n      \"messages\": [\n        \"No metadata conflicts detected.\"\n      ],\n      \"assetSize\": [\n        560,\n        244\n      ],\n      \"metadataSourceSize\": [\n        560,\n        244\n      ]\n    },\n    {\n      \"component\": \"Resource Soul\",\n      \"asset\": \"assets/runtime/webp/ui/formal_v034b1/ui_runtime_atlas.webp\",\n      \"metadata\": \"assets/runtime/webp/ui/formal_v034b1/ui_runtime_atlas.json\",\n      \"status\": \"PASS\",\n      \"messages\": [\n        \"No metadata conflicts detected.\"\n      ],\n      \"assetSize\": [\n        1024,\n        512\n      ],\n      \"metadataSourceSize\": [\n        1024,\n        512\n      ]\n    },\n    {\n      \"component\": \"Resource Fire\",\n      \"asset\": \"assets/runtime/webp/ui/formal_v034b1/ui_runtime_atlas.webp\",\n      \"metadata\": \"assets/runtime/webp/ui/formal_v034b1/ui_runtime_atlas.json\",\n      \"status\": \"PASS\",\n      \"messages\": [\n        \"No metadata conflicts detected.\"\n      ],\n      \"assetSize\": [\n        1024,\n        512\n      ],\n      \"metadataSourceSize\": [\n        1024,\n        512\n      ]\n    },\n    {\n      \"component\": \"Lineage Card\",\n      \"asset\": \"assets/runtime/webp/ui/lineage_card.webp\",\n      \"metadata\": \"TBD\",\n      \"status\": \"TBD\",\n      \"messages\": [\n        \"TBD: No current authoritative metadata in formal_v034b1. legacy formal_v034a8 bounds exist but are migration reference only.\"\n      ],\n      \"assetSize\": [\n        307,\n        581\n      ]\n    },\n    {\n      \"component\": \"Choice Card\",\n      \"asset\": \"assets/runtime/webp/ui/choice_card_frame.webp\",\n      \"metadata\": \"TBD\",\n      \"status\": \"TBD\",\n      \"messages\": [\n        \"TBD: No current authoritative metadata in formal_v034b1. legacy formal_v034a8 bounds exist but are migration reference only.\"\n      ],\n      \"assetSize\": [\n        358,\n        542\n      ]\n    },\n    {\n      \"component\": \"Story UI\",\n      \"asset\": \"assets/runtime/webp/ui/story/story_panel_art.webp\",\n      \"metadata\": \"assets/runtime/webp/ui/story/manifest-art.json\",\n      \"status\": \"FAIL\",\n      \"messages\": [\n        \"TBD: Current art manifest records size only. Safe areas are not authoritative because spec dimensions differ from current asset dimensions.\",\n        \"Manifest size [1577,733] conflicts with asset size [1858,693]\"\n      ],\n      \"assetSize\": [\n        1858,\n        693\n      ],\n      \"metadataSourceSize\": [\n        1577,\n        733\n      ]\n    }\n  ],\n  \"summary\": {\n    \"checked\": 6,\n    \"pass\": 3,\n    \"fail\": 1,\n    \"tbd\": 2\n  },\n  \"ok\": false\n}\n",
+    "stderr": ""
+  }
+}
