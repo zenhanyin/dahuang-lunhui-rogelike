@@ -1,5 +1,5 @@
 import { execFileSync, spawn, spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -317,7 +317,7 @@ function writeSnapshotIndex(manifest) {
       <article>
         <h2>${shot.component} / ${shot.viewport} / ${shot.state}</h2>
         <a href="${png}"><img src="${png}" alt="${shot.component} ${shot.viewport} ${shot.state}"></a>
-        <p><a href="${json}">geometry json</a></p>
+        <p><a href="${png}">Open original PNG</a> · <a href="${json}">geometry json</a></p>
       </article>`);
   }
   writeFileSync(join(OUT_DIR, "index.html"), `<!doctype html>
@@ -366,6 +366,12 @@ function runMetadataValidator() {
 }
 
 async function main() {
+  if (process.argv.includes("--index-only")) {
+    const manifest = JSON.parse(readFileSync(join(OUT_DIR, "manifest.json"), "utf8"));
+    writeSnapshotIndex(manifest);
+    return;
+  }
+
   cleanOutput();
   const { chromium } = await loadPlaywright();
   const server = startServer();
