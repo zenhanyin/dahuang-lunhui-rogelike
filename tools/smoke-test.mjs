@@ -223,6 +223,38 @@ const touchMoved = state.player.x > moved.x;
 endGame();
 phaseTransitions.result = currentPhase();
 const metaPoints = Number(ui.metaPointText.textContent);
+const eventSmoke = {};
+const receivedEvents = [];
+onGameplayEvent("test.event", event => receivedEvents.push(event));
+emitGameplayEvent("test.event", { value: 42, position: { x: 7, y: 9 } });
+eventSmoke.firstConsumeCount = consumeGameplayEvents();
+eventSmoke.secondConsumeCount = consumeGameplayEvents();
+eventSmoke.receivedCount = receivedEvents.length;
+eventSmoke.receivedType = receivedEvents[0]?.type;
+eventSmoke.payloadValue = receivedEvents[0]?.payload?.value;
+eventSmoke.payloadPositionX = receivedEvents[0]?.payload?.position?.x;
+const gameplayBeforeFailure = {
+  hp: state.player.hp,
+  kills: state.kills,
+  soul: state.resources.soul,
+  phase: currentPhase()
+};
+onGameplayEvent("test.failure", () => {
+  throw new Error("intentional smoke consumer failure");
+});
+emitGameplayEvent("test.failure", { value: "should not mutate gameplay" });
+consumeGameplayEvents();
+eventSmoke.failureDidNotMutateGameplay = state.player.hp === gameplayBeforeFailure.hp
+  && state.kills === gameplayBeforeFailure.kills
+  && state.resources.soul === gameplayBeforeFailure.soul
+  && currentPhase() === gameplayBeforeFailure.phase;
+eventSmoke.passed = eventSmoke.firstConsumeCount === 1
+  && eventSmoke.secondConsumeCount === 0
+  && eventSmoke.receivedCount === 1
+  && eventSmoke.receivedType === "test.event"
+  && eventSmoke.payloadValue === 42
+  && eventSmoke.payloadPositionX === 7
+  && eventSmoke.failureDidNotMutateGameplay;
 const phaseSmokePassed = phaseTransitions.startRunning === RUN_PHASE.RUNNING
   && phaseTransitions.choiceOpen === RUN_PHASE.CHOICE
   && phaseTransitions.choiceClosed === RUN_PHASE.RUNNING
@@ -236,6 +268,7 @@ const phaseSmokePassed = phaseTransitions.startRunning === RUN_PHASE.RUNNING
 globalThis.__SMOKE__ = {
   phaseTransitions,
   phaseSmokePassed,
+  eventSmoke,
   before,
   moved,
   crossedScreen,
@@ -251,5 +284,8 @@ globalThis.__SMOKE__ = {
 `;
 
 new Script(`${config}\n${game}\n${probe}`).runInContext(context, { timeout: 5000 });
+if (!context.__SMOKE__?.phaseSmokePassed || !context.__SMOKE__?.eventSmoke?.passed) {
+  throw new Error("Smoke test failed");
+}
 console.log(JSON.stringify(context.__SMOKE__, null, 2));
 

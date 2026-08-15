@@ -90,6 +90,7 @@ const domWidthCache = new WeakMap();
 let lastUiSync = 0;
 let resizeQueued = false;
 const UI_SYNC_INTERVAL = 90;
+const gameplayEventConsumers = new Map();
 
 function currentPhase() {
   return state?.phase || RUN_PHASE.LINEAGE_SELECT;
@@ -103,6 +104,39 @@ function setRunPhase(phase) {
   if (!state) return;
   state.phase = phase;
   state.paused = !GAMEPLAY_ACTIVE_PHASES.has(phase);
+}
+
+function onGameplayEvent(type, consumer) {
+  if (!gameplayEventConsumers.has(type)) gameplayEventConsumers.set(type, []);
+  gameplayEventConsumers.get(type).push(consumer);
+}
+
+function emitGameplayEvent(type, payload = {}) {
+  if (!state) return null;
+  const event = {
+    id: state.nextGameplayEventId,
+    type,
+    payload
+  };
+  state.nextGameplayEventId += 1;
+  state.gameplayEvents.push(event);
+  return event;
+}
+
+function consumeGameplayEvents() {
+  if (!state?.gameplayEvents?.length) return 0;
+  const events = state.gameplayEvents.splice(0);
+  for (const event of events) {
+    const consumers = gameplayEventConsumers.get(event.type) || [];
+    for (const consumer of consumers) {
+      try {
+        consumer(event);
+      } catch (error) {
+        console.warn(`[gameplay-event] consumer failed for ${event.type}`, error);
+      }
+    }
+  }
+  return events.length;
 }
 
 const RUNTIME_ASSET_ROOT = "assets/runtime/webp";
@@ -911,6 +945,8 @@ function freshState() {
     clouds: [],
     effects: [],
     damageTexts: [],
+    gameplayEvents: [],
+    nextGameplayEventId: 1,
     map: generateMap(mapTemplate, mapSeed, bounds),
     spawnTimer: 1.2,
     spawnDelay: pacingValue("spawn", "baseDelay", CONFIG.tuning.spawnDelay),
@@ -1312,6 +1348,53 @@ function addDamageText(x, y, amount, kind = "damage") {
     scale: (crit ? 1.34 : 1) * (kind === "boom" ? 1.26 : kind === "hurt" ? 1.1 : 1)
   }, runtimeLimit("maxDamageTexts", 54));
 }
+
+onGameplayEvent("damage.hit", ({ payload }) => {
+  const { target, damage, kind, angle = 0 } = payload;
+  if (!target) return;
+  pushCapped(state.pulses, { x: target.x, y: target.y, radius: 22, life: 0.18, maxLife: 0.18, kind: "hit" }, runtimeLimit("maxPulses", 36));
+  addEffect(kind === "sword" ? "swordImpact" : "talismanImpact", target.x, target.y, {
+    angle,
+    radius: kind === "sword" ? 42 : 52,
+    life: 0.28,
+    color: kind === "sword" ? "#dff6ff" : "#fff0a4",
+    secondary: kind === "sword" ? "#72cfe9" : "#78bff2"
+  });
+  addEffect("hitSpark", target.x, target.y, {
+    angle,
+    radius: kind === "sword" ? 34 : 42,
+    life: 0.24,
+    color: kind === "sword" ? "#dff6ff" : "#fff0a4",
+    secondary: kind === "sword" ? "#72cfe9" : "#d98bd8",
+    count: kind === "sword" ? 6 : 8
+  });
+  addDamageText(target.x, target.y, damage, kind);
+  addShake(kind === "sword" ? 2.3 : 3.2);
+  playSound("hit");
+});
+
+onGameplayEvent("enemy.kill", ({ payload }) => {
+  const { enemy, chapterBossKilled = false } = payload;
+  if (!enemy) return;
+  pushCapped(state.pulses, {
+    x: enemy.x,
+    y: enemy.y,
+    radius: enemy.elite ? 68 : 42,
+    life: 0.24,
+    maxLife: 0.24,
+    kind: enemy.elite ? "boom" : "kill"
+  }, runtimeLimit("maxPulses", 36));
+  addEffect(chapterBossKilled ? "bossDeath" : "killBloom", enemy.x, enemy.y, {
+    radius: chapterBossKilled ? 168 : enemy.elite ? 92 : 62,
+    life: chapterBossKilled ? 1.05 : enemy.elite ? 0.62 : 0.42,
+    color: enemy.elite ? "#e16935" : "#54b88a",
+    secondary: "#fff2c8",
+    count: chapterBossKilled ? 18 : enemy.elite ? 12 : 8
+  });
+  addDamageText(enemy.x, enemy.y - 8, chapterBossKilled ? "破魇" : enemy.elite ? 88 : 36, chapterBossKilled ? "boom" : enemy.elite ? "boom" : "pickupBurst");
+  addShake(chapterBossKilled ? 13 : enemy.elite ? 8 : 3);
+  playSound(chapterBossKilled ? "boss" : enemy.elite ? "boom" : "kill");
+});
 
 function renderLineageSelect() {
   ui.lineageList.innerHTML = "";
@@ -2434,25 +2517,15 @@ function update(dt) {
         applyEnemyDamage(enemy, projectile.damage, projectile.type);
         if ((projectile.pierce || 0) > 0) projectile.pierce -= 1;
         else projectile.life = 0;
-        pushCapped(state.pulses, { x: enemy.x, y: enemy.y, radius: 22, life: 0.18, maxLife: 0.18, kind: "hit" }, runtimeLimit("maxPulses", 36));
-        addEffect(projectile.type === "sword" ? "swordImpact" : "talismanImpact", enemy.x, enemy.y, {
+        emitGameplayEvent("damage.hit", {
+          source: { type: "projectile", weapon: projectile.type },
+          target: enemy,
+          damage: projectile.damage,
+          position: { x: enemy.x, y: enemy.y },
+          kind: projectile.type,
           angle: projectile.angle || 0,
-          radius: projectile.type === "sword" ? 42 : 52,
-          life: 0.28,
-          color: projectile.type === "sword" ? "#dff6ff" : "#fff0a4",
-          secondary: projectile.type === "sword" ? "#72cfe9" : "#78bff2"
+          tags: [projectile.type]
         });
-        addEffect("hitSpark", enemy.x, enemy.y, {
-          angle: projectile.angle || 0,
-          radius: projectile.type === "sword" ? 34 : 42,
-          life: 0.24,
-          color: projectile.type === "sword" ? "#dff6ff" : "#fff0a4",
-          secondary: projectile.type === "sword" ? "#72cfe9" : "#d98bd8",
-          count: projectile.type === "sword" ? 6 : 8
-        });
-        addDamageText(enemy.x, enemy.y, projectile.damage, projectile.type);
-        addShake(projectile.type === "sword" ? 2.3 : 3.2);
-        playSound("hit");
         if (projectile.type === "sword" && state.mechanics.swordMark) {
           enemy.marks += 1;
           if (enemy.marks >= 3) {
@@ -2471,17 +2544,12 @@ function update(dt) {
     if (enemy.hp <= 0) {
       const chapterBossKilled = Boolean(enemy.boss && state.chapter?.bossSpawned && !state.chapter?.bossCleared);
       state.kills += 1;
-      pushCapped(state.pulses, { x: enemy.x, y: enemy.y, radius: enemy.elite ? 68 : 42, life: 0.24, maxLife: 0.24, kind: enemy.elite ? "boom" : "kill" }, runtimeLimit("maxPulses", 36));
-      addEffect(chapterBossKilled ? "bossDeath" : "killBloom", enemy.x, enemy.y, {
-        radius: chapterBossKilled ? 168 : enemy.elite ? 92 : 62,
-        life: chapterBossKilled ? 1.05 : enemy.elite ? 0.62 : 0.42,
-        color: enemy.elite ? "#e16935" : "#54b88a",
-        secondary: "#fff2c8",
-        count: chapterBossKilled ? 18 : enemy.elite ? 12 : 8
+      emitGameplayEvent("enemy.kill", {
+        enemy,
+        position: { x: enemy.x, y: enemy.y },
+        chapterBossKilled,
+        tags: [enemy.elite ? "elite" : "normal", chapterBossKilled ? "boss" : "enemy"]
       });
-      addDamageText(enemy.x, enemy.y - 8, chapterBossKilled ? "破魇" : enemy.elite ? 88 : 36, chapterBossKilled ? "boom" : enemy.elite ? "boom" : "pickupBurst");
-      addShake(chapterBossKilled ? 13 : enemy.elite ? 8 : 3);
-      playSound(chapterBossKilled ? "boss" : enemy.elite ? "boom" : "kill");
       pushCapped(state.drops, {
         x: enemy.x,
         y: enemy.y,
@@ -2492,11 +2560,14 @@ function update(dt) {
       }, runtimeLimit("maxDrops", 80));
       state.enemies.splice(i, 1);
       if (chapterBossKilled) {
+        consumeGameplayEvents();
         completeChapter();
         return;
       }
     }
   }
+
+  consumeGameplayEvents();
 
   for (let i = state.drops.length - 1; i >= 0; i -= 1) {
     const drop = state.drops[i];
